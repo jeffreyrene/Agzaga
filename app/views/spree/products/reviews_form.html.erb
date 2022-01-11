@@ -1,0 +1,122 @@
+<div class="body">
+  <%= link_to request.referer, class: 'back-link' do %>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.16667 14L5 10M5 10L9.16667 6M5 10L15 10" stroke="#52525B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <span class="back">Back</span>
+  <% end %>
+
+  <div class="modal-title ">
+    <div class="txt-heading">Write Your Review</div>
+
+    <div class="product-image-container">
+      <div class="product-image-section">
+        <%= image_tag @product.gallery.images[0].url(:original), class: 'image', alt: ''%>
+      </div>
+      <div class="image-text"><%= @product.name%></div>
+    </div>
+
+    <div>
+      <div class="review-form">
+        <%= form_for @review, url: product_reviews_path(@product), html: { method: :post, remote: true, multipart: true} do |f| %>
+        <div class="review-rating">
+          <div class="rating_review_field">
+            <div class="score " >Score 
+              <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.788 0.767999L5.388 1.848L3.828 2.412L5.388 2.976L4.764 4.092L3.468 3.024L3.744 4.68H2.496L2.76 3.024L1.476 4.116L0.816 2.964L2.376 2.4L0.828 1.86L1.44 0.756L2.772 1.812L2.496 0.144H3.756L3.468 1.812L4.788 0.767999Z" fill="#EF4444"/>
+              </svg>
+            </div>
+            <div class="stars">
+              <fieldset class="rate">
+                <% for i in 5.downto(1) %>
+                  <input name="review[rating]"
+                    type="radio"
+                    id="rating<%= i %>"
+                    value="<%= i %>"
+                    <%= "checked" if i == 5 %> />
+                  <label for="rating<%= i %>"></label>
+                <% end %>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="review_title_field">
+          <div class="form-text">Your Experience</div>
+          <div class="form-text-down">What's your one line sentence title?</div>
+          <div class="example-text">Example High Quality Purchase</div>
+          <%= f.text_area :title, required: true, class: "product-review-content form-control input-field placeholder-text", placeholder: "One Sentence Title" %>
+          <div class="poppins-text-10 review-title-error" >*Title can't be blank</div>
+        </div>
+
+        <div class="review_review_field">
+          <div class="review-field">Tell other people more about product.</div>
+          <div class="example-field-text example-text">Ideas: How's the quality? Does it work well?</div>
+          <%= f.text_area :review, required: true, wrap: "virtual", rows: 8, class: "product-review-content form-control input-field" %>
+          <div class="poppins-text-10 review-review-error" >*Review can't be blank</div>
+        </div>
+
+        <div>
+          <% if Spree::Reviews::Config[:allow_image_upload] %>
+          <div class="review_images_field">
+            <div class="form-text">Add upto 5 photos</div>
+
+            <label for="review_images", class="image-upload poppins-text-12 bold default-upload" >
+              <span>Upload Photo</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 5V10M10 10V15M10 10H15M10 10L5 10" stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </label>
+
+            <%= f.file_field :images, :accept => "image/jpeg, image/png", multiple: true, class: 'd-none' %>
+
+            <div class="poppins-text-10 image-upload-message image-upload-error" >*Incorrect File Type</div>
+
+            <div class="poppins-text-10 image-upload-message image-selected" >Images Selected</div>
+          </div>
+          <div class="review_title_field">
+            <div class="email-text">Email*</div>
+
+            <div class="example-text">This is for confirmation only - we won't send your any promotional emails from this review </div>
+
+            <%= f.text_field :email, required: true, class: "form-control input-field placeholder-text", placeholder: "Email Address" %>
+
+            <div class="poppins-text-10 review-email-error" >*Email can't be blank</div>
+          </div>
+
+          <div class="review_title_field">
+            <div class="email-text">Nick Name</div>
+
+            <div class="example-text">Example: Joke 96 Don't use your full name or email address </div>
+
+            <%= f.text_field :name, required: true, class: "form-control input-field placeholder-text", placeholder: "Nickname" %>
+          </div>
+          <% end %>
+
+          <%= button_tag class: "review-submit-btn" do %>
+             <span class="btn-text">Submit Review<span>
+            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.6667 6.66669L18 10M18 10L14.6667 13.3334M18 10L3 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          <% end %>
+
+          <div class="privacy-text">By submitting a review, you agree to our</div>
+          <div class="privacy-policy">
+            <a class="clear-link" href="<%= spree::privacy_policy_path %>">Terms & Condition</a>
+          </div>
+        </div>
+
+        <% if Spree::Reviews::Config[:render_show_identifier_checkbox] %>
+          <div class="review_show_identifier_field">
+            <%= f.label :show_identifier %><br />
+            <%= f.check_box :show_identifier, wrap: "virtual", rows: "10", cols: "50", checked: true %>
+          </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:44:34.095188Z
