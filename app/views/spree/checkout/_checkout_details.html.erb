@@ -1,0 +1,50 @@
+<div class="checkout-details">
+  <div class="card">
+    <div class="delivery-header">
+      <div class="mb-0">
+        <div class="heading-text lexend-h4 clear-link">
+          1. Delivery Options
+        </div>
+      </div>
+    </div>
+    <div id="collapseDeliveryOptions" class="collapse show">
+      <div class="card-body">
+        <%= render @order.state, form: form %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="payment-header">
+      <div class="mb-0">
+        <div class="heading-text lexend-h4 clear-link">
+          2. Payment
+        </div>
+      </div>
+    </div>
+    <div id="collapsePayment" class="collapse show">
+      <div class="card-body">
+        <%= render 'new_payment_form' %>
+        <%= render 'payment' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="order-header" id="orderReview">
+      <div class="mb-0">
+        <div class="heading-text lexend-h4 collapsed clear-link">
+          3. Order Review
+        </div>
+      </div>
+    </div>
+    <div id="collapseOrderReview" class="collapse">
+      <div class="card-body">
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:36:42.757838Z
+# touched on 2025-05-22T23:22:26.195025Z
+# touched on 2025-05-22T23:45:43.272996Z
