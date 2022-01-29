@@ -1,0 +1,46 @@
+<%= form.fields_for :shipments do |ship_form| %>
+  <% all_rates = ship_form.object.shipping_rates %>
+  <% rates_to_show = @order.pick_up_order? ?
+              all_rates :
+              all_rates.where.not(shipping_method_id: Spree::ShippingMethod.find_by(admin_name: "Free Shipment").id)
+  %>
+
+  <div class="category-sub-title"><%="Shipping Rates,  #{ship_form.object.shipping_method.shipping_categories.first.name} (#{ship_form.object.line_items.includes(:product).pluck(:name).join(", ")})" %></div>
+
+  <% last_index = rates_to_show.order(:cost).count - 1%>
+
+  <% rates_to_show.order(:cost).each_with_index do |rate, index| %>
+    <% focused = @order.shipments.first.selected_shipping_rate == rate ? true : false %>
+    <label class="w-100 shipping-address-group shipping-button <%= 'active' if focused.present? %>" data-price="<%= rate.amount %>">
+      <div class="shipping-rate-section">
+        <div class="shipping-rates-block <%= index == 0 ? 'top-border-radius' : 'top-border-none' %> <%= 'bottom-border-radius' if index == last_index %>">
+          <div class="ag-form-control">
+            <div class="ag-radio">
+               <%= link_to '', apply_shipment_path(params: {order: {shipments_attributes: {selected_shipping_rate_id: rate.id, id: rate.shipment.id}}, state: 'payment'}), id: "shipping-rate-#{rate.id}", method: :post, remote: :true %>
+              <%= ship_form.radio_button :selected_shipping_rate_id, rate.id, class: "shipping-radio shipping-selection", data: {shipping_id: "#shipping-rate-#{rate.id}"} %>
+
+              <div class="form-control-content">
+                <div class="form-control-title"><%= rate.name %></div>
+                <div class="form-control-sub-title shipping-rate-text">
+                  <% if rate.name == "Standard Shipping"%>
+                    Estimated 2-4 Days
+                  <% elsif rate.name == "Expedited Max 3 Days"%>
+                    3 Days or Less
+                  <% end %>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="price">$<%= '%.2f' % rate.cost %></div>
+        </div>
+      </div>
+    </label>
+  <% end %>
+<% end %>
+
+# touched on 2025-05-22T20:37:55.522855Z
+# touched on 2025-05-22T20:43:33.011168Z
+# touched on 2025-05-22T20:44:58.443570Z
+# touched on 2025-05-22T22:49:58.456305Z
+# touched on 2025-05-22T23:21:39.620800Z
+# touched on 2025-05-22T23:29:58.703615Z

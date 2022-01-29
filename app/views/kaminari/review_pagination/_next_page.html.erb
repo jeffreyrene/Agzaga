@@ -1,0 +1,10 @@
+<div class="review-next-pagination">
+<span class="next">
+  <%= link_to_unless current_page.last?, "Read More Reviews", url, rel: 'next', remote: remote, class: 'read-more' %>
+</span>
+<div>
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 6V10M10 10V14M10 10H14M10 10L6 10" stroke="#52525B" stroke-width="1.336" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</div>
+</div>

@@ -1,0 +1,131 @@
+<% if params[:upsell] == "true" %>
+  <% for_upsell = true %>
+  $('#update-upsell-products').html('<%= j render(partial: "spree/pages/partials/chuckwagon_upsell_product", collection: @upsell_products, as: :product, locals:{ variant_id_prefix: 'upsell' })%>');
+  window.enable_select2_in_quick_view();
+
+  if($('.added-upsell-product').length) {
+    $('.go-to-cart-btn').show();
+    if($(document).width() > 991) {
+      $('.upsell_modal_close-desktop').hide();
+    } else {
+      $('.upsell_modal_close-mobile').hide();
+    }
+  } else {
+    $('.go-to-cart-btn').hide();
+    if($(document).width() > 991) {
+      $('.upsell_modal_close-desktop').show();
+    } else {
+      $('.upsell_modal_close-mobile').show();
+    }
+  }
+<% end %>
+
+<% unless @from_undo %>
+  <% if @order.errors.blank? %>
+    <% for_upsell = false if for_upsell != true %>
+
+    <% unless @modal_v2_quantity %>
+      $('.modal_v2_quantity').hide();
+    <% end %>
+
+    if (window.location.href.split('/').slice(-1) != "cart") {
+      <% if !@order.pick_up_order? %>
+        $('.quick_view_close').click();
+      <% end %>
+
+      <% if @pick_up_order_present == true %>
+        $('.quick_view_close').click();
+        $('#pick-up-popup').addClass('show-popup');
+      <% else %>
+        <% if for_upsell != true %>
+          let add_to_cart = $("#show_add_to_cart");
+          if($(document).width() < 768) {
+            add_to_cart.attr('data-backdrop', true);
+          } else {
+            add_to_cart.attr('data-backdrop', false);
+          }
+        <% end %>
+
+        <% if @variant.present? %>
+          add_to_cart.click();
+
+          <% if @remove_products == true %>
+            $('.pick-up-alert').show();
+          <% end %>
+
+          <% if @variant.gallery.images.present? && mobile_image?(@variant) %>
+            $('.product_modal-info .image-container').html('<%= image_tag image_cdn_link(@variant.gallery.images.where(alt: "mobile-image").first.url(:sm_200)), class: "product_modal_img" %>' );
+          <% elsif @variant.images.present? %>
+            $('.product_modal-info .image-container').html('<%= image_tag image_cdn_link(@variant.gallery.images.first.url(:sm_200)), class: "product_modal_img" %>' );
+          <% elsif @variant.product.gallery.images.present? %>
+            $('.product_modal-info .image-container').html('<%= image_tag image_cdn_link(@variant.product.gallery.images.first.url(:sm_200)), class: "product_modal_img" %>' );
+          <% end %>
+
+          $('.product_modal_name').html('<%= @variant.name %>' );
+          $('#current-quantity').html('<%= "Qty: #{@line_item.quantity}" %>' );
+          $('.product_modal_price').html('<%= Spree::Money.new(@line_item.single_money).to_html %> ');
+          <% items = @order.line_items.count %>
+          $('.cart-items').html('<%= items < 2 ? items.to_s + " item" : items.to_s + " items"%>')
+          $('.close-modal, .shpng_btn').click(function() {
+            $('.pick-up-alert').hide();
+          });
+        <% else %>
+          location.reload();
+        <% end %>
+
+        $('#slider-adc-form').html('<%= j render 'spree/shared/slider_v2'%>');
+        event.preventDefault();
+        $('.subtotal-price').empty().append('$<%= @order.total.to_s %>');
+      <% end %>
+    }
+    else {
+      $('.quick_view_close').click();
+      <% if @pick_up_order_present == true %>
+        $('#pick-up-popup').addClass('show-popup');
+      <% else %>
+        location.reload();
+      <% end %>
+    }
+  <% end %>
+<% else %>
+
+  window.$('#cart-body-summary').html('<%= j render 'spree/shared/cart_summary'%>');
+  window.$('#slider-summary').html("<%= j render(partial: 'spree/shared/cart_mobile_total')%>");
+  window.$('#checkout_summary_detail_div').html("<%=j render 'spree/checkout/checkout_summary_detail', order: @order %>");
+  window.$('#cart-body-summary').html('<%= j render 'spree/shared/cart_summary'%>');
+  window.$('#variant_<%= @variant_id %>').html("<%= j render(partial: 'spree/shared/cart_products', locals: {line_item: @order.line_items.find_by(variant_id: @variant_id)})%>");
+
+  <% if @render_slider_partial %>
+    <% @from_undo == false %>
+
+    window.$('#slider-adc-form').html('<%= j render 'spree/shared/slider_v2'%>');
+    window.$('#cart-page-line-items').html('<%= j render 'spree/shared/slider_v2', on_cart_page: true %>');
+    window.$('#variant_<%= @variant_id %>')[0].scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  <% else %>
+    window.$('#saved-products-section').find('#variant_<%= @variant_id %>').hide()
+    window.$('#order-count').html('<%= j render(partial: 'spree/shared/cart_count', locals: {order: true})%>');
+    window.$('#upper-cart').html('<%= j render(partial: 'spree/shared/cart_count', locals: {order: true})%>');
+    window.$('#count-mob-cart').html('<%= j render(partial: 'spree/shared/cart_count', locals: {order: true})%>');
+    window.$('#count-mob-saved').html('<%= j render(partial: 'spree/shared/cart_count', locals: {saved_item: true})%>');
+    window.$('#save-item-count').html('<%= j render(partial: 'spree/shared/cart_count', locals: {saved_item: true})%>');
+  <% end %>
+<% end %>
+
+<% if @order.line_items.count > 0 %>
+  $('.countdown-notifier').addClass('display-animation');
+<% end %>
+
+<% if flash[:success] %>
+  $(".flash-wrapper").html("<%= j render('spree/shared/flash_ticker') %>")
+  <% flash.delete(:success) %>
+<% end %>
+
+# touched on 2025-05-22T20:37:39.234094Z
+# touched on 2025-05-22T23:07:12.565606Z
+# touched on 2025-05-22T23:20:01.217520Z
+# touched on 2025-05-22T23:29:53.824950Z
+# touched on 2025-05-22T23:38:29.079753Z
