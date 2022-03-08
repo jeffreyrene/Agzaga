@@ -1,0 +1,31 @@
+<% if current_order&.custom_hose_configurations.present? %>
+  <% @custom_hose_configurations = current_order.custom_hose_configurations %>
+  <h1 class="poppins-bold-text-20 custom-hose-configuration-header">Custom Hose <%= 'Configuration'.pluralize( @custom_hose_configurations&.length) %></h1>
+  <table class="table custom-hose-configuration-table">
+    <thead>
+      <tr>
+        <th>Color</th>
+        <th>Length</th>
+        <th>Fitting 1</th>
+        <th>Fitting 2</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @custom_hose_configurations.each do |custom_hose_configuration|%>
+        <tr>
+          <td><%= custom_hose_configuration.custom_hose.option_values.pluck(:name).join(',')%></td>
+          <td><%= custom_hose_configuration.length%></td>
+          <td><%= custom_hose_configuration.fitting_1.option_values.pluck(:name).join(', ')%></td>
+          <td><%= custom_hose_configuration.fitting_2.option_values.pluck(:name).join(', ')%></td>
+          <td><%= link_to image_tag("times_circle_red.svg"), custom_hose_configuration_path(id:custom_hose_configuration.id),method: :delete, data: { confirm: 'Are you sure?' }, title: 'Remove from cart' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+# touched on 2025-05-22T19:21:05.071077Z
+# touched on 2025-05-22T22:43:41.669306Z
+# touched on 2025-05-22T23:44:17.608494Z
