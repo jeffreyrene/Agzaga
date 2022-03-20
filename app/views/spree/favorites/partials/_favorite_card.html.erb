@@ -1,0 +1,18 @@
+<div class="favorite_item <%= cycle('even', 'odd') %>" id='favorite_<%= favorite.id %>' data-product-id='<%= favorite&.favorable&.id %>' data-variant-id='<%= favorite&.favorable&.master&.id %>'>
+
+  <%= render partial: 'spree/shared/standard_product_card', locals: { product: favorite.favorable.product_card } %>
+
+  <div class='favorite-product-actions'>
+    <div class='favorite-product-actions-links'>
+      <div class="view-more-mbl">
+        <%= link_to 'View Product', product_path(favorite.favorable), class: 'ag-btn ag-btn-neutral ag-btn-lg view-more-link', data: {turbolinks: :false} %>
+      </div>
+
+      <div class="view-more-mbl remove-btn">
+        <%= link_to 'Remove', favorite_path(favorite), method: :delete, class: 'ag-btn ag-btn-destructive ag-btn-lg view-more-link remove-link', data: {turbolinks: :false} %>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T23:43:37.626748Z
