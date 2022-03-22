@@ -1,0 +1,15 @@
+var data = '';
+
+<% @products.each do |product| %>
+  data += '<%= j render(partial: "spree/shared/product_card", locals: { product: product }) %>';
+<% end %>
+$('#products').html(data);
+
+$('#indiviual-section').html('<%= j (paginate(@products, theme: 'ag_pagination', left: 3, right: 1, window: 1)) %>');
+
+# touched on 2025-05-22T20:40:44.878277Z
+# touched on 2025-05-22T21:30:24.485015Z
+# touched on 2025-05-22T23:30:26.781963Z
+# touched on 2025-05-22T23:39:17.609736Z
+# touched on 2025-05-22T23:43:35.157811Z
+# touched on 2025-05-22T23:46:22.434318Z
