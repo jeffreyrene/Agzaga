@@ -1,0 +1,20 @@
+
+<div id="newest-products">
+  <h2 class="section-heading">NEWEST PRODUCTS SITEWIDE</h2>
+  <%= link_to 'View All', spree.products_url(new_addition: true), class: 'clear-link view-all-link'%>
+  <div class="data-container">
+    <div id="cards" class="product-categories-section">
+
+    <% @product_cards.each do |product| %>
+      <%= render partial: 'spree/shared/standard_product_card', locals: { product: product } %>
+    <% end %>
+
+    </div>
+    <div id="newest-section">
+      <%= paginate @products, left: 3, right: 1, window: 1, remote: true%>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:43:46.764284Z
+# touched on 2025-05-22T23:27:05.499721Z
