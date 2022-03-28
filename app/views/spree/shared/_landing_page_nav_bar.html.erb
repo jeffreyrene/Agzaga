@@ -1,0 +1,93 @@
+<% freedom_wrap_search_page = root_url + 'products?keywords=Freedom+Wrap' %>
+
+<div class="landing-page-nav-bar">
+  <header>
+    <nav class="desktop-nav">
+      <div class="logo-nav-items">
+        <div class="head-logo">
+          <%= link_to root_url do %>
+            <%= image_tag 'navbar_new_logo.svg' %>
+          <% end %>
+        </div>
+
+        <div class="nav-box">
+          <%= link_to "Home", spree::root_url, target: '_blank' %>
+          <%= link_to "About Us", about_us_path, target: '_blank' %>
+          <div id="contact-link">Contact</div>
+          <%= link_to "FAQs", faqs_page_path, target: '_blank' %>
+        </div>
+      </div>
+
+      <div class="nav-icons">
+        <div class="search-icon" data-search="landing-page-search">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M31 31L25 25M27 20C27 23.866 23.866 27 20 27C16.134 27 13 23.866 13 20C13 16.134 16.134 13 20 13C23.866 13 27 16.134 27 20Z" stroke="#18181B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="navbar_v2" id="landing-page-search">
+          <div class="nav-search-box-v2">
+            <%= render partial: 'spree/shared/search_v2' %>
+          </div>
+        </div>
+
+        <div class="login-icon" data-toggle="modal" data-target=".checkout-login-modal">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.121 27.8037C17.1527 26.6554 19.4998 26 22 26C24.5002 26 26.8473 26.6554 28.879 27.8037M25 20C25 21.6569 23.6569 23 22 23C20.3431 23 19 21.6569 19 20C19 18.3431 20.3431 17 22 17C23.6569 17 25 18.3431 25 20ZM31 22C31 26.9706 26.9706 31 22 31C17.0294 31 13 26.9706 13 22C13 17.0294 17.0294 13 22 13C26.9706 13 31 17.0294 31 22Z" stroke="#18181B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+
+        <div class="cart-btn">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 13H15L15.4 15M17 23H27L31 15H15.4M17 23L15.4 15M17 23L14.7071 25.2929C14.0771 25.9229 14.5233 27 15.4142 27H27M27 27C25.8954 27 25 27.8954 25 29C25 30.1046 25.8954 31 27 31C28.1046 31 29 30.1046 29 29C29 27.8954 28.1046 27 27 27ZM19 29C19 30.1046 18.1046 31 17 31C15.8954 31 15 30.1046 15 29C15 27.8954 15.8954 27 17 27C18.1046 27 19 27.8954 19 29Z" stroke="#18181B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </nav>
+
+    <nav class="mobile-nav">
+      <div class="toggle-btn">
+        <%= image_tag "america-day-mobile-toggle.png", data: { collapse_icon: asset_path('america-day-mobile-toggle.png'), expand_icon: asset_path('close.svg') } %>
+      </div>
+
+      <div class="mobile-nav-logo">
+        <%= link_to root_url do %>
+          <%= image_tag 'navbar_new_logo.svg', class: 'w-100' %>
+        <% end %>
+      </div>
+
+      <div class="search-form_v2">
+        <div class="mobile-search-icon">
+          <%= image_tag "search_icon_24.svg" %>
+        </div>
+      </div>
+
+      <div id="myNav" class="overlay" >
+        <div class="overlay-left">
+          <%= link_to "Home", root_url %>
+          <%= link_to "About", about_us_url %>
+          <div class="contact-link">Contact</div>
+          <%= link_to "FAQs", faqs_page_path %>
+        </div>
+      </div>
+
+      <div class="small-nav-v2">
+        <div class="small-search-bar-v2">
+          <div class="navbar_search">
+            <div class="search-form_v2">
+              <%= form_tag spree.products_path, class:'navbar_search', method: :get do %>
+                <%= render 'spree/shared/partials/mobile_nav_bar_search_modal', search_from_results: true %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+</div>
+
+<%= render partial: 'spree/shared/cart_slider_v2_modal' %>
+
+# touched on 2025-05-22T20:37:26.254450Z
+# touched on 2025-05-22T23:29:07.647190Z

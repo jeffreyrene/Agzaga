@@ -1,0 +1,22 @@
+<% fill ||= 0 %>
+<% hide_rating_number ||= false %>
+<% if @product.reviews.approved.present? %>
+  <div class="rating-section">
+    <input
+      name = "review[rating]"
+      class="rating"
+      max="5"
+      oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
+      step="0.5"
+      style="--value:<%= @product.avg_rating %>"
+      type="range" class="rating_star" disabled>
+
+    <% unless hide_rating_number %>
+      <span class="number poppins-text-10"> <%= @product.avg_rating %> | <%= @product.reviews_count%> <%= 'Review'.pluralize(@product.reviews_count) %> </span>
+    <% end %>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T23:21:39.620069Z
+# touched on 2025-05-22T23:30:48.136334Z
+# touched on 2025-05-22T23:47:15.993014Z
