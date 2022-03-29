@@ -1,0 +1,59 @@
+<div class="add_to_cart_modal_v2">
+  <div class="d-none" id ="show_add_to_cart" data-toggle= "modal", data-target= ".add_to_cart_modal" data-backdrop="false">
+    open modal
+  </div>
+
+  <div
+      class="modal add_to_cart_modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+      id="add_to_cart_v2_modal"
+    >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content product-review-modal-content">
+        <div class="modal-header">
+          <div class="modal-line"></div>
+          <div class="modal-title">
+            <div class="poppins-bold-text-24 main-heading">Item added to your Cart</div>
+          </div>
+        </div>
+
+        <div class="pick-up-alert alert alert-info">
+          Looks like you had some products in your cart that weren't eligible for event pick-up, but don't worry—we've removed them for you. Please complete your pick-up order first, then you can place a separate order for anything you'd like shipped.
+        </div>
+
+        <div class="modal-body">
+          <div class="product_modal-info">
+            <div class="image-container">
+            </div>
+
+            <div class="product_detail">
+              <div class="product-detail-content">
+                <div class="product_modal_name">Bridon Integra Blue/Green Net Wrap - 40” x 9,840’</div>
+                <div class="poppins-bold-text-18 product_modal_price">59</div>
+              </div>
+              <div id= 'current-quantity'class="product-quantity modal_v2_quantity">
+                Qty: 1
+              </div>
+            </div>
+          </div>
+          <div class="buttons_section">
+            <a class="clear-link poppins-text-12 cart_btn" id="go-to-slider" href="<%= spree::cart_path %>" data-turbolinks="false">
+              View Cart <p class="cart-items">0 items</p>
+            </a>
+
+            <div class="clear-link shpng_btn" data-toggle= "modal", data-target= ".add_to_cart_modal">
+              Keep Shopping
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-section">
+          <%= image_tag("add_to_cart_logo.svg", class: "cart-btn", alt: "")%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
