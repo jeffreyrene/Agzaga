@@ -1,0 +1,37 @@
+<% image ||= '' %>
+<% category ||= '' %>
+<% published ||= 0 %>
+<% certified ||= false %>
+<% title ||= '' %>
+
+<div class="card mill-product-short-card text-left">
+  <%= image_tag image, class: 'product-image w-100' %>
+  <div class="content">
+    <div class="d-flex justify-content-between header">
+      <p class="category poppins-text-11 bold">
+        <%= category %>
+      </p>
+
+      <% unless certified %>
+        <p class="published poppins-text-11">
+          <%= "#{published} days ago" %>
+        </p>
+      <% end %>
+
+      <% if certified %>
+        <%= image_tag 'mill_icon_circle.svg', class: 'mill-icon' %>
+      <% end %>
+    </div>
+
+    <h4 class="poppins-bold-text-20 product-title">
+      <%= title %>
+    </h4>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:24:52.322435Z
+# touched on 2025-05-22T21:30:33.468314Z
+# touched on 2025-05-22T22:49:58.452062Z
+# touched on 2025-05-22T23:04:26.319401Z
+# touched on 2025-05-22T23:23:59.906273Z
+# touched on 2025-05-22T23:30:03.278490Z
