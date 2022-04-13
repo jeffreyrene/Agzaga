@@ -1,0 +1,192 @@
+<%= form_for ffa_chapter, url: admin_ffa_chapter_enrollment_path(ffa_chapter) do |f| %>
+  <div class="row">
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "First Name" %></br>
+        <%= f.text_field :first_name, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:first_name) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:first_name][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Last Name" %></br>
+        <%= f.text_field :last_name, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:last_name) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:last_name][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Email" %></br>
+        <%= f.text_field :email, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:email) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:email][0]%></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Phone Number" %></br>
+        <%= f.text_field :phone_number, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:phone_number) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:phone_number][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Chapter Name" %></br>
+        <%= f.text_field :name, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:name) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:name][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Chapter Members" %></br>
+        <%= f.text_field :members, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:members) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:members][0]%></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Chapter Number" %></br>
+        <%= f.text_field :number, class: 'w-100'%>
+        <% if ffa_chapter.errors.messages.key?(:number) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:number][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Chapter Ein Number" %></br>
+        <%= f.text_field :ein_number, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:ein_number) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:ein_number][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "School Name" %></br>
+        <%= f.text_field :school_name, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:school_name) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:school_name][0]%></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Street" %></br>
+        <%= f.text_field :street, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:street) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:street][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+     <div class="col-4">
+      <div class="field">
+        <%= f.label "City" %></br>
+        <%= f.text_field :city, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:city) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:city][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "State" %></br>
+        <%= f.text_field :state, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:state) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:state][0]%></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Postal Code" %></br>
+        <%= f.text_field :postal_code, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:postal_code) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:postal_code][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="field">
+        <%= f.label "Digital Signature" %></br>
+        <%= f.text_field :digital_signature, class: 'w-100' %>
+        <% if ffa_chapter.errors.messages.key?(:digital_signature) %>
+          </br><span class= "ffa-error-message"><%= ffa_chapter.errors[:digital_signature][0]%></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <div class="field ffa-check">
+        <%= f.label :consent_verified, "Consent Verified" %>
+        <%= f.check_box :consent_verified %>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="field ffa-check">
+        <%= f.label :advisor_form_downloaded, "Form Downloaded" %>
+        <%= f.check_box :advisor_form_downloaded %>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="field ffa-check">
+        <%= f.label :selected, "Select Chapter" %>
+        <%= f.check_box :selected %>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="field ffa-check">
+        <%= f.label :is_signed, "Agreement Signed" %>
+        <%= f.check_box :is_signed %>
+      </div>
+    </div>
+  </div>
+
+  <div class='actions text-right'>
+    <%= link_to "Back", admin_ffa_chapter_enrollments_path, class: "btn btn-primary"%>
+    <%= f.submit "Update", class: "btn btn-primary"%>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T22:36:10.030007Z
+# touched on 2025-05-22T22:44:38.486731Z
+# touched on 2025-05-22T22:49:42.088980Z
