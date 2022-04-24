@@ -1,0 +1,26 @@
+<% unless @featured_products.blank? %>
+  <div id="our-best-deals" class="data-container featured-carousel">
+    <h2 class="section-heading margin-top-20">FEATURED PRODUCTS</h2>
+    <a class="view-all-link" href="<%= spree.products_url(featured_products: true) %>">View All</a>
+    <div class="container-fluid p-0">
+      <div id="featured-carousel" class="owl-carousel owl-theme home-page-slider">
+        <% @featured_products.each do |product| %>
+          <div class="item">
+            <a href="<%= product_path(product) %>" class="clear-link product-image-link" data-turbolinks="false">
+              <%= render partial: 'spree/shared/standard_product_card', locals: { product: product } %>
+            </a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% @featured_products.each do |product| %>
+    <%= render partial: 'spree/shared/product_quick_view', locals: { product: product } %>
+  <% end %>
+<% end %>
+
+# touched on 2025-05-22T19:07:37.298029Z
+# touched on 2025-05-22T20:41:10.641787Z
+# touched on 2025-05-22T22:38:45.491826Z
+# touched on 2025-05-22T23:25:20.448313Z
