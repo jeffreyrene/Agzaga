@@ -1,0 +1,37 @@
+<button type="button" class="sort-by carousel-btn clear-link dropdown-toggle" data-toggle="modal" data-target="#sort_by_modal">Sort</button>
+<div class="modal" id="sort_by_modal" tabindex="-1" role="dialog" aria-labelledby="sort_by_modalTitle" aria-hidden="true">
+  <div class="back-area"></div>
+  <div class="modal-dialog modal-dialog-end animate-bottom" id="customPositionModal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title row">
+          <div class="lexend-h4 title col">Sort By</div>
+        </div>
+        <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <%= image_tag("close-icon.svg") %>
+        </div>
+      </div>
+      <div class="full-line"></div>
+      <div class="modal-body">
+        <div class="price-category">
+          <input type="radio" name="order_by" id="staff_pick" value="Staff Pick" <%= 'checked' if params[:order_by]&.include?("Staff Pick")%>>
+          <label class="radio-tag sort-tag <%= 'sorted' if h(params.dig(:order_by)).include? 'Staff Pick'%>" for="staff_pick">Staff Pick</label>
+
+          <input type="radio" name="order_by" id="best_seller" value="Best Sellers" <%= 'checked' if params[:order_by]&.include?("Best Sellers")%>>
+          <label class="radio-tag sort-tag <%= 'sorted' if h(params.dig(:order_by)).include? 'Best Sellers'%>" for="best_seller">Best Sellers</label>
+
+          <input type="radio" name="order_by" id="Price:_Low_to_High" value="Price: Low to High" <%= 'checked' if params[:order_by]&.include?("Price: Low to High")%>>
+          <label class="radio-tag sort-tag <%= 'sorted' if h(params.dig(:order_by)).include? 'Price: Low to High'%>" for="Price:_Low_to_High">$ -> $$$</label>
+
+          <input type="radio" name="order_by" id="Price:_High_to_Low" value="Price: High to Low" <%= 'checked' if params[:order_by]&.include?("Price: High to Low")%>>
+          <label class="radio-tag sort-tag <%= 'sorted' if h(params.dig(:order_by)).include? 'Price: High to Low'%>" for="Price:_High_to_Low">$$$ -> $</label>
+        </div>
+      </div>
+
+      <div class="modal-footer m-footer">
+        <%= link_to "Clear", spree::deals_products_url, class: 'clear-link btn modal-footer-btn' %>
+        <button class="modal-footer-apply-btn apply-button" id="apply-button">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
