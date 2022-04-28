@@ -1,0 +1,65 @@
+<ul class="admin-subnav" data-hook="admin_product_sub_tabs">
+  <% if can? :admin, Spree::Product %>
+    <%= tab :products, match_path: '/products' %>
+  <% end %>
+
+  <% if can? :admin, Spree::Product %>
+    <%= tab :labels_products, match_path: '/labels_products' %>
+  <% end %>
+
+  <% if can? :admin, Spree::OptionType %>
+    <%= tab :option_types, match_path: '/option_types' %>
+  <% end %>
+
+  <% if can? :admin, Spree::Property %>
+    <%= tab :properties %>
+  <% end %>
+
+  <% if can? :admin, Spree::Taxonomy %>
+    <%= tab :taxonomies %>
+  <% end %>
+
+  <% if can? :admin, Spree::Product %>
+    <%= tab :bulk_update_product_labels, match_path: '/bulk_update_product_labels' %>
+  <% end %>
+
+  <% if can? :admin, Spree::Product %>
+    <%= tab :google_product_categories, match_path: '/google_product_categories' %>
+  <% end %>
+
+  <% if can? :admin, Spree::Product %>
+    <%= tab :bulk_update_product_prices, match_path: '/bulk_update_product_prices' %>
+  <% end %>
+
+  <% if can? :admin, Spree::Product %>
+    <%= tab :bulk_update_sale_prices, match_path: '/bulk_update_sale_prices' %>
+  <% end %>
+
+  <% if can? :admin, Spree::Taxon %>
+    <%= tab :taxons, label: :display_order, match_path: '/taxons' %>
+  <% end %>
+
+   <% if can? :admin, Spree::ProductQuestion %>
+    <%= tab :product_questions, label: :product_questions, match_path: '/product_questions' %>
+  <% end %>
+
+  <% if can? :admin, Spree::Label %>
+    <%= tab :labels, label: :labels, match_path: '/labels' %>
+  <% end %>
+
+
+  <% if can? :admin, Spree::Product %>
+    <%= tab :featured_products, label: :featured_products, match_path: '/featured_products' %>
+  <% end %>
+
+  <% if can? :admin, Spree::Product %>
+    <%= tab :deals_products, label: :deals_products, match_path: '/deals_products' %>
+  <% end %>
+
+  <% if can? :admin, Spree::FilterType %>
+    <%= tab :filter_types, label: :filter_types, match_path: '/filter_types' %>
+  <% end %>
+</ul>
+
+# touched on 2025-05-22T21:19:02.953566Z
+# touched on 2025-05-22T23:45:52.737384Z
