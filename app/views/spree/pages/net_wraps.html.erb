@@ -1,0 +1,205 @@
+<% content_for :title, 'Agazga - Net Wrap' %>
+
+<div class="net-wrap-landing-page">
+  <div class="net-wrap-header">
+    <div class="left-container">
+      <div class="details">
+        <div class="heading">
+          Bale Hay with Quality Products.
+        </div>
+
+        <div class="text">
+          Ag’s best crop packaging supplies, shipped directly to the farm.
+        </div>
+
+        <%= link_to '#blue_gold_net_wrap', class: 'shop-crop-btn', data: {turbolinks: false} do %>
+          Shop Below
+
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.1853 11.4815L10.0001 16.6667M10.0001 16.6667L4.81494 11.4815M10.0001 16.6667L10.0001 3.33337" stroke="white" stroke-width="1.77778" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="right-container">
+      <iframe src="https://www.youtube.com/embed/UGc40GxxLAk?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="net_wrap-section" id="blue_gold_net_wrap">
+    <div class="heading">Top Net Wrap Brands – Save in Bulk</div>
+    <% net_wrap_products_cards = load_product_cards(@net_wrap_products) %>
+    <% net_wrap_products_cards.each_with_index do |product, index| %>
+      <%= render 'spree/pages/partials/net_wrap_products', product: product, net_wrap_product_order: index %>
+    <% end %>
+  </div>
+
+  <div class="order-delivered">
+    <div class="delivered-heading">
+      Our Guarantee – Low Prices, Easy Checkout, Fast shipping.
+    </div>
+
+    <div class="delivered-sub-heading">
+      Here’s what a few of our customers are saying:
+    </div>
+
+    <div class="delivered-review-box">
+      <div class="box-1">
+        <div class="star-row">
+          <div class="stars">
+            <% for a in 1..5 do %>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.66405 1.23465C5.78834 0.921621 6.21166 0.92162 6.33595 1.23465L7.4545 4.05176C7.5069 4.18373 7.62537 4.27389 7.76138 4.28532L10.6647 4.52914C10.9873 4.55623 11.1181 4.97797 10.8723 5.19852L8.66031 7.18341C8.55668 7.2764 8.51143 7.42229 8.54309 7.56131L9.2189 10.5291C9.294 10.8589 8.95152 11.1195 8.67532 10.9428L6.18966 9.35244C6.07322 9.27794 5.92678 9.27794 5.81034 9.35244L3.32468 10.9428C3.04848 11.1195 2.706 10.8589 2.7811 10.5291L3.45691 7.56131C3.48857 7.42229 3.44332 7.2764 3.33969 7.18341L1.12766 5.19853C0.881865 4.97797 1.01268 4.55623 1.33529 4.52914L4.23862 4.28532C4.37463 4.27389 4.4931 4.18373 4.5455 4.05176L5.66405 1.23465Z" fill="#52525B"/>
+              </svg>
+            <% end %>
+          </div>
+
+          <div class="date">
+            2/13/2023
+          </div>
+        </div>
+
+        <div class="box-1-heading">
+          Speeco Cat #1 Quick Rear Hitch
+        </div>
+
+        <div class="box-1-text">
+          The item was exactly what I was looking for at a great price. It arrived on time as expected. I would purchase again without question.
+        </div>
+
+        <div class="verified-customer">
+          <div class="verified-customer-name">
+            Kevin9334
+          </div>
+
+          <div class="verified-customer-icon">
+            <div class="vc-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.73364 4.27309C7.29632 4.22818 7.8305 4.00692 8.26013 3.64079C9.26271 2.7864 10.7373 2.7864 11.7399 3.64079C12.1695 4.00692 12.7037 4.22818 13.2664 4.27309C14.5794 4.37787 15.6221 5.42056 15.7269 6.73364C15.7718 7.29632 15.9931 7.8305 16.3592 8.26013C17.2136 9.26271 17.2136 10.7373 16.3592 11.7399C15.9931 12.1695 15.7718 12.7037 15.7269 13.2664C15.6221 14.5794 14.5794 15.6221 13.2664 15.7269C12.7037 15.7718 12.1695 15.9931 11.7399 16.3592C10.7373 17.2136 9.26271 17.2136 8.26013 16.3592C7.8305 15.9931 7.29632 15.7718 6.73364 15.7269C5.42056 15.6221 4.37787 14.5794 4.27309 13.2664C4.22818 12.7037 4.00692 12.1695 3.64079 11.7399C2.7864 10.7373 2.7864 9.26271 3.64079 8.26013C4.00692 7.8305 4.22818 7.29632 4.27309 6.73364C4.37787 5.42056 5.42056 4.37787 6.73364 4.27309ZM13.2437 8.86872C13.5854 8.52701 13.5854 7.97299 13.2437 7.63128C12.902 7.28957 12.348 7.28957 12.0063 7.63128L9.125 10.5126L7.99372 9.38128C7.65201 9.03957 7.09799 9.03957 6.75628 9.38128C6.41457 9.72299 6.41457 10.277 6.75628 10.6187L8.50628 12.3687C8.84799 12.7104 9.40201 12.7104 9.74372 12.3687L13.2437 8.86872Z" fill="#22C55E"/>
+              </svg>
+            </div>
+
+            <div class="vc-name">
+              Verified Customer
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-1">
+        <div class="star-row">
+          <div class="stars">
+            <% for a in 1..5 do %>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.66405 1.23465C5.78834 0.921621 6.21166 0.92162 6.33595 1.23465L7.4545 4.05176C7.5069 4.18373 7.62537 4.27389 7.76138 4.28532L10.6647 4.52914C10.9873 4.55623 11.1181 4.97797 10.8723 5.19852L8.66031 7.18341C8.55668 7.2764 8.51143 7.42229 8.54309 7.56131L9.2189 10.5291C9.294 10.8589 8.95152 11.1195 8.67532 10.9428L6.18966 9.35244C6.07322 9.27794 5.92678 9.27794 5.81034 9.35244L3.32468 10.9428C3.04848 11.1195 2.706 10.8589 2.7811 10.5291L3.45691 7.56131C3.48857 7.42229 3.44332 7.2764 3.33969 7.18341L1.12766 5.19853C0.881865 4.97797 1.01268 4.55623 1.33529 4.52914L4.23862 4.28532C4.37463 4.27389 4.4931 4.18373 4.5455 4.05176L5.66405 1.23465Z" fill="#52525B"/>
+              </svg>
+            <% end %>
+          </div>
+
+          <div class="date">
+            1/11/2023
+          </div>
+        </div>
+
+        <div class="box-1-heading">
+          Truck, Gooseneck Trailer, Rodeo and Ranch Toy Sets
+        </div>
+
+        <div class="box-1-text">
+          Toys well made from metal, and should stand up to my grandchildren playing hard with them. Order shipped promptly, and well packaged. Excellent customer service. I will buy from this company again.
+        </div>
+
+        <div class="verified-customer">
+          <div class="verified-customer-name">
+            R. Reid
+          </div>
+
+          <div class="verified-customer-icon">
+            <div class="vc-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.73364 4.27309C7.29632 4.22818 7.8305 4.00692 8.26013 3.64079C9.26271 2.7864 10.7373 2.7864 11.7399 3.64079C12.1695 4.00692 12.7037 4.22818 13.2664 4.27309C14.5794 4.37787 15.6221 5.42056 15.7269 6.73364C15.7718 7.29632 15.9931 7.8305 16.3592 8.26013C17.2136 9.26271 17.2136 10.7373 16.3592 11.7399C15.9931 12.1695 15.7718 12.7037 15.7269 13.2664C15.6221 14.5794 14.5794 15.6221 13.2664 15.7269C12.7037 15.7718 12.1695 15.9931 11.7399 16.3592C10.7373 17.2136 9.26271 17.2136 8.26013 16.3592C7.8305 15.9931 7.29632 15.7718 6.73364 15.7269C5.42056 15.6221 4.37787 14.5794 4.27309 13.2664C4.22818 12.7037 4.00692 12.1695 3.64079 11.7399C2.7864 10.7373 2.7864 9.26271 3.64079 8.26013C4.00692 7.8305 4.22818 7.29632 4.27309 6.73364C4.37787 5.42056 5.42056 4.37787 6.73364 4.27309ZM13.2437 8.86872C13.5854 8.52701 13.5854 7.97299 13.2437 7.63128C12.902 7.28957 12.348 7.28957 12.0063 7.63128L9.125 10.5126L7.99372 9.38128C7.65201 9.03957 7.09799 9.03957 6.75628 9.38128C6.41457 9.72299 6.41457 10.277 6.75628 10.6187L8.50628 12.3687C8.84799 12.7104 9.40201 12.7104 9.74372 12.3687L13.2437 8.86872Z" fill="#22C55E"/>
+              </svg>
+            </div>
+
+            <div class="vc-name">
+              Verified Customer
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-1">
+        <div class="star-row">
+          <div class="stars">
+            <% for a in 1..5 do %>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.66405 1.23465C5.78834 0.921621 6.21166 0.92162 6.33595 1.23465L7.4545 4.05176C7.5069 4.18373 7.62537 4.27389 7.76138 4.28532L10.6647 4.52914C10.9873 4.55623 11.1181 4.97797 10.8723 5.19852L8.66031 7.18341C8.55668 7.2764 8.51143 7.42229 8.54309 7.56131L9.2189 10.5291C9.294 10.8589 8.95152 11.1195 8.67532 10.9428L6.18966 9.35244C6.07322 9.27794 5.92678 9.27794 5.81034 9.35244L3.32468 10.9428C3.04848 11.1195 2.706 10.8589 2.7811 10.5291L3.45691 7.56131C3.48857 7.42229 3.44332 7.2764 3.33969 7.18341L1.12766 5.19853C0.881865 4.97797 1.01268 4.55623 1.33529 4.52914L4.23862 4.28532C4.37463 4.27389 4.4931 4.18373 4.5455 4.05176L5.66405 1.23465Z" fill="#52525B"/>
+              </svg>
+            <% end %>
+          </div>
+
+          <div class="date">
+            11/1/2022
+          </div>
+        </div>
+
+        <div class="box-1-heading">
+          2-Way Lockable Gate Latch
+        </div>
+
+        <div class="box-1-text">
+          Your service was excellent and your prices are very reasonable.
+        </div>
+
+        <div class="verified-customer">
+          <div class="verified-customer-name">
+            Sharon C.
+          </div>
+
+          <div class="verified-customer-icon">
+            <div class="vc-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.73364 4.27309C7.29632 4.22818 7.8305 4.00692 8.26013 3.64079C9.26271 2.7864 10.7373 2.7864 11.7399 3.64079C12.1695 4.00692 12.7037 4.22818 13.2664 4.27309C14.5794 4.37787 15.6221 5.42056 15.7269 6.73364C15.7718 7.29632 15.9931 7.8305 16.3592 8.26013C17.2136 9.26271 17.2136 10.7373 16.3592 11.7399C15.9931 12.1695 15.7718 12.7037 15.7269 13.2664C15.6221 14.5794 14.5794 15.6221 13.2664 15.7269C12.7037 15.7718 12.1695 15.9931 11.7399 16.3592C10.7373 17.2136 9.26271 17.2136 8.26013 16.3592C7.8305 15.9931 7.29632 15.7718 6.73364 15.7269C5.42056 15.6221 4.37787 14.5794 4.27309 13.2664C4.22818 12.7037 4.00692 12.1695 3.64079 11.7399C2.7864 10.7373 2.7864 9.26271 3.64079 8.26013C4.00692 7.8305 4.22818 7.29632 4.27309 6.73364C4.37787 5.42056 5.42056 4.37787 6.73364 4.27309ZM13.2437 8.86872C13.5854 8.52701 13.5854 7.97299 13.2437 7.63128C12.902 7.28957 12.348 7.28957 12.0063 7.63128L9.125 10.5126L7.99372 9.38128C7.65201 9.03957 7.09799 9.03957 6.75628 9.38128C6.41457 9.72299 6.41457 10.277 6.75628 10.6187L8.50628 12.3687C8.84799 12.7104 9.40201 12.7104 9.74372 12.3687L13.2437 8.86872Z" fill="#22C55E"/>
+              </svg>
+            </div>
+
+            <div class="vc-name">
+              Verified Customer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="industry-leading-wraps-section">
+    <div class="heading">
+      Industry-Leading Silage Wraps.
+    </div>
+
+    <% inductry_net_wraps_cards = load_product_cards(@inductry_net_wraps) %>
+    <% inductry_net_wraps_cards.each_with_index do |product, index| %>
+      <%= render 'spree/pages/partials/net_wrap_products', product: product, net_wrap_product_order: index, industry_products: true %>
+    <% end %>
+  </div>
+
+  <div class="next-customer">
+    <div class="next-customer-data">
+      <div class="next-customer-heading">
+        From Silage to Hay, We Got You Covered.
+      </div>
+
+      <%= link_to spree::nested_taxons_url('hay-containment'), class: "next-customer-button", data: {turbolinks: false} do %>
+        Shop More Options
+
+        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.6667 6.6665L18 9.99984M18 9.99984L14.6667 13.3332M18 9.99984L3 9.99984" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T23:23:57.475425Z
+# touched on 2025-05-22T23:39:10.273650Z

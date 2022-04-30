@@ -1,0 +1,31 @@
+
+<button type="button" class="sort-by carousel-btn clear-link dropdown-toggle" data-toggle="modal" data-target="#categoryModal">
+  Categories
+</button>
+
+<div class="modal" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalTitle" aria-hidden="true">
+  <div class="back-area"></div>
+  <div class="modal-dialog modal-dialog-end animate-bottom" id="customPositionModal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title row">
+          <div class="lexend-h4 title col">Categories</div>
+        </div>
+
+        <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <%= image_tag("close-icon.svg") %>
+        </div>
+      </div>
+      <div class="full-line"></div>
+      <div class="modal-body">
+        <div class="md-categories">
+          <%= render 'spree/products/partials/toys_categories' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:40:36.334608Z
+# touched on 2025-05-22T22:38:20.261256Z
+# touched on 2025-05-22T22:55:52.020913Z
