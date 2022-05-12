@@ -1,0 +1,29 @@
+<% site_wide_deals_product_cards = load_product_cards(@site_wide_deals) %>
+
+<div class="card-pages-group" data-tab-size=4>
+  <div class="nav-section left">
+    <div class="load-btn nav-back disabled" data-current-section="site_wide_products">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="cards" id="site_wide_products" data-total-cards="<%= @site_wide_products_count %>">
+    <% site_wide_deals_product_cards.each do |product| %>
+      <div class="slider-card visible" data-tab="" data-loaded="true">
+        <%= render partial: 'spree/shared/standard_product_card', locals: { product: product } %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="nav-section">
+    <div class="load-btn nav-forward <%= "disabled" if @site_wide_products_count <= 4 %>" data-current-section="site_wide_products">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:41:13.056070Z
