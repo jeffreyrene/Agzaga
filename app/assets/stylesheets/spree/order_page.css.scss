@@ -1,0 +1,1163 @@
+.orders.edit {
+  .data-container {
+    text-align: left;
+  }
+
+  .modal-dialog {
+    max-width: 900px;
+
+    .modal-header {
+      padding: 24px;
+      display: inline-block;
+    }
+
+    .modal-body {
+      padding: 24px;
+
+      .custom-hose-configurations {
+        margin-top: 20px;
+        width: 100%;
+
+        .custom-hose-configuration-header {
+          padding-top: 20px;
+          margin-top: 0;
+        }
+      }
+
+      .buttons_section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 32px;
+
+        .custom-modal-btn {
+          border-radius: 8px;
+          font-family: 'Poppins';
+          padding: 11px 40px;
+          margin: 0px;
+          background: #FFB514;
+          box-shadow: none;
+          letter-spacing: 0.07em;
+          color: #FFFFFF;
+          font-weight: 600;
+          font-size: 16px;
+
+          a {
+            color: #FFFFFF;
+            text-decoration: none;
+          }
+        }
+
+        .custom-page-btn {
+          border: 1px solid #5A5A5A;
+          border-radius: 8px;
+          font-family: 'Poppins';
+          letter-spacing: 0.07em;
+          padding: 11px 23px;
+          color: #353535;
+          font-weight: 600;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .checkout-login-modal .modal-dialog {
+    max-width: 382px;
+
+    .modal-header {
+      padding: 0;
+      display: flex;
+
+      .close {
+        cursor: pointer;
+      }
+    }
+
+    .google-login-section {
+      div {
+        cursor: pointer;
+      }
+
+      .google-login {
+        &:hover {
+          background: var(--palette-neutral-200);
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 0;
+    }
+  }
+
+  .rm-promo-code {
+    position: relative;
+      .rmv-per-item-promo {
+        position: absolute;
+        margin-left: -30px;
+      }
+  }
+
+  .keep-shopping-btn {
+    position: absolute;
+    margin-left: 33px;
+    margin-top: 48px;
+    border: 2px solid #353535;
+    border-radius: 100px;
+    padding: 11px 23px;
+    font-family: 'Poppins-bold';
+    letter-spacing: 0.07em;
+    &:before {
+      content: image-url("arrow_left_long_black.svg");
+      padding-right: 8px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.discount {
+  margin-bottom: 24px;
+
+  .input-group {
+    position: relative;
+    max-width: 260px;
+  }
+
+  .success {
+    color: #61EB0C !important;
+  }
+
+  .input-coupon-code {
+    max-width: 100%;
+    background: #F5F5F5;
+    border-radius: 8px;
+    border: 1px solid #A6A6A6;
+    line-height: 16px;
+    font-weight: 600;
+    padding: 9px 9px 9px 13px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-size: 16px;
+    color: #000000;
+
+    &::placeholder {
+      padding-top: 4px;
+    }
+  }
+
+  .coupon_message {
+    font-family: 'Poppins';
+    font-size: 10px;
+    display: block;
+    width: 100%;
+    text-align: initial;
+    &.error {
+      color: #E32754;
+      margin-bottom: -18px;
+    }
+
+    &.success {
+      color: #7CC039;
+      margin-bottom: -18px;
+    }
+  }
+
+  .input-coupon-code:focus::placeholder {
+    opacity: 0.5;
+  }
+
+  .input-coupon-code:focus {
+    color: #000000;
+    border-color: #A6A6A6;
+  }
+
+  #submit-coupon_code {
+    cursor: pointer;
+  }
+
+  .coupon-submit {
+    align-self: center;
+  }
+
+  .discount-price {
+    color: #000000;
+    line-height: 28px;
+    font-family: 'Poppins-bold';
+    font-size: 16px;
+
+    &.price {
+      color: #7B8C48;
+    }
+  }
+}
+
+.cart {
+  .main-heading {
+    margin: 0px 0px 69px 0px;
+    font-weight: 400;
+  }
+
+  .btn-home {
+    a, a:hover {
+      border-radius: 100px;
+      margin-bottom: 70px;
+      text-decoration: none;
+    }
+  }
+
+  .cart-image {
+    margin-top: 57px;
+    width: 100px;
+    height: 102px;
+  }
+
+  .product-quick-view {
+    text-align: left;
+  }
+
+  .cart-summary {
+    padding-left: 19px;
+    padding-right: 0px;
+
+    .order-summary {
+      background: #F5F5F5;
+      border-radius: 24px 24px 0px 0px;
+      padding: 48px 26px 24px 27px;
+
+      .heading {
+        line-height: 16px;
+        margin-bottom: 43px;
+      }
+
+      .grey-line {
+        margin-bottom: 43px;
+      }
+
+      .line {
+        margin-bottom: 43px;
+      }
+
+      .content {
+        padding: 0px 32px;
+
+        .subtotal {
+          font-size: 24px;
+          line-height: 28px;
+          margin-bottom: 24px;
+
+          .subtotal-price {
+            font-family: 'Poppins-bold';
+          }
+        }
+
+        .extra-charges {
+          margin-bottom: 24px;
+          font-size: 24px;
+          line-height: 28px;
+          text-align: left;
+
+          .charges {
+            font-family: 'Poppins-bold';
+          }
+        }
+      }
+    }
+  }
+
+  .grey-line {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.160003);
+    margin-bottom: 37px;
+  }
+
+  .total {
+    padding: 22px 58px 21px 27px;
+    background: #ECECEC;
+    margin-bottom: 24px;
+
+    .total-text {
+      align-self: center;
+      line-height: 16px;
+    }
+
+    .total-price {
+      line-height: 28px;
+      font-family: 'Poppins-bold';
+    }
+  }
+
+  .btn-check-out {
+    padding: 8px 90px;
+    color: #FFFFFF;
+    margin: 0px auto 24px;
+    border: none;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    background: linear-gradient(145.87deg, #F1B71C -11.86%, #EB6E19 95.89%);
+    box-shadow: 0px 2px 6px rgba(240, 170, 28, 0.447412);
+    border-radius: 100px;
+  }
+
+  .btn-continue {
+    background: linear-gradient(145.87deg, #F1B71C -11.86%, #EB6E19 95.89%);
+    box-shadow: 0px 2px 6px rgba(240, 170, 28, 0.447412);
+    border-radius: 100px;
+    color: #FFFFFF;
+    padding: 8px 23px;
+    font-weight: 600;
+  }
+
+  .btn-empty-cart {
+    color: #EC5231;
+    font-weight: 600;
+    margin-bottom: 50px;
+    background: none;
+    border: none;
+    padding: 0px;
+    letter-spacing: 0.5px;
+    cursor:pointer;
+  }
+
+  .section-heading {
+    line-height: 57px;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  #update-cart {
+    display: contents;
+  }
+
+  .line {
+    margin-top: 30px;
+    margin-bottom: 64px;
+  }
+
+  .product-card {
+    text-align: center;
+
+    .image-conatiner {
+      height: 322px;
+      width: 322px;
+    }
+
+    .rating {
+      justify-content: center;
+    }
+  }
+
+  .product-items-list {
+    .product-list-item {
+      grid-template-columns: 20px 207px 1fr;
+    }
+
+    .productlist-image {
+      margin-left:18px;
+    }
+
+    .cart-item-delete {
+      margin-top: 93px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .disabled-state {
+      pointer-events: none;
+      img {
+        filter: grayscale(100%);
+      }
+    }
+
+  }
+
+  #addition-carousel {
+    text-align: -webkit-center;
+  }
+}
+
+.orders.show {
+  .container-fluid {
+    padding: 0 16px;
+  }
+
+  .product-quick-view .product-big-desc {
+    text-align: left;
+  }
+
+  #addition-carousel {
+    text-align: -webkit-center;
+  }
+}
+
+.order-show {
+  .navbar {
+    margin-bottom: 87px;
+  }
+
+  .popular-add-on {
+    margin-top: 64px;
+  }
+
+  .view-your-orders {
+    padding: 8px 23px;
+    font-weight: 600;
+    color: #FFFFFF;
+    background: #B9B9B9;
+    letter-spacing: 0.5px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+
+  #view-orders {
+    display: inline-block;
+  }
+
+  .order-received {
+    padding: 0;
+    max-width: 1014px;
+    margin: 0 auto 40px auto;
+
+    .orderpage_content {
+      padding: 48px 96px 81px;
+      background: #F5F5F5;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+      border-radius: 24px;
+      position: relative;
+      min-height: 572px;
+      z-index: 1;
+
+      .logo-mark {
+        width: 46px;
+        height: 75px;
+        margin: 0px auto;
+      }
+
+      .main-heading {
+        margin-bottom: 57px;
+      }
+
+      .order-number-title {
+        color: #F2B705;
+        font-style: normal;
+        font-weight: normal;
+        margin-bottom: 24px;
+        line-height: 16px;
+      }
+
+      .order-number {
+        text-align: left;
+        margin-bottom: 24px;
+      }
+
+      .order-decsription {
+        margin-bottom: 52px;
+      }
+
+      .view-order-summary {
+        color: #7B8C48;
+        font-size: 16px;
+        line-height: 16px;
+        cursor: pointer;
+
+        &:after {
+          content: image_url('arrow_down_olive.svg');
+          padding-left: 12px;
+          vertical-align: text-top;
+        }
+
+        &[aria-expanded="true"]:after {
+          content: image_url('arrow_up_olive.svg');
+          padding-left: 12px;
+          vertical-align: text-top;
+        }
+      }
+
+      .order-summary {
+        margin-bottom: 23px;
+
+        .order-summary-title {
+          color: #F2B705;
+          font-style: normal;
+          font-weight: normal;
+          line-height: 16px;
+        }
+      }
+
+      .order-summary-detail {
+        padding: 0;
+
+        .grey-line {
+          margin-bottom: 43px;
+        }
+
+        .order-summary-detail-content {
+          padding-right: 64px;
+
+          .subtotal {
+            font-size: 24px;
+            line-height: 28px;
+            margin-bottom: 24px;
+
+            .subtotal-price {
+              font-family: 'Poppins-bold';
+              font-weight: bold;
+            }
+          }
+
+          .extra-charges {
+            font-size: 24px;
+            line-height: 28px;
+            margin-bottom: 24px;
+          }
+
+          .total {
+            margin-bottom: 26px;
+
+            .total-text {
+              font-size: 24px;
+              line-height: 16px;
+            }
+
+            .total-price {
+              font-family: 'Poppins-bold';
+              font-weight: bold;
+              font-weight: bold;
+              font-size: 26px;
+              line-height: 28px;
+              color: #7B8C48;
+            }
+          }
+        }
+      }
+
+      .product-items-list .product-list-item {
+        .content {
+          padding: 49px 52px 31px 40px;
+        }
+
+        .productlist-image {
+          img {
+            width: 159px;
+            height: 160px;
+          }
+        }
+
+        .item-name-price {
+          .item-name {
+            line-height: 36px;
+          }
+        }
+      }
+
+      .grey-line {
+        margin-bottom: 32px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.160003);
+      }
+    }
+
+    .bg-logo-right {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      max-height: 472px;
+      z-index: -1;
+    }
+  }
+
+  .section-heading {
+    line-height: 57px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    font-weight: normal;
+  }
+
+  .line {
+    margin-bottom: 64px;
+  }
+}
+
+.first-card-section {
+  margin-bottom: 44px;
+}
+
+.last-card-section {
+  margin-bottom: 79px;
+}
+
+.btn-home {
+  margin: 0px auto 33px;
+
+  a, a:hover {
+    padding: 8px 23px;
+    background: linear-gradient(145.87deg, #F1B71C -11.86%, #EB6E19 95.89%);
+    box-shadow: 0px 2px 6px rgba(240, 170, 28, 0.447412);
+    border-radius: 100px;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+}
+
+.product-items-list {
+  margin-bottom: 60px;
+  padding: 0px 40px;
+
+  .product-list-item {
+    margin-bottom: 34px;
+    display: grid;
+    grid-template-columns: 207px 1fr;
+
+    .productlist-image {
+      img {
+        width:207px;
+        height: 207px;
+        max-width: 207px;
+        border-radius: 16px;
+        background: #F9F9F9;
+      }
+    }
+
+    .content {
+      padding: 25px 0px 0px 40px;
+
+      .item-name-price {
+        line-height: 46px;
+        margin-bottom: 8px;
+
+        a, a:hover {
+          color: #000000;
+          text-decoration: none;
+        }
+        .item-name {
+          padding: 0px;
+        }
+
+        .item-price {
+          font-family: 'Poppins-bold';
+          font-weight: bold;
+        }
+      }
+
+      .item-description {
+        line-height: 28px;
+        font-size: 24px;
+        margin-bottom: 26px;
+      }
+
+      .update-count {
+        margin-bottom: 16px;
+
+        .button {
+          width: 32px;
+          height: 32px;
+          background: #F5F5F5;
+          margin-right: 2px;
+          padding-top: 6px;
+        }
+
+        .btn-sub {
+          border: none;
+          color: black;
+          border-radius: 15px 0px 0px 15px;
+
+          &:after {
+            font-family: 'FontAwesome';
+            content: "\2212";
+            font-size: 22px;
+            cursor: pointer;
+            position: relative;
+            top: -2px;
+            font-weight: normal;
+          }
+        }
+
+        .disable {
+          pointer-events: none;
+        }
+
+        .btn-add {
+          border: none;
+          color: black;
+          border-radius: 0px 15px 15px 0px;
+
+          &:after {
+            font-family: 'FontAwesome';
+            content: "\2b";
+            font-size: 22px;
+            cursor: pointer;
+            position: relative;
+            top: -3px;
+            font-weight: normal;
+          }
+        }
+
+        .disable-state {
+          pointer-events: none;
+          color: #D0D0D0;
+        }
+
+        .product-quantity {
+          width: 42px;
+          text-align: center;
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+@media ( max-width: 1150px ) {
+  .cart {
+    .product-items-list {
+      .product-list-item {
+        grid-template-columns:  20px 150px 1fr;
+      }
+
+      .content {
+        padding-left: 25px;
+      }
+
+      .productlist-image {
+        img {
+          width: 150px;
+          height: 180px;
+          max-width: 150px;
+        }
+      }
+    }
+  }
+}
+
+@media ( max-width: 990px ) {
+  .cart {
+    .checkout-empty-btn {
+      margin: 25px auto 0px;
+    }
+
+    .product-items-list {
+
+      .product-list-item {
+        margin-bottom: 22px;
+        grid-template-columns: 190px 1fr;
+      }
+
+      .content {
+        padding-left: 40px;
+      }
+
+      .productlist-image {
+
+        img {
+          width: 190px;
+          height: 190px;
+          max-width: 190px;
+        }
+      }
+    }
+  }
+}
+
+@media ( max-width: 767px ) {
+  .orders.edit {
+    .keep-shopping-btn {
+      width: 94%;
+      margin-left: 0px;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .cart .cart-image {
+      margin-top: 86px;
+    }
+  }
+
+  .order-show {
+    .order-received {
+      .bg-logo-right {
+        height: 374px;
+      }
+
+      .orderpage_content {
+        padding: 32px 24px 46px 24px;
+        min-height: 502px;
+
+        .logo-mark {
+          height: 44px;
+          width: 26px;
+          margin-bottom: 6px;
+        }
+
+        .main-heading {
+          font-size: 65px;
+          line-height: 60px;
+          margin-bottom: 28px;
+        }
+
+        .order-number-title {
+          font-size: 38px;
+          line-height: 26px;
+          margin-bottom: 6px;
+        }
+
+        .order-number {
+          font-size: 16px;
+          line-height: 24px;
+          margin-bottom: 22px;
+        }
+
+        .order-decsription {
+          font-size: 16px;
+          line-height: 24px;
+          margin-bottom: 34px;
+        }
+
+        .order-summary {
+          display: none !important;
+        }
+
+        .order-summary-detail{
+          .grey-line {
+            margin-bottom: 43px;
+          }
+
+          .order-summary-detail-content {
+            padding: 0;
+
+            .subtotal {
+              font-size: 16px;
+              align-items: center;
+
+              .subtotal-price {
+                font-size: 24px;
+              }
+            }
+
+            .extra-charges p:first-child {
+              font-size: 16px;
+              line-height: 28px;
+            }
+
+            .total {
+              margin-bottom: 41px;
+
+              .total-text {
+                font-size: 16px;
+                line-height: 16px;
+              }
+            }
+          }
+        }
+
+        .product-items-list {
+          .product-list-item {
+            margin-bottom: 0;
+            grid-template-columns: 114px 1fr;
+            padding-bottom: 22px;
+            .grey-line {
+              margin-bottom: 24px;
+            }
+
+            .content {
+              padding: 15px 0 0 28px;
+
+              .item-name-price {
+                font-family: 'Poppins-bold';
+                font-size: 20px;
+                line-height: 16px;
+                margin-bottom: 6px;
+              }
+
+              .item-description {
+                font-size: 16px;
+                line-height: 28px;
+                margin-bottom: 12px;
+              }
+
+              .mob-item-price {
+                font-size: 20px;
+                line-height: 16px;
+                padding: 0 !important;
+              }
+            }
+
+            .productlist-image {
+              img {
+                width: 114px;
+                height: 114px;
+              }
+            }
+          }
+        }
+
+        .view-order-summary {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+@media ( max-width: 681px ) {
+  .cart {
+    margin: 0px 1px 0px 1px;
+
+    .checkout-empty-btn {
+      margin: 25px auto 0px;
+    }
+
+    .main-heading {
+      margin: 0px 0px 39px 0px;
+      font-size: 72px;
+      line-height: 60px
+    }
+
+    .grey-line {
+      margin-bottom: 24px
+    }
+
+    .cart-summary {
+      padding-left: 0px;
+
+      .order-summary {
+        padding: 48px 16px 0px 17px;
+
+        .heading {
+          font-size: 24px;
+          margin-bottom: 31px;
+        }
+
+        .line {
+          margin-bottom: 31px;
+        }
+
+        .content {
+          padding: 0px 13px 11px 13px;
+
+          .subtotal {
+            margin-bottom: 23px;
+            font-size: 16px;
+            line-height: 16px;
+
+            .subtotal-price {
+              font-size: 18px;
+              line-height: 28px;
+            }
+          }
+
+          .extra-charges {
+            margin-bottom: 11px;
+            font-size: 16px;
+            line-height: 16px;
+
+            .no-charges, .charges {
+              font-size: 18px;
+              line-height: 28px;
+            }
+          }
+
+        }
+      }
+    }
+
+    .total {
+      padding: 22px 25px 21px;
+      margin-bottom: 27px;
+      .total-text {
+        font-size: 24px;
+      }
+    }
+
+    .product-items-list {
+      padding: 0px 1px;
+      margin-bottom: 0px;
+      .productlist-image {
+        margin-left: 0px;
+      }
+
+      .product-list-item {
+        margin-bottom: 22px;
+        grid-template-columns: 114px 1fr;
+        .content {
+          padding: 1px 0px 0px 25px;
+
+          .update-count {
+            margin-bottom: 0px;
+          }
+
+          .mob-item-price {
+            line-height: 16px;
+            align-self: center;
+          }
+
+          .item-description {
+            font-size: 16px;
+            line-height: 28px;
+            margin-bottom: 23px;
+            padding-left: 3px;
+          }
+        }
+
+        .productlist-image {
+          img {
+            width: 114px;
+            height: 114px;
+            max-width: 114px;
+          }
+        }
+
+        .item-name-price {
+          margin-bottom: 6px;
+          padding-left: 3px;
+          .item-name {
+            padding-top: 8px;
+            font-size: 20px;
+            line-height: 36px;
+          }
+        }
+      }
+    }
+
+    .btn-empty-cart {
+      margin-bottom: 36px;
+    }
+
+    .mob-cart-item-delete {
+      height: 22px;
+    }
+
+    .remv-margin {
+      margin-right: -16px;
+      margin-left: -16px;
+    }
+
+    .section-heading {
+      font-size: 44px;
+      line-height: 53px;
+      margin-bottom: 8px;
+    }
+
+    .btn-home {
+      margin-bottom: 36px;
+    }
+
+    .first-card-section {
+      margin-bottom: 40px;
+    }
+
+    .last-card-section {
+      margin-bottom: 36px;
+    }
+
+    .line {
+      margin-bottom: 24px;
+    }
+
+    .product-card {
+      width: 181px;
+
+      .price {
+        .current-price {
+          font-size: 20px;
+          line-height: 30px;
+        }
+        .orignal-price {
+          font-size: 14px;
+          line-height: 21px;
+        }
+      }
+
+      .image-container {
+        width: 181px;
+        height: 181px;
+        margin-bottom: 12px;
+        overflow: hidden;
+
+        img {
+          width: 181px;
+          height: 181px;
+        }
+      }
+
+      .rating {
+        margin-bottom: 6px;
+
+        .number {
+          line-height: 20px;
+        }
+      }
+
+      .name {
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 6px;
+      }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .discount {
+    #submit-coupon_code {
+      right: 25px;
+    }
+
+    .input-coupon-code {
+      padding-left: 8px;
+    }
+
+    .discount-price {
+      font-family: 'Poppins';
+      &.price {
+        color: #7CC039;
+      }
+    }
+  }
+
+  .modal-body {
+    .custom-hose-configuration-table {
+      font-size: 10px;
+      line-height: 16px;
+
+      td, th {
+        padding: 5px !important;
+      }
+    }
+
+    .buttons_section {
+      flex-direction: column;
+
+      .custom-page-btn {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .cart {
+    .cart-image {
+      width: 83px;
+      height: 83px;
+    }
+
+    .checkout-empty-btn {
+      margin: 25px auto 0px;
+    }
+
+    .product-items-list {
+      .product-list-item  {
+        margin-bottom: 22px;
+        grid-template-columns: 83px 1fr;
+
+        .productlist-image  img {
+          width: 83px;
+          height: 100px;
+          max-width: 100px;
+        }
+      }
+    }
+  }
+}
+
+
+# touched on 2025-05-22T21:30:47.547072Z
+# touched on 2025-05-22T23:38:32.383186Z
