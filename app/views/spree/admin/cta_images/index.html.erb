@@ -1,0 +1,40 @@
+<% admin_breadcrumb('CTA Images') %>
+
+<% content_for :page_actions do %>
+  <% if can?(:create, Spree::CtaImage) %>
+    <li>
+      <%= link_to 'Add new Cta Image', new_admin_cta_image_path, id: 'admin_new_cta_link', class: 'btn btn-primary' %>
+    </li>
+  <% end %>
+<% end %>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item active"><a class="nav-link text-dark active" data-toggle="tab" href="#Top">Main CTA</a></li>
+
+  <li class="nav-item"><a class="nav-link text-dark" data-toggle="tab" href="#MiddleCta">Middle CTA</a></li>
+
+  <li class="nav-item"><a class="nav-link text-dark" data-toggle="tab" href="#Leftside">Left CTA</a></li>
+
+  <li class="nav-item"><a class="nav-link text-dark" data-toggle="tab" href="#Rightside">Right CTA</a></li>
+</ul>
+
+<div class="tab-content help-center">
+  <div id="Top" class="tab-pane active">
+    <%= render 'cta_tab', cta_images: @cta_images.top %>
+  </div>
+
+  <div id="MiddleCta" class="tab-pane">
+    <%= render 'cta_tab', cta_images: @cta_images.middle %>
+  </div>
+
+  <div id="Leftside" class="tab-pane">
+    <%= render 'cta_tab', cta_images: @cta_images.left_side %>
+  </div>
+  <div id="Rightside" class="tab-pane">
+    <%= render 'cta_tab', cta_images: @cta_images.right_side %>
+  </div>
+</div>
+
+# touched on 2025-05-22T23:06:32.564177Z
+# touched on 2025-05-22T23:22:20.555878Z
+# touched on 2025-05-22T23:37:39.694404Z
