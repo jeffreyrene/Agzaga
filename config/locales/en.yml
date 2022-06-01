@@ -1,0 +1,135 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+  spree:
+    coupon_code_single_usage: Multiple coupon codes cannot be applied.
+    search: Search products, categories, faqs, …
+    shipping_address: Shipping Address
+    billing_address: Billing Address
+    street_address_2: Company, Apartment, Suite, Address Line 2
+    zip: Postal Code
+    payment_information: CARD INFORMATION
+    checkout_page_title:
+      address: WHERE SHOULD WE SEND IT?
+      delivery: How Should We Ship It?
+      payment: PAYMENT INFORMATION
+      confirm: REVIEW YOUR ORDER
+    checkout_submit_button_text:
+      address: PROCEED TO SHIPPING
+      delivery: PROCEED TO PAYMENT
+      payment: CONFIRM YOUR INFORMATION
+      confirm: PLACE ORDER
+    login_as_existing: Login to your account
+    new_filter_type: New Filter Type
+    add_filter_value: Add Filter Value
+    review_successfully_added: Successfully submitted review
+    review_successfully_updated: Successfully updated review
+    deal_successfully_added: Successfully submitted deal
+    deal_successfully_updated: Successfully updated deal
+    continue_to_payment_option: Continue
+    pay_now: Pay Now
+    new_cta_images: "New CTA Images"
+    registrating_new_user: "Setting Up Your Account"
+    update_user_information: "Updating Account Information"
+    linked_with_google_account: "It looks like this email account is already associated with an existing Google account."
+    linked_with_existing_email_account: "It looks like this Google account is already associated with an existing email account."
+    admin:
+      cta_images:
+        new:
+          start_at_placeholder: "Start at"
+          expires_at_placeholder: "End at"
+      tab:
+        product_questions: Product Questions
+        labels: Labels
+        contact: Contact Requests
+        featured_products: Featured Products
+        deals_products: Deals Products
+        filter_types: Filter Types
+        net_suite_logs: Net Suite Logs
+        ebay_logs: Ebay Logs
+        net_suite_authorization: Net Suite Auth
+        home_page_review: Home Page Data
+        deals_page: Deals Page Data
+        google_product_categories: Google Product Categories
+        bulk_update_product_prices: Bulk Update Products Prices
+        bulk_update_sale_prices: Bulk Update Sale Prices
+        email_logs: Email Logs
+        facebook_api_logs: Facebook Api Logs
+        ffa_chapter_enrollments: FFA Enrollments
+        interested_chapters: FFA Interested Chapters
+        ffa_fundraiser_calculations: FFA Fundraiser
+        net_suite_logs: Data Push Service
+        ns_responses: Data Sync Callbacks
+        change_logs: Solidus Data Update
+        ebay_change_logs: Ebay Data Update
+        net_suite_logs_main: Net Suite Logs
+        ffa: FFA
+        help_center: Help Center
+        labels_products: Labels Products
+        chuckwagon_contest: Chuckwagon Contest
+        bulk_update_product_labels: Bulk Add Products Label
+        tracking_urls: Tracking URLs
+        cta_images: CTA Images
+    order_mailer:
+      notify_admin_order_placed_email:
+        dear_admin: Dear Admin,
+        subject: New Order Received.
+        instructions: "%{email} placed a new order: "
+        order_summary: Order Number
+        view_order: 'Please go to store for details.'
+    store_credit:
+      store_credit: 'Store Credit Applied'
+    pages:
+      usa:
+        bridon_us:
+          title: 'AmericaNet - Bridon USA'
+          text: 'Fill your hayfield with the American flag this season.This round bale net wrap from Bridon USA – a Tama Group company - is one of the best net wraps on the market.It is UV protected for long-term strength and has been specially designed and performance tested for American balers, crops, and conditions.'
+        ariat:
+          title: 'Flag Apparel'
+          text: 'In search of that perfect 4th of July shirt? Agzaga.com has you covered with patriotic shirts and hats from Ariat, Red Dirt Hat Company, and more! Check out our great American flag apparel and make sure you’re dressed to get your flag on.'
+        allied:
+          title: 'USA Flags American Made'
+          text: 'We’ve partnered with Allied Flag to offer high quality, MADE-IN-AMERICA American flags! Don’t miss out on some of the best outdoor American flags on the market. Grab a new flag or try a flag pole kit and get your flag on!'
+        accessories:
+          title: 'More Flag Gear'
+          text: 'Want more American flag gear? We’ve got more American flag gear! Get your flag on with one of these America flag accessories. They’re a must for 4th of July parties and make great patriotic Father’s Day gifts!'
+
+
+  activerecord:
+    models:
+      spree/promotion/actions/create_shipping_adjustments: Create shipping adjustment
+
+# touched on 2025-05-22T19:13:30.814417Z
+# touched on 2025-05-22T22:38:45.492836Z
+# touched on 2025-05-22T23:06:29.927296Z
+# touched on 2025-05-22T23:26:47.243830Z
+# touched on 2025-05-22T23:48:20.550957Z

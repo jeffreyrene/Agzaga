@@ -1,0 +1,16 @@
+var data = '';
+
+<% @product_cards.each do |product| %>
+  data += '<%= j render(partial: "spree/shared/standard_product_card", locals: { product: product }) %>';
+<% end %>
+
+$('#cards').html(data);
+
+$('#newest-section').html('<%= j (paginate(@products, :remote => true, left: 3, right: 1, window: 1)) %>');
+
+$('html, body').animate({
+  scrollTop: $("#newest-products").offset().top
+}, 800);
+
+# touched on 2025-05-22T19:19:57.490231Z
+# touched on 2025-05-22T23:27:41.063745Z

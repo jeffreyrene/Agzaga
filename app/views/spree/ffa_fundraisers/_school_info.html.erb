@@ -1,0 +1,118 @@
+<%= form_for @ffa_chapter, url: wizard_path(:school_info), remote: true, method: :patch do |f| %>
+
+<div class="is-flex justify-center">
+  <div class="ffa-step-card">
+    <%= render partial: 'step_progress', locals: { level: 2 } %>
+
+    <%= hidden_field_tag :edit_request, params[:edit_request] %>
+    <div class="step-header">
+      <div class="step-heading">
+        How about your School?
+      </div>
+
+      <div class="sub-heading">
+        We need this information so we can send you the check!
+      </div>
+    </div>
+
+    <div class="step-body">
+      <div class="step-col-57">
+        <div class="material-textfield">
+          <%= f.text_field :school_name, placeholder: ' ' %>
+          <label>School Name</label>
+          <% if @ffa_chapter.errors.messages.key?(:school_name) %>
+            <span class= "ffa-error-message"><%= @ffa_chapter.errors[:school_name][0]%></span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="step-col-57">
+        <div class="material-textfield">
+          <%= f.text_field :street, placeholder: ' ' %>
+          <label>Street Address</label>
+          <% if @ffa_chapter.errors.messages.key?(:street) %>
+            <span class= "ffa-error-message"><%= @ffa_chapter.errors[:street][0]%></span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="step-col-57 is-flex justify-space-between">
+        <div class="step-col-39">
+          <div class="material-textfield">
+            <%= f.text_field :city, placeholder: ' ' %>
+            <label>City</label>
+            <% if @ffa_chapter.errors.messages.key?(:city) %>
+              <span class= "ffa-error-message"><%= @ffa_chapter.errors[:city][0]%></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="step-col-18">
+          <div class="material-textfield">
+            <%= f.collection_select :state, @ffa_chapter.approved_states, :to_s, :to_s, {include_blank: false}, {class: 'ffa-approved-states'} %>
+            <label>State</label>
+            <% if @ffa_chapter.errors.messages.key?(:state) %>
+              <span class= "ffa-error-message"><%= @ffa_chapter.errors[:state][0]%></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="step-col-33">
+          <div class="material-textfield">
+            <%= f.text_field :postal_code, placeholder: ' ' %>
+            <label>Postal Code</label>
+            <% if @ffa_chapter.errors.messages.key?(:postal_code) %>
+              <span class= "ffa-error-message"><%= @ffa_chapter.errors[:postal_code][0]%></span>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="notification-red <%= 'signed' if @ffa_chapter.is_signed %>">
+        <div class="notification-heading">
+          FL, LA, OH, VA, AR, PA, MS State Residents
+        </div>
+        <div class="notification-body">
+          Due to regulations in these states, residents must sign a written agreement to participate in this fundraiser. Please click the button below to download the agreement and, once signed, please email the form to <%= mail_to 'david@agzaga.com' %>.
+        </div>
+
+        <% if @ffa_chapter.is_signed %>
+          <div class="btn-download"></div>
+        <% else %>
+          <!--%= link_to 'Sign now', new_e_signature_path(ffa_chapter_id: @ffa_chapter.id), remote: true, class: 'btn-download' %-->
+          <a href="<%= asset_path('downloadables/co-venture_agreement_download.pdf') %>" class="btn-download" download> Download </a>
+          <%= f.hidden_field :advisor_form_downloaded %>
+
+        <% end %>
+      </div>
+
+    </div>
+
+
+    <div class="step-card-foot">
+      <div class="step-count">
+        Step 3 of 4
+      </div>
+
+      <div class="is-flex mobile-mb-16">
+        <% if !params[:edit_request].present? %>
+          <%= link_to wizard_path(:chapter_info), remote: true, class: 'clear-link btn-back-link' do %>
+            <div class="btn-back">
+              <%= image_tag('ffa-step-back-arrow.svg', class: "next-step-arrow") %> Go Back
+            </div>
+          <% end %>
+        <% end %>
+
+        <button class="btn-orange-red <%= 'full-width' if params[:edit_request].present? %>" type="submit">
+          <%= params[:edit_request].present? ? 'Save Changes' : 'Last Step'  %>
+          <%= image_tag 'next-step-arrow.svg', class: "next-step-arrow" %>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<% end %>
+
+# touched on 2025-05-22T19:21:56.988194Z
