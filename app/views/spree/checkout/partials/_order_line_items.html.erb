@@ -1,0 +1,33 @@
+<div class="line-items">
+  <% @order.line_items.each do |item| %>
+    <div class="line-item">
+      <div class="d-flex">
+        <div class="item-image">
+          <%= render( 'spree/shared/image', image: item.variant.gallery.images.first || item.variant.product.gallery.images.first, size: :small ) %>
+        </div>
+
+        <div class="item-description d-flex">
+          <p class="poppins-text-16 item-name">
+            <%= item.variant.name %>
+          </p>
+          <p class="item-variant name-line">
+            Quantity: <%= item.quantity %>
+          </p>
+          <% if item.variant.option_values.present? %>
+            <p class="item-variant name-line">
+              Color: <%= item.variant.option_values.pluck(:name)[1] %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+      <div class="poppins-bold-text-16 pl-4 price">
+        <p class="p-0 mb-0 item-price"><%= Spree::Money.new( item.quantity * item.price ).to_html%></p>
+        <% if item.product.on_sale? %>
+          <span class="item-variant original-price poppins-text-16">
+            <%= Spree::Money.new(item.product.original_price).to_html %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
