@@ -1,0 +1,60 @@
+<div class="taxonsList overlay animate__animated" >
+  <div class="overlay-left">
+    <div class="taxonomy-header">
+      <div class="header-back">
+        <span class="back">
+          <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 27L25 22L30 17" stroke="#18181B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="taxo-head">
+          <%= @taxon.name  if @taxon.present? %>
+        </span>
+      </div>
+      <span data-dismiss="modal">
+        <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 28L34 16M22 16L34 28" stroke="#18181B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+
+    <div class="taxo-lists">
+      <% is_custom_hose = @taxon.name == 'Lawn & Garden' %>
+      <% @taxon_children.each do |taxon| %>
+        <% if is_custom_hose %>
+          <div class="taxo-list-items">
+            <%= link_to 'Custom Length Hose', custom_hose_generator_index_path, class: 'parent_taxonomy d-flex justify-content-between'%>
+          </div>
+          <% is_custom_hose = false %>
+        <% end %>
+
+        <div class="taxo-list-items">
+          <% if taxon["children_count"] %>
+            <span class="d-flex category-section">
+              <span>
+                <%= link_to taxon["name"], spree::nested_taxons_url(taxon["permalink"]),data: { turbolinks: false }, class:"parent_taxonomy d-flex justify-content-between category-name" %>
+              </span>
+              <%= link_to load_taxon_children_path({id: taxon["id"]}),class:"open_sub_set parent_taxonomy has_children d-flex", data: { turbolinks: false }, remote: true do %>
+                <span>
+                  <%= hidden_field_tag :children_count, taxon["children_count"] %>
+
+                  <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L6 6L1 11" stroke="#18181B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              <% end %>
+            </span>
+          <% else %>
+            <div>
+              <%= link_to taxon["name"], spree::nested_taxons_url(taxon["permalink"]), class:"parent_taxonomy d-flex justify-content-between" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="list-placeholder"></div>
+</div>
+
+# touched on 2025-05-22T23:46:03.099702Z
