@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="featured-categories-holder featured-carousel">
+    <div>
+      <h1 class="section-heading">SHOP BY CATEGORY</h1>
+      <a href="<%= spree::product_categories_path %>" class="view-all-link">View All</a>
+    </div>
+
+    <div id="featured-categories" class="owl-carousel owl-theme home-page-slider">
+    <% if @taxonomies.any? %>
+      <% @taxonomies.each do |taxonomy| %>
+        <div class="item">
+          <div class="img-holder">
+            <% if taxonomy.root.icon.present? %>
+              <% image_link = image_cdn_link(taxonomy.root.icon.url(:medium))%>
+              <%= link_to (image_tag image_link, alt: taxonomy.name, loading: 'lazy'),spree::nested_taxons_url(id: taxonomy.root.permalink), class: 'clear-link' %>
+            <% else %>
+              <a href="<%= spree::nested_taxons_url(id: taxonomy.root.permalink) %>" class="clear-link">
+                <%= image_tag "noimage.png", alt: 'Image' %>
+              </a>
+            <% end %>
+          </div>
+          <p><%= link_to (taxonomy.name), spree::nested_taxons_url(id: taxonomy.root.permalink), class: 'clear-link' %></p>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T23:26:36.503238Z
