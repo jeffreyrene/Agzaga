@@ -1,0 +1,58 @@
+# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+User-agent: *
+Disallow: /checkout
+Disallow: /cart
+Disallow: /orders
+Disallow: /user
+Disallow: /account
+Disallow: /api
+Disallow: /password
+Crawl-Delay: 10
+
+User-agent: SeekportBot
+Disallow: /
+
+User-agent: rogerbot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SiteAuditBot
+Disallow: /
+
+User-agent: SemrushBot-BA
+Disallow: /
+
+User-agent: SemrushBot-SI
+Disallow: /
+
+User-agent: SemrushBot-SWA
+Disallow: /
+
+User-agent: SemrushBot-CT
+Disallow: /
+
+User-agent: SemrushBot-BM
+Disallow: /
+
+User-agent: SplitSignalBot
+Disallow: /
+
+User-agent: SemrushBot-COUB
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+
+User-agent: barkrowler
+Disallow: /products/deals
+Crawl-Delay: 30
+
+Sitemap: https://assets.agzaga.com/sitemaps/sitemap.xml
+
+# touched on 2025-05-22T20:36:20.084614Z
+# touched on 2025-05-22T23:05:18.207195Z
+# touched on 2025-05-22T23:39:20.931905Z
+# touched on 2025-05-22T23:46:53.730991Z
