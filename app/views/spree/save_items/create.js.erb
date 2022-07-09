@@ -1,0 +1,33 @@
+<% unless @variant_present %>
+
+  window.$('#variant_<%= @variant_id %>').html("<%= j render(partial: 'spree/orders/save_item' , locals: { is_save_item: true })%>");
+  window.$('#saved-products-section').html("<%= j render(partial: 'spree/shared/partials/saved_section') %>");
+  window.$('#saved-items-product').find('#variant_<%= @variant_id %>').html("<%= j render(partial: 'spree/orders/cart_v2_product' , locals: { saveditems: true })%>");
+  window.$('#slider-summary').html("<%= j render(partial: 'spree/shared/cart_mobile_total')%>");
+  window.$('#checkout_summary_detail_div').html("<%=j render 'spree/checkout/checkout_summary_detail', order: @order %>");
+  window.$('#cart-body-summary').html('<%= j render 'spree/shared/cart_summary'%>');
+
+  window.$('#order-count').html('<%= j render(partial: 'spree/shared/cart_count', locals: {order: true})%>');
+  window.$('#upper-cart').html('<%= j render(partial: 'spree/shared/cart_count', locals: {order: true})%>');
+  window.$('#count-mob-cart').html('<%= j render(partial: 'spree/shared/cart_count', locals: {order: true})%>');
+  window.$('#count-mob-saved').html('<%= j render(partial: 'spree/shared/cart_count', locals: {saved_item: true})%>');
+  window.$('#save-item-count').html('<%= j render(partial: 'spree/shared/cart_count', locals: {saved_item: true})%>');
+
+  setTimeout(function() {
+    if(!(window.$('#variant_<%= @variant_id %>').find('.cart-product-footer').length)) {
+      <% if @order.line_items.empty? %>
+        window.$('#slider-adc-form').html('<%= j render 'spree/shared/slider_v2'%>');
+        window.$('#cart-page-line-items').html('<%= j render 'spree/shared/slider_v2', on_cart_page: true %>');
+        window.$('.cart-bottom-summary').hide()
+        window.$('.cart-mobile-total').hide()
+        window.$('.cart-body-left-max-freight').hide()
+      <% else %>
+        window.$('#variant_<%= @variant_id %>').hide()
+      <% end %>
+    }
+  }, 10000);
+<% else %>
+  location.reload();
+<% end %>
+
+# touched on 2025-05-22T20:43:46.758214Z
