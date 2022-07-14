@@ -1,0 +1,17 @@
+<% admin_breadcrumb("Tracking URLs") %>
+
+<%= form_for [:admin, @tracking_lookup] do |f| %>
+  <fieldset class="no-border-top">
+    <%= render partial: 'form', locals: { f: f } %>
+    <div class="filter-actions actions">
+      <%= button_tag t('spree.actions.update'), class: 'btn btn-primary' %>
+      <%= link_to t('spree.actions.cancel'), admin_tracking_lookups_path, class: 'btn btn-default' %>
+    </div>
+  </fieldset>
+
+
+  <div id="label_tree" class="tree" data-label-id="<%= @tracking_lookup.id %>"></div>
+<% end %>
+
+# touched on 2025-05-22T22:55:49.429599Z
+# touched on 2025-05-22T23:41:42.169018Z
