@@ -1,0 +1,230 @@
+<div class="d-md-block d-none order-confirm-content">
+  <% if order.has_checkout_step?("delivery") %>
+    <div class="outer_box">
+
+      <div><%= link_to( "Edit", checkout_state_path(:address), class: 'poppins-text-12 bold clear-link green-link') unless order.completed? %></div>
+
+      <div class="poppins-bold-text-24 group-heading">Shipping Information</div>
+      <% shipping_address = order.ship_address %>
+
+      <div class="poppins-text-18 group-heading-content user_name"><%= shipping_address.firstname %> <%= @order.bill_address.lastname %></div>
+      <div class="poppins-text-18 group-heading-content"><%= @order.email %></div>
+      <div class="poppins-text-18 group-heading-content"><%= shipping_address.phone %></div>
+      <div class="address-line"></div>
+      <div class="poppins-text-18 group-heading-content"><%= shipping_address.businessname %></div>
+      <div class="poppins-text-18 group-heading-content"><%= shipping_address.address1 %></div>
+      <div class="poppins-text-18 group-heading-content"><%= shipping_address.address2 %></div>
+      <div class="poppins-text-18 group-heading-content"><%= shipping_address.city%>, <%= shipping_address.state.name %> <%= shipping_address.zipcode %> </div>
+    </div>
+  <% end %>
+
+  <% if order.has_checkout_step?("address") %>
+    <div class="outer_box">
+      <div class="poppins-bold-text-24 group-heading">Billing Information</div>
+      <%= link_to("Edit", checkout_state_path(:address), class: 'poppins-text-12 bold clear-link green-link') unless order.completed? %>
+
+      <div class="poppins-text-18 group-heading-content user_name"><%= @order.bill_address.firstname %> <%= @order.bill_address.lastname %></div>
+      <div class="poppins-text-18 group-heading-content"><%= @order.bill_address.businessname %></div>
+      <div class="poppins-text-18 group-heading-content"><%= @order.bill_address.address1 %></div>
+      <div class="poppins-text-18 group-heading-content"><%= @order.bill_address.city%>, <%= @order.bill_address.state.name %> <%= @order.bill_address.zipcode %> </div>
+    </div>
+  <% end %>
+
+  <% if order.has_checkout_step?("payment") %>
+    <div class="outer_box">
+      <%= link_to("Edit", checkout_state_path(:payment), class: 'poppins-text-12 bold clear-link green-link') unless order.completed? %>
+
+      <div class="poppins-bold-text-24 group-heading">Payment Information</div>
+
+      <div class="payment-info">
+
+        <% store_credit = @order.payments.where(source_type: "Spree::StoreCredit")&.last&.source %>
+        <% card = @order.payments.where(source_type: "Spree::CreditCard")&.last&.source %>
+
+        <% if store_credit.present? && store_credit.is_a?(Spree::StoreCredit) %>
+          <div class="poppins-text-18 group-heading-content user_name">
+            Store Credit Applied: <%= Spree::Money.new( @order.total_applicable_store_credit, currency: @order.currency ).to_html %>
+          </div>
+        <% end %>
+
+        <% if card.present? && card.is_a?(Spree::CreditCard) %>
+          <div class="poppins-text-18 group-heading-content user_name"><%= card.name %></div>
+          <div class="poppins-text-18 group-heading-content"><span class="card-last-digits">............</span><%= card.last_digits%></div>
+          <div class="poppins-text-18 group-heading-content"><%= "#{card.month}/#{card.year.to_s.last(2)}" %></div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if order.has_checkout_step?("delivery") %>
+    <div class="outer_box">
+      <%= link_to("Edit", checkout_state_path(:delivery), class: 'poppins-text-12 bold clear-link green-link') unless order.completed? %>
+      <div class="shipping-group">
+        <% rate = order.shipments.first.selected_shipping_rate %>
+        <div class="d-flex btn-group-toggle methods-group">
+          <label class="btn shipping-method active">
+            <div class="icon text-center">
+              <%= show_svg shipment_method_icon(rate.name) %>
+            </div>
+
+            <div class="rate-name poppins-h4"><%= rate.name %></div>
+
+            <div class="rate-cost draught-h2"><%= rate.amount == 0 ? 'FREE' : rate.display_amount.to_html %></div>
+
+            <div class="rate-tax poppins-text-14"><%= rate.taxes.map(&:label).join(', ') %></div>
+          </label>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="row d-md-none d-flex">
+  <% if order.has_checkout_step?("delivery") %>
+    <div class="col-12 shipping-address-group text-left">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="poppins-bold-text-24 group-heading">
+          Your Shipping Info
+        </div>
+
+        <%= link_to( "Edit", checkout_state_path(:address), class: 'poppins-text-12 bold clear-link green-link') unless order.completed? %>
+      </div>
+
+      <div class="address-details">
+        <% shipping_address = order.ship_address %>
+
+        <p class="poppins-bold-text-16 address-text">
+          <%= shipping_address.name %>
+        </p>
+
+        <p class="poppins-text-16 address-text">
+          <%= shipping_address.phone %>
+        </p>
+
+        <p class="poppins-text-16 address-text">
+          <%= order.email %>
+        </p>
+
+        <div class="line"></div>
+
+         <p class="poppins-text-16 address-text">
+          <%= shipping_address.businessname %>
+        </p>
+
+        <p class="poppins-text-16 address-text">
+          <%= shipping_address.address1 %>
+        </p>
+
+        <% if shipping_address.address2.present? %>
+          <p class="poppins-text-16 address-text">
+            <%= shipping_address.address2 %>
+          </p>
+        <% end %>
+
+        <p class="poppins-text-16 address-text m-0 ">
+          <%= " #{shipping_address.city}, #{shipping_address.state.abbr} #{shipping_address.zipcode}" %>
+        </p>
+     </div>
+    </div>
+  <% end %>
+
+  <% if order.has_checkout_step?("payment") %>
+    <div class="col-12 card-group text-left">
+      <div class="d-flex align-items-start justify-content-between w-100">
+        <div class="poppins-bold-text-24 group-heading">
+          Your Card Info
+        </div>
+
+        <%= link_to('Edit', checkout_state_path(:payment), class: 'poppins-text-12 bold clear-link green-link') unless order.completed? %>
+      </div>
+
+      <div class="card-details">
+        <% order.payments.valid.each do |payment| %>
+          <%= render partial: '/spree/checkout/payment/show_stripe_card_details_mobile' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if order.has_checkout_step?("delivery") %>
+    <div class="col-12 shipment-method-group text-left">
+      <div class="d-flex align-items-start justify-content-between">
+        <div class="shipping-group">
+          <% rate = order.shipments.first.selected_shipping_rate %>
+
+          <div class="d-flex btn-group-toggle methods-group">
+            <label class="btn shipping-method active">
+              <div class="icon text-center">
+                <%= show_svg shipment_method_icon(rate.name) %>
+              </div>
+
+              <div class="rate-name poppins-h4"><%= rate.name %></div>
+
+              <div class="rate-cost draught-h2"><%= rate.amount == 0 ? 'FREE' : rate.display_amount.to_html %></div>
+
+              <div class="rate-tax poppins-text-14"><%= rate.taxes.map(&:label).join(', ') %></div>
+            </label>
+          </div>
+        </div>
+
+        <%= link_to('Edit', checkout_state_path(:delivery), class: 'poppins-text-12 bold clear-link green-link') unless order.completed? %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if order.has_checkout_step?("address") %>
+    <div class="col-12 billing-address-group text-left">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="poppins-bold-text-24 group-heading">
+          Your Billing Info
+        </div>
+
+        <%= link_to( "Edit", checkout_state_path(:address), class: 'poppins-text-12 bold clear-link green-link') unless order.completed? %>
+      </div>
+
+      <div class="address-details">
+        <% if order.shipping_eq_billing_address? %>
+          <p class="poppins-text-16 address-text">
+            Same as Shipping Address
+          </p>
+        <% else %>
+          <% address = order.bill_address %>
+
+          <p class="poppins-bold-text-16 address-text">
+            <%= address.name %>
+          </p>
+
+          <p class="poppins-text-16 address-text">
+            <%= address.phone %>
+          </p>
+
+          <p class="poppins-text-16 address-text">
+            <%= order.email %>
+          </p>
+
+          <div class="line"></div>
+
+          <p class="poppins-text-16 address-text">
+            <%= address.businessname %>
+          </p>
+
+          <p class="poppins-text-16 address-text">
+            <%= address.address1 %>
+          </p>
+
+          <% if address.address2.present? %>
+            <p class="poppins-text-16 address-text">
+              <%= address.address2 %>
+            </p>
+          <% end %>
+
+          <p class="poppins-text-16 address-text m-0 ">
+            <%= " #{address.city}, #{address.state.abbr} #{address.zipcode}" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T23:43:40.246085Z
