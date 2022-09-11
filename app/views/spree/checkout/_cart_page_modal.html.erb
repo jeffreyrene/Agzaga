@@ -1,0 +1,29 @@
+<div class="cart-page-modal">
+  <div class="cart-modal-heading">
+    FFA Week Fundaraiser
+  </div>
+
+  <div class="ffa-chapter-selection">
+    <div class="display-flex align-item-center ffa-section-body">
+      <div class="d-none d-lg-block cart-modal-gift-icon">
+        <img src="<%= image_path('gift-icon.svg')%>" alt="image" class="d-none d-lg-block">
+      </div>
+      <div class="heading-section">
+        <div class="cart-modal-subheading poppins-text-14 details-text">
+          We’ll give 5% of your purchase to a participating FFA Chapter, at no cost to you.
+        </div>
+      </div>
+    </div>
+    <div class="text-align-right mobile-btn-align">
+      <button type="" class="cart-modal-button ag-btn-lg ag-btn-primary pay-now-btn <%= @order&.ffa_chapter.present? ? 'd-none' : 'd-inline'%>" data-toggle="modal" data-target=".chapter_selection_modal">Select Chapter</button>
+      <button type="" class="cart-change-chapter-btn <%= @order&.ffa_chapter.present? ? 'd-inline' : 'd-none'%>" data-toggle="modal" data-target=".chapter_selection_modal">Change Chapter</button>
+
+      <%= link_to update_chapter_path({order: {ffa_chapter_id: nil}}), class: 'remove-chapter-selection', remote: false, method: :patch do%>
+        <button type="" class="cart-chapter-remove-btn <%= @order&.ffa_chapter.present? ? 'd-inline' : 'd-none'%>">Remove</button>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:33:10.003856Z
+# touched on 2025-05-22T22:51:14.437445Z
