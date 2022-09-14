@@ -1,0 +1,163 @@
+<% if @order.total_applicable_store_credit > 0.0 && ['payment', 'confirm'].include?(@order.state) %>
+  <% total_order_amount =  @order.display_order_total_after_store_credit.to_html %>
+<% else %>
+  <% total_order_amount = @order.display_total.to_html %>
+<% end %>
+
+<div class="head">
+  <div class="logo-nav">
+    <div class="back-btn">
+      <%= link_to image_tag("cart-back-btn.png"), cart_url, data: { turbolinks: false } %>
+    </div>
+    <div class="logo">
+      <%= link_to image_tag("agzaga_black_logo.svg"), root_url %>
+    </div>
+  </div>
+</div>
+
+<div class="checkout-cart-preview-mbl">
+  <div class="cart-previews">
+    <div class="cart-previews-images">
+      <% @order.line_items.each do |item| %>
+        <%= render( 'spree/shared/image', image: item.variant.gallery.images.first || item.variant.product.gallery.images.first, size: :small ) %>
+      <% end %>
+    </div>
+    <div class="qty-badge">
+      <span><%= @order.line_items.count %> items</span>
+      <span class="scroll-img-preview">
+        <%= image_tag 'summary-icon.png' %>
+      </span>
+    </div>
+  </div>
+
+  <div class="cart-title">Pay Agzaga</div>
+  <div class="checkout-modal-back-drop"></div>
+  <div class="cart-amount" id="total-order-total"><%= total_order_amount %></div>
+</div>
+
+<div class="cart-detail-body">
+  <div class="products-list">
+    <%= render partial: 'spree/checkout/checkout_summary_line_items', locals: { order: @order } %>
+  </div>
+
+  <div class="sub-total-section">
+    <div class="sub-total-heading">Subtotal</div>
+    <div class="sub-total-amount"><%= @order.display_item_total %></div>
+  </div>
+
+  <div class="promo-container">
+    <div class = 'promo-link'>Apply Promo Code</div>
+  </div>
+
+  <%= form_tag order_coupon_codes_path(@order), id: "couponcode_v2",  method: :post, remote: :true do %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <input name="coupon_code" id="hidden-coupon-code" type="hidden" value="">
+
+    <div id="promo-field-block" class="d-none">
+      <div class="ag-input-group-box">
+        <input class="ag-input-field form-control" placeholder="Add Promo Code" type="text" id="promo-field">
+      </div>
+
+      <button id="add-coupon-code" class="ag-p-sm" data-operation="cancel" type="submit">
+        Cancel
+      </button>
+
+      <div class="promo-error ag-p-xsm"></div>
+
+    </div>
+  <% end %>
+
+  <div class="promo-badge-container" id="chekcout_promotion_tags">
+    <%= render partial: 'spree/checkout/checkout_promotion_badges', locals: { order: @order } %>
+  </div>
+
+  <div class="shipping-section">
+    <div class="shipping">
+      <div class="shipping-heading">
+        Shipping Total
+      </div>
+
+    </div>
+    <div class="shipping-price">
+      <%= @order.shipments.any? ? Spree::Money.new(@order.shipment_total, currency: @order.currency).to_html : '$0.00' %>
+    </div>
+  </div>
+
+  <% @order.all_adjustments.nonzero.tax.eligible.group_by(&:label).each do |label, adjustments| %>
+    <div class="shipping-section">
+      <div class="shipping">
+        <div class="shipping-heading">
+          Total Tax
+        </div>
+      </div>
+
+      <div class="shipping-price">
+        <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency).to_html %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if ['payment'].include?(@order.state) %>
+    <div class="shipping-section store-credit-section">
+      <div class="shipping">
+        <div class="shipping-heading">
+          <%= t('spree.store_credit.store_credit') %>
+        </div>
+      </div>
+
+      <div class="shipping-price price store_credit_price">
+        <%= @order.state == 'payment'? Spree::Money.new(0.0).to_html.prepend('-') : @order.display_total_applicable_store_credit.to_html %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @order.ffa_chapter.present? %>
+    <div class="shipping-section">
+      <div class="shipping">
+        <div class="shipping-heading">
+          FFA Chapter
+        </div>
+      </div>
+
+      <div class="shipping-price">
+        <%= @order&.ffa_chapter&.name %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="total-section">
+    <div class="total-head">
+      Total Due
+    </div>
+    <div class="total-due-amount price total_price"  data-order-total="<%= @order&.display_total&.to_d&.to_f %>">
+      <%= total_order_amount %>
+    </div>
+  </div>
+</div>
+
+<div class="family-owned-section desktop-only">
+  <div class="image-container">
+    <%= image_tag 'about-us.png', class: 'image' %>
+  </div>
+  <div class="info-section">
+    <div class="heading">Family-Owned & Operated</div>
+    <div class="info">We’re a family-owned business, proudly located in Southwest Missouri.</div>
+    <a href="<%= about_us_path %>" class="learn-more">More About Us
+      <span class="ml-1">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.75 4.25H4.25C3.55964 4.25 3 4.80964 3 5.5V11.75C3 12.4404 3.55964 13 4.25 13H10.5C11.1904 13 11.75 12.4404 11.75 11.75V9.25M9.25 3H13M13 3V6.75M13 3L6.75 9.25" stroke="#52525B" stroke-width="1.13" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </a>
+  </div>
+</div>
+
+<div class="summary-links-container">
+  <%= link_to 'Return, Privacy & Contact', faqs_page_path, class: 'summary-link ag-p-sm', data: {turbolinks: false} %>
+</div>
+
+# touched on 2025-05-22T20:38:32.835530Z
+# touched on 2025-05-22T20:44:38.681528Z
+# touched on 2025-05-22T21:33:35.952866Z
+# touched on 2025-05-22T23:19:29.800064Z
+# touched on 2025-05-22T23:37:30.951686Z
