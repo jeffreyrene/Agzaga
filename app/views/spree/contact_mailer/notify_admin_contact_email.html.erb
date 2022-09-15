@@ -1,0 +1,36 @@
+<div>
+  <div style="font-family: sans-serif; font-size: 18px; font-weight: 600;">
+    Name
+  </div>
+
+  <div style="padding: 16px; font-family: sans-serif; font-size: 16px;">
+    <%= "#{@contact.firstname} #{@contact.lastname}" %>
+  </div>
+
+  <div style="font-family: sans-serif; font-size: 18px; font-weight: 600;">
+    Email
+  </div>
+
+  <div style="padding: 16px; font-family: sans-serif; font-size: 16px;">
+    <%= @contact.email%>
+  </div>
+
+  <div style="font-family: sans-serif; font-size: 18px; font-weight: 600;">
+    Phone
+  </div>
+
+  <div style="padding: 16px; font-family: sans-serif; font-size: 16px;">
+    <%= @contact.phone%>
+  </div>
+
+  <div style="font-family: sans-serif; font-size: 18px; font-weight: 600;">
+    Messsage
+  </div>
+
+  <div style="padding: 16px; font-family: sans-serif; font-size: 16px;">
+    <%= simple_format @contact.messsage %>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:09:17.612621Z
+# touched on 2025-05-22T23:07:12.569618Z

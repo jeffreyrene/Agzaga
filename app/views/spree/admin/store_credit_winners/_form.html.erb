@@ -1,0 +1,45 @@
+<%= form_for store_credit_winner, url: admin_store_credit_winner_path(store_credit_winner) do |f| %>
+  <div class="row">
+    <div class="col-6">
+      <div class="field">
+        <%= f.label "Name" %></br>
+        <%= f.text_field :name, class: 'w-100' %>
+        <% if store_credit_winner.errors.messages.key?(:name) %>
+          </br><span class= "ffa-error-message"><%= store_credit_winner.errors[:name][0]%></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="field">
+        <%= f.label "Email" %></br>
+        <%= f.text_field :email, class: 'w-100' %>
+        <% if store_credit_winner.errors.messages.key?(:email) %>
+          </br><span class= "ffa-error-message"><%= store_credit_winner.errors[:email][0]%></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="field">
+        <%= f.label "Phone Number" %></br>
+        <%= f.text_field :phone_number, class: 'w-100' %>
+        <% if store_credit_winner.errors.messages.key?(:phone_number) %>
+          </br><span class= "ffa-error-message"><%= store_credit_winner.errors[:phone_number][0]%></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class='actions text-right'>
+    <%= link_to "Back", admin_store_credit_winners_path, class: "btn btn-primary"%>
+    <%= f.submit "Update", class: "btn btn-primary"%>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T21:19:05.680561Z
+# touched on 2025-05-22T21:33:35.953745Z
+# touched on 2025-05-22T23:28:02.023032Z
+# touched on 2025-05-22T23:46:45.923724Z
