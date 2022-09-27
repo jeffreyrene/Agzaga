@@ -1,0 +1,116 @@
+<% address_id = address_type.chars.first %>
+<% read_only ||= false%>
+
+<div class="inner was-validated" data-hook=<%="#{address_type}_inner" %>>
+
+  <div class="d-flex w-100">
+    <%= ag_text_field form, :firstname, 'First Name',
+                            required: true,
+                            autocomplete: address_type + ' firstname',
+                            id: "#{address_id}firstname",
+                            class: 'name-field name-validation' %>
+
+    <%= ag_text_field form, :lastname, 'Last Name',
+                            required: true,
+                            autocomplete: address_type + ' lastname',
+                            id: "#{address_id}lastname",
+                            class: 'name-field name-validation mr-0' %>
+  </div>
+
+  <%= ag_text_field form, :businessname, 'Business Name',
+                          autocomplete: address_type + ' businessname',
+                          id: "#{address_id}businessname" %>
+
+
+  <% if Spree::Config[:company] %>
+    <div class="field" id=<%="#{address_id}company" %>>
+      <%= form.label :company, t('spree.company') %>
+      <%= form.text_field :company, autocomplete: address_type + ' organization' %>
+    </div>
+  <% end %>
+
+  <%= ag_text_field form, :address1, t('spree.street_address'),
+                          required: true,
+                          autocomplete: address_type + ' address-line1',
+                          id: "#{address_id}address1" %>
+
+  <div class="poppins-text-16 address-field">
+    + Add Company, Apt, Suite, Unit
+  </div>
+
+  <%= ag_text_field form, :address2, I18n.t('spree.street_address_2'),
+                          autocomplete: address_type + ' address-line2',
+                          id: "#{address_id}address2",
+                          class: 'address-line' %>
+
+
+  <div class="d-flex w-100 flex-wrap justify-content-between">
+    <%= ag_text_field form, :city, t('spree.city'),
+                            required: true,
+                            autocomplete: address_type + ' address-level2',
+                            id: "#{address_id}city",
+                            class: 'city-area' %>
+
+    <% if Spree::Config[:address_requires_state] %>
+      <label class="custom-field poppins-text-16 city-area" id="<%="#{address_id}state" %>">
+        <% have_states = !address.country.states.empty? %>
+        <%=
+          form.collection_select(
+            :state_id, @allowed_states, :id, :abbr,
+            {include_blank: true},
+            {
+              class: have_states ? 'custom-field-input required states-drop-down' : '',
+              style: have_states ? '' : 'display: none;',
+              disabled: !have_states,
+              autocomplete: address_type + ' address-level1',
+            }
+          )
+        %>
+        <h6 id="state-error" class="text-danger text-left"></h6>
+
+        <span class="placeholder-states" style="display:none">
+          <%= t('spree.state') %>
+        </span>
+
+        <%=
+          form.text_field(
+            :state_name,
+            class: !have_states ? 'custom-field-input required' : '',
+            style: have_states ? 'display: none;' : '',
+            disabled: have_states,
+            autocomplete: address_type + ' address-level1',
+          )
+        %>
+      </label>
+    <% end %>
+
+    <%= ag_text_field form, :zipcode, t('spree.zip'),
+                            required: true,
+                            autocomplete: address_type + ' postal-code',
+                            id: "#{address_id}zipcode",
+                            class: 'city-area zip-validation mr-0' %>
+
+    <%= ag_text_field form, :phone, t('spree.phone'),
+                          required: true,
+                          autocomplete: address_type + ' home tel',
+                          id: "#{address_id}phone",
+                          class: 'w-50 text-left phone-validation' %>
+
+  </div>
+
+  <% unless read_only %>
+    <div id=<%="#{address_id}country" %>>
+      <%= form.hidden_field :country_id, value: Spree::Country.find_by(iso: 'US')&.id %>
+    </div>
+  <% end %>
+
+  <% if Spree::Config[:alternative_shipping_phone] %>
+    <div class="field" id=<%="#{address_id}altphone" %>>
+      <%= form.label :alternative_phone, t('spree.alternative_phone') %>
+      <%= form.phone_field :alternative_phone, autocomplete: address_type + ' tel'%>
+    </div>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T19:18:03.146782Z
+# touched on 2025-05-22T23:39:48.975030Z
