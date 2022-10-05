@@ -1,0 +1,181 @@
+<footer class="footer_v2 none" data-id="footer-length">
+  <div class="footer-container mobile">
+   <div class="upper-part">
+    <div class="footer-email-group">
+        <div class="label">Don’t miss our emails with exclusive offers, awesome updates, and deals you’ll love.</div>
+          <%= form_tag(main_app.news_letter_path, remote: true, class: 'news-letter-form') do %>
+            <%= email_field_tag 'email', '', placeholder: 'Enter Email', required: true, class: 'email-input-field email-input-news-letter' %>
+
+            <button type="submit" class="submit-btn submit-btn-news-letter" aria-label="email">Join Us</button>
+            <div class="error-message footer_news_letter_error_v2"></div>
+          <% end %>
+      </div>
+
+      <div class="resources-box">
+        <div class="header" id="toggle-resources" data-name="resources">
+          <div class="title">Resources</div>
+
+          <div type="button" class="arrow-down show" id="arrow-down-resources">
+            <%= image_tag("arrow-down-cheveron.svg") %>
+          </div>
+
+          <div type="button" class="arrow-up" id="arrow-up-resources">
+            <%= image_tag("arrow-up-cheveron.svg") %>
+          </div>
+        </div>
+
+        <div class="links" id="links-resources" >
+          <a class="clear-link" href="<%= spree::faqs_page_path %>#contact-support-section">Contact Us</a>
+
+          <a class="clear-link" href="<%= spree::faqs_page_path %>"> Help Center</a>
+
+          <a class="clear-link" href="<%= spree::custom_hose_generator_index_path%>">Custom Hose</a>
+        </div>
+      </div>
+
+      <div class="separator sep-box"></div>
+
+      <div class="company-box">
+        <div class="header" id="toggle-company" data-name="company">
+          <div class="title">Company</div>
+
+          <div type="button" class="arrow-down show" id="arrow-down-company">
+            <%= image_tag("arrow-down-cheveron.svg") %>
+          </div>
+
+          <div type="button" class="arrow-up" id="arrow-up-company">
+            <%= image_tag("arrow-up-cheveron.svg") %>
+          </div>
+        </div>
+
+        <div class="links" id="links-company">
+          <a class="clear-link" href="<%= spree::about_us_path %>">About Us</a>
+        </div>
+      </div>
+
+      <div class="separator sep-box"></div>
+
+      <div class="logo-icons-section">
+        <ul class="nav social-media">
+          <li class="nav-item">
+            <a class="youtube-link" target="_blank" href="https://www.youtube.com/channel/UCbakHBOpI1LJAMsqTvmE13w">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="change" d="M0 20C0 31.0457 8.95431 40 20 40C31.0457 40 40 31.0457 40 20C40 8.95431 31.0457 0 20 0C8.95431 0 0 8.95431 0 20Z" fill="#3F3F46"/>
+                <path d="M29.5 15.125C29.25 14.25 28.625 13.625 27.75 13.375C26.25 13 19.875 13 19.875 13C19.875 13 13.625 13 12 13.375C11.125 13.625 10.5 14.25 10.25 15.125C10 16.75 10 20 10 20C10 20 10 23.25 10.375 24.875C10.625 25.75 11.25 26.375 12.125 26.625C13.625 27 20 27 20 27C20 27 26.25 27 27.875 26.625C28.75 26.375 29.375 25.75 29.625 24.875C30 23.25 30 20 30 20C30 20 30 16.75 29.5 15.125ZM18 23V17L23.25 20L18 23Z" fill="white"/>
+              </svg>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="twitter-link" target="_blank" href="https://www.twitter.com/agzagasocial">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="change" d="M0 20C0 31.0457 8.95431 40 20 40C31.0457 40 40 31.0457 40 20C40 8.95431 31.0457 0 20 0C8.95431 0 0 8.95431 0 20Z" fill="#3F3F46"/>
+                <path d="M30 13.75C29.25 14.125 28.5 14.25 27.625 14.375C28.5 13.875 29.125 13.125 29.375 12.125C28.625 12.625 27.75 12.875 26.75 13.125C26 12.375 24.875 11.875 23.75 11.875C21.125 11.875 19.125 14.375 19.75 16.875C16.375 16.75 13.375 15.125 11.25 12.625C10.125 14.5 10.75 16.875 12.5 18.125C11.875 18.125 11.25 17.875 10.625 17.625C10.625 19.5 12 21.25 13.875 21.75C13.25 21.875 12.625 22 12 21.875C12.5 23.5 14 24.75 15.875 24.75C14.375 25.875 12.125 26.5 10 26.25C11.875 27.375 14 28.125 16.25 28.125C23.875 28.125 28.125 21.75 27.875 15.875C28.75 15.375 29.5 14.625 30 13.75Z" fill="white"/>
+              </svg>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a class="instagram-link" target="_blank" href="https://www.instagram.com/agzagasocial">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="change" d="M0 20C0 31.0457 8.95431 40 20 40C31.0457 40 40 31.0457 40 20C40 8.95431 31.0457 0 20 0C8.95431 0 0 8.95431 0 20Z" fill="#3F3F46"/>
+                <path d="M20 11.5C22.75 11.5 23.125 11.5 24.25 11.5C25.25 11.5 25.75 11.75 26.125 11.875C26.625 12.125 27 12.25 27.375 12.625C27.75 13 28 13.375 28.125 13.875C28.25 14.25 28.375 14.75 28.5 15.75C28.5 16.875 28.5 17.125 28.5 20C28.5 22.875 28.5 23.125 28.5 24.25C28.5 25.25 28.25 25.75 28.125 26.125C27.875 26.625 27.75 27 27.375 27.375C27 27.75 26.625 28 26.125 28.125C25.75 28.25 25.25 28.375 24.25 28.5C23.125 28.5 22.875 28.5 20 28.5C17.125 28.5 16.875 28.5 15.75 28.5C14.75 28.5 14.25 28.25 13.875 28.125C13.375 27.875 13 27.75 12.625 27.375C12.25 27 12 26.625 11.875 26.125C11.75 25.75 11.625 25.25 11.5 24.25C11.5 23.125 11.5 22.875 11.5 20C11.5 17.125 11.5 16.875 11.5 15.75C11.5 14.75 11.75 14.25 11.875 13.875C12.125 13.375 12.25 13 12.625 12.625C13 12.25 13.375 12 13.875 11.875C14.25 11.75 14.75 11.625 15.75 11.5C16.875 11.5 17.25 11.5 20 11.5ZM20 9.625C17.125 9.625 16.875 9.625 15.75 9.625C14.625 9.625 13.875 9.875 13.25 10.125C12.625 10.375 12 10.75 11.375 11.375C10.75 12 10.5 12.5 10.125 13.25C9.875 13.875 9.75 14.625 9.625 15.75C9.625 16.875 9.625 17.25 9.625 20C9.625 22.875 9.625 23.125 9.625 24.25C9.625 25.375 9.875 26.125 10.125 26.75C10.375 27.375 10.75 28 11.375 28.625C12 29.25 12.5 29.5 13.25 29.875C13.875 30.125 14.625 30.25 15.75 30.375C16.875 30.375 17.25 30.375 20 30.375C22.75 30.375 23.125 30.375 24.25 30.375C25.375 30.375 26.125 30.125 26.75 29.875C27.375 29.625 28 29.25 28.625 28.625C29.25 28 29.5 27.5 29.875 26.75C30.125 26.125 30.25 25.375 30.375 24.25C30.375 23.125 30.375 22.75 30.375 20C30.375 17.25 30.375 16.875 30.375 15.75C30.375 14.625 30.125 13.875 29.875 13.25C29.625 12.625 29.25 12 28.625 11.375C28 10.75 27.5 10.5 26.75 10.125C26.125 9.875 25.375 9.75 24.25 9.625C23.125 9.625 22.875 9.625 20 9.625Z" fill="white"/>
+                <path d="M20 14.625C17 14.625 14.625 17 14.625 20C14.625 23 17 25.375 20 25.375C23 25.375 25.375 23 25.375 20C25.375 17 23 14.625 20 14.625ZM20 23.5C18.125 23.5 16.5 22 16.5 20C16.5 18.125 18 16.5 20 16.5C21.875 16.5 23.5 18 23.5 20C23.5 21.875 21.875 23.5 20 23.5Z" fill="white"/>
+                <path d="M25.5 15.75C26.1904 15.75 26.75 15.1904 26.75 14.5C26.75 13.8096 26.1904 13.25 25.5 13.25C24.8096 13.25 24.25 13.8096 24.25 14.5C24.25 15.1904 24.8096 15.75 25.5 15.75Z" fill="white"/>
+              </svg>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="facebook-link" target="_blank" href="https://www.facebook.com/agzagasocial">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="change" d="M0 20C0 31.0457 8.95431 40 20 40C31.0457 40 40 31.0457 40 20C40 8.95431 31.0457 0 20 0C8.95431 0 0 8.95431 0 20Z" fill="#3F3F46"/>
+                <path d="M30 20C30 14.5 25.5 10 20 10C14.5 10 10 14.5 10 20C10 25 13.625 29.125 18.375 29.875V22.875H15.875V20H18.375V17.75C18.375 15.25 19.875 13.875 22.125 13.875C23.25 13.875 24.375 14.125 24.375 14.125V16.625H23.125C21.875 16.625 21.5 17.375 21.5 18.125V20H24.25L23.75 22.875H21.375V30C26.375 29.25 30 25 30 20Z" fill="white"/>
+              </svg>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="tiktok-link" target="_blank" href="https://www.tiktok.com/@agzagasocial">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="change" d="M0 20C0 8.95431 8.95431 0 20 0C31.0457 0 40 8.95431 40 20C40 31.0457 31.0457 40 20 40C8.95431 40 0 31.0457 0 20Z" fill="#3F3F46"/>
+                <path d="M18.123 17.8753V17.0967C17.8562 17.0611 17.585 17.0388 17.305 17.0388C13.9663 17.0344 11.25 19.753 11.25 23.0989C11.25 25.1501 12.2725 26.9654 13.8374 28.0645C12.8282 26.9833 12.2103 25.5283 12.2103 23.9354C12.2103 20.6384 14.851 17.951 18.123 17.8753Z" fill="white"/>
+                <path d="M18.2701 26.703C19.7594 26.703 20.9775 25.515 21.0309 24.0378L21.0354 10.8365H23.4449C23.396 10.5651 23.3693 10.2848 23.3693 10H20.0795L20.0751 23.2014C20.0217 24.6785 18.8036 25.8665 17.3143 25.8665C16.852 25.8665 16.4163 25.7508 16.0295 25.5461C16.5275 26.2447 17.3455 26.703 18.2701 26.703Z" fill="white"/>
+                <path d="M27.9479 15.317V14.5829C27.0277 14.5829 26.174 14.3115 25.4539 13.8398C26.094 14.574 26.9609 15.108 27.9479 15.317Z" fill="white"/>
+                <path d="M25.4539 13.8397C24.7515 13.0344 24.3292 11.9844 24.3292 10.8364H23.449C23.6757 12.0912 24.4226 13.1679 25.4539 13.8397Z" fill="white"/>
+                <path d="M17.3094 20.3269C15.7845 20.3269 14.5442 21.5683 14.5442 23.0945C14.5442 24.1579 15.1488 25.0833 16.029 25.5461C15.7001 25.0922 15.5044 24.5361 15.5044 23.9309C15.5044 22.4048 16.7448 21.1634 18.2697 21.1634C18.5542 21.1634 18.8298 21.2123 19.0876 21.2924V17.9288C18.8209 17.8931 18.5497 17.8708 18.2697 17.8708C18.2207 17.8708 18.1763 17.8753 18.1274 17.8753V20.456C17.8651 20.3759 17.5939 20.3269 17.3094 20.3269Z" fill="white"/>
+                <path d="M27.9476 15.317V17.8754C26.2405 17.8754 24.6579 17.3282 23.3686 16.4027V23.099C23.3686 26.4405 20.6524 29.1635 17.3092 29.1635C16.02 29.1635 14.8196 28.7542 13.8372 28.0645C14.9441 29.2525 16.5223 30 18.2695 30C21.6081 30 24.3289 27.2814 24.3289 23.9355V17.2391C25.6181 18.1646 27.2007 18.7119 28.9079 18.7119V15.4194C28.5744 15.4194 28.2544 15.3838 27.9476 15.317Z" fill="white"/>
+                <path d="M23.3687 23.0989V16.4026C24.658 17.3281 26.2407 17.8753 27.9478 17.8753V15.3169C26.9608 15.1079 26.0939 14.5739 25.4538 13.8397C24.4224 13.1679 23.68 12.0912 23.4443 10.8364H21.0348L21.0303 24.0377C20.977 25.5149 19.7589 26.7029 18.2696 26.7029C17.3449 26.7029 16.5314 26.2446 16.0246 25.5505C15.1443 25.0833 14.5397 24.1624 14.5397 23.0989C14.5397 21.5728 15.7801 20.3314 17.3049 20.3314C17.5894 20.3314 17.8651 20.3803 18.1229 20.4604V17.8798C14.8509 17.951 12.2102 20.6384 12.2102 23.9354C12.2102 25.5283 12.8281 26.9788 13.8373 28.0645C14.8198 28.7541 16.0201 29.1635 17.3094 29.1635C20.648 29.1635 23.3687 26.4404 23.3687 23.0989Z" fill="white"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="lower-part">
+      <div class="footer-bottom-links">
+        <div class="cloud-flare-section">
+          <a href="https://www.cloudflare.com/learning/security/what-is-web-application-security" target="_blank">
+            <%= image_tag 'https://assets.agzaga.com/public_images/ProtectedByCloudflare_img.webp', alt: 'cloudflare' %>
+          </a>
+        </div>
+
+        <div class="missouri-section">
+          <a href="/about_us">
+            <%= image_tag 'missouri.svg', alt: 'missouri'%>
+          </a>
+        </div>
+      </div>
+
+      <div class="payment-box">
+        <ul class="nav payment-media">
+          <li class="nav-item">
+            <%= image_tag 'visa-color.svg', alt: 'Visa'%>
+          </li>
+
+          <li class="nav-item">
+            <%= image_tag 'master-color.svg', alt: 'Master'%>
+          </li>
+
+          <li class="nav-item">
+            <%= image_tag 'discover-color.svg', alt: 'Discover'%>
+          </li>
+
+          <li class="nav-item">
+            <%= image_tag 'amex-color.svg', alt: 'American Experss'%>
+          </li>
+
+          <li class="nav-item">
+            <%= image_tag 'apple-pay-color.svg', alt: 'American Experss'%>
+          </li>
+
+          <li class="nav-item">
+            <%= image_tag 'google-pay-color.svg', alt: 'American Experss'%>
+          </li>
+
+          <li class="nav-item">
+            <%= image_tag 'affirm_logo-black_bg.svg', class: 'affirm', alt: 'Affirm'%>
+          </li>
+
+          <li class="nav-item">
+            <%= image_tag 'paypal.svg', class: 'paypal', alt: 'Paypal'%>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="footer-brand">
+        © 2022 Agzaga, LLC, All Rights Reserved
+      </div>
+
+      <div class="privacy-policy">
+        <a class="clear-link" href="<%= spree::privacy_policy_path %>">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+# touched on 2025-05-22T22:51:23.575901Z
