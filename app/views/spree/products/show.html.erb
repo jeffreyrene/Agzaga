@@ -1,0 +1,380 @@
+<%= render partial: 'spree/shared/facebook_micro_data_tags' %>
+
+<div class="product-page-container product-details-group">
+  <div class="product-info d-none" data-id="<%= @product.id %>" data-price="<%= @product.price %>" data-name="<%= @product.name%>" data-currency="<%= @product.prices.last.currency%>"></div>
+  <div class="product-detail-section">
+    <div class="breadcrumb-group">
+      <% @visible_taxons.each do |taxon| %>
+        <% separator = '<span class="separator">/<span>'.html_safe %>
+
+        <div class="taxon-breadcrumb-desktop">
+          <%= link_to taxon.name, spree::nested_taxons_url(taxon.permalink) %> <%= separator %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if (@product.master.volume_prices.present? && !@product.variants.present?) || @product.variants.any?{|v| v.volume_prices.present?} %>
+      <div class="bulk-avialable-tag d-lg-none d-block">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8 13C10.7614 13 13 10.7614 13 8C13 5.23858 10.7614 3 8 3C5.23858 3 3 5.23858 3 8C3 10.7614 5.23858 13 8 13ZM10.3169 7.19194C10.561 6.94786 10.561 6.55214 10.3169 6.30806C10.0729 6.06398 9.67714 6.06398 9.43306 6.30806L7.375 8.36612L6.56694 7.55806C6.32286 7.31398 5.92714 7.31398 5.68306 7.55806C5.43898 7.80214 5.43898 8.19786 5.68306 8.44194L6.93306 9.69194C7.17714 9.93602 7.57286 9.93602 7.81694 9.69194L10.3169 7.19194Z" fill="#3F3F46"/>
+        </svg>
+
+
+        Bulk Pricing
+      </div>
+    <% end %>
+  </div>
+
+  <div class="product-page-section">
+    <div class="image-description-section">
+      <div class="product-info">
+        <div class="heading-section">
+          <div class="product-name">
+            <%= @product.name %>
+          </div>
+
+          <div class="mobile-review-media-section">
+            <div class="reviews-media-section">
+              <div class="reviews-rating-section">
+                <div class="reviews">
+                  <div id="product-rating" class="product-rating-group">
+                    <%= render partial: 'spree/shared/product_rating', locals: { fill: @product.stars } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="media-favorite-section d-lg-none d-block">
+              <div class="product-icons-container">
+                <div class="icon-list-container">
+                  <div class="share-icons-popup hide-popup">
+                    <a class="mail-btn" id="mail-btn" target="_blank"></a>
+                    <a class="clipboard-button" id="clipboard-btn"></a>
+                    <a class="twitter-btn" id="twitter-btn" target="_blank"></a>
+                    <a class="facebook-btn" id="facebook-btn" target="_blank"></a>
+                  </div>
+                </div>
+
+                <div class="share-icon" id="link-share-icon">
+                  Share
+                </div>
+              </div>
+
+              <%if try_spree_current_user %>
+                <div class="favorites" itemprop='favorite' data-hook='favorite'>
+                  <% if has_favorite?(@product) %>
+                    <%= link_to '',
+                                favorite_path(get_favorite(@product),
+                                favorable_id: @product.id,
+                                favorable_type: 'Spree::Product'),
+                                method: :delete,
+                                remote: true,
+                                id: "favorable_product_#{@product.id}",
+                                class: "favorites-control favorable_product_#{@product.id}" %>
+                  <% else %>
+                    <%= link_to '',
+                                favorites_path(favorable_id: @product.id,
+                                favorable_type: 'Spree::Product'),
+                                method: :post,
+                                remote: true,
+                                id: "favorable_product_#{@product.id}",
+                                class: "favorites-control favorable_product_#{@product.id}" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-100">
+          <%= render partial: 'spree/shared/product_images_slider' %>
+        </div>
+      </div>
+
+      <div class="description-group">
+        <div class="headings">
+          <ul class="nav nav-fill mb-3" id="ex1" >
+            <li class="nav-item" >
+              <a class="nav-link active description-heading" data-toggle="tab" href="#ex2-tabs-1">Description</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#ex2-tabs-2">Features & Key Specs</a>
+            </li>
+          </ul>
+
+          <div class="under-line"></div>
+        </div>
+
+        <div class="tab-content" id="ex2-content">
+          <div class="tab-pane fade show active" id="ex2-tabs-1" >
+            <%= product_description(@product) rescue t('spree.product_has_no_description') %>
+            <div class="sku">SKU: <span class="product-variant-sku"><%= @product.sku %></span></div>
+            <!--%= render partial: 'spree/products/partials/description' %-->
+          </div>
+          <div class="tab-pane fade" id="ex2-tabs-2">
+            <% if @product.features.present? %>
+              <%= raw(@product.features) rescue t('spree.product_has_no_description') %>
+            <% end %>
+
+            <ul class="">
+              <% @product_properties.each do |product_property| %>
+                <% next if product_property.visibility == false %>
+                <li class="">
+                  <%= product_property.property.presentation %>:&nbsp;
+                  <%= product_property.value %>
+                </li>
+              <% end %>
+            </ul>
+              <!-- %= render partial: 'spree/products/partials/features_and_key_specs' %-->
+          </div>
+        </div>
+      </div>
+
+      <div class="video-container">
+        <%= render partial: 'spree/shared/video_section', locals: {product: @product} if @product.video_link.present? %>
+      </div>
+    </div>
+
+    <div class="add-to-cart-add-ons">
+      <div class="heading-section">
+        <div class="product-name">
+          <%= @product.name %>
+        </div>
+
+        <div class="reviews-media-section">
+          <div class="reviews-rating-section">
+            <div class="reviews">
+              <div id="product-rating" class="product-rating-group">
+                <%= render partial: 'spree/shared/product_rating', locals: { fill: @product.stars } %>
+              </div>
+
+              <% if (@product.master.volume_prices.present? && !@product.variants.present?) || @product.variants.any?{|v| v.volume_prices.present?} %>
+                <div class="bulk-avialable-tag">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 13C10.7614 13 13 10.7614 13 8C13 5.23858 10.7614 3 8 3C5.23858 3 3 5.23858 3 8C3 10.7614 5.23858 13 8 13ZM10.3169 7.19194C10.561 6.94786 10.561 6.55214 10.3169 6.30806C10.0729 6.06398 9.67714 6.06398 9.43306 6.30806L7.375 8.36612L6.56694 7.55806C6.32286 7.31398 5.92714 7.31398 5.68306 7.55806C5.43898 7.80214 5.43898 8.19786 5.68306 8.44194L6.93306 9.69194C7.17714 9.93602 7.57286 9.93602 7.81694 9.69194L10.3169 7.19194Z" fill="#3F3F46"/>
+                  </svg>
+
+
+
+                  Bulk Pricing
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-to-cart-section">
+        <div class="cart-details">
+          <div class="price">
+            <% if @product.on_sale? %>
+              <div class="product-on-sale">
+                <div class="sale-discount-section">
+                  <span class="current-price on-sale before-sale-price"><%= "$#{'%.2f' % @product.price}" %></span>
+
+                  <span class="orignal-price"><span class="original-price-value"><%= Spree::Money.new(@product.original_price).to_html %></span></span>
+                </div>
+
+                <span class="discount-percentage"> <%=@product.discount_percent.round%>% OFF </span>
+              </div>
+            <% else %>
+              <span class="current-price"><%= "$#{'%.2f' % @product.price}" %></span>
+            <% end %>
+
+            <div class="on-sale-tag <%= 'd-none' unless @product.on_sale? %>">
+              ON SALE
+            </div>
+          </div>
+
+          <% unless @product.master.is_backorderable? || @product.total_on_hand >= 100 %>
+            <div class="master-product-stock"></div>
+          <% end %>
+
+          <div class="stock-variant-detail">
+            <div class="stock-shipping-detail">
+              <div class="stock-detail">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path fill-rule="evenodd" clip-rule="evenodd" d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM10.875 13.5C10.875 13.9832 10.4832 14.375 10 14.375C9.51675 14.375 9.125 13.9832 9.125 13.5C9.125 13.0168 9.51675 12.625 10 12.625C10.4832 12.625 10.875 13.0168 10.875 13.5ZM10 5.625C9.51675 5.625 9.125 6.01675 9.125 6.5V10C9.125 10.4832 9.51675 10.875 10 10.875C10.4832 10.875 10.875 10.4832 10.875 10V6.5C10.875 6.01675 10.4832 5.625 10 5.625Z" fill="#3F9EF6"/>
+                </svg>
+
+                <span class="quantity">
+                  Stock Alert - <span class="stock-on-hand"><%= @product.total_on_hand %></span> Left
+                </span>
+              </div>
+
+              <div class="shipping-estimate-time">
+                <% unless @product.master.is_dropship == true || @product.variants.pluck(:is_dropship).any? { |is_dropship| is_dropship == true } %>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.1007 12.8995C13.5075 13.4927 12.3487 14.6515 11.4138 15.5863C10.6328 16.3674 9.36738 16.3672 8.58633 15.5862C7.66878 14.6686 6.53036 13.5302 5.89966 12.8995C3.63501 10.6348 3.63501 6.96313 5.89966 4.69848C8.1643 2.43384 11.836 2.43384 14.1007 4.69848C16.3653 6.96313 16.3653 10.6348 14.1007 12.8995Z" stroke="#71717A" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12.1748 8.79899C12.1748 10 11.2012 10.9736 10.0002 10.9736C8.79915 10.9736 7.82554 10 7.82554 8.79899C7.82554 7.59798 8.79915 6.62437 10.0002 6.62437C11.2012 6.62437 12.1748 7.59798 12.1748 8.79899Z" stroke="#71717A" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+
+                  <span class="estimate-time">
+                    Usually Arrives in 3-5 Days
+                  </span>
+                <% else %>
+                  <svg width="20" height="20" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M48 0C21.5 0 0 21.5 0 48V368c0 26.5 21.5 48 48 48H64c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H48zM416 160h50.7L544 237.3V256H416V160zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+                  </svg>
+
+                  <span class="estimate-time">
+                    Ships direct from Mfg. in 3-5 business days
+                  </span>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="variants-section">
+              <div id="cart-form" data-hook="cart_form">
+                <%= render partial: 'spree/products/partials/product_cart_form_v1' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="share-favorite-section">
+            <div class="product-icons-container">
+              <div class="icon-list-container">
+                <div class="share-icons-popup hide-popup">
+                  <a class="mail-btn" id="mail-btn" target="_blank"></a>
+                  <a class="clipboard-button" id="clipboard-btn"></a>
+                  <a class="twitter-btn" id="twitter-btn" target="_blank"></a>
+                  <a class="facebook-btn" id="facebook-btn" target="_blank"></a>
+                </div>
+              </div>
+
+              <div class="share-icon" id="link-share-icon">
+                Share
+              </div>
+            </div>
+
+            <%if try_spree_current_user %>
+              <div class="favorites" itemprop='favorite' data-hook='favorite'>
+                <% if has_favorite?(@product) %>
+                  <%= link_to '',
+                              favorite_path(get_favorite(@product),
+                              favorable_id: @product.id,
+                              favorable_type: 'Spree::Product'),
+                              method: :delete,
+                              remote: true,
+                              id: "favorable_product_#{@product.id}",
+                              class: "favorites-control favorable_product_#{@product.id}" %>
+                <% else %>
+                  <%= link_to '',
+                              favorites_path(favorable_id: @product.id,
+                              favorable_type: 'Spree::Product'),
+                              method: :post,
+                              remote: true,
+                              id: "favorable_product_#{@product.id}",
+                              class: "favorites-control favorable_product_#{@product.id}" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-group">
+        <div class="headings">
+          <ul class="nav nav-fill mb-3" id="ex1" >
+            <li class="nav-item" >
+              <a class="nav-link active description-heading" data-toggle="tab" href="#ex1-tabs-1">Description</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#ex1-tabs-2">Features & Key Specs</a>
+            </li>
+          </ul>
+
+          <div class="under-line"></div>
+        </div>
+
+        <div class="tab-content" id="ex2-content">
+          <div class="tab-pane fade show active" id="ex1-tabs-1" >
+            <%= product_description(@product) rescue t('spree.product_has_no_description') %>
+            <div class="sku">SKU: <span class="product-variant-sku"><%= @product.sku %></span></div>
+            <!--%= render partial: 'spree/products/partials/description' %-->
+          </div>
+          <div class="tab-pane fade" id="ex1-tabs-2">
+            <% if @product.features.present? %>
+              <%= raw(@product.features) rescue t('spree.product_has_no_description') %>
+            <% end %>
+
+            <ul class="">
+              <% @product_properties.each do |product_property| %>
+                <% next if product_property.visibility == false %>
+                <li class="">
+                  <%= product_property.property.presentation %>:&nbsp;
+                  <%= product_property.value %>
+                </li>
+              <% end %>
+            </ul>
+              <!-- %= render partial: 'spree/products/partials/features_and_key_specs' %-->
+          </div>
+        </div>
+      </div>
+
+      <% if @product.add_ons.present? %>
+        <%= render partial: 'spree/products/partials/add_on_section'%>
+      <% end %>
+
+      <div class="video-container">
+        <%= render partial: 'spree/shared/video_section', locals: {product: @product} if @product.video_link.present? %>
+      </div>
+    </div>
+  </div>
+
+  <div class="separator-line"></div>
+
+  <div class="reting-section-desktop">
+    <div class="total-avg">
+      <%= "#{@product.avg_rating > 0 ? @product.avg_rating : 0} / 5" %>
+    </div>
+
+    <input
+    name = "review[rating]"
+    class="rating"
+    max="5"
+    oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
+    step="0.5"
+    style="--value:<%= @product.avg_rating %>"
+    type="range" class="rating_star" disabled>
+
+    <div class="count">
+      <%= @product.reviews_count%> <%= 'Review'.pluralize(@product.reviews_count) %>,
+      <%= "#{@product.product_questions.count} #{'Q&A'.pluralize(@product.product_questions.count)}"%>
+    </div>
+
+  </div>
+
+  <% if spree_user_signed_in? %>
+    <div class="review-question-btns">
+      <%= link_to reviews_form_product_path("#{@product.slug}"), class: 'review-button' do %>
+        Write a Review
+      <% end %>
+
+      <%= link_to question_form_product_path("#{@product.slug}"), class: 'question-button' do %>
+        Ask a Question
+      <% end %>
+    </div>
+  <% else %>
+    <div class='btn secondry-btn clear-link poppins-text-16' data-toggle="modal" data-target=".checkout-login-modal">
+      <%= image_tag "user_icon_black.svg", class: "icon", alt: "Login" %> Login to leave a review
+    </div>
+  <% end %>
+
+  <div class="line-product-page"></div>
+
+  <div class="reviews-section">
+    <%= render partial: 'spree/products/partials/product_rating', locals: { fill: @product.stars }%>
+  </div>
+
+
+  <%= link_to "Submit", show_related_product_path(id: @product.slug), class: 'show-related-products d-none', remote: true, method: :get %>
+  <div class="related-products-container"></div>
+
+  <div class="customer-reviews">
+    <!--%= render partial: 'spree/shared/product_rating_stars', locals: { fill: @product.stars } %-->
+  </div>
+</div>
+
+# touched on 2025-05-22T22:38:20.255626Z
+# touched on 2025-05-22T23:04:42.792526Z
