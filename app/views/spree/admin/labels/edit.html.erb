@@ -1,0 +1,19 @@
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Product), spree.admin_products_path) %>
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Label), spree.admin_labels_path) %>
+<% admin_breadcrumb(@label.tag) %>
+
+<%= form_for [:admin, @label] do |f| %>
+  <fieldset class="no-border-top">
+    <%= render partial: 'form', locals: { f: f } %>
+    <div class="filter-actions actions">
+      <%= button_tag t('spree.actions.update'), class: 'btn btn-primary' %>
+      <%= link_to t('spree.actions.cancel'), admin_labels_path, class: 'btn btn-default' %>
+    </div>
+  </fieldset>
+
+
+  <div id="label_tree" class="tree" data-label-id="<%= @label.id %>"></div>
+<% end %>
+
+# touched on 2025-05-22T23:08:58.931287Z
+# touched on 2025-05-22T23:22:23.631265Z
