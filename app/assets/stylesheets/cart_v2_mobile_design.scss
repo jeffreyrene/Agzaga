@@ -1,0 +1,261 @@
+@mixin mobile-design {
+  #content {
+    text-align: left;
+  }
+
+  .cart {
+    padding: 0px;
+
+    .cart-header {
+      margin-bottom: 0;
+
+    }
+
+    .cart-body-tabs {
+      display: flex;
+    }
+
+    .empty-cart-body {
+      height: calc( 100vh - 170px );
+
+      .empty-cart {
+        max-width: 366px;
+        padding: 24px;
+      }
+    }
+
+    .cart-body {
+      .cart-body-summary {
+        display: none;
+      }
+
+      .cart-body-content-left {
+        width: 100%;
+        padding: 0 16px;
+
+        .cart-product-seperator {
+          margin-left: 0;
+          margin-right: 0;
+          width: unset;
+        }
+
+        .cart-body-left-max-freight {
+          margin-bottom: 24px;
+
+        }
+
+        .your-cart-head {
+          display: none;
+        }
+
+        .cart-product-section {
+          margin-bottom: 32px;
+          .product-blocks {
+            margin-bottom: 16px;
+            .product-details-block {
+
+              .product-image {
+                img {
+                  width: 130px;
+                  height: 130px;
+                }
+              }
+
+              .product-info-container {
+                .product-info {
+                  flex-direction: column;
+
+                  .cart-product-title {
+                    margin-bottom: 8px;
+
+                  }
+
+                  .product-price {
+                    margin-bottom: 8px;
+                    font-size: 18px;
+                  }
+                }
+              }
+            }
+          }
+
+          .cart-product-footer {
+            gap: unset;
+            flex-wrap: wrap;
+
+            .product-actions {
+              max-width: fit-content;
+              gap: 8px;
+              justify-content: inherit;
+
+              .save-items-btn {
+                padding: 8px 16px;
+                background-color: var(--palette-primary-50);
+                color: var(--palette-primary-600);
+                border-radius: 6px;
+                font-family: 'Poppins-medium';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 24px;
+              }
+
+              .pipe-line {
+                display: none;
+              }
+
+              .remove-items-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--palette-destructive-50);
+                border-radius: 6px;
+                box-sizing: border-box;
+                width: 40px;
+                height: 40px;
+                .title {
+                  display: none;
+                }
+
+                .remove-icon {
+                  display: flex;
+                }
+              }
+            }
+
+            .product-actions-custom-hose
+            {
+              justify-content: end;
+            }
+          }
+        }
+      }
+
+      .cart-body-section-visible {
+       display: none;
+      }
+    }
+
+    .cart-bottom-summary {
+      display: flex;
+      padding: 0 24px;
+      margin-bottom: 112px;
+
+      .cart-bottom-summary-total {
+        margin-bottom: 18px;
+      }
+    }
+    .cart-mobile-total {
+      display: flex;
+    }
+
+  }
+
+  #cartSlider {
+    .modal.custom_hose_verfication .modal-dialog {
+      width: 100%;
+
+      .modal-header {
+        justify-content: center;
+
+        .modal-title div.poppins-bold-text-24 {
+          width: 100%;
+          text-align: center;
+          font-family: 'Lexend';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 28px;
+          line-height: 36px;
+          letter-spacing: -0.02em;
+          color: var(--palette-neutral-900);
+          margin-right: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      .modal-body {
+        padding: 24px;
+
+        .poppins-text-16 {
+          padding: 20px;
+          display: flex;
+          background: var(--palette-neutral-200);
+          width: 100%;
+          justify-content: center;
+          font-family: 'Poppins-semi-bold';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 24px;
+          color: var(--palette-neutral-600);
+          margin-bottom: 30px;
+          border-radius: 4px;
+        }
+
+        .custom-hose-configurations {
+          width: 100%;
+          margin: 0 0 30px 0;
+          // box-shadow: 0px 10px 20px rgba(0 0 0 / 4%), 0px 2px 6px rgba(0 0 0 / 4%), 0px 0px 1px rgba(0 0 0 / 4%);
+          box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08), 0px 2px 6px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.08);
+
+          .custom-hose-configuration-header {
+            margin: 0;
+            line-height: 24px;
+            padding: 20px;
+            text-align: center;
+          }
+
+          .custom-hose-configuration-table tr {
+            border-bottom: none;
+            border-top: 1px solid #d9d9db;
+          }
+        }
+
+        .buttons_section {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .delete-button {
+            border-radius: 8px;
+            font-family: 'Poppins';
+            padding: 11px 40px;
+            margin: 0px;
+            background: #FFB514;
+            box-shadow: none;
+            letter-spacing: 0.07em;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 16px;
+
+            &:hover {
+              text-decoration: none;
+              background-color: var(--palette-primary-600)
+            }
+          }
+
+          .custom-page-btn {
+            border: 1px solid #5A5A5A;
+            border-radius: 8px;
+            font-family: 'Poppins';
+            letter-spacing: 0.07em;
+            padding: 11px 23px;
+            color: #353535;
+            font-weight: 600;
+            font-size: 16px;
+            max-width: 112px;
+
+            &:hover {
+              cursor: pointer;
+              background-color: var(--palette-neutral-100)
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+# touched on 2025-05-22T23:30:11.486314Z
