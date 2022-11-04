@@ -1,0 +1,11 @@
+<%= render partial: 'spree/shared/navbar_v2' %>
+<%= render partial: 'spree/checkout/registration_modal' %>
+
+<% if controller_name == 'home' && action_name == 'index_v2' && agzaga_day_modals  %>
+  <%= render 'spree/checkout/subscriber_cta_modal' unless early_bird_modal_time %>
+  <%= render 'spree/checkout/early_bird_modal' if early_bird_modal_time %>
+<% end %>
+
+# touched on 2025-05-22T20:44:25.687677Z
+# touched on 2025-05-22T22:46:58.659685Z
+# touched on 2025-05-22T23:39:23.557715Z
