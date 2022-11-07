@@ -1,0 +1,17 @@
+<div class="saved-address-group pickup">
+  <div class="saved-address-panel black-border-address">
+    <div class="black-dot"></div>
+
+    <div class="saved-address-info">
+      <div class="poppins-text-16"><%= " #{@order.pick_up_person.firstname} #{@order.pick_up_person.lastname} " %></div>
+      <div class="poppins-text-16"><%= @order.pick_up_person.email %></div>
+    </div>
+
+    <a class="d-lg-block d-none poppins-text-16 address-edit-link clear-link" href="<%=checkout_state_path(:address, params: {pick_up_person: 'abc'}) %>" data-remote="true" id="<%=address_type%>-edit">Edit</a>
+    <a class="address-edit-link clear-link edit-button d-lg-none d-block"href="<%=checkout_state_path(:address, params: {edit_address: address_type}) %>" data-remote="true" id="<%=address_type%>-edit">
+      <%= image_tag 'edit-icon-mob.svg'%>
+    </a>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:38:57.608475Z
