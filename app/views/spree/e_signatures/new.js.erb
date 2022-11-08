@@ -1,0 +1,9 @@
+client.open('<%= @signature_request_url.html_safe %>');
+
+client.on('sign', function(data) {
+  document.getElementsByClassName('btn-orange-red')[0].removeAttribute('disabled')
+  document.getElementsByClassName('notification-red')[0].classList.add('signed')
+});
+
+# touched on 2025-05-22T23:06:08.970562Z
+# touched on 2025-05-22T23:24:23.512317Z
