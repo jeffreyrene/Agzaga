@@ -1,0 +1,76 @@
+<% content_for :title, 'Agzaga - Favorites' %>
+
+<div class="data-container">
+  <div data-hook='account_my_favorite_products' class='account-my-favorite-products'>
+    <div class="main-heading favorite-heading draught-h2">Favorites</div>
+    <% if spree_user_signed_in? %>
+
+      <% if @favorites.present? %>
+        <div class="fav-bg d-md-block d-none"><%= image_tag 'fav-mob.svg', alt: '' %></div>
+        <div class="fav-bg d-md-none d-block"><%= image_tag 'fav-bg.svg', alt: '' %></div>
+        <div class="total_items"><%= @favorites.count %> items </div>
+        <div id="fav-cards" class="favorite-listing">
+          <% @favorites.each do |favorite| %>
+            <% next unless favorite&.favorable.present? %>
+            <div class="cards">
+              <a href="<%= product_path(favorite&.favorable) %>" class="clear-link" rel= "nofollow">
+                <%= render partial: 'spree/favorites/partials/favorite_card', locals: { favorite: favorite } %>
+              </a>
+            </div>
+          <% end %>
+        </div>
+
+      <% else %>
+        <div class="no-favorites text-center no-text-content">
+          <div class="heading poppins-bold-text-24">
+            <span>It looks like you don't have any favorites yet.</span>
+          </div>
+          <div class="content poppins-text-16">
+            Don’t forget your favorite products! Save them for later by clicking the <br>
+            thumbs up button on our product pages and they’ll show up here.
+          </div>
+          <div class="sm-line"></div>
+          <div class="browse-products-btn"><a href="<%= spree::root_url() %>" class="clear-link">Browse Products</a></div>
+          <div class="fav-icon d-md-block d-none"><%= image_tag 'fav.svg', alt: '' %></div>
+          <div class="fav-icon d-md-none d-block"><%= image_tag 'fav-mob.svg', alt: '' %></div>
+
+        </div>
+      <div class="d-md-block d-none"><%= render partial: 'spree/product_categories/partials/newest_products'%></div>
+      <div class="d-md-none d-block"><%= render partial: 'spree/home/partials/top_rated_this_season', locals: {heading_text: 'NEW ON AGZAGA', for_mobile: true}%></div>
+
+      <% end %>
+      <%= paginate @favorites %>
+
+    <% else %>
+
+      <div class="no-favorites text-center no-text-content">
+        <div class="heading poppins-bold-text-24">
+          <span>You need an account to save your favorites.</span>
+        </div>
+        <div class="content poppins-text-16">
+          Don’t worry, it’s free! Click the link below to sign up or login for quick <br>
+          and easy access to your favorite products.
+        </div>
+        <div class="sm-line"></div>
+        <div class="login-section">
+          <a class="signup-btn poppins-text-16 secondry-btn clear-link" href="<%=spree::signup_path %>">Sign Up</a>
+          <a class="login-btn poppins-bold-text-16" href="<%= spree::login_path %>">Login</a>
+        </div>
+          <div class="fav-icon d-md-block d-none"><%= image_tag 'fav.svg', alt: '' %></div>
+          <div class="fav-icon d-md-none d-block"><%= image_tag 'fav-mob.svg', alt: ''%></div>
+      </div>
+
+      <div class="d-md-block d-none"><%= render partial: 'spree/product_categories/partials/newest_products'%></div>
+      <div class="d-md-none d-block"><%= render partial: 'spree/home/partials/top_rated_this_season', locals: {heading_text: 'NEW ON AGZAGA', for_mobile: true}%></div>
+
+    <% end %>
+  </div>
+</div>
+
+<%= render partial: 'spree/shared/pick_up_popup' %>
+
+
+# touched on 2025-05-22T20:44:44.573861Z
+# touched on 2025-05-22T22:32:15.384578Z
+# touched on 2025-05-22T22:37:09.108116Z
+# touched on 2025-05-22T22:42:49.025569Z
