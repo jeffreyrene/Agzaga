@@ -1,0 +1,52 @@
+<%= form_for :order, html: { method: :post, remote: :true},  url: populate_orders_path do |f| %>
+  <div class="gift-card-section col">
+    <div class="sale-tag d-flex align-items-center">
+      <% if product.on_sale? %>
+        <div class="percent poppins-bold-text-10">
+          <%= number_to_percentage(product.discount_percent.round, precision: 0) %> OFF
+        </div>
+      <% end %>
+
+      <% if product.on_sale? || product.deal_product? %>
+        <div class="tag poppins-bold-text-10">DEAL</div>
+      <% end %>
+    </div>
+
+    <div class="gift-set-header">
+      <div class="gift-set-name-description">
+        <div class="lexend-h3 gift-set-name"> <%= product.name %></div>
+      </div>
+
+      <div class="text-right gift-set-prices">
+        <div class="lexend-h3 selling-price mb-0">
+          <%= display_price(product) %>
+        </div>
+
+        <% if product.on_sale? %>
+          <div class="original-price poppins-text-16">
+            <%= Spree::Money.new(product.original_price).to_html %>
+          </div>
+        <% end %>
+
+        <%= hidden_field_tag 'variant_id', product.master.id %>
+      </div>
+    </div>
+
+    <div class="full-grey-line mb-3"></div>
+    <div class="poppins-text-16 mb-4 gift-card-description d-md-block d-none"> <%= Nokogiri::HTML(product.description).text %></div>
+
+    <a href="<%= product_path(product) %>" class="clear-link">
+      <% if  mobile_image?(product) %>
+        <%= image_tag( product.gallery.images.where(alt: "mobile-image").first.url(:large), alt: product.name, class: 'gift-card-img' ) %>
+      <% else %>
+        <%= image_tag( product.gallery.images.first.url(:large), alt: product.name, class: 'gift-card-img' ) if product.gallery.images.any?  %>
+      <% end %>
+    </a>
+
+      <%= render partial: 'spree/products/partials/gift_card_btns_group', locals: {product: product} %>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T20:32:11.927495Z
+# touched on 2025-05-22T22:44:38.491301Z
+# touched on 2025-05-22T23:01:57.734887Z
