@@ -1,0 +1,16 @@
+<% fill ||= 0 %>
+<% hide_rating_number ||= false %>
+
+<div class="rating">
+  <% (1..5).each do |i| %>
+    <span class="rating-wheat <%= 'filled' if i <= fill %>"></span>
+  <% end %>
+
+  <% unless hide_rating_number %>
+    <span class="number poppins-text-10"> <%= @product.reviews_count %> </span>
+    <span class="rating-text"> Rating </span>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T20:33:10.004684Z
+# touched on 2025-05-22T22:38:59.657132Z

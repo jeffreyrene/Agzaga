@@ -1,0 +1,37 @@
+<table class="index sortable" id='listing_labels'>
+  <colgroup>
+    <col style="width: 10%">
+    <col style="width: 75%">
+    <col style="width: 15%">
+  </colgroup>
+  <thead>
+    <tr data-hook="labels_header">
+      <th></th>
+      <th><%= Spree::Label.human_attribute_name(:tag) %></th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @labels.each do |label| %>
+      <tr id="<%= spree_dom_id label %>" data-hook="labels_row">
+        <td>
+          <% if can?(:update_positions, Spree::Label) %>
+            <span class="handle"></span>
+          <% end %>
+        </td>
+        <td><%= label.tag %></td>
+        <td class="actions">
+          <% if can?(:update, label) %>
+            <%= link_to_edit label, no_text: true %>
+          <% end %>
+          <% if can?(:destroy, label) %>
+            <%= link_to_delete label, no_text: true %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+# touched on 2025-05-22T20:33:03.618815Z
+# touched on 2025-05-22T23:24:23.520182Z
