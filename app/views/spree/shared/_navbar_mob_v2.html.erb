@@ -1,0 +1,86 @@
+<!-- Mobile Navbar -->
+<div class="small-nav-v2 p-0">
+  <div class="container-fluid p-0">
+    <div class="small-top-bar-v2">
+      <div class="row m-0" id="scroll-hide">
+
+        <div class="row w-100 ml-0 mr-0 coupon-bar" id="header-mob">
+
+          <div class="coupon-area d-flex">
+            <%= image_tag 'coupon_icon.svg', alt: 'Coupon'%>
+            <div class="coupon-text"> to get 5% OFF YOUR FIRST ORDER, use the code <span class="coupon-code p-0">FIRST5</span> at checkout </div>
+          </div>
+
+          <div class="favorite-icon">
+            <a class="btn-usr pb-0" href="<%= spree::favorites_path %>">
+              <%= image_tag 'favorite_logo.svg', alt: 'Favorites' %>
+            </a>
+          </div>
+
+          <div class="small-nav-right">
+            <div class="dropdown usr-icon">
+            <% if spree_user_signed_in? %>
+              <a class="btn-usr pb-0" href="<%= spree::account_path %>">
+                <%= image_tag("login_icon.svg", alt: 'login') %>
+              </a>
+            <% else %>
+              <a class="btn-usr pb-0" href="<%= spree::login_path %>">
+                <%= image_tag("login_icon.svg", alt: 'login') %>
+              </a>
+            <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mbl-nav-padding">
+          <div class="countdown-notifier animate__animated animate__bounceIn"></div>
+          <div class="hamburger_v2">
+            <%= image_tag("hamburger_v2.svg", alt: "")%>
+          </div>
+
+          <div class="small-nav-logo">
+            <%= link_to spree::root_url, class: 'small-nav-logo-link' do %>
+              <%= image_tag 'pre-header-logo.svg', alt: 'Agzaga' %>
+            <% end %>
+          </div>
+
+          <div class="login-btn-for-mobile">
+            <% unless spree_user_signed_in? %>
+              <div class="login-button" data-target=".checkout-login-modal" data-toggle="modal">
+                <%= image_tag("login_icon.svg",  class: 'btn-user-icon', alt: 'login') %>
+              </div>
+            <% end %>
+
+            <a href="<%= spree::cart_path %>" class="cart-section">
+              <%= image_tag 'cart-icon.svg', class: 'cart-image' %>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-bottom-bar-v2">
+      <div class="hamburger_v2 float-left" id="scroll-hamburger-v2">
+          <div class="countdown-notifier"></div>
+          <%= image_tag("hamburger_v2.svg", alt: "",
+            data: { toggle: "modal",
+                    target: "#responsiveModal"})
+          %>
+      </div>
+
+      <div class="small-search-bar-v2">
+        <%= render 'spree/shared/search_v2', placeholder_text: 'Search our catalog', mobile_nav: true, search_from_results: true %>
+      </div>
+
+      <div class="small-cart-box" id="mob-cart-box">
+        <a href="<%= spree::cart_path %>" >
+          <%= image_tag("add_to_cart_logo.svg", class: 'small-cart-img', alt: 'Cart',) %>
+          <span class="mobile counter notification-badge"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:24:45.826915Z
+# touched on 2025-05-22T23:06:32.553763Z
+# touched on 2025-05-22T23:27:35.504619Z

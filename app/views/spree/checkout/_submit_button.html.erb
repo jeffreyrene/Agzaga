@@ -1,0 +1,9 @@
+<div class="form-buttons" data-hook="buttons">
+  <% button_state = @order&.ship_address&.empty? ? true : false %>
+  <% show_placing_order = "payment_step_pay_now_btn" if button_text.include?('Pay Now') %>
+
+  <%= button_tag button_text, class: "ag-btn-lg ag-btn-primary pay-now-btn disable-save-btn#{ 'payment_step_submit_button' if @order.state == 'payment'} #{show_placing_order}", id: 'payment_step_submit_button', disabled: button_state, data: {turbolinks: false} %>
+  <script>Spree.disableSaveOnClick();</script>
+</div>
+
+# touched on 2025-05-22T23:38:34.876429Z
