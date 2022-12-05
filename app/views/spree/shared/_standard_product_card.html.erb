@@ -1,0 +1,56 @@
+<div class="standard-product-card">
+  <div class="image-container">
+    <a href="<%= product_path(product.slug) %>" class="clear-link" data-turbolinks="false">
+      <%= image_tag product.image_url.present? ? image_cdn_link(product.image_url) : 'noimage_sq.png', loading: 'lazy', alt: product.name, class: 'product_image' %>
+
+      <%= product_label(product.label_text, product.label_color, product.label_display_text_color) %>
+    </a>
+  </div>
+
+  <div class="out-of-stock-text">
+    <%= 'Out of stock' unless product.in_stock %>
+  </div>
+
+  <div class="title-price-section">
+    <div class="price">
+      <% price_range = product.product.variants.includes(:prices).pluck(:amount) %>
+
+      <% if product.on_sale? && !price_range.any? %>
+        <div class="product-on-sale">
+          <div class="sale-discount-section">
+            <span class="current-price on-sale before-sale-price"><%= "$#{'%.2f' % product.price}" %></span>
+            <span class="discount-percentage"> <%= product.discount_percentage.round %>% OFF </span>
+          </div>
+
+          <div class="orignal-price">List Price: <span class="original-price-value"><%= Spree::Money.new(product.original_price).to_html %></span></div>
+        </div>
+      <% elsif price_range.any? && product.product.variants.any?{|v| v.on_sale?} %>
+        <% sale_price_range = product.product.variants.map{|v| v.price} << product.price %>
+
+        <div class="product-on-sale">
+          <div class="sale-discount-section">
+            <span class="current-price on-sale before-sale-price"><%=sale_price_range.min == sale_price_range.max ? "$#{'%.2f' % sale_price_range.min}" : "$#{'%.2f' % sale_price_range.min} - $#{'%.2f' % sale_price_range.max}"%></span>
+
+            <span class="discount-percentage"> <%= 100 - ((sale_price_range.min / price_range.min) * 100).round %>% OFF </span>
+          </div>
+          <div class="orignal-price">List Price: <span class="original-price-value"><%= price_range.min != price_range.max ? "$#{'%.2f' % price_range.min} - $#{'%.2f' % price_range.max}" : "$#{'%.2f' % price_range.min}"%></span></div>
+        </div>
+      <% elsif price_range.any? %>
+        <span class="current-price"><%= price_range.min != price_range.max ? "$#{'%.2f' % price_range.min} - $#{'%.2f' % price_range.max}" : "$#{'%.2f' % price_range.min}" %></span>
+      <% else %>
+        <span class="current-price"><%= "$#{'%.2f' % product.price}" %></span>
+      <% end %>
+    </div>
+
+    <div class="name">
+      <a href="<%= product_path(product.slug) %>" class="product_name clear-link" data-turbolinks="false">
+        <%= product.name %>
+      </a>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:44:16.569671Z
+# touched on 2025-05-22T21:30:36.189775Z
+# touched on 2025-05-22T23:19:00.342682Z
+# touched on 2025-05-22T23:48:15.374739Z
