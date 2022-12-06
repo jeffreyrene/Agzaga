@@ -1,0 +1,90 @@
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content" id="user-registration-content">
+    <div class="modal-header">
+      <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <%= image_tag("modal-close.svg") %>
+      </div>
+    </div>
+
+    <div class="modal-body" id="done-in-stock-notification">
+      <div class="header-content">
+        <% unless spree_user_signed_in? %>
+          <div class="heading">Create an account to get stock updates.</div>
+          <div class="text-body">Create your free Agzaga account to get the latest product updates, and we’ll send you an email when this product is back in stock.</div>
+        <%else%>
+          <div class="heading">Get Stock Updates</div>
+        <%end%>
+        <div class="modal-text-body-bottom-line"></div>
+        <div class="modal-body-product-data">
+          <%img = variant.gallery.images.first.url(:sm_200)%>
+
+          <div class="product-variant">
+            <div class="variant-row">
+              <div class="image">
+                <%= image_tag img, class: 'img' %>
+              </div>
+              <div class="title">
+                <div class="head">
+                  <%=variant.product.name%>
+                </div>
+
+                <div class="price">
+                  <% if variant.on_sale? %>
+                    <div class="variant-price sale-price">$<%= variant.price %></div>
+                    <div class="variant-price original-price">$<%= variant.original_price %></div>
+                  <% else %>
+                    <div class="variant-price current-price">$<%= variant.price %></div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <% options = variant.option_values.pluck(:name)%>
+          <% if options[1].present?%>
+            <div class="variant-option">
+              Color:
+            </div>
+
+            <div class="color-option"> <%=options[1]%> </div>
+          <%end%>
+
+          <% if options[0].present?%>
+            <div class="variant-option">
+              Size:
+            </div>
+
+            <div class="color-option size-variant"> <%=options[0]%> </div>
+          <%end%>
+
+          <%= form_with(model: @stock_update, url: stock_updates_path, local: false ) do |form| %>
+            <% unless spree_user_signed_in? %>
+              <div class="variant-email-field">
+                <%= form.email_field :email, required: true, placeholder: "Email Address", class:"v-email" %>
+              </div>
+            <%else%>
+              <%= form.email_field :email,value:spree_current_user.email, required: true, class:"v-email", type: :hidden %>
+            <%end%>
+
+            <%= form.text_field :variant_id, value:variant.id , type: :hidden%>
+            <%= form.button nil, class: "notify-button" do %>
+              <span class="notify">Notify me</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.1667 6.66663L17.5 9.99996M17.5 9.99996L14.1667 13.3333M17.5 9.99996L2.5 9.99996" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="variant-text">
+          <% unless spree_user_signed_in? %>
+            Sign me up to Agzaga.com, featuring exclusive offers and news.
+          <%end%>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T22:55:19.246470Z

@@ -1,0 +1,75 @@
+<% hide_rating_number ||= false %>
+
+<div id="faq-collapse-group">
+  <div class="search-control-div">
+    <div class="card">
+      <div class="customer_questions search-text d-lg-none" id="customer-question" data-toggle="collapse" data-target="#prod-question" aria-expanded="false" aria-controls="prod-question">
+        <div class="questions-count">
+          <% unless hide_rating_number %>
+            Q&A <span class="count"> <%= @product_questions.count %>  </span>
+          <% end %>
+        </div>
+      </div>
+
+      <% if @product_questions.present? %>
+        <div id="prod-question" class=" prod-question-section" aria-labelledby="customer-question" data-parent="#faq-collapse-group">
+
+          <% @product_questions.each do |question| %>
+            <div class="question-customer-name-date">
+              <div class="question-customer-name">
+                <%= question.name %>
+              </div>
+
+              <div class="question-date">
+                <%= question.created_at.strftime("%m/%d/%y") %>
+              </div>
+            </div>
+
+            <div class="customer-question-q">
+              Q: <%= raw(question.question) %>
+            </div>
+
+            <% if question.answer.present? %>
+              <div class="answer-section">
+                <div class="agzaga-support-team">
+                  <div class="agzaga-support">
+                    AGZAGA SUPPORT
+                  </div>
+                </div>
+
+                <div class="support-team-answer">
+                  <span class="A-heading">A:</span>
+                  <%= raw(question.answer) %>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="line-product-page "></div>
+          <%end%>
+        </div>
+      <% else %>
+        <div id="prod-question" class="collapse prod-no-question-section" aria-labelledby="customer-question" data-parent="#faq-collapse-group">
+          <div class="review-heading">There Aren't Any Questions, Yet</div>
+            <%= image_tag "no-question.png", class: "image", alt: 'No Review Image' %>
+          <div class="text-body">If you've got one, just ask!</div>
+
+        <% if spree_user_signed_in? %>
+          <div class="ag-btn no-review-btn">
+            <%= link_to question_form_product_path("#{@product.slug}"), class: 'question-button' do %>
+              Ask a Question
+            <% end %>
+          </div>
+        <% else %>
+          <div class="ag-btn no-review-btn" data-toggle="modal" data-target=".checkout-login-modal">
+            <%= image_tag "user_icon_black.svg", class: "icon", alt: "Login" %> Login to leave a question
+          </div>
+        <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+# touched on 2025-05-22T19:12:49.769530Z
+# touched on 2025-05-22T21:30:42.195158Z
