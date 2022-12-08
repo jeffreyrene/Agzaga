@@ -1,0 +1,27 @@
+<% admin_breadcrumb('Help Center') %>
+
+
+<% content_for :page_actions do %>
+  <% if can?(:create, Spree::HelpCenter) %>
+    <li>
+      <%= link_to 'Add new Q&As', spree.new_admin_help_center_path, id: 'admin_new_faq_link', class: 'btn btn-primary' %>
+    </li>
+  <% end %>
+<% end %>
+<ul class="nav nav-tabs">
+  <li class="nav-item active"><a class="nav-link text-dark active" data-toggle="tab" href="#FAQs">FAQs</a></li>
+  <li class="nav-item"><a class="nav-link text-dark" data-toggle="tab" href="#Shipping">Shipping</a></li>
+</ul>
+
+<div class="tab-content help-center">
+  <div id="FAQs" class="tab-pane active">
+    <%= render 'help_center_tabs', faqs: @faqs.FAQs %>
+  </div>
+  <div id="Shipping" class="tab-pane">
+    <%= render 'help_center_tabs', faqs: @faqs.Shippings %>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:14:48.417386Z
+# touched on 2025-05-22T22:45:34.213593Z
+# touched on 2025-05-22T23:06:57.440074Z
