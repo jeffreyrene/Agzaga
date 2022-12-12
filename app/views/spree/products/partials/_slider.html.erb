@@ -1,0 +1,32 @@
+<div class="cta-section w-100">
+  <% if (@deals_products&.image.present? && @deals_products&.images&.where.not(alt: nil)) %>
+    <% alternate_image = @deals_products&.images&.first.url(:original) %>
+    <% image_link = @deals_products&.images&.where(alt: "desktop-image").present? ? @deals_products&.images&.where(alt: "desktop-image").last.url(:original) : alternate_image %>
+    <% image_link_mob = @deals_products&.images&.where(alt: "mobile-image").present? ? @deals_products&.images&.where(alt: "mobile-image").last.url(:original) : alternate_image %>
+
+    <picture>
+      <source media="(max-width:767px)" srcset="<%= image_cdn_link(image_path(image_link_mob))%>" >
+      <img src="<%= image_cdn_link(image_path(image_link)) %>" alt="Flowers">
+    </picture>
+
+  <% else %>
+
+    <picture>
+      <img src="<%= image_cdn_link(image_path('background_texture.png')) %>" alt="Flowers" class="texture-img" >
+    </picture>
+    <div class="overlay"></div>
+  <% end %>
+
+  <div class="heading-section text-center">
+    <div class="header-text lexend-h2"><%= @deals_products.present? ? @deals_products.title : "Deals"%></div>
+    <div class="header-line"></div>
+    <div class="header-subtext lexend-h4"><%= @deals_products.present? ? @deals_products.description : "Deals on Ertl, Little Buster, and more"%></div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:16:26.970556Z
+# touched on 2025-05-22T20:36:40.641401Z
+# touched on 2025-05-22T20:43:46.759242Z
+# touched on 2025-05-22T20:44:08.377628Z
+# touched on 2025-05-22T21:21:55.305414Z
+# touched on 2025-05-22T23:04:01.206373Z
