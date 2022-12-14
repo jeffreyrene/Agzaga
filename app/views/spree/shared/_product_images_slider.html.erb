@@ -1,0 +1,44 @@
+<div class="clearfix images-slider-group">
+  <ul id="lightgallery" class="lightgallery gallery cS-hidden">
+    <% @product.gallery.images.each do |image| %>
+      <li data-responsive="<%= image_cdn_link(image.url(:product))%>" data-src="<%= image_cdn_link(image.url(:product))%>" data-thumb="<%= image_cdn_link(image.url(:small))%>" class="pro-img img-<%= image.viewable_id %>">
+        <img src="<%= image_cdn_link(image.url(:product))%>" />
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="slider-nav-group cS-hidden">
+    <div id="goToPrevSlide" class="goToPrevSlide slider-nav-btn nav-prev">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.52778 12.7777L3.75 9.99995M3.75 9.99995L6.52778 7.22217M3.75 9.99995L16.25 9.99995" stroke="#E4E4E7" stroke-width="1.13" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+    </div>
+    <div id="goToNextSlide" class="goToNextSlide slider-nav-btn nav-next">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.4722 7.22217L16.25 9.99995M16.25 9.99995L13.4722 12.7777M16.25 9.99995L3.75 9.99995" stroke="#52525B" stroke-width="1.13" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+  var masterVarientId = <%= @product.master.id %>;
+  var images = []
+
+  <% @product.gallery.images.each do |image| %>
+    images.push({
+      id: <%= image.viewable_id %>,
+      element:
+      '<li data-responsive="<%= image_cdn_link(image.url(:product))%>" data-src="<%= image_cdn_link(image.url(:product))%>" data-thumb="<%= image_cdn_link(image.url(:small))%>" class="pro-img img-<%= image.viewable_id %>">'+
+          '<img src="<%= image_cdn_link(image.url(:product))%>" />'+
+      '</li>'
+    });
+  <% end %>
+</script>
+
+# touched on 2025-05-22T19:07:43.799013Z
+# touched on 2025-05-22T20:43:46.762546Z
+# touched on 2025-05-22T21:21:43.161292Z
+# touched on 2025-05-22T22:38:54.961325Z
+# touched on 2025-05-22T23:28:09.706609Z
