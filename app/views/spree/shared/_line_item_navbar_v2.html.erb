@@ -1,0 +1,79 @@
+<% variant = line_item_navbar_v2.variant %>
+<% quantity_change ||= false %>
+
+<div class="product-list-item line-item">
+	<%= link_to( render( 'spree/shared/image', image: variant.gallery.images.first || variant.product.gallery.images.first, size: :small ), variant.product, class: "productlist-image" ) %>
+	<div class="content text-left">
+		<div class="d-flex justify-content-between poppins-h3 item-name-price">
+			<p class="mb-0 item-name"><%= link_to line_item_navbar_v2.name, product_path( variant.product ) %></p>
+
+			<% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item_navbar_v2.product.product_type) ) %>
+				<% price = (line_item_navbar_v2.price * line_item_navbar_v2.quantity) %>
+				<p class="p-0 mb-0 pl-3 item-price"><%= number_to_currency(price)%></p>
+			<% else %>
+				<div class="price-section d-flex">
+					<p class="p-0 mb-0 pl-3 item-price"><%= display_price(line_item_navbar_v2.product)%></p>
+					<% if line_item_navbar_v2.product.on_sale? %>
+						<span class="original-price pl-3 poppins-text-16">
+							<%= Spree::Money.new(line_item_navbar_v2.product.original_price).to_html %>
+						</span>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+
+		<div class="d-flex justify-content-between poppins-h3 quantity-remove-area">
+			<% if quantity_change %>
+				<%= order_form.fields_for :line_items, line_item_navbar_v2 do |item_form| %>
+
+					<% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item_navbar_v2.product.product_type) ) %>
+						<div class="update-count text-center">
+							<div class="d-flex">
+								<%= link_to "", spree::cart_decrease_quantity_path(id: line_item_navbar_v2.id ), class: "button btn-sub-slider disable", disabled: true, rel: 'nofollow' %>
+								<%= item_form.number_field :quantity, min: 1, class: "button product-quantity-slider line_item_quantity",  size: 5, disabled: true %>
+								<%= link_to "", spree::cart_increase_quantity_path(id: line_item_navbar_v2.id ), class: "button btn-add-slider disable", disabled: true, rel: 'nofollow' %>
+							</div>
+							<div class="poppins-text-10 stock-error-message"></div>
+						</div>
+
+					<% else %>
+						<div class="update-count text-center">
+							<div class="d-flex">
+								<%= link_to "", spree::cart_decrease_quantity_path(id: line_item_navbar_v2.id ), class: "button btn-sub-slider", remote: true, rel: 'nofollow' %>
+
+								<% if variant.is_backorderable? %>
+		              <% variant_max_quantity = variant.get_max_stock %>
+
+  								<%= item_form.number_field :quantity, data: { remote: true, method: :get, url: spree::cart_update_line_item_quantity_path(id: line_item_navbar_v2.id )}, min: 0, class: "button product-quantity-slider",  size: 5, max: variant_max_quantity > 0 ? variant_max_quantity : '' %>
+
+		            <% else %>
+		            	<%= item_form.number_field :quantity, data: { remote: true, method: :get, url: spree::cart_update_line_item_quantity_path(id: line_item_navbar_v2.id )}, min: 0, class: "button product-quantity-slider",  size: 5, max: variant.total_on_hand %>
+		            <% end%>
+
+								<%= link_to "", spree::cart_increase_quantity_path(id: line_item_navbar_v2.id ), class: "button btn-add-slider", remote: true, rel: 'nofollow' %>
+							</div>
+							<div class="poppins-text-10 stock-error-message" data-quantity="<%= line_item_navbar_v2.quantity%>"></div>
+						</div>
+					<% end %>
+				<% end %>
+
+				<% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item_navbar_v2.product.product_type) ) %>
+					<div class="cart-remove pl-1">
+						<%= link_to 'Remove', spree::cart_path, class: 'clear-link'%>
+					</div>
+
+				<% else %>
+					<div class="cart-remove pl-1">
+						<%= link_to 'Remove', spree::cart_destroy_line_item_path(id: line_item_navbar_v2.id ), class: 'clear-link', method: :delete, remote: true%>
+					</div>
+				<% end %>
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+			<% end %>
+		</div>
+	</div>
+	<% if line_item_navbar_v2_iteration.size != line_item_navbar_v2_iteration.index+1 %>
+		<div class="dotted-line"></div>
+	<% end %>
+</div>
+
+# touched on 2025-05-22T20:37:41.523411Z
