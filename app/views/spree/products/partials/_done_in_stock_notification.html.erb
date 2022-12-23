@@ -1,0 +1,16 @@
+<div class="header-content">
+  <% unless spree_user_signed_in? %>
+    <div class="heading">Done! We'll send you an email when it's in stock.</div>
+    <div class="text-body">You've been signed up for your free Agzaga account! We're committed to adding new benefits as often as we can, so be sure to log in before you buy.</div>
+  <% else %>
+    <div class="heading">Done! You're set to receive stock updates.</div>
+    <div class="text-body">We'll be in touch as soon as we get new stock for this product.</div>
+  <% end %>
+
+  <div class="keep-shopping">
+    <%= link_to ' Keep Shoping', request.referer, class: "keep-shopping ag-btn ag-btn-lg ag-btn-primary w-100" %>
+  </div>
+</div>
+
+# touched on 2025-05-22T21:21:55.301013Z
+# touched on 2025-05-22T23:29:10.412866Z
