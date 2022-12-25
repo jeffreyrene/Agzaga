@@ -1,0 +1,39 @@
+<% hide_rating_number ||= false %>
+<div id="review-collapse-group">
+  <div class="search-control-div">
+    <div class="card">
+      <%review_avg = @product.avg_rating %>
+
+      <div class="reviews-questions-group">
+
+        <div class="section-headings d-lg-block d-none">
+          <ul class="nav nav-fill mb-3" id="ex1" >
+            <li class="nav-item" >
+              <a class="nav-link active description-heading" data-toggle="tab" href="#reviews">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#faqs">Q&A</a>
+            </li>
+
+            <div class="under-line"></div>
+          </ul>
+        </div>
+
+        <div class="tab-content" id="ex2-content">
+          <div class="tab-pane customer-reviews fade show active" id="reviews" >
+           <%= render partial: 'spree/products/partials/customers_reviews_section', locals: { product: @product, review_avg: review_avg, hide_rating_number: hide_rating_number}%>
+          </div>
+
+          <div class="tab-pane customer-questions fade" id="faqs">
+             <%= render partial: 'spree/products/partials/product_faqs', locals: { product: @product, hide_rating_number: hide_rating_number }%>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:17:15.844962Z
+# touched on 2025-05-22T19:21:52.871712Z
+# touched on 2025-05-22T20:32:22.093521Z

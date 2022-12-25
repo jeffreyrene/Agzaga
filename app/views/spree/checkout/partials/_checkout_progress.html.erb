@@ -1,0 +1,69 @@
+<% current_step = @order.checkout_steps.index(@order.state) %>
+<div class="checkout-progress">
+  <div class="step <%= 'active' if current_step >= 0 %>">
+    <% if current_step > 0 %>
+      <a class="clear-link" href="<%= checkout_state_path 'address' %>">
+        <h3 class="poppins-h3 count">1</h3>
+        <div class="poppins-text-16 bold title">Billing</div>
+      </a>
+
+    <% else %>
+      <h3 class="poppins-h3 count">1</h3>
+      <div class="poppins-text-16 bold title">Billing</div>
+    <% end %>
+  </div>
+
+  <div class="text-center h-100">
+    <div class="line <%= 'active' if current_step > 0 %>"></div>
+  </div>
+
+  <div class="step <%= 'active' if current_step > 0 %>">
+    <% if current_step > 0 %>
+      <a class="clear-link" href="<%= checkout_state_path 'delivery' %>">
+        <h3 class="poppins-h3 count">2</h3>
+        <div class="poppins-text-16 bold title">Shipping</div>
+      </a>
+
+    <% else %>
+      <h3 class="poppins-h3 count">2</h3>
+      <div class="poppins-text-16 bold title">Shipping</div>
+    <% end %>
+  </div>
+
+  <div class="text-center">
+    <%= image_tag current_step > 1 ? 'agazon_logo_mark_warm.svg' : 'agazon_logo_mark_gray.svg', class: 'center-logo', alt: '' %>
+  </div>
+
+  <div class="step <%= 'active' if current_step > 1 %>">
+    <% if current_step > 1 %>
+      <a class="clear-link" href="<%= checkout_state_path 'payment' %>" data-turbolinks="false">
+        <h3 class="poppins-h3 count">3</h3>
+        <div class="poppins-text-16 bold title">Payment</div>
+      </a>
+
+    <% else %>
+      <h3 class="poppins-h3 count">3</h3>
+      <div class="poppins-text-16 bold title">Payment</div>
+    <% end %>
+  </div>
+
+  <div class="text-center h-100">
+    <div class="line <%= 'active' if current_step > 2 %>"></div>
+  </div>
+
+  <div class="step <%= 'last-step' if current_step > 2 %>">
+    <% if current_step > 2 %>
+      <a class="clear-link" href="<%= checkout_state_path 'payment' %>" data-turbolinks="false">
+        <h3 class="poppins-h3 count">4</h3>
+        <div class="poppins-text-16 bold title">Confirm</div>
+      </a>
+
+    <% else %>
+      <h3 class="poppins-h3 count">4</h3>
+      <div class="poppins-text-16 bold title">Confirm</div>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:36:16.612679Z
+# touched on 2025-05-22T20:39:55.070420Z
