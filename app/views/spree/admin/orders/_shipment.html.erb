@@ -1,0 +1,117 @@
+<%
+  manifest_items = Spree::ShippingManifest.new(
+    inventory_units: shipment.inventory_units.where(carton_id: nil),
+  ).items.sort_by { |item| item.line_item.created_at }
+%>
+
+<div id="<%= "shipment_#{shipment.id}" %>" class="js-shipment-edit" data-hook="admin_shipment_form">
+  <fieldset class="no-border-bottom">
+    <legend align="center" class="stock-location" data-hook="stock-location">
+      <span class="shipment-number"><%= shipment.number %></span>
+      -
+      <span class="shipment-state"><%= t(shipment.state, scope: "spree.shipment_states") %></span>
+      <%= t('spree.package_from') %>
+      <strong class="stock-location-name" data-hook="stock-location-name">'<%= shipment.stock_location.name %>'</strong>
+    </legend>
+
+    <% if shipment.ready? && can?(:ship, shipment) %>
+      <%= form_tag("#", class: "admin-ship-shipment") do %>
+        <label>
+          <%= check_box_tag :send_mailer, true, true %>
+          <%= t('spree.send_mailer') %>
+        </label>
+        <%= submit_tag t('spree.actions.ship'), class: "ship-shipment-button" %>
+      <% end %>
+    <% end %>
+  </fieldset>
+
+  <table class="stock-contents shipment index" data-hook="stock-contents">
+    <colgroup>
+      <col style="width: 17.5%;" />
+      <col style="width: 30%;" />
+      <col style="width: 12.5%;" />
+      <col style="width: 15%;" />
+      <col style="width: 15%;" />
+      <col style="width: 10%;" />
+    </colgroup>
+
+    <thead>
+      <tr>
+        <th colspan="2"><%= Spree::LineItem.human_attribute_name(:description) %></th>
+        <th><%= Spree::LineItem.human_attribute_name(:price) %></th>
+        <th><%= Spree::LineItem.human_attribute_name(:quantity) %></th>
+        <th><%= Spree::LineItem.human_attribute_name(:total) %></th>
+        <th class="orders-actions actions" data-hook="admin_order_form_line_items_header_actions"></th>
+      </tr>
+    </thead>
+
+    <tbody data-shipment-number="<%= shipment.number %>" data-order-number="<%= order.number %>">
+      <%= render 'spree/admin/orders/shipment_manifest', { shipment_number: shipment.number, shipment_manifest: manifest_items } %>
+      <% unless shipment.shipped? %>
+        <tr class="edit-shipping-method vertical-middle">
+        </tr>
+      <% end %>
+
+      <tr class="edit-tracking vertical-middle">
+      </tr>
+
+      <tr class="edit-tracking-url vertical-middle">
+      </tr>
+
+      <% tracking_lookups = Spree::TrackingLookup.all %>
+      <% if tracking_lookups.present? %>
+        <tr class="tracking_url_dropdown vertical-middle">
+          <th></th>
+          <td colspan="4">
+            <div class="dropdown-menu fullwidth" id="tracking_lookup" >
+              <% tracking_lookups.each do |tracking_lookup| %>
+                <div class="dropdown-item tracking-lookup-option"><%= tracking_lookup.url %></div>
+              <% end %>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+      <% end %>
+
+      <% if order.special_instructions.present? %>
+        <tr class='special_instructions'>
+          <td colspan="5">
+            <strong><%= t('spree.special_instructions') %>:&nbsp;</strong><%= order.special_instructions %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if order&.custom_hose_configurations.present? %>
+  <% @custom_hose_configurations = order.custom_hose_configurations %>
+  <fieldset>
+    <legend>Order Summary</legend>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Color</th>
+          <th scope="col">Length</th>
+          <th scope="col">Fitting 1</th>
+          <th scope="col">Fitting 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @custom_hose_configurations.each do |custom_hose_configuration|%>
+          <tr>
+            <td><%= custom_hose_configuration.custom_hose.option_values.pluck(:name).join(',')%></td>
+            <td><%= custom_hose_configuration.length%></td>
+            <td><%= custom_hose_configuration.fitting_1.option_values.pluck(:name).join(',')%></td>
+            <td><%= custom_hose_configuration.fitting_2.option_values.pluck(:name).join(',')%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </fieldset>
+<% end %>
+
+# touched on 2025-05-22T22:47:14.291135Z
+# touched on 2025-05-22T22:47:16.875589Z
+# touched on 2025-05-22T23:37:02.268652Z
+# touched on 2025-05-22T23:44:29.947501Z
