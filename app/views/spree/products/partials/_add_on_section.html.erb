@@ -1,0 +1,37 @@
+<div class="add-on-section">
+  <div class="heading">Add-Ons & Accessories</div>
+    <% @product.add_ons.each do |product| %>
+
+    <div class="separator"></div>
+
+    <div class="product-section">
+      <div class="product-image">
+        <%= image_tag  product.gallery.images[0].url(:original), class: 'image', alt: ''%>
+      </div>
+
+      <div class="product-details">
+        <div class="product-name"><%= product.name%></div>
+
+        <div class="pricing-section">
+          <% if product.on_sale? %>
+            <div class="product-on-sale">
+              <div class="sale-discount-section">
+                <span class="current-price on-sale before-sale-price"><%= "$#{'%.2f' % product.price}" %></span>
+              </div>
+
+              <div class="orignal-price"><span class="original-price-value"><%= Spree::Money.new(product.original_price).to_html %></span></div>
+            </div>
+          <% else %>
+            <span class="current-price"><%= "$#{'%.2f' % product.price}" %></span>
+          <% end %>
+
+          <%= link_to "View", product_path(product.slug), class:'ag-btn ag-btn-md ag-btn-primary view-btn' %>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+# touched on 2025-05-22T23:01:55.568195Z
+# touched on 2025-05-22T23:05:18.210929Z
+# touched on 2025-05-22T23:19:43.176170Z
