@@ -1,0 +1,13 @@
+
+<% if content_for?(:table_filter) %>
+  <div id="table-filter" data-hook>
+    <fieldset>
+      <legend align="center"><%= yield :table_filter_title %></legend>
+      <%= yield :table_filter %>
+    </fieldset>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T19:22:29.270542Z
+# touched on 2025-05-22T22:47:19.546079Z
+# touched on 2025-05-22T23:37:02.272320Z
