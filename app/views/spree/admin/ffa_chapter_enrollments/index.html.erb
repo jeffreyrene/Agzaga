@@ -1,0 +1,70 @@
+<% admin_breadcrumb("FFA Chapter Enrollments") %>
+<% admin_layout "full-width" %>
+
+<% content_for :page_actions do %>
+  <li>
+    <%= link_to 'Export FFA Chapter Enrollments', main_app.export_ffa_chapter_enrollments_path, class: 'btn btn-primary' %>
+  </li>
+<% end %>
+
+<h4 class="text-center mb-3">FFA Chapter Enrollments</h4>
+<div style="width: 100%; overflow-x: scroll;">
+  <table class="index" width="100%" id="listing_orders" data-hook>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Chapter Name</th>
+        <th>Chapter Number</th>
+        <th>Chapter Members</th>
+        <th>EIN Number</th>
+        <th>School Name</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Postal Code</th>
+        <th>Digital Signature</th>
+        <th>Consent Verified</th>
+        <th>Form Downloaded</th>
+        <th>Select Chapter</th>
+        <th>Agreement Signed</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @ffa_chapter.each do |chapter| %>
+        <tr>
+          <td><%= chapter.id %></td>
+          <td><%= chapter.first_name %></td>
+          <td><%= chapter.last_name %></td>
+          <td><%= chapter.email %></td>
+          <td><%= chapter.phone_number %></td>
+          <td><%= chapter.name %></td>
+          <td><%= chapter.number %></td>
+          <td><%= chapter.members %></td>
+          <td><%= chapter.ein_number %></td>
+          <td><%= chapter.school_name %></td>
+          <td><%= chapter.street %></td>
+          <td><%= chapter.city %></td>
+          <td><%= chapter.state %></td>
+          <td><%= chapter.postal_code %></td>
+          <td><%= chapter.digital_signature %></td>
+          <td><%= check_box_tag :consent_verified, true, chapter.consent_verified, disabled: "disabled" %></td>
+          <td><%= check_box_tag :advisor_form_downloaded, true, chapter.advisor_form_downloaded, disabled: "disabled" %></td>
+          <td><%= check_box_tag :selected, true, chapter.selected, disabled: "disabled" %></td>
+          <td><%= check_box_tag :is_signed, true, chapter.is_signed, disabled: "disabled" %></td>
+          <td><%= link_to '', edit_admin_ffa_chapter_enrollment_path(chapter.id), class: 'edit fa fa-edit icon_link with-tip no-text' %></td>
+          <td><%= link_to '', admin_ffa_chapter_enrollment_path(chapter.id), method: :delete, class: 'fa fa-trash icon_link' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= paginate @ffa_chapter, theme: "solidus_admin" %>
+
+# touched on 2025-05-22T23:26:34.162152Z
