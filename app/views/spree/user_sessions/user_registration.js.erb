@@ -1,0 +1,23 @@
+<% if @existing_user == 'agzaga user' %>
+  $('#user-registration-content').html('<%= j render(partial: "spree/shared/login_user_content", locals: {user: @user})%>')
+<% elsif @existing_user == 'google user' %>
+  $('#user-registration-content').html('<%= j render(partial: "spree/shared/google_email_account", locals: {content: t("spree.linked_with_google_account")})%>')
+<% elsif @new_user.present? %>
+  $('#user-registration-content').html('<%= j render(partial: "spree/shared/new_user_content", locals: {user_email: @new_user})%>')
+<% end %>
+
+if($('#check-user-status').length) {
+  get_jquery_object();
+}
+
+$(document).on("hidden.bs.modal", "#user-registration-modal", function () {
+  $('#user-registration-content').html('<%= j render(partial: "spree/shared/registration_email")%>')
+});
+
+$(document).on('click', '.back-to-login-btn', function() {
+  $('#user-registration-content').html('<%= j render(partial: "spree/shared/registration_email")%>');
+});
+
+# touched on 2025-05-22T20:43:46.760251Z
+# touched on 2025-05-22T23:22:18.252333Z
+# touched on 2025-05-22T23:36:52.301871Z
