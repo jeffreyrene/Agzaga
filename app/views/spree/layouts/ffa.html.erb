@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="<%= I18n.locale %>">
+  <head data-hook="inside_head">
+
+    <title><%= 'FFA Fundraiser - ' + title %></title>
+    <%= render partial: 'layouts/partials/no_index' %>
+    <%= render partial: 'layouts/partials/google_tag_head' %>
+    <%= stylesheet_link_tag 'fonts', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'ffa_header', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'ffa_fundraiser', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'base', 'data-turbolinks-track': 'reload' %>
+    <%= render partial: 'layouts/partials/facebook_meta_tag' %>
+    <%= render partial: 'layouts/partials/hotjar' %>
+
+    <meta charset="utf-8">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+    <%== meta_data_tags %>
+    <%= canonical_tag(current_store.url) %>
+    <%= favicon_link_tag 'agazon_logo_mark_warm.svg' %>
+    <%= csrf_meta_tags %>
+
+    <meta property="og:title" content="Agzaga">
+    <meta property="og:image" content="http://agazon-storage.nyc3.digitaloceanspaces.com/public_images/new_social_share_logo.png"/>
+    <meta property="og:image:secure_url" content="https://agazon-storage.nyc3.digitaloceanspaces.com/public_images/new_social_share_logo.png"/>
+
+    <%= render partial: 'layouts/partials/pinterest' %>
+    <%= render partial: 'layouts/partials/microsoft_ads' %>
+  </head>
+
+  <body data-turbolinks="false" class="<%= "#{controller_name} #{action_name} #{step.present? ? step : ''}" %> " id="<%= @body_id || 'default' %>" data-hook="body">
+    <%= render partial: 'layouts/partials/google_tag_body' %>
+    <%= render partial: 'spree/shared/flash' %>
+    <%= render partial: 'spree/layouts/partials/ffa/header' %>
+
+        <%= yield %>
+
+      <%= yield :templates %>
+  </body>
+</html>
+
+# touched on 2025-05-22T21:30:33.470742Z
+# touched on 2025-05-22T22:34:24.879975Z
+# touched on 2025-05-22T22:46:45.201694Z

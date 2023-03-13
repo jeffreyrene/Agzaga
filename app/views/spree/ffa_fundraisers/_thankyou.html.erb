@@ -1,0 +1,74 @@
+<div class="is-flex justify-center">
+  <div class="ffa-step-card">
+    <%= render partial: 'step_progress', locals: { level: 4 } %>
+
+    <div class="step-header">
+      <div class="step-heading finish-heading">
+        <div>
+          <%= image_tag 'ffa-confirm-check.svg' %>
+        </div>
+        Thank you!
+      </div>
+    </div>
+    <div class="step-body">
+
+      <div class="notification-green">
+        <div class="notification-heading">
+          What’s next?
+        </div>
+        <div class="notification-body">
+          We’ll contact you periodically as FFA Week get’s closer with tutorial videos, tips,
+          and customized things you can print to give your Chapter members.
+        </div>
+
+        <div class="ffa-thankyou-point-wrapper is-flex">
+          <div class="ffa-thankyou-point">
+            <%= image_tag 'ffa-updates.svg' %>
+          </div>
+          <div class="ffa-thankyou-point">
+            <%= image_tag 'ffa-printouts.svg' %>
+          </div>
+          <div class="ffa-thankyou-point">
+            <%= image_tag 'ffa-spread-words.svg' %>
+          </div>
+          <div class="ffa-thankyou-point">
+            <%= image_tag 'ffa-get-money.svg' %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="thankyou-notification-footer-head">
+        Join our advisor Facebook Group!
+      </div>
+      <div class="thankyou-notification-footer-subhead">
+        Connect with other advisors across the country, share ideas, get updates from our team, and celebrate your successes!
+      </div>
+
+    </div>
+
+
+    <div class="is-flex justify-center">
+
+      <%= link_to "https://www.facebook.com/groups/447365113512053/", class: 'fb-text' do %>
+        <div class="btn-fb-group">
+          <span class="fb-icons">
+            <%= image_tag 'ffa-fb-group.svg' %> Join Facebook Group
+          </span>
+        </div>
+      <% end %>
+
+      <%= link_to spree::root_path, class: 'home-text' do %>
+        <div class="btn-ffa-home">
+          <span class="home-icons">
+            <%= image_tag 'ffa-home.svg' %> Return Home
+          </span>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+# touched on 2025-05-22T21:21:23.085224Z
+# touched on 2025-05-22T22:45:00.987131Z
