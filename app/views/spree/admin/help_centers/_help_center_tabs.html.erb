@@ -1,0 +1,51 @@
+<% if faqs.any? %>
+  <table class="index sortable" id='listing_faqs' data-sortable-link="<%= update_positions_admin_help_centers_url %>">
+    <colgroup>
+      <col style="width: 10%">
+      <col style="width: 60%">
+      <col style="width: 15%">
+      <col style="width: 15%">
+    </colgroup>
+
+    <thead>
+      <tr data-hook="faqs_header">
+        <th></th>
+        <th>Questions</th>
+        <th>Type</th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% faqs.each do |faq| %>
+        <tr id="<%= spree_dom_id faq %>" data-hook="faqs_row">
+          <td>
+            <span class="handle"></span>
+          </td>
+
+          <td>
+            <%= raw(faq.question) rescue '' %>
+          </td>
+
+          <td>
+            <%= raw(faq.question_type) rescue '' %>
+          </td>
+
+          <td class="actions">
+            <%= link_to '', edit_admin_help_center_path(faq.id), class: 'edit fa fa-edit icon_link with-tip no-text' %>
+            <%= link_to '', admin_help_center_path(faq.id), method: :delete, class: 'fa fa-trash icon_link' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= render 'spree/admin/shared/no_objects_found',
+                 resource: Spree::HelpCenter %>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T20:39:02.248830Z
+# touched on 2025-05-22T21:51:20.679579Z
+# touched on 2025-05-22T22:50:01.059425Z
