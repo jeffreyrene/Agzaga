@@ -1,0 +1,57 @@
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Product), spree.admin_products_path) %>
+<% admin_breadcrumb(plural_resource_name(Spree::FilterType)) %>
+
+
+<% content_for :page_actions do %>
+  <% if can?(:create, Spree::FilterType) %>
+    <li id="new_ot_link">
+      <%= link_to t('spree.new_filter_type'), new_admin_filter_type_url, remote: true, id: 'new_filter_type_link', class: 'btn btn-primary' %>
+    </li>
+  <% end %>
+<% end %>
+
+<div id="new_filter_type"></div>
+
+<% if @filter_types.any? %>
+<table class="index sortable" id="listing_filter_types" data-hook data-sortable-link="<%= update_positions_admin_filter_types_url %>">
+  <colgroup>
+    <col style="width: 10%">
+    <col style="width: 35%">
+    <col style="width: 40%">
+    <col style="width: 15%">
+  </colgroup>
+  <thead>
+    <tr data-hook="filter_header">
+      <th></th>
+      <th><%= Spree::FilterType.human_attribute_name(:name) %></th>
+      <th><%= Spree::FilterType.human_attribute_name(:presentation) %></th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @filter_types.each do |filter_type| %>
+      <tr class="spree_filter_type" id="<%= spree_dom_id filter_type %>" data-hook="filter_row">
+        <td><span class="handle"></span></td>
+        <td><%= filter_type.name %></td>
+        <td class="presentation"><%= filter_type.presentation %></td>
+        <td class="actions">
+          <% if can?(:update, filter_type) %>
+            <%= link_to_edit(filter_type, class: 'admin_edit_filter_type', no_text: true) %>
+          <% end %>
+          <% if can?(:destroy, filter_type) %>
+            <%= link_to_delete(filter_type, no_text: true) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <div class="no-objects-found">
+    <%= render 'spree/admin/shared/no_objects_found',
+                 resource: Spree::FilterType,
+                 new_resource_url: new_object_url %>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T19:22:29.271562Z
