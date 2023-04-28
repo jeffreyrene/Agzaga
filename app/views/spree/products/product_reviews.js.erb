@@ -1,0 +1,10 @@
+<% if @product_reviews.present? %>
+  $('.customer-review-stars').html("<%=j render partial: 'spree/products/partials/customer_reviews_stars', locals: { reviews: @product_reviews } %>");
+  $('.reviews-pagination').html("<%= j (paginate(@product_reviews, theme: 'review_pagination', remote: true, params: {count: @product_reviews.count})) %>")
+<% else %>
+  $('.customer-review-stars').html('No Review Found.');
+  $('.reviews-pagination').html('');
+<% end %>
+
+# touched on 2025-05-22T20:44:34.096584Z
+# touched on 2025-05-22T23:43:37.622298Z
