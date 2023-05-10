@@ -1,0 +1,168 @@
+<div class="data-container">
+  <div id="latest-posts">
+    <h1 class=" d-md-none d-block draught-textured-h1 section-top-h1">
+      Latest POSTS
+    </h1>
+
+    <div class="row no-gutters d-md-block d-none">
+      <div class="col-12">
+        <div class="card hero-card">
+          <div><%= image_tag 'mill/1.jpg', class:'w-100 hero-card-image', alt: '' %></div>
+
+          <div class="text-left card-content">
+            <div class="row no-gutters post-head">
+              <div class="col-sm-7 poppins-text-20 bold category">
+                Crop Packaging
+              </div>
+
+              <div class="col-sm-5 text-right">
+                <span class="poppins-text-18 published">17 days ago</span>
+                <%= image_tag 'mill_fan_slim_red.svg', class: 'mill-icon', alt: '' %>
+              </div>
+            </div>
+
+            <h2 class="poppins-bold-text-40">
+              Is crop packaging the future of agriculture?
+            </h2>
+
+            <p class="poppins-text-18 post-body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis.
+            </p>
+
+            <div class="row no-gutters post-footer">
+              <div class="col-8">
+                <%= image_tag 'agazon_logo_mark_warm.svg', class: 'logo-mark', alt: '' %>
+                <span class="published-by poppins-text-18">Agzaga Staff</span>
+              </div>
+
+              <div class="col-4 d-flex">
+                <a class="poppins-text-18 read-more clear-link">
+                  Read more <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row no-gutters product_cards">
+          <div class="col-xl-4 col-lg-6 d-flex justify-content-center ">
+            <%= render partial: 'pages/partials/mill_product_short_card',
+                locals: {
+                          image: 'mill/2.jpg', category: 'Drivelines', published: 2,
+                          title: 'How many farmers does it take to farm?'
+                        } %>
+          </div>
+
+          <div class="col-xl-4 col-lg-6 d-flex justify-content-center">
+            <%= render partial: 'pages/partials/mill_product_short_card',
+                locals: {
+                          image: 'mill/3.jpg', category: 'Hay Parts', published: 3,
+                          title: 'Why is my tractor still talking to me?'
+                        } %>
+          </div>
+
+          <div class="col-xl-4 col-lg-6 d-flex justify-content-center">
+            <%= render partial: 'pages/partials/mill_product_short_card',
+                locals: {
+                          image: 'mill/4.jpg', category: 'Apparel', published: 4,
+                          title: 'You’re never off work when you’re working.'
+                        } %>
+          </div>
+
+          <div class="col-xl-4 col-lg-6 d-flex justify-content-center">
+            <%= render partial: 'pages/partials/mill_product_short_card',
+                locals: {
+                          image: 'mill/5.jpg', category: 'Hay Containment', published: 5,
+                          title: 'Too many farmers, not enough A/C.'
+                        } %>
+          </div>
+
+          <div class="col-xl-4 col-lg-6 d-flex justify-content-center">
+            <%= render partial: 'pages/partials/mill_product_short_card',
+                locals: {
+                          image: 'mill/6.jpg', category: 'Drivelines', published: 6,
+                          title: 'Why AirPods will make you more popular.'
+                        } %>
+          </div>
+
+          <div class="col-xl-4 col-lg-6 d-flex justify-content-center">
+            <%= render partial: 'pages/partials/mill_product_short_card',
+                locals: {
+                          image: 'mill/7.jpg', category: 'Hay Containment', published: 7,
+                          title: 'Your bales aren’t as tight as you think.'
+                        } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row no-gutters d-md-none d-block">
+      <div class="owl-carousel owl-theme latest-products home-page-slider">
+        <div class="item">
+          <%= render partial: 'pages/partials/mill_product_card',
+              locals: {
+                        image: 'mill/34.jpg', published: 17,
+                        title: 'Post title, whatever it is even it it is 2 lines'
+                      } %>
+        </div>
+
+        <div class="item">
+          <%= render partial: 'pages/partials/mill_product_card',
+              locals: {
+                        image: 'mill/9.jpg', category: 'Drivelines', published: 2,
+                        title: 'How many farmers does it take to farm?'
+                      } %>
+        </div>
+
+        <div class="item">
+          <%= render partial: 'pages/partials/mill_product_card',
+              locals: {
+                        image: 'mill/10.jpg', category: 'Hay Parts', published: 3,
+                        title: 'Why is my tractor still talking to me?'
+                      } %>
+        </div>
+
+        <div class="item">
+          <%= render partial: 'pages/partials/mill_product_card',
+              locals: {
+                        image: 'mill/34.jpg', category: 'Apparel', published: 4,
+                        title: 'You’re never off work when you’re working.'
+                      } %>
+        </div>
+
+        <div class="item">
+          <%= render partial: 'pages/partials/mill_product_card',
+              locals: {
+                        image: 'mill/15.jpg', category: 'Hay Containment', published: 5,
+                        title: 'Too many farmers, not enough A/C.'
+                      } %>
+        </div>
+
+        <div class="item">
+          <%= render partial: 'pages/partials/mill_product_card',
+              locals: {
+                        image: 'mill/34.jpg', category: 'Drivelines', published: 6,
+                        title: 'Why AirPods will make you more popular.'
+                      } %>
+        </div>
+
+        <div class="item">
+          <%= render partial: 'pages/partials/mill_product_card',
+              locals: {
+                        image: 'mill/15.jpg', category: 'Hay Containment', published: 7,
+                        title: 'Your bales aren’t as tight as you think.'
+                      } %>
+        </div>
+      </div>
+    </div>
+
+    <a class="clear-link view-all poppins-text-16 bold" href="/mill">
+      View All <i class="bi bi-arrow-right"></i>
+    </a>
+
+    <div class="line"></div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:35:29.996729Z
+# touched on 2025-05-22T22:54:58.584459Z
