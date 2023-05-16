@@ -1,0 +1,73 @@
+<div class="row data-container">
+  <div class="col-xl-6 p-0">
+    <%= image_tag 'contact_page_hero_image.jpg', class: 'w-100', alt: '' %>
+  </div>
+
+  <div class="contact-us-form-group message_form col-xl-6">
+    <h1 class="draught-textured-h1 main-heading">WE’RE HERE TO HELP</h1>
+
+    <div class="line"></div>
+
+    <h1 class="poppins-h3 mb-4">SEND US A MESSAGE</h1>
+
+    <%= form_with url: contacts_path,  id: "contact-form", class: "contact-us-form", method: :post, local: false do |form| %>
+      <div class="row text-left">
+        <div class="col-lg-6 form-group">
+          <%= form.label :firstname, "First name*", class: "poppins-text-16 bold" %>
+          <%= form.text_field :firstname, class: "form-control poppins-text-16", required: true, id: "firstname" %>
+        </div>
+
+        <div class="col-lg-6 form-group">
+          <%= form.label :lastname, "Last name*", class: "poppins-text-16 bold" %>
+          <%= form.text_field :lastname, class: "form-control poppins-text-16", required: true, id: "lastname" %>
+        </div>
+      </div>
+
+      <div class="row text-left">
+        <div class="col-lg-6 form-group">
+          <%= form.label :email, "Email*", class: "poppins-text-16 bold" %>
+          <%= form.email_field :email, class: "form-control poppins-text-16", required: true, id: "email" %>
+        </div>
+
+        <div class="col-lg-6 form-group">
+          <%= form.label :phone, "Phone", class: "poppins-text-16 bold" %>
+          <%= form.text_field :phone, class: "form-control poppins-text-16 mobile-number-field", id: "phone" %>
+        </div>
+      </div>
+
+      <div class="row text-left">
+        <div class="col-12 form-group">
+          <%= form.label :messsage, "Message", class: "poppins-text-16 bold" %>
+          <%= form.text_area :messsage, class: "form-control", id: "message", rows: "6" %>
+        </div>
+      </div>
+
+      <div class="form-group text-center">
+        <%= form.submit "Send Message", id: "submitButton", class: "btn-gradient-orange" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="contact-us-form-group message_submit col-xl-6">
+     <h1 class="poppins-h3 mt-4 mb-2">Thanks for contacting us!</h1>
+     <div class="poppins-text-16 mb-4" >We will answer you as soon as possible!</div>
+     <p class="btn-home text-center"><%= link_to 'Return Home', spree::root_url, class: "poppins-text-16 bold  btn-home", rel: "nofollow" %></p>
+  </div>
+
+</div>
+
+<div>
+  <%= render partial: '/spree/pages/partials/contact_methods', locals: { page: 'contact' } %>
+</div>
+
+<div class="text-center">
+  <h2 class="draught-h2 sign-up-heading">SIGN UP FOR OUR NEWSLETTER</h2>
+
+  <form class="inline-sign-up-form">
+    <%= email_field_tag 'email', '', placeholder: 'Enter your email address', class: 'email-input-field poppins-text-14' %>
+    <%= submit_tag 'Sign Up', class: 'btn-gradient-orange poppins-text-16'%>
+  </form>
+</div>
+
+# touched on 2025-05-22T22:45:13.085542Z
+# touched on 2025-05-22T23:39:17.604927Z
+# touched on 2025-05-22T23:42:23.607665Z
