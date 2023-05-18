@@ -1,0 +1,128 @@
+<div class="order-summary-group">
+    <div class="lexend-h4 message-heading">Order Summary</div>
+    <div class="summary-body">
+      <div class="poppins-text-16 bold order-number-heading">Order Number</div>
+      <div class="lexend-h4 order-number"><%= @order.number %></div>
+
+      <div  class='d-lg-block d-none'>
+        <%= render 'spree/checkout/partials/order_line_items', order: @order%>
+      </div>
+
+      <div id="accordion" class="d-lg-none d-block">
+        <div id="cartLineItems" class="collapse show" aria-labelledby="expandCart" data-parent="#accordion">
+          <div class="card-body p-0">
+            <%= render 'spree/checkout/partials/order_line_items', order: @order%>
+          </div>
+        </div>
+
+        <div id="expandCart" class="text-center">
+          <button class="expand-btn clear-link btn btn-link" data-toggle="collapse" data-target="#cartLineItems" aria-expanded="true" aria-controls="cartLineItems">
+            EXPAND CART
+            <div><%= image_tag 'expand-arrow.svg' %></div>
+          </button>
+
+          <button class="view-less-btn clear-link btn btn-link" data-toggle="collapse" data-target="#cartLineItems" aria-expanded="true" aria-controls="cartLineItems">
+            VIEW LESS
+            <div><%= image_tag 'viewless-cart.svg' %></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="grey-line"></div>
+
+      <div class="order-summary-detail-content">
+
+        <div class="d-flex justify-content-between poppins-text-16">
+          <p class="p-0 mb-2"><%= t('spree.subtotal') %></p>
+          <p class="p-0 mb-2"><%= @order.display_item_total %></p>
+        </div>
+
+        <% if @order.line_item_adjustments.exists? %>
+
+          <% @order.line_item_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
+            <div class="d-flex justify-content-between poppins-text-16">
+
+              <p class="p-0 mb-2">
+                <%=  t('spree.promotion') %>: <%= label %>
+              </p>
+
+              <p class="p-0 mb-2">
+                <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %>
+              </p>
+            </div>
+          <% end %>
+
+        <% end %>
+
+        <% @order.shipments.group_by { |s| s.selected_shipping_rate.name }.each do |name, shipments| %>
+
+          <div class="d-flex justify-content-between poppins-text-16">
+
+            <p class="p-0 mb-2">
+              <%= t('spree.shipping') %>: <%= name %>
+            </p>
+
+            <p class="p-0 mb-2">
+              <%= Spree::Money.new(shipments.sum(&:total_before_tax), currency: @order.currency).to_html %>
+            </p>
+          </div>
+
+        <% end %>
+
+        <% if @order.all_adjustments.tax.exists? %>
+          <% @order.all_adjustments.tax.eligible.group_by(&:label).each do |label, adjustments| %>
+            <div class="d-flex justify-content-between poppins-text-16">
+
+              <p class="p-0 mb-2">
+                <%= t('spree.tax') %>: <%= label %>
+              </p>
+
+              <p class="p-0 mb-2">
+                <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %>
+              </p>
+            </div>
+          <% end %>
+
+        <% if @order.total_applicable_store_credit > 0.0 %>
+          <div class="d-flex justify-content-between poppins-text-16">
+
+            <p class="p-0 mb-2">
+              <%= t('spree.store_credit.store_credit') %>:
+            </p>
+
+            <p class="p-0 mb-2">
+              <%= @order.display_total_applicable_store_credit.to_html %>
+            </p>
+          </div>
+        <% end %>
+
+        <% @order.adjustments.eligible.each do |adjustment| %>
+          <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+            <div class="d-flex justify-content-between poppins-text-16">
+
+              <p class="p-0 mb-2">
+                <%= adjustment.label %>
+              </p>
+
+              <p class="p-0 mb-2">
+                <%= adjustment.display_amount.to_html %>
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div class="d-flex justify-content-between">
+          <p class="p-0 mb-0 poppins-text-24 bold total-text">Total</p>
+
+          <p class="p-0 mb-0 poppins-text-24 bold total-price">
+            <%= @order.display_order_total_after_store_credit.to_html %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+# touched on 2025-05-22T22:30:36.756283Z
+# touched on 2025-05-22T23:00:00.003896Z
+# touched on 2025-05-22T23:42:23.606273Z
+# touched on 2025-05-22T23:48:15.374272Z
