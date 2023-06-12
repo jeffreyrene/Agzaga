@@ -1,0 +1,25 @@
+<div class="featured-categories-holder featured-carousel">
+  <div id="featured-categories" class="owl-carousel owl-theme home-page-slider">
+
+    <% @all_gift_products.each do |product| %>
+      <div class="item">
+        <a href="<%= product_path(product) %>" class="clear-link">
+          <div class="img-holder black-deals-holder">
+            <%= image_tag( image_cdn_link(product.gallery.images.first.url(:small)), alt: product.name, class: 'black-deals-card', loading: 'lazy' ) if product.gallery.images.present? %>
+          </div>
+        </a>
+
+        <p>
+          <%= link_to "#{product.name}", spree::product_path(product), class: 'clear-link deals-bold-text' %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-05-22T21:18:52.099728Z
+# touched on 2025-05-22T23:25:28.973152Z
+# touched on 2025-05-22T23:27:30.484651Z
+# touched on 2025-05-22T23:28:43.832544Z
+# touched on 2025-05-22T23:45:47.161493Z
+# touched on 2025-05-22T23:46:05.475659Z
