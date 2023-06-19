@@ -1,0 +1,47 @@
+<div class="data-container">
+  <div class="product-search-page">
+    <% if @product_cards.any? %>
+      <div id="products" class="inline product-listing" data-hook>
+        <% if (@taxon&.video_link&.present? || @taxon&.small_ads&.present?) && @taxon&.small_ads_end_at&.future? %>
+          <div class="products-ad-block">
+            <% if @taxon.video_link.present? %>
+              <% video_id = @taxon.video_link.partition('=').last %>
+
+              <iframe src="https://www.youtube.com/embed/<%= video_id %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" class="small-video-ads" allowfullscreen></iframe>
+
+              <div class="ads-annotation"> <%= raw(@taxon.annotation) %> </div>
+            <% elsif @taxon.small_ads.present? ||  @taxon.small_ad_for_mobile.present? %>
+              <a href="<%= @taxon.small_ad_link %>">
+                <%= image_tag( @taxon.small_ads.url(:medium), class: 'small-ads d-md-block d-none') %>
+                <%= image_tag( @taxon.small_ad_for_mobile.url(:medium), class: 'small-ads small-ads-for-mobile d-md-none d-block') %>
+              </a>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% @product_cards.each do |product| %>
+          <div class="search-product">
+            <%= render partial: 'spree/shared/standard_product_card', locals: { product: product, from_category_page: true } %>
+          </div>
+        <% end %>
+
+        <% reset_cycle("classes") %>
+      </div>
+
+      <div id="indiviual-section">
+        <%= paginate @products, theme: 'ag_pagination', left: 3, right: 1, window: 1 %>
+      </div>
+
+      <div class="loading">
+        <%= image_tag "loading.gif", alt: 'loading' %>
+      </div>
+      <input name="scroll_click" type="hidden" value='' >
+    <% else %>
+      <div class="no-product-found">
+        We didn't add any products to this category yet. Please checkout other categories or explore <%= link_to 'All Products', spree::product_categories_path %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:15:00.778823Z

@@ -1,0 +1,145 @@
+<% address_id = address_type.chars.first %>
+<% read_only ||= false%>
+
+<div class="inner was-validated" data-hook=<%="#{address_type}_inner" %>>
+  <div class="d-flex w-100 name-area">
+    <label class="poppins-text-16 custom-field field-required name-field" id="<%= "#{address_id}firstname" %>">
+      <%= form.text_field :firstname, class: 'form-control custom-field-input required', autocomplete: address_type + ' firstname', required: true, autofocus: true, disabled: read_only %>
+      <span class="placeholder">First Name</span>
+      <div class="invalid-feedback text-left">
+        This field is required
+      </div>
+    </label>
+
+    <label class="poppins-text-16 custom-field field-required name-field mr-0" id="<%= "#{address_id}lastname" %>">
+      <%= form.text_field :lastname, class: 'form-control custom-field-input required', autocomplete: address_type + ' lastname', required: true, autofocus: true, disabled: read_only %>
+      <span class="placeholder">Last Name</span>
+      <div class="invalid-feedback text-left">
+        This field is required
+      </div>
+    </label>
+  </div>
+
+  <% if Spree::Config[:company] %>
+    <label class="poppins-text-16 custom-field field-required" id=<%="#{address_id}company"%>>
+      <%= form.text_field :company, class: 'custom-field-input', autocomplete: address_type + ' organization', disabled: read_only %>
+      <span class="placeholder"><%= t('spree.company') %></span>
+    </label>
+  <% end %>
+
+  <label class="poppins-text-16 custom-field field-required" id=<%="#{address_id}address1" %>>
+    <%= form.text_field :address1, class: 'form-control custom-field-input required', autocomplete: address_type + ' address-line1',  required: true, disabled: read_only %>
+    <span class="placeholder">Address</span>
+    <div class="invalid-feedback text-left">
+      This field is required
+    </div>
+  </label>
+
+  <div class="poppins-text-16 address-field" >
+    + Add Company, Apt, Suite, Unit
+  </div>
+
+  <label class="address-line poppins-text-16 custom-field" id=<%="#{address_id}address2" %> style="display: none;">
+    <%= form.text_field :address2, class: 'custom-field-input', autocomplete: address_type + ' address-line2', disabled: read_only %>
+    <span class="placeholder"><%= I18n.t('spree.street_address_2') %></span>
+  </label>
+
+  <% unless read_only %>
+    <div id=<%="#{address_id}country" %>>
+      <%= form.hidden_field :country_id, value: Spree::Country.find_by(iso: 'US')&.id %>
+    </div>
+  <% end %>
+
+  <div class="d-flex w-100">
+    <label class="poppins-text-16 custom-field field-required city-area" id=<%="#{address_id}city" %>>
+      <%= form.text_field :city, class: 'form-control custom-field-input required', autocomplete: address_type + ' address-level2',  required: true, disabled: read_only %>
+      <span class="placeholder"><%= t('spree.city') %></span>
+      <div class="invalid-feedback text-left">
+        This field is required
+      </div>
+    </label>
+
+    <% if Spree::Config[:address_requires_state] %>
+      <label class="poppins-text-16 custom-field field-required city-area" id="<%="#{address_id}state" %>">
+        <% have_states = !address.country.states.empty? %>
+
+        <% if read_only %>
+          <%= form.text_field :state, class: 'form-control custom-field-input required',  value: address.state.name, disabled: read_only %>
+        <% else %>
+          <span class="js-address-fields" >
+            <%=
+              form.collection_select(
+                :state_id, address.country.states, :id, :name,
+                {include_blank: true},
+                {
+                  class: have_states ? 'custom-field-input required' : '',
+                  style: have_states ? '' : 'display: none;',
+                  disabled: !have_states,
+                  autocomplete: address_type + ' address-level1',
+                })
+              %>
+            <%=
+              form.text_field(
+                :state_name,
+                class: !have_states ? 'custom-field-input required' : '',
+                style: have_states ? 'display: none;' : '',
+                disabled: have_states,
+                autocomplete: address_type + ' address-level1',
+              )
+            %>
+            <span class="placeholder" style="display: <%= "#{have_states ? 'none' : 'block'}" %>"><%= t('spree.state') %></span>
+          </span>
+          <noscript>
+            <%= form.text_field :state_name, class: 'form-control custom-field-input required', autocomplete: address_type + ' address-level1',  required: true %>
+            <div class="invalid-feedback text-left">
+              This field is required
+            </div>
+          </noscript>
+        <% end %>
+      </label>
+    <% end %>
+
+    <label class="poppins-text-16 custom-field <%= 'field-required' if address.require_zipcode? %> city-area mr-0" id=<%="#{address_id}zipcode" %>>
+      <%= form.number_field :zipcode, class: "form-control custom-field-input #{'required' if address.require_zipcode?}", autocomplete: address_type + ' postal-code',  required: true, disabled: read_only%>
+      <span class="placeholder">Postal Code</span>
+      <div class="invalid-feedback text-left">
+        This field is required
+      </div>
+    </label>
+  </div>
+
+  <div class="d-flex w-100">
+    <label class="poppins-text-16 custom-field field-required name-field">
+      <%= form_order.email_field :email, required: true,  class: "form-control custom-field-input" %>
+      <span class="placeholder">Email</span>
+      <div class="invalid-feedback text-left">
+        Please enter a valid email address.
+      </div>
+    </label>
+
+    <% unless read_only %>
+      <label class="poppins-text-16 custom-field <%= 'field-required' if address.require_phone? %> name-field mr-0" id=<%="#{address_id}phone" %>>
+        <% phone_hash = address.require_phone? ? { class: 'form-control custom-field-input required', required: true } : {} %>
+        <%= form.phone_field :phone, phone_hash.merge({ autocomplete: address_type + ' home tel'}) %>
+        <span class="placeholder">Phone Number</span>
+        <div class="invalid-feedback text-left">
+          This field is required
+        </div>
+      </label>
+    <% end %>
+  </div>
+
+  <% if Spree::Config[:alternative_shipping_phone] %>
+     <label class="poppins-text-16 custom-field field-required name-field" id=<%="#{address_id}altphone"%>>
+      <%= form.phone_field :alternative_phone, class:"custom-field-input", autocomplete: address_type + ' tel'%>
+      <span class="placeholder"><%= t('spree.alternative_phone') %></span>
+    </label>
+  <% end %>
+
+  <div class="mt-4 text-right">
+    <%= submit_tag 'Save Address', class: "save-btn clear-link" %>
+    <script>Spree.disableSaveOnClick();</script>
+  </div>
+</div>
+
+# touched on 2025-05-22T22:55:01.285760Z
