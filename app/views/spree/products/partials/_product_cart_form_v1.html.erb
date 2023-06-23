@@ -1,0 +1,195 @@
+<% variants_stock = product_out_of_stock(@product) %>
+
+<% if out_of_stock(@product, variants_stock) %>
+  <%= hidden_field_tag "disable-select2", true %>
+<% end %>
+
+<%= form_for :order, html: { method: :post, remote: true},  url: populate_orders_path do |f| %>
+  <div id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <% if @product.variants_and_option_values_for(current_pricing_options).any? %>
+      <div id="product-<%= @product.id %>-variants" class="product-variants" data-product="<%= @product.id %>">
+        <ul class="d-none">
+          <% @product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index| %>
+            <li>
+              <div id = "pallet_element_<%=variant.id%>">
+                <% variant.volume_prices.each do |v|%>
+                  <% price_per_unit = v.discount_type == 'price' ? v.amount : (v.discount_type == 'percent' ? (variant.price - ((variant.price * v.amount) / 100)) : variant.price - v.amount) %>
+
+                  <%= content_tag :div, '', data: { volume_price_name: v.name, volume_prices_quantity: v.range.split(/[. +]/).first, volume_unit_price: ('%.2f' % price_per_unit) } %>
+                <% end %>
+              </div>
+
+              <%= radio_button_tag 'variant_id', variant.id, nil, data: { price: "#{variant.price_for(current_pricing_options)}", target_pallet: "pallet_element_#{variant.id}", stock_count: variant.total_on_hand, is_backorderable: variant.is_backorderable?, variant_sku: variant.sku, is_dropship: variant.is_dropship }, class: 'variantid' %>
+
+              <%= label_tag "variant_id_#{ variant.id }" do %>
+                <span class="variant-description">
+                  <%= variant_options variant %>
+                </span>
+
+                <% if variant_price variant %>
+                  <span class="price diff"><%= variant_price variant %></span>
+                <% end %>
+
+                <% unless variant.can_supply? %>
+                  <span class="out-of-stock variant_id_<%= variant.id %>"><%= t('spree.out_of_stock') %></span>
+                <% end %>
+
+                <span class="stock-count"><%= variant.total_on_hand %></span>
+                <span class="variant-backorderable"><%= variant.is_backorderable? %></span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+
+        <% @product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index| %>
+
+          <div class="d-none variants-data-for-<%= @product.id %>" data-id="<%= variant.id %>" data-text="<%= variant.options_text %>" ></div>
+        <% end %>
+
+        <% options = @product.variant_option_values_by_option_type %>
+
+        <div class="variant-presentation variant"><b>Select an option <span class="clr-red">*</span></b></div>
+        <% prev = [] %>
+        <% options.each do |option| %>
+
+            <div class="variant-presentation"><%= option[0].presentation.gsub(/[^\w]/, '_') %>:</div>
+
+            <div class="options-section variant-options-for-selection color-options" data-option= "<%= option[0].presentation %>" id = "<%= @product.id %>-options-for-<%= option[0].presentation.gsub(/[^\w]/, '_') %>">
+              <% select_variant = true %>
+
+              <% option[1].each do |opt| %>
+                <%= radio_button_tag "variant-#{option[0].presentation.gsub(/[^\w]/, '_')}_for", opt[:presentation], select_variant, required: true %>
+
+                <% if select_variant %>
+                  <% opt_variants = opt.variants.where(product_id: @product.id).includes(:stock_items) %>
+                  <% if options.first === option && (opt_variants.sum { |variant| variant.stock_items[0].count_on_hand } != 0 || opt_variants.where(stock_items: {backorderable: true}).any?) %>
+                    <% select_variant = nil %>
+                    <% prev.append(opt.id) %>
+                  <% elsif options.first != option %>
+                    <% opt_variants.each do |opt_variant| %>
+                      <% if (prev - opt_variant.option_values.pluck(:id)).empty? && (opt_variant.stock_items[0].count_on_hand != 0 || opt_variant.is_backorderable?) %>
+                        <% select_variant = nil %>
+                        <% prev.append(opt.id) %>
+                        <% break %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+
+                <%= label_tag "variant-#{option[0].presentation.gsub(/[^\w]/, '_')}_for_#{opt[:presentation]}", class: 'label-name' do %>
+                  <span class="variant-description">
+                    <%= opt[:name] %>
+                  </span>
+                <% end %>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    <% else %>
+      <%= hidden_field_tag 'variant_id', @product.master.id %>
+    <% end %>
+
+    <div class="buy-in-bulk">
+      <% if !@product.variants.present? && @product.master.volume_prices.present? %>
+        <div class="buy-in-bulk-text">
+          Bulk Pricing Options
+        </div>
+
+        <div class="pallet-section">
+          <% @product.master.volume_prices.each do |v|%>
+            <% price_per_unit = v.discount_type == 'price' ? v.amount : (v.discount_type == 'percent' ? (@product.price - ((@product.price * v.amount) / 100)) : @product.price - v.amount) %>
+            <div class="pallets">
+              <div class="add-pallet-to-cart-button" data-pallet-quantity="<%= v.range.split(/[. +]/).first %>">
+                <%= v.name %>
+              </div>
+
+              <div class="price-per-unit">
+                $<%= '%.2f' % price_per_unit %> Each
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @product.price_for(current_pricing_options) and !@product.price.nil? %>
+      <div class="quantity-btn-group-section">
+        <div class="quantity-btn-group <%= 'disable-quantity-btn-group' if out_of_stock(@product, variants_stock) || !@product.variants.empty? %>">
+          <div class="buttons">
+            <%= button_tag '', class: 'button disable_btn sub-btn', type: 'button' %>
+            <% if @product.master.is_backorderable? %>
+              <% if @product.master.get_max_stock > 0 %>
+                <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1, max: @product.master.get_max_stock  %>
+              <% else %>
+                <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1, max: 500 %>
+              <% end %>
+
+            <% else %>
+              <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1, max: @product.master.total_on_hand %>
+            <% end%>
+            <%= button_tag '', class: 'button add-btn', type: 'button' %>
+          </div>
+
+          <div class="poppins-text-10 stock-error-message"></div>
+
+          <% taxon_names = @product.taxons.flat_map(&:self_and_ancestors).uniq.pluck(:name).map(&:downcase) %>
+
+          <% if taxon_names.include?('hay containment') && !taxon_names.include?('accessories') %>
+            <div class="need-more-quantity-group">
+              <div class="need-more-quantity-box">
+
+                <div class="box-heading poppins-bold-text-16">
+                  <%= image_tag 'phone_icon_grey.svg', class: 'phone-icon', alt: 'Phone icon', size: '16x16' %>
+                  Need more?
+                </div>
+
+                <div class="box-text poppins-text-16">
+                  We’ve got you covered!
+                  <span class="mob-new-line">
+                    Call us at <a href="tel:+18882497412" class="poppins-bold-text-16 phone-link">1-888-249-7412</a> for availability.
+                  </span>
+
+                  <a class="call-btn poppins-bold-text-12" href="tel:+18882497412">
+                    <%= image_tag 'phone_icon_black.svg', class: 'phone-icon', alt: 'Phone icon', size: '16x16' %> Call Now
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <% if out_of_stock(@product, variants_stock) %>
+          <%= button_tag class: 'poppins-bold-text-16 mt-0 out-of-stock-btn add-to-cart notify-icon restock-text-change', id: 'add-to-cart-button', type: :button, data: { product_type: 'master' } do %>
+            <%= t('spree.add_to_cart') %>
+          <% end %>
+
+        <% else %>
+          <div class="add-to-cart-button">
+            <%= button_tag class: 'poppins-bold-text-16 mt-0 btn-gradient-orange add-to-cart', id: 'add-to-cart-button', type: :submit do %>
+              <%= t('spree.add_to_cart') %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_with url: stock_update_notification_products_path, method: :get, id: "stock-update-form", local: false do |f| %>
+  <%= f.hidden_field :my_field %>
+  <button id="stock-update-btn" class="d-none" type="submit"></button>
+<% end %>
+
+
+
+<div
+  class="modal out-of-stock-notification"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+  id="out-of-stock-notification"
+>
+</div>
+
+# touched on 2025-05-22T20:32:55.135990Z
