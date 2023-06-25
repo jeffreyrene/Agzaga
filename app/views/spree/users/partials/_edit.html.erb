@@ -1,0 +1,39 @@
+<div class="modal fade" id="editUser">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <span class="modal-header">
+        <h1 class="modal-title">Edit you information</h1>
+        <button type="button" class="close" data-dismiss="modal">&#x2715;</button>
+      </span>
+      <div class="modal-body">
+        <%= form_for Spree.user_class.new, id: "edit_account_form", as: @user, url: spree.account_path, method: :put, remote: true do |f| %>
+          <div class="form-group">
+            <label for="email" class="field-heading poppins-text-16 d-block">Email Address</label>
+            <%= f.email_field :email,id: 'email', class: 'form-control display-field', placeholder: Spree.t(:email) %>
+            <i data-field='password' id="email-icon" class="fa fa-eye visible-icon"></i>
+            <span id='email-message' class="error-message"></span>
+          </div>
+          <div class="form-group">
+            <label for="password" class="field-heading poppins-text-16 d-block">Password</label>
+            <%= f.password_field :password, id: 'password', minlength: 6, class: 'form-control display-field', placeholder: Spree.t(:password) %>
+            <i data-field='password' id="password-icon" class="fa fa-eye visible-icon"></i>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password" class="field-heading poppins-text-16 d-block">Password Confirmation</label>
+            <%= f.password_field :password_confirmation, minlength: 6, id: 'confirm-password', class: 'form-control display-field', placeholder: Spree.t(:confirm_password) %>
+            <i data-field='confirm-password' id="confirm-password-icon" class="fa fa-eye visible-icon"></i>
+            <span id='pass-message' class="error-message"></span>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit Spree.t(:update), id: 'update-password-btn', class: 'update-btn poppins-text-12 col-md-6', disabled: true %>
+            <%= link_to 'Cancel', spree.account_path, class: 'clear-link poppins-text-12 cancel-link' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:09:48.538913Z
+# touched on 2025-05-22T20:40:34.402317Z
+# touched on 2025-05-22T22:55:10.198947Z
