@@ -1,0 +1,49 @@
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Product), spree.admin_products_path) %>
+<% admin_breadcrumb(link_to plural_resource_name(Spree::FilterType), spree.admin_filter_types_path) %>
+<% admin_breadcrumb(@filter_type.name) %>
+
+
+<% content_for :page_actions do %>
+  <li>
+    <span id="new_add_filter_value" data-hook>
+      <%= button_tag t('spree.add_filter_value'), type: 'button',
+            data: { target: 'tbody#filter_values' },
+            class: 'btn btn-primary spree_add_fields' %>
+    </span>
+  </li>
+<% end %>
+
+<%= render partial: 'spree/shared/error_messages', locals: { target: @filter_type } %>
+
+<%= form_for [:admin, @filter_type] do |f| %>
+
+  <fieldset class="no-border-bottom">
+    <legend><%= Spree::FilterType.model_name.human %></legend>
+    <%= render partial: 'form', locals: { f: f } %>
+  </fieldset>
+
+  <fieldset>
+    <legend><%= plural_resource_name(Spree::FilterValue) %></legend>
+    <table class="index sortable" data-hook data-sortable-link="<%= update_values_positions_admin_filter_types_url %>">
+      <thead data-hook="filter_header">
+        <tr>
+          <th></th>
+          <th><%= Spree::FilterValue.human_attribute_name(:name) %></th>
+          <th><%= Spree::FilterValue.human_attribute_name(:presentation) %></th>
+          <th class="actions"></th>
+        </tr>
+      </thead>
+      <tbody id="filter_values">
+        <%= f.fields_for :filter_values, @filter_values do |filter_value_form| %>
+          <%= render partial: 'filter_value_fields', locals: { f: filter_value_form } %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>
+
+# touched on 2025-05-22T19:13:46.984348Z
+# touched on 2025-05-22T22:52:34.818605Z
+# touched on 2025-05-22T23:19:40.857375Z
+# touched on 2025-05-22T23:21:34.005618Z
