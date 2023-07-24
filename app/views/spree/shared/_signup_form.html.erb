@@ -1,0 +1,79 @@
+<% for_checkout_login ||= false %>
+<% request_type = for_checkout_login ? true : false %>
+<% resource = Spree::User.new %>
+
+<%= form_for resource, as: :spree_user, remote: request_type, url: spree.registration_path(resource) do |f| %>
+  <div data-hook="signup_inside_form" class="checkout-login-form">
+
+    <div class="form-group">
+      <div class="ag-input-neutral shipping-email">
+        <div>
+          <label class="ag-input-label" for="signup-email">Email</label>
+        </div>
+
+        <div class="ag-input-group-box email-validation">
+          <%= f.text_field :email, required: true, class: "ag-input-field form-control",  placeholder: "Email Address", id: "signup-email"%>
+
+          <div class="ag-input-icon-append">
+            <i data-field='signup-email' id="email-icon" class=""></i>
+          </div>
+        </div>
+
+        <span class="email-message error-message" id="email-modal-message"></span>
+      </div>
+
+      <% if resource && resource.errors.any? %>
+        <% resource.errors.full_messages.each do |msg| %>
+          <span class="email_message error-message">Error: <%= msg %></span>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div id="password-credentials">
+      <div class="form-group">
+        <div class="ag-input-neutral shipping-email">
+          <div>
+            <label class="ag-input-label" for="password">Password</label>
+          </div>
+
+          <div class="ag-input-group-box email-validation">
+            <%= f.text_field :password, required: true, class: "ag-input-field form-control",  placeholder: "Password", id: "password"%>
+
+            <div class="ag-input-icon-append">
+              <i data-field='password' id="password-icon" class="fa-eye "></i>
+            </div>
+          </div>
+
+          <span id='pass-message' class="error-message"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="ag-input-neutral shipping-email">
+          <div>
+            <label class="ag-input-label" for="confirm-password">Confirm Password</label>
+          </div>
+
+          <div class="ag-input-group-box email-validation">
+            <%= f.text_field :password_confirmation, required: true, class: "ag-input-field form-control",  placeholder: "Confirm Password", id: "confirm-password"%>
+
+            <div class="ag-input-icon-append">
+              <i data-field='confirm-password' id="confirm-password-icon" class="fa-eye "></i>
+            </div>
+          </div>
+          <span id='confirm-pass-message' class="error-message"></span>
+        </div>
+      </div>
+    </div>
+
+    <div data-hook="signup_below_password_fields"></div>
+
+    <div class="p-0 sigup-btn">
+      <%= f.submit t('spree.create'), id: 'create-account', class: 'poppins-text-16' %>
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T21:30:42.190111Z
+# touched on 2025-05-22T23:29:05.124146Z
+# touched on 2025-05-22T23:30:26.778227Z
