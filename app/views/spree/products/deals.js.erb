@@ -1,0 +1,13 @@
+var data = '';
+<% if @product_cards.present? %>
+  <% @product_cards.each do |product| %>
+    data += '<%= j render(partial: "spree/products/partials/deals_products", locals: { product: product }) %>';
+  <% end %>
+
+  $('#deals-products').append(data);
+  $('#deals-section').html('<%= j (paginate(@products, :remote => true, left: 3, right: 1, window: 1)) %>');
+<% else %>
+  alert("no product found")
+<% end %>
+
+# touched on 2025-05-22T23:28:12.223700Z
