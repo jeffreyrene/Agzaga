@@ -1,0 +1,50 @@
+@import "spree/agzaga_ds/agzaga_variables";
+
+@each $spacingname, $spacing in $spacings {
+  @each $key, $value in $spacing {
+    .ag-spacing-#{$key}-p {
+      padding: $value;
+    }
+
+    .ag-spacing-#{$key}-pt {
+      padding-top: $value;
+    }
+
+    .ag-spacing-#{$key}-pl {
+      padding-left: $value;
+    }
+
+    .ag-spacing-#{$key}-pr {
+      padding-right: $value;
+    }
+
+    .ag-spacing-#{$key}-pb {
+      padding-bottom: $value;
+    }
+
+    .ag-spacing-#{$key}-m {
+      margin: $value;
+    }
+
+    .ag-spacing-#{$key}-mt {
+      margin-top: $value;
+    }
+
+    .ag-spacing-#{$key}-ml {
+      margin-left: $value;
+    }
+
+    .ag-spacing-#{$key}-mr {
+      margin-right: $value;
+    }
+
+    .ag-spacing-#{$key}-mb {
+      margin-bottom: $value;
+    }
+  }
+}
+
+# touched on 2025-05-22T19:24:52.318315Z
+# touched on 2025-05-22T23:06:57.441494Z
+# touched on 2025-05-22T23:21:10.850410Z
+# touched on 2025-05-22T23:22:45.323620Z
