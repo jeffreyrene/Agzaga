@@ -1,0 +1,52 @@
+<% if @taxonomies.any? %>
+  <div class="item <%= 'active_img' if params[:toys_id] == nil %>">
+    <div class="img-holder black-deals-holder">
+      <a href="<%= spree::deals_products_url %>" class="clear-link">
+        <%= image_tag "deals.png", alt: 'Image', class: "d-none d-md-block black-deals-card" %>
+        <%= image_tag "deals_mob.svg", alt: 'Image', class: "d-block d-md-none black-deals-card" %>
+      </a>
+    </div>
+
+    <p>
+      <%= link_to "All Deals", spree::deals_products_url, class: 'clear-link deals-text deals-bold-text' %>
+    </p>
+  </div>
+
+  <div class="item">
+    <div class="img-holder black-deals-holder">
+      <a href="/products/gift_page" class="clear-link">
+        <img src="<%= image_path('gift_bundle.png')%>" alt="image" class="d-none d-md-block black-deals-card" >
+        <img src="<%= image_path('gift_mob.svg')%>" alt="image" class="d-block d-md-none black-deals-card" >
+      </a>
+    </div>
+
+    <p>
+      <a href="/products/gift_page" class="clear-link deals-text deals-bold-text">Gift Bundles</a>
+    </p>
+  </div>
+
+  <% @taxonomies.each do |taxonomy| %>
+    <% if taxonomy.name == "Toys" %>
+      <% taxonomy.root.children.where(visibility: true).each do |staxon| %>
+        <div class="item <%= 'active_img' if params[:toys_id]&.include?("#{staxon.id}")%>">
+          <div class="img-holder black-deals-category">
+            <% if staxon.icon.present? %>
+              <% image_link = image_cdn_link(staxon.icon.url(:medium))%>
+              <a href="<%= spree::deals_products_url(toys_id: staxon.id) %>" class="clear-link <%= 'active_img' if params[:toys_id]&.include?("#{staxon.id}")%>">
+                <%= image_tag image_link, alt: staxon.name, class: "black-deals-category", loading: "lazy" %>
+              </a>
+            <% else %>
+              <a href="<%= spree::deals_products_url(toys_id: staxon.id) %>" class="clear-link">
+                <%= image_tag "noimage.png", alt: 'Image', class: "black-deals-category" %>
+              </a>
+            <% end %>
+          </div>
+          <% @taxon_name = (staxon.name == "Miscellaneous") ? "Other Toys" : staxon.name%>
+          <p class="category-name"><%= link_to (@taxon_name), spree::deals_products_url(toys_id: staxon.id), class: 'clear-link deals-text' %></p>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+# touched on 2025-05-22T20:32:14.952274Z
