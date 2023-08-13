@@ -1,0 +1,51 @@
+<% search_page ||= false %>
+<% deals_page ||= false %>
+<div class="sort-modal">
+  <div class="modal animate__animated" id="sortingModal" tabindex="-1" role="dialog" aria-labelledby="sortingModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="">
+            <div class="poppins-text-16 sort_by-btn" >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.11111 13.1112V3.77783M6.11111 3.77783L3 6.88894M6.11111 3.77783L9.22222 6.88894M13.8889 6.88894V16.2223M13.8889 16.2223L17 13.1112M13.8889 16.2223L10.7778 13.1112" stroke="#52525B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+
+              <%= 'Sort By' %>
+            </div>
+
+            <% if search_page %>
+              <%= link_to "Sale", spree.products_path(request.query_parameters.merge( order_by: 'Sale')), class: "p-0 poppins-text-16 dropdown-item", rel: "nofollow" %>
+
+              <%= link_to "Staff Pick", spree.products_path(request.query_parameters.merge( order_by: 'Staff Pick')), class: "p-0 poppins-text-16 dropdown-item", rel: 'nofollow' %>
+
+              <%= link_to "Best Sellers", spree.products_path(request.query_parameters.merge( order_by: 'Best Sellers')), class: "p-0 poppins-text-16 dropdown-item", rel: "nofollow" %>
+
+              <%= link_to "Price: Low to High", spree.products_path(request.query_parameters.merge( order_by: 'Price: Low to High')), class: "p-0 poppins-text-16 dropdown-item", rel: "nofollow" %>
+
+              <%= link_to "Price: High to Low", spree.products_path(request.query_parameters.merge( order_by: 'Price: High to Low')), class: "p-0 poppins-text-16 dropdown-item", rel: "nofollow" %>
+            <% elsif deals_page %>
+              <%= link_to "Staff Pick", spree::deals_products_url(request.query_parameters.merge( order_by: "Staff Pick")), class: "dropdown-item", rel: "nofollow" %>
+
+              <%= link_to "Best Sellers", spree::deals_products_url(request.query_parameters.merge( order_by: "Best Sellers")), class: "dropdown-item", rel: "nofollow" %>
+
+              <%= link_to "Price: Low to High", spree::deals_products_url(request.query_parameters.merge( order_by: 'Price: Low to High')), class: "dropdown-item", rel: "nofollow" %>
+
+              <%= link_to "Price: High to Low", spree::deals_products_url(request.query_parameters.merge( order_by: 'Price: High to Low')), class: "dropdown-item", rel: "nofollow" %>
+            <% else %>
+              <%= link_to "Sale", nested_taxons_url(taxon: @taxon, order_by: 'Sale'), class: "dropdown-item", rel: "nofollow" %>
+              <%= link_to "Staff Pick", nested_taxons_url(taxon: @taxon, order_by_staff_pick: 'Staff Pick'), class: "dropdown-item", rel: "nofollow" %>
+              <%= link_to "Best Sellers", nested_taxons_url(taxon: @taxon, order_by: 'Best Sellers'), class: "dropdown-item", rel: "nofollow" %>
+              <%= link_to "Price: Low-High", nested_taxons_url(taxon: @taxon, order_by: 'Price: Low to High'), class: "dropdown-item", rel: "nofollow" %>
+              <%= link_to "Price: High-Low", nested_taxons_url(taxon: @taxon, order_by: 'Price: High to Low'), class: "dropdown-item", rel: "nofollow" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:21:54.951171Z
+# touched on 2025-05-22T21:18:49.929446Z
+# touched on 2025-05-22T23:24:03.796741Z

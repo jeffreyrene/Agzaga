@@ -1,0 +1,16 @@
+<div class="d-flex gift-set-included-section">
+  <% product.products.each do |item|%>
+
+    <div class="gift-set-included-card">
+      <a href="<%= product_path(item) %>" class="clear-link">
+        <%= image_tag( item.gallery.images.first.url(:large), alt: item.name, class: 'gift-set-included-img' ) if item.gallery.images.present? %>
+      </a>
+
+      <div class=" poppins-text-16 gift-set-included-name">
+        <%= link_to "#{item.name}", spree::product_path(item), class: 'clear-link' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T23:06:40.329295Z
