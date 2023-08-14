@@ -1,0 +1,36 @@
+<div data-hook="admin_product_form_fields">
+  <div class="row">
+    <div class="left col-9" data-hook="admin_product_form_left">
+
+      <%= form_for [:admin, @product], :url => {:controller => "google_product_categories"} do |f| %>
+        <div data-hook="admin_product_form_taxons">
+          <%= f.field_container :taxons do %>
+            <%= f.label :taxon_ids, plural_resource_name(Spree::Taxon) %><br />
+            <%= f.hidden_field :taxon_ids, value: @product.taxon_ids.join(',') %>
+          <% end %>
+        </div>
+
+        <div data-hook="admin_product_form_google_product_category">
+          <%= f.field_container :google_product_category do %>
+            <%= f.label :google_product_category, "Google Product Category"%><br />
+            <%= f.select(:google_product_category, google_product_categories.map {|key, value| [value, key]}, { include_blank: true }, class: "form-control google-product-category-dropdown", style: "border:none; padding:0") %>
+          <% end %>
+        </div>
+
+        <div class="filter-actions actions mt-3 text-center">
+          <%= button_tag t('spree.actions.save'), class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('.google-product-category-dropdown').select2();
+</script>
+
+# touched on 2025-05-22T19:09:20.638270Z
+# touched on 2025-05-22T22:45:13.084331Z
+# touched on 2025-05-22T23:24:18.279058Z
+# touched on 2025-05-22T23:42:54.690502Z
