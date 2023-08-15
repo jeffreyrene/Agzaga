@@ -1,0 +1,127 @@
+$bg-gold: #F1B71C;
+
+.ag-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  .page a, .current, .gap {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #1A202C;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 4px;
+
+    &:hover {
+      text-decoration: none;
+      background: var(--palette-neutral-100);
+      border-radius: 6px;
+    }
+  }
+
+  .current {
+    background: var(--palette-neutral-200);
+    color: var(--palette-neutral-700);
+    border-radius: 6px;
+  }
+
+  .next, .prev {
+    a {
+      font-size: 0;
+      width: 36px;
+      height: 36px;
+      color: var(--palette-neutral-700);
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: none;
+        background: var(--palette-neutral-100);
+        border-radius: 6px;
+      }
+
+      &:active {
+        text-decoration: none;
+      }
+    }
+
+    .disabled:after {
+      filter: invert(1);
+    }
+
+    .disabled:before {
+      filter: brightness(0.9);
+    }
+  }
+
+  .prev {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+  }
+
+  .next a:after {
+    content: image-url('next-page-label.png');
+    height: 36px;
+    width: 36px;
+  }
+
+  .prev a:before {
+    content: image-url('prev-page-label.png');
+    height: 36px;
+    width: 36px;
+    filter: brightness(0.3);
+  }
+}
+
+.review-pagination {
+  .review-next-pagination {
+   display: flex;
+   column-gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px 8px 16px;
+    background: #FFFFFF;
+    border: 1px solid var(--palette-neutral-300);
+    border-radius: 6px;
+
+    .read-more {
+      text-decoration: none;
+      font-family: 'Poppins-medium';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      align-items: center;
+      color: var(--palette-neutral-800);
+      text-align: center;
+    }
+
+
+  }
+}
+
+@media (max-width: 767px) {
+  .ag-pagination {
+    .page a, .current, .gap {
+      margin: 0 3px;
+    }
+  }
+}
+
+# touched on 2025-05-22T22:54:45.642187Z
+# touched on 2025-05-22T22:59:51.539011Z
+# touched on 2025-05-22T23:18:38.810158Z
