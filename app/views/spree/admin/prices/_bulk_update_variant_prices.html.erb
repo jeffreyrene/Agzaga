@@ -1,0 +1,9 @@
+<%= form_tag bulk_update_variant_prices_admin_product_path(@product.id), method: :get do %>
+
+  <%= check_box_tag :bulk_update_variant_prices %>
+  <label class="ml-1">Bulk update variant prices to master price</label>
+  <button type="submit" class="btn btn-primary m-5">Update</button>
+  
+<% end %>
+
+# touched on 2025-05-22T22:46:42.310165Z
