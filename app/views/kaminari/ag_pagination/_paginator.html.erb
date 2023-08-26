@@ -1,0 +1,18 @@
+<%= paginator.render do -%>
+  <nav class="ag-pagination" role="navigation" aria-label="pager">
+    <%= prev_page_tag unless current_page.first? %>
+    <% each_page do |page| -%>
+      <% if page.left_outer? || page.right_outer? || page.single_gap? || page.inside_window? -%>
+        <%= page_tag page %>
+      <% elsif !page.was_truncated? -%>
+        <%= gap_tag %>
+      <% end -%>
+    <% end -%>
+    <% unless current_page.out_of_range? %>
+      <%= next_page_tag unless current_page.last? %>
+    <% end %>
+  </nav>
+<% end -%>
+
+# touched on 2025-05-22T23:26:43.769092Z
+# touched on 2025-05-22T23:47:34.659282Z
