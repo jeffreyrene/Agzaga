@@ -1,0 +1,44 @@
+<% desktop_only ||= false %>
+<% view_in_store ||= false %>
+<% button_text ||= 'View in Store' %>
+
+<div class="product-card-md <%= 'desktop-only' if desktop_only %>">
+  <a href="<%= spree::product_url(product.slug) %>"  data-turbolinks="false" class="clear-link">
+    <div class="ag-product-image-md-group">
+      <%= image_tag product.image_url.present? ? image_cdn_link(product.image_url) : 'noimage_sq.png' , loading: 'lazy', alt: product.name, class: 'product-image-md' %>
+
+      <%= product_label(product.label_text, product.label_color, product.label_display_text_color) %>
+    </div>
+
+    <div class="title-price-section">
+      <div class="price <%= 'ag-font-sbold' if view_in_store %>">
+        <% if product.on_sale? %>
+          <div class="product-on-sale">
+            <div class="sale-discount-section">
+              <span class="current-price on-sale before-sale-price"><%= "$#{'%.2f' % product.price}" %></span>
+              <span class="discount-percentage"> <%= product.discount_percentage.round %>% OFF </span>
+            </div>
+
+            <div class="orignal-price">List Price: <span class="original-price-value"><%= Spree::Money.new(product.original_price).to_html %></span></div>
+          </div>
+
+        <% else %>
+          <span class="current-price poppins-body-24">$<%= product.price %></span>
+        <% end %>
+      </div>
+
+      <div class="ag-product-name poppins-body-16"><%= product.name %></div>
+    </div>
+
+    <% if view_in_store %>
+      <div class="view-store">
+        <%= link_to button_text, spree::product_url(product.slug), class: 'ag-btn-lg', data: {turbolinks: false} %>
+      </div>
+    <% end %>
+  </a>
+</div>
+
+# touched on 2025-05-22T19:24:26.616379Z
+# touched on 2025-05-22T20:38:32.837379Z
+# touched on 2025-05-22T23:46:48.668252Z
+# touched on 2025-05-22T23:48:15.373740Z
