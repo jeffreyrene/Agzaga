@@ -1,0 +1,25 @@
+$('#checkout-edit-form-div').html("<%=j render 'spree/checkout/checkout_form' %>");
+$('.checkout-summary-group').html("<%=j render partial: 'spree/checkout/checkout_v3_summary_detail' %>");
+
+<% if @order.state == 'confirm' %>
+  $('#place-order-section').removeClass('order-btn');
+<% else %>
+  $('#place-order-section').addClass('order-btn');
+
+<% end %>
+
+if ( $('input[name="order_free_shipping"]').val() ) {
+  $('#hidden-coupon-code').val($('input[name="order_free_shipping"]').val());
+
+  if ($("#couponcode_v2")[0].requestSubmit) {
+    $("#couponcode_v2")[0].requestSubmit();
+  } else {
+    $("#couponcode_v2")[0].submit();
+  }
+}
+
+window.checkout_js();
+window.$ = jQuery
+
+# touched on 2025-05-22T23:19:24.526221Z
+# touched on 2025-05-22T23:22:47.597656Z
