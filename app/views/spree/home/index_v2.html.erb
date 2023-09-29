@@ -1,0 +1,289 @@
+<% content_for :title, 'Agzaga - Your Online Farm Store' %>
+
+<div class="home-page-container">
+  <% if @home_page_cta&.top&.present? %>
+    <div class="cta-section">
+      <%= render partial: 'spree/home/partials/slider' %>
+      <div class="overlay"></div>
+    </div>
+  <% end %>
+
+  <div class="small-cta-section">
+    <% if @home_page_cta&.left_side&.present? %>
+      <% left_cta = @home_page_cta&.left_side %>
+      <% left_cta.each do |cta| %>
+        <div class="toystore">
+          <div class="image-container">
+            <a href="<%= spree::root_url + cta.redirect_to %>" class= "clear-link">
+              <picture>
+                <source media="(max-width:414px)" srcset="<%= cta.mobile_link %>" type="image/webp">
+
+                <source media="(max-width:767px)" srcset="<%= cta.tab_link %>" type="image/webp">
+
+                <source srcset="<%= cta.desktop_link %>" type="image/webp" >
+                <img data-src="https://assets.agzaga.com/CTA/deals_home_page_cta.jpg" alt="Deals" class="d-block w-100 h-100 outerdiv-img video_loader image" >
+              </picture>
+            </a>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if @home_page_cta&.right_side&.present? %>
+      <% right_cta = @home_page_cta&.right_side%>
+      <% right_cta.each do |cta| %>
+        <div class="pre-seasons">
+          <div class="image-container">
+            <a href="<%= spree::root_url + cta.redirect_to %>" class= "clear-link">
+              <picture>
+                <source media="(max-width:414px)" srcset="<%= cta.mobile_link %>" type="image/webp">
+
+                <source media="(max-width:767px)" srcset="<%= cta.tab_link %>" type="image/webp">
+
+                <source srcset="<%= cta.desktop_link %>" type="image/webp" >
+                <img data-src="https://assets.agzaga.com/CTA/deals_home_page_cta.jpg" alt="Deals" class="d-block w-100 h-100 outerdiv-img video_loader image" >
+              </picture>
+            </a>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="horizontal-line"></div>
+
+  <div class="products-section featured-products-section">
+    <div class="heading-section">
+      <div class="heading"> Featured Products </div>
+
+      <div class="view-more">
+        <%= link_to 'View More', spree.products_url(featured_products: true), class: 'view-more-link' %>
+      </div>
+    </div>
+
+    <div class="card-pages-group" data-tab-size=4>
+      <div class="nav-section left">
+        <div class="load-btn nav-back disabled" data-current-section="featured_products">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="cards" id="featured_products" data-total-cards="<%= @featured_products_count %>">
+        <% cache @featured_products.map(&:id), expires_in: 30.minutes do %>
+          <% featured_product_cards = load_product_cards(@featured_products) %>
+          <% featured_product_cards.each do |product| %>
+            <div class="slider-card visible" data-tab="" data-loaded="true">
+              <%= render partial: 'spree/shared/standard_product_card', locals: { product: product } %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="nav-section">
+        <div class="load-btn nav-forward <%= "disabled" if @featured_products_count <= 4 %>" data-current-section="featured_products">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-more-mbl">
+      <%= link_to 'View More', spree.products_url(featured_products: true), class: 'ag-btn ag-btn-neutral ag-btn-lg view-more-link' %>
+    </div>
+  </div>
+
+  <div class="category-separation"></div>
+
+  <div class="categories-group">
+    <div class="heading-section">
+      <div class="heading"> Shop by Category </div>
+
+      <div class="view-more">
+        <%= link_to 'Shop All', product_categories_path, class: 'view-more-link' %>
+      </div>
+    </div>
+
+    <div class="categories-slider">
+      <div class="category-circle">
+        <%= link_to spree::deals_products_url, class: 'circle' do %>
+          <%= image_tag 'https://assets.agzaga.com/public_images/deals-icon.webp', class: 'image' %>
+        <% end %>
+
+        <%= link_to 'All Deals', spree::deals_products_url, class: 'name' %>
+      </div>
+
+      <div class="category-circle">
+        <%= link_to spree::gift_page_products_path, class: 'circle' do %>
+          <%= image_tag 'https://assets.agzaga.com/public_images/gift-bundles-icon.png', class: 'image' %>
+        <% end %>
+
+        <%= link_to 'Gift Bundles', spree::gift_page_products_path, class: 'name' %>
+      </div>
+
+      <% @taxonmies.each do |taxonomy| %>
+        <% root_taxon = taxonomy.root %>
+
+        <div class="category-circle">
+          <%= link_to spree::nested_taxons_url(id: taxonomy.root.permalink), class: 'circle' do %>
+            <%= image_tag image_cdn_link(root_taxon.icon(:normal)), class: 'image' %>
+          <% end %>
+
+          <%= link_to root_taxon.name, spree::nested_taxons_url(id: taxonomy.root.permalink), class: 'name' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="view-more-mbl">
+      <%= link_to 'Shop All', product_categories_path, class: 'ag-btn ag-btn-neutral ag-btn-lg view-more-link' %>
+    </div>
+  </div>
+
+  <div class="category-separation site-wide-separation"></div>
+
+  <div class="products-section site-wide-section">
+    <div class="heading-section">
+      <div class="heading"> Sitewide Deals</div>
+
+      <div class="view-more">
+        <%= link_to 'View More', deals_products_path, class: 'view-more-link' %>
+      </div>
+    </div>
+
+    <div class="products-container">
+      <% cache @site_wide_deals, expires_in: 30.minutes do %>
+        <%= render partial: 'spree/home/partials_v2/site_wide_deals' %>
+      <% end %>
+    </div>
+
+    <div class="view-more-mbl">
+      <%= link_to 'View More', deals_products_path, class: 'ag-btn ag-btn-neutral ag-btn-lg view-more-link' %>
+    </div>
+  </div>
+
+  <div class="new-arrivals-start-young-section">
+    <div class="new-arrivals">
+      <div class="heading-section">
+        <div class="heading">New Arrivals</div>
+
+        <div class="view-more">
+          <%= link_to 'View More', spree.products_url(new_addition: true), class: 'view-more-link' %>
+        </div>
+      </div>
+
+      <div class="products-container">
+        <% cache @new_arrivals, expires_in: 30.minutes do %>
+          <%= render partial: 'spree/home/partials_v2/new_arrivals' %>
+        <% end %>
+      </div>
+
+      <div class="view-more-mbl">
+        <%= link_to 'View More', spree.products_url(new_addition: true), class: 'view-more-link' %>
+      </div>
+    </div>
+
+    <div class="start-young">
+      <div class="heading-section">
+        <div class="heading"> Start ‘Em Young </div>
+
+        <div class="view-more">
+          <%= link_to 'View More', spree::nested_taxons_path('toys'), class: 'view-more-link' %>
+        </div>
+      </div>
+
+      <div class="products-container">
+        <% cache @start_young_products, expires_in: 30.minutes do %>
+          <%= render partial: 'spree/home/partials_v2/start_young_section' %>
+        <% end %>
+      </div>
+
+      <div class="view-more-mbl">
+        <%= link_to 'View More', spree::nested_taxons_path('toys'), class: 'view-more-link' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="products-section best-sellers">
+    <div class="heading-section">
+      <div class="heading"> Best Sellers</div>
+    </div>
+
+    <div class="products-container">
+      <% cache @best_seller.map(&:id), expires_in: 30.minutes do %>
+        <%= render partial: 'spree/home/partials_v2/best_seller_section'%>
+      <% end %>
+    </div>
+
+    <div class="view-more-mbl">
+      <%= link_to 'View More', spree.products_url(best_seller_products: true), class: 'ag-btn ag-btn-neutral ag-btn-lg view-more-link' %>
+    </div>
+
+  </div>
+
+  <div class="our-hearts">
+    <div class="heading"> Our Hearts </div>
+  </div>
+
+  <div class="hompage-content mission-cards">
+    <%= link_to 'https://link.edgepilot.com/s/9951d1c0/wqk33K4GHEyxKLpUyBaNYA?u=https://convoyofhope.org/agzaga/', target: '_blank', class: "convoy-box" do %>
+     <div class="convoy-hope-section">
+      <div class="heart-section">
+        <div class="convoy-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.90381 6.80761C7.44221 4.26921 11.5578 4.26921 14.0962 6.80761L16 8.71142L17.9038 6.80761C20.4422 4.26921 24.5578 4.26921 27.0962 6.80761C29.6346 9.34602 29.6346 13.4616 27.0962 16L16 27.0962L4.90381 16C2.3654 13.4616 2.3654 9.34602 4.90381 6.80761Z" fill="#F4F4F5"/>
+          </svg>
+        </div>
+
+        <div class="our-heart">
+          Our Heart
+        </div>
+      </div>
+
+
+      <div class="convoy-content">
+        <div class="convoy-img">
+          <%= image_tag 'convey-of-hope.png', class: 'convoy-hope-img', alt: 'convoy-hope', loading: 'lazy' %>
+        </div>
+
+        <div class="convoy-text">
+          A mission to end world hunger through teaching agriculture. Click now to learn how you can help today.
+        </div>
+      </div>
+
+     </div>
+    <% end %>
+
+    <%= link_to spree::ffa_home_index_path do %>
+      <div class="growing-leaders">
+        <picture>
+          <source media="(max-width:767px)" srcset="https://assets.agzaga.com/homepage_images/growingLeader_mobile.webp" type="image/webp">
+          <source media="(max-width:767px)" srcset="https://assets.agzaga.com/homepage_images/growingLeader_mobile.png" type="image/png">
+
+          <source srcset="https://assets.agzaga.com/homepage_images/growingLeader.webp" type="image/webp">
+          <%= image_tag 'https://assets.agzaga.com/homepage_images/growingLeader.png', class: ' growing-leaders-img', alt: 'growing leaders', loading: 'lazy' %>
+        </picture>
+      </div>
+    <% end %>
+  </div>
+
+  <% if spree_user_signed_in? && @recently_viewed.present? %>
+    <div class="horizontal-line our-hearts-separation"></div>
+
+    <div class="products-section recently_viewed">
+      <div class="heading-section">
+        <div class="heading"> Recently Viewed </div>
+      </div>
+
+      <div class="products-container">
+        <%= render partial: 'spree/home/partials_v2/recently_viewed' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T19:16:26.969659Z
+# touched on 2025-05-22T20:34:41.510358Z
+# touched on 2025-05-22T23:07:10.122382Z
+# touched on 2025-05-22T23:29:53.825925Z

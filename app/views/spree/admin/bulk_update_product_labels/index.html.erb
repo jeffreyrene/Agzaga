@@ -1,0 +1,27 @@
+<%= form_for [:admin, @product], method: :post, url: admin_bulk_update_product_labels_path, html: { multipart: true } do |f| %>
+  <fieldset data-hook="new_product">
+    <legend align="center">Add Products Label</legend>
+    <div data-hook="admin_product_form_labels">
+      <%= f.field_container :products do %>
+        <%= f.label :product_ids, plural_resource_name(Spree::Product) %><br />
+        <%= f.select(:product_ids, Spree::Product.all.collect {|p| [p.name, p.id] }.compact, { include_blank: true, include_hidden: true }, class: "form-control products_dropdown", style: "border:none; padding:0", :multiple => true) %>
+      <% end %>
+    </div>
+
+    <div data-hook="admin_product_form_labels">
+      <%= f.field_container :labels do %>
+        <%= f.label :label_ids, plural_resource_name(Spree::Label) %><br />
+        <%= f.select(:label_ids, Spree::Label.all.collect {|a| [a.tag, a.id] if a.tag }.compact, { include_blank: true, include_hidden: true }, class: "form-control labels_dropdown", style: "border:none; padding:0", :multiple => false) %>
+      <% end %>
+    </div>
+
+    <div class="form-buttons filter-actions actions" data-hook="buttons">
+      <%= submit_tag t('spree.actions.add'), class: 'btn btn-primary' %>
+    </div>
+  </fieldset>
+<% end %>
+
+<script>
+  $('.products_dropdown').select2();
+  $('.labels_dropdown').select2();
+</script>
