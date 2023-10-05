@@ -1,0 +1,297 @@
+.checkout.registration, .checkout.update_registration,  .user_sessions.create {
+  background: #F4F4F4;
+  .main-heading {
+    max-width: 668px;
+    margin: 42px auto;
+  }
+
+  .options-group {
+    background: #FFFFFF;
+    box-shadow: 0px 10px 20px RGB(0 0 0 / 4%), 0px 2px 6px RGB(0 0 0 / 4%), 0px 0px 1px RGB(0 0 0 / 4%);
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+
+    .draught-h2 {
+      font-weight: 400;
+    }
+
+    &.user-login, &.guest-login, &.user-registration {
+      .poppins-text-16 {
+        line-height: 16px;
+      }
+
+      .input-field {
+        background: #FFFFFF;
+        border: 1px solid #ACACAC;
+        box-sizing: border-box;
+        border-radius: 8px;
+        width: 100%;
+        padding: 11px;
+        margin-bottom: 24px;
+      }
+
+      input[type="submit"].btn-gradient-orange {
+        &.poppins-text-16 {
+          line-height: 24px;
+        }
+        color: #FFFFFF;
+        font-weight: 500;
+        font-size: 16px;
+        font-family: 'Poppins-bold';
+        border: none;
+        line-height: 24px;
+        padding: 8px 23px;
+        background: linear-gradient(145.87deg, #F1B71C -11.86%, #EB6E19 95.89%);
+        box-shadow: 0px 2px 6px rgba(240, 170, 28, 0.447412);
+        border-radius: 100px;
+        margin-bottom: 24px;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    &.user-login {
+      width: 100%;
+      max-width: 899px;
+      margin: 0 12px 24px 20px;
+      position: relative;
+      height: 501px;
+
+      .bg-logo-left {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 472px;
+      }
+
+      .draught-h2 {
+        font-weight: 400;
+        margin: 39px 0 40px 0;
+      }
+
+      input[type="checkbox"] {
+        height: 24px;
+        width: 24px;
+        background: #FFFFFF;
+        border: 1px solid #ECECEC;
+        box-sizing: border-box;
+        border-radius: 4px;
+        margin-right: 4px;
+      }
+
+      .remember-me-group {
+        margin-bottom: 31px;
+      }
+
+      .green-link {
+        font-weight: 600;
+        line-height: 16px;
+        text-decoration: underline;
+        color: #7B8C48;
+        padding: 0 17px;
+      }
+    }
+
+    &.guest-login, &.user-registration {
+      width: 100%;
+      max-width: 437px;
+      margin: 0 25px 24px 12px;
+      flex-direction: column;
+      padding: 15px 40px 8px 40px;
+
+      .draught-h2 {
+        margin-bottom: 23px;
+      }
+    }
+  }
+
+  .other-options-group {
+    width: 100%;
+    max-width: 474px;
+    .full-page-line,
+    .checkout-text {
+      display: none;
+    }
+  }
+
+  #registration #existing-customer {
+    width: 60%;
+    text-align: center;
+    z-index: 1;
+  }
+
+  #checkout_form_registration {
+    .checkout-as-guest {
+      background: none;
+      box-shadow: none;
+      border: 1px solid #171717;
+      color: #171717;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      padding: 8px 22px;
+      border-radius: 16px;
+
+    }
+  }
+
+  @media (min-width: 1050px) and (max-width: 1200px) {
+    .options-group {
+      &.user-login,&.guest-login, &.user-registration {
+        .green-link {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1050px) {
+    #existing-customer {
+      width: 90% !important;
+    }
+    .options-group {
+      &.user-login,&.guest-login, &.user-registration {
+        .green-link {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    #registration #existing-customer {
+      width: 99%;
+    }
+
+    .main-heading {
+      font-family: Draught;
+      font-size: 53px;
+      line-height: 45.05px;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 30px;
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .options-group {
+      &.user-login,&.guest-login, &.user-registration {
+        margin: 0 auto;
+        max-width: 767px;
+        padding: 15px 16px 8px 16px;
+
+        .draught-h2 {
+          font-family: Poppins-bold;
+          font-size: 24px;
+          line-height: 36px;
+          letter-spacing: 1px;
+          text-align: center;
+          margin: 26px 0 16px 0;
+        }
+
+        .remember-me-group {
+          margin-bottom: 16px;
+        }
+
+        input[type="submit"].btn-gradient-orange {
+          width: 60%;
+          border-radius: 100px;
+          font-size: 12px;
+        }
+
+        .input-field {
+          margin-bottom: 13px;
+        }
+
+        .bg-logo-left {
+          height: 262px;
+        }
+
+        .green-link {
+          font-size: 12px;
+        }
+      }
+      &.user-login {
+        height: 398px;
+      }
+
+      &.guest-login {
+        margin: 24px auto;
+      }
+    }
+
+    .other-options-group {
+      margin: 16px auto 0;
+      max-width: 767px;
+
+      .full-page-line {
+        display: block;
+        margin-top: 32px;
+        position: absolute;
+        left: 0%;
+        right: 0%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      .checkout-text {
+        display: block;
+        padding: 0px;
+        margin: 56px 0 0 0;
+        letter-spacing: 0.03em;
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    .main-heading {
+      font-size: 44px;
+    }
+    .options-group {
+      &.user-login,&.guest-login, &.user-registration {
+        .green-link {
+          padding: 0 5px;
+        }
+      }
+    }
+    #guest_checkout{
+      .checkout-as-guest {
+        width: 70%;
+      }
+    }
+  }
+
+  @media (max-width: 350px) {
+    #guest_checkout{
+      .checkout-as-guest {
+        width: 80%;
+        padding: 8px 8px;
+      }
+    }
+
+    .options-group {
+      &.user-login,&.guest-login, &.user-registration {
+        .draught-h2 {
+          margin-top: 5px;
+        }
+        .green-link {
+          padding: 0;
+          font-size: 10px
+        }
+      }
+    }
+  }
+}
+
+.checkout.update_registration {
+  .error-message {
+    display: block;
+    text-align: right;
+    margin-bottom: 6px;
+    margin-top: -24px;
+  }
+}
+
+# touched on 2025-05-22T20:44:40.773831Z
+# touched on 2025-05-22T23:46:27.774269Z
+# touched on 2025-05-22T23:47:04.454456Z
