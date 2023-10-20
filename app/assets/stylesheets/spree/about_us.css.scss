@@ -1,0 +1,554 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.pages.about_us {
+  font-family: 'Poppins';
+
+  .container-fluid {
+    padding: 0 16px;
+  }
+
+  #content {
+    max-width: 1556px;
+    width: 100%;
+    padding: 16px;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+    }
+
+    .about-us-header {
+
+      .head-nav {
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .nav-block .ag-btn-lg {
+          margin-right: 24px;
+          &:hover {
+            text-decoration: none;
+            color: inherit;
+          }
+        }
+
+        .ag-btn-primary {
+          &:hover {
+            text-decoration: none;
+            color: inherit;
+
+            &::before {
+              filter: invert(0.8);
+            }
+          }
+        }
+
+        .get-in-touch .ag-btn-primary {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &::before {
+            content: image_url('get-in-touch-icon.svg');
+            margin-right: 9px;
+            width: 20px;
+            height: 20px;
+            display: block;
+          }
+        }
+      }
+
+      .about-us-cta {
+        margin-bottom: 64px;
+        img {
+          box-shadow: 0px 25px 50px -12px rgba(16, 24, 40, 0.25);
+          border-radius: 40px;
+        }
+      }
+
+    }
+
+    .about-content-wrapper {
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+
+      .about-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .ag-btn-primary {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &::after {
+            content: image_url('learn-more-icon.svg');
+            margin-left: 10px;
+            width: 20px;
+            height: 20px;
+          }
+
+          &:hover {
+            text-decoration: none;
+            color: inherit;
+
+            &::after {
+              filter: invert(0.8);
+            }
+          }
+        }
+      }
+
+      .align-items-center {
+        align-items: center;
+      }
+
+      .about-half-block {
+        width: 47%;
+        margin-bottom: 64px;
+
+        .ag-member-image {
+          border-radius: 24px;
+          margin-bottom: 24px;
+        }
+      }
+
+      .ag-h1 {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 48px;
+        letter-spacing: -0.02em;
+        color: #18181B;
+      }
+
+      .ag-h3 {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+        letter-spacing: -0.02em;
+        color: #18181B;
+        padding: 0;
+        margin: 0;
+      }
+
+      .ag-h6 {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+        letter-spacing: -0.02em;
+        color: var(--palette-primary-500);
+        padding: 0;
+        margin: 0;
+      }
+
+      .detail-para {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 35px;
+        color: #18181B;
+      }
+
+      .our-story {
+        .ag-h6 {
+          margin: 0 0 20px 0;
+        }
+        .ag-h3 {
+          margin: 0 0 54px 0;
+        }
+        .sub-content {
+          display: flex;
+          align-items: center;
+
+          .ag-logo {
+            margin-right: 24px;
+          }
+
+          .story-title {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #71717A;
+            max-width: 390px;
+            padding: 0;
+            margin-bottom: 0;
+          }
+
+          &.for-mobile {
+            display: none;
+          }
+        }
+
+        .our-story-right-content {
+          margin: 0;
+          padding: 0;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 35px;
+          font-feature-settings: 'salt' on;
+          color: #18181B;
+        }
+      }
+
+      .family-owned {
+
+        .cards-block {
+          display: flex;
+          justify-content: center;
+          margin: 0 -8px;
+
+          .card {
+            padding: 24px 10px;
+            background: #FFFFFF;
+            box-shadow: 0px 10px 15px -3px rgba(16, 24, 40, 0.1), 0px 4px 6px -4px rgba(16, 24, 40, 0.1);
+            border-radius: 8px;
+            max-width: 184px;
+            width: 100%;
+            margin: 0 6px;
+            border: none;
+
+            .card-head {
+              font-family: 'Lexend';
+              font-style: normal;
+              font-weight: 600;
+              font-size: 24px;
+              line-height: 32px;
+              text-align: center;
+              letter-spacing: -0.02em;
+              color: #18181B;
+              margin-bottom: 4px;
+            }
+
+            .card-content {
+              font-family: 'Poppins';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 20px;
+              text-align: center;
+              font-feature-settings: 'salt' on;
+              color: #71717A;
+            }
+
+          }
+
+        }
+      }
+
+      .our-mission {
+        .full-banner {
+          img {
+            box-shadow: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1);
+            box-sizing: border-box;
+            border-radius: 24px;
+          }
+
+          text-align: center;
+          margin-bottom: 40px;
+        }
+
+        .small-head {
+          font-family: 'Lexend';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 28px;
+          letter-spacing: -0.02em;
+          color: #D4D4D8;
+          margin-bottom: 16px;
+          width: 100%;
+        }
+
+        .big-head {
+          font-family: 'Lexend';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 56px;
+          line-height: 67px;
+          letter-spacing: -0.02em;
+          color: #FFFFFF;
+          width: 100%;
+          max-width: 583px;
+          margin: 0 auto;
+        }
+        .ag-h6 {
+          margin: 0 0 20px 0;
+        }
+
+        .sub-title {
+          font-family: 'Poppins';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          font-feature-settings: 'salt' on;
+          color: #52525B;
+        }
+
+        .mission-cards {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          column-gap: 54px;
+
+          .mission-card {
+            max-width: 583px;
+            width: 100%;
+
+            img {
+              border-radius: 16px;
+              width: 100%;
+            }
+
+            .leaders {
+              margin-bottom: 32px;
+              border-radius: 32px;
+            }
+
+            .coh {
+              margin-bottom: 32px;
+              border-radius: 32px;
+            }
+
+            .detail-para {
+              max-width: 370px;
+              width: 100%;
+            }
+
+            .ag-btn-lg {
+              height: max-content;
+            }
+          }
+        }
+
+      }
+
+    }
+  }
+
+  @media(max-width: 991px) {
+    #content{
+      margin-top: 16px;
+      padding: 0 1px;
+
+      .about-us-header {
+        .head-nav {
+          margin-bottom: 32px;
+
+          .nav-block {
+            display: none;
+          }
+
+          .get-in-touch {
+            width: 100%;
+          }
+        }
+
+        .about-us-cta {
+          margin-bottom: 32px;
+
+          img {
+            border-radius: 24px;
+          }
+        }
+      }
+
+      .about-row {
+        .mobile-order-1 {
+          order: 1;
+        }
+
+        .mobile-order-2 {
+          order: 2;
+        }
+      }
+
+      .about-content-wrapper {
+        .about-half-block {
+          width: 100%;
+          margin-bottom: 0;
+        }
+
+        .our-story {
+          .ag-h6 {
+            margin: 0 0 8px 0;
+            text-align: left;
+          }
+
+          .ag-h3 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 36px;
+            letter-spacing: -0.02em;
+            text-align: left;
+            margin: 0 0 24px 0;
+          }
+
+          .our-story-right-content {
+            font-size: 14px;
+            text-align: left;
+            line-height: 28px;
+            margin-bottom: 24px;
+          }
+
+          .sub-content {
+            display: none;
+
+            &.for-mobile {
+              display: flex;
+              margin-bottom: 64px;
+              justify-content: center;
+
+              .story-title {
+                text-align: left;
+              }
+            }
+          }
+        }
+
+        .family-owned, .market-place {
+          .family-image, .ag-tape-image {
+            margin-bottom: 24px;
+          }
+
+          .ag-h1 {
+            margin-bottom: 24px;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 44px;
+            letter-spacing: -0.02em;
+            text-align: left;
+          }
+
+          .detail-para {
+            font-size: 14px;
+            line-height: 28px;
+            text-align: left;
+            padding: 0;
+            margin-bottom: 24px;
+          }
+        }
+
+        .family-owned {
+          .cards-block {
+            max-width: 520px;
+            margin: 0 auto 48px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+
+            .card {
+              max-width: 155px;
+              padding: 16px;
+              margin: 0 1px 16px 1px;
+              box-shadow: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1);
+
+              .card-head {
+                margin-bottom: 8px;
+              }
+            }
+          }
+        }
+
+        .market-place {
+          margin-bottom: 40px;
+        }
+
+        .our-mission {
+          .full-banner {
+            margin-bottom: 24px;
+          }
+
+          .ag-h3 {
+            font-size: 28px;
+            line-height: 36px;
+            letter-spacing: -0.02em;
+            text-align: left;
+            margin-bottom: 16px;
+          }
+
+          .sub-title {
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            text-align: left;
+            margin-bottom: 24px;
+            padding: 0;
+          }
+
+          .detail-para {
+            font-size: 14px;
+            line-height: 28px;
+            text-align: left;
+            padding: 0;
+            margin-bottom: 40px;
+          }
+
+          .mission-cards {
+            flex-wrap: wrap;
+
+            .mission-card {
+              max-width: unset;
+              .coh, .detail-para {
+                margin-bottom: 24px;
+              }
+
+              .leaders, .coh {
+                margin-bottom: 24px;
+              }
+
+              .ag-btn-primary {
+                width: 100%;
+                margin-bottom: 29px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media(max-width: 767px) {
+    #content{
+      .about-content-wrapper {
+        .family-owned {
+          .cards-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 16px;
+            max-width: unset;
+
+            .card {
+              max-width: unset;
+              padding: 16px 4px;
+            }
+
+            .team-members {
+              grid-column-start: 1;
+              grid-column-end: 3;
+              grid-row-start: 2;
+              grid-row-end: 3;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+# touched on 2025-05-22T19:14:52.841774Z
+# touched on 2025-05-22T23:41:44.778694Z
+# touched on 2025-05-22T23:45:33.093905Z
