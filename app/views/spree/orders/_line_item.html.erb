@@ -1,0 +1,99 @@
+<% variant = line_item.variant %>
+<% quantity_change ||= false %>
+
+<div class="grey-line"></div>
+
+<div class="product-list-item  <%= cycle('', 'alt') %> line-item">
+
+	<% if quantity_change %>
+		<% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+			<div class="d-lg-block d-none cart-item-delete" data-toggle= "modal", data-target= ".custom_hose_verfication">
+			  <%= image_tag("times_circle_red.svg") %>
+			</div>
+			<%= render partial: 'spree/orders/custom_hose_verification_modal' ,locals: { line_item: line_item}  %>
+		<% else %>
+			<div class="d-lg-block d-none cart-item-delete">
+				<%= render partial: 'spree/orders/remove_btn' ,locals: { line_item: line_item}  %>
+			</div>
+		<% end %>
+	<% end %>
+
+	<%= link_to( render( 'spree/shared/image', image: variant.gallery.images.first || variant.product.gallery.images.first, size: :small ), variant.product, class: "productlist-image" ) %>
+
+	<div class="content text-left">
+		<div class="d-flex justify-content-between poppins-h3 item-name-price">
+			<p class="mb-0 item-name"><%= link_to line_item.name, product_path( variant.product ) %></p>
+
+			<% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+				<% price = (line_item.price * line_item.quantity) %>
+				<p class="p-0 mb-0 pl-3 d-lg-block d-none item-price"><%= number_to_currency(price)%></p>
+			<% else %>
+				<p class="p-0 mb-0 pl-3 d-lg-block d-none item-price"><%= line_item.single_money.to_html %></p>
+			<% end %>
+
+			<% if quantity_change %>
+			  <% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+					<div class="d-lg-none d-block  mob-cart-item-delete pl-1" data-toggle= "modal", data-target= ".custom_hose_verfication">
+					  <%= image_tag("times_circle_red.svg") %>
+					</div>
+
+				<% else %>
+					<div class="d-lg-none d-block  mob-cart-item-delete pl-1">
+						<%= render partial: 'spree/orders/remove_btn' ,locals: { line_item: line_item}  %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="poppins-text-20 item-description">
+			<%= variant.option_values.pluck(:name).join(', ') %>
+		</div>
+
+		<div class="d-flex justify-content-between poppins-h3">
+			<% if quantity_change %>
+				<%= order_form.fields_for :line_items, line_item do |item_form| %>
+					<% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+						<div class="update-count text-center">
+							<div class="d-flex">
+								<%= button_tag "", class: "button btn-sub disable-state" %>
+								<%= item_form.number_field :quantity, min: 1, class: "button poppins-text-16 bold product-quantity line_item_quantity",  size: 5 %>
+								<%= button_tag "", class: "button btn-add disable-state" %>
+							</div>
+							<div class="poppins-text-10 stock-error-message"></div>
+						</div>
+
+					<% else %>
+						<div class="update-count text-center">
+							<div class="d-flex">
+								<%= button_tag "", class: "button btn-sub" %>
+
+								<% if variant.is_backorderable? %>
+		              <% variant_max_quantity = variant.get_max_stock %>
+
+  								<%= item_form.number_field :quantity, min: 0, class: "button poppins-text-16 bold product-quantity line_item_quantity",  size: 5, max: variant_max_quantity > 0 ? variant_max_quantity : '' %>
+
+		            <% else %>
+		            	<%= item_form.number_field :quantity, min: 0, class: "button poppins-text-16 bold product-quantity line_item_quantity",  size: 5, max: variant.total_on_hand %>
+		            <% end%>
+
+								<%= button_tag "", class: "button btn-add" %>
+							</div>
+							<div class="poppins-text-10 stock-error-message"></div>
+						</div>
+					<% end %>
+				<% end %>
+			<% end %>
+
+			<% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+				<% price = (line_item.price * line_item.quantity) %>
+				<p class="p-0 mb-0 pl-3 d-lg-none d-block poppins-bold-text-20 mob-item-price"><%= number_to_currency(price)%></p>
+			<% else %>
+				<p class="p-0 mb-0 pl-3 d-lg-none d-block poppins-bold-text-20 mob-item-price"><%= line_item.single_money.to_html %></p>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+# touched on 2025-05-22T21:19:05.674507Z
+# touched on 2025-05-22T23:27:46.266753Z
+# touched on 2025-05-22T23:41:54.331663Z
