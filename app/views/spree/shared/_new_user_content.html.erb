@@ -1,0 +1,78 @@
+<% for_checkout_login ||= false %>
+<% request_type = for_checkout_login ? true : false %>
+<% resource = Spree::User.new %>
+
+<div class="sign-up-user-credentials">
+  <div class="modal-header">
+    <div class="modal-title">Let’s Get You Set Up.</div>
+
+    <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <%= image_tag("modal-close.svg") %>
+    </div>
+  </div>
+
+  <div class="modal-body sign-up-user-section">
+    <div class="body-header">
+      <div class="body-header-title">Enter a Password to Join (It’s Free)</div>
+    </div>
+
+    <%= form_for resource, as: :spree_user, remote: true, url: spree.registration_path(resource) do |f| %>
+      <div data-hook="signup_inside_form" class="checkout-login-form">
+        <div id="password-credentials">
+          <%= hidden_field_tag "spree_user[email]", user_email %>
+
+          <div class="form-group">
+            <div class="ag-input-neutral">
+              <div class="ag-input-group-box">
+                <%= f.password_field :password, required: true, class: "ag-input-field form-control",  placeholder: "Password", id: "password"%>
+
+                <div class="ag-input-icon-append">
+                  <div data-field='password' id="password-icon" class="secure-password"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="ag-input-neutral">
+              <div class="ag-input-group-box">
+                <%= f.password_field :password_confirmation, required: true, class: "ag-input-field form-control",  placeholder: "Re-Enter Password", id: "confirm-password"%>
+
+                <div class="ag-input-icon-append">
+                  <div data-field='confirm-password' id="confirm-password-icon" class="secure-password"></div>
+                </div>
+              </div>
+              <span id='confirm-pass-message' class="error-message"></span>
+            </div>
+          </div>
+        </div>
+
+        <div data-hook="signup_below_password_fields"></div>
+
+        <div class="mailchimp-subscription">
+          <%= label_tag do %>
+            <%= check_box_tag "subscribe_me", true, checked: :true %>
+            I would like to receive Agzaga deals & updates
+          <% end %>
+        </div>
+
+        <div class="mailchimp-subscription privacy-policy">
+          <%= label_tag do %>
+            <%= check_box_tag "agree_policy", 1, false %>
+            I have read and agree to the <%= link_to ' Privacy Policy', spree::privacy_policy_path, class: 'link' %>
+          <% end %>
+        </div>
+
+        <div class="p-0 sigup-btn">
+          <%= f.submit 'Create Account', id: 'create-account', class: 'ag-btn ag-btn-md ag-btn-primary create-account-btn' %>
+        </div>
+
+        <div class="agree-policy-error"></div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:41:47.297859Z
+# touched on 2025-05-22T22:55:46.264389Z
+# touched on 2025-05-22T23:07:03.433641Z
