@@ -1,0 +1,110 @@
+<%= form_for @ffa_chapter, url: wizard_path(:signature), remote: true, method: :patch do |f| %>
+  <div class="is-flex justify-center">
+    <div class="ffa-step-card">
+      <%= render partial: 'step_progress', locals: { level: 3 } %>
+
+      <div class="step-header">
+        <div class="step-heading">
+          One last thing, a signature
+        </div>
+        <div class="sub-heading">
+          As a digital signature, please type your full name below.
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="step-col-57">
+          <div class="material-textfield">
+            <%= f.text_field :digital_signature, placeholder: ' ' %>
+            <label>Digital Signature</label>
+            <span class= "ffa-error-message custom-ffa-error-message">This field is required</span>
+            <% if @ffa_chapter.errors.messages.key?(:digital_signature) %>
+              <span class= "ffa-error-message"><%= @ffa_chapter.errors[:digital_signature][0]%></span>
+            <% end %>
+          </div>
+
+          <%= f.check_box :consent_verified, {class: 'material-checkbox', id: 'styled-checkbox-1', required: true}, true, false %>
+          <label for="styled-checkbox-1">I verify that I am an advisor for the aforementioned FFA Chapter and intend to participate in Agzaga’s FFA Chapter Fundraiser Program</label>
+        </div>
+
+        <div class="notification-grey">
+          <div class="notification-heading">
+            Let’s Recap
+          </div>
+
+          <div class="notification-seperator"></div>
+
+          <div class="notification-body is-flex">
+            <div class="step-col-third">
+              <div class="head mobile-layout-flex">
+                Your Info
+                <span class="head-edit-link">
+                  <%= link_to wizard_path(:user_info, {edit_request: 'true'}), class: 'desktop-edit-link-color', remote: true do %>
+                    <span class="desktop-edit-link">Edit</span>
+                    <%= image_tag 'step-edit.svg', class: 'mobile-edit-icon' %>
+                  <% end %>
+                </span>
+              </div>
+
+              <div class="info"><%= @ffa_chapter.first_name %></div>
+              <div class="info"><%= @ffa_chapter.last_name %></div>
+              <div class="info"><%= @ffa_chapter.email %></div>
+              <div class="info"><%= @ffa_chapter.phone_number %></div>
+            </div>
+            <div class="step-col-third">
+              <div class="head mobile-layout-flex">
+                Chapter Info
+                <span class="head-edit-link">
+                  <%= link_to wizard_path(:chapter_info, {edit_request: 'true'}), class: 'desktop-edit-link-color', remote: true do %>
+                    <span class="desktop-edit-link">Edit</span>
+                    <%= image_tag 'step-edit.svg', class: 'mobile-edit-icon' %>
+                  <% end %>
+                </span>
+              </div>
+                <div class="info"><%= @ffa_chapter.name %></div>
+                <div class="info"><%= @ffa_chapter.members %></div>
+                <div class="info"><%= @ffa_chapter.number %></div>
+                <div class="info"><%= @ffa_chapter.ein_number %></div>
+            </div>
+
+            <div class="step-col-third">
+              <div class="head mobile-layout-flex">
+                School Info
+                <span class="head-edit-link">
+                  <%= link_to wizard_path(:school_info, {edit_request: 'true'}), class: 'desktop-edit-link-color', remote: true do %>
+                    <span class="desktop-edit-link">Edit</span>
+                    <%= image_tag 'step-edit.svg', class: 'mobile-edit-icon' %>
+                  <% end %>
+                </span>
+              </div>
+
+              <div class="info"><%= @ffa_chapter.school_name %></div>
+              <div class="info"><%= @ffa_chapter.street %></div>
+              <div class="info"><%= @ffa_chapter.city %></div>
+              <div class="info"><%= [@ffa_chapter.state, @ffa_chapter.postal_code].join(', ') %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card-foot">
+        <div class="step-count">
+          Step 4 of 4
+        </div>
+
+        <div class="is-flex mobile-mb-16">
+          <%= link_to wizard_path(:start), class: "btn-blank" do %>
+            <%= image_tag 'step-back-Icon.svg' %>
+            Start Over
+          <% end %>
+
+          <button class="btn-green">
+            Enroll my FFA Chapter
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-06-13T21:14:31.232917Z
