@@ -1,0 +1,97 @@
+<% @body_id = 'order-show' %>
+<div class="<%="purchase-tag" if ENV['GTM_INTEGRATION'] == 'Active' %>" ></div>
+<div class="data-container">
+  <div class="order-summary">
+    <%= image_tag 'check-green.svg', alt: 'check-image', class: "checked-image" %>
+    <div class="lexend-h2 top-heading">Success!</div>
+
+    <div class="d-lg-none return-btn" id="return-home">
+      <%= link_to 'Return Home', spree::root_url, class: 'clear-link' %>
+    </div>
+
+    <div class="order-summary-body">
+      <div class="faq-message-group">
+        <div class="success-message-group">
+          <div class="lexend-h4 message-heading"> Here's What's Next</div>
+          <div class="success-message-content">
+            <div class="order-states">
+              <div>
+                <%= image_tag 'inbox_black.svg', alt: 'check-image' , class: "icon" %>
+                <div class="poppins-text-16 bold">Confirm</div>
+              </div>
+              <div>
+                <%= image_tag 'package_black.svg', alt: 'check-image' , class: "icon" %>
+                <div class="poppins-text-16 bold">Package</div>
+              </div>
+              <div>
+                <%= image_tag 'ship_black.svg', alt: 'check-image' , class: "icon" %>
+                <div class="poppins-text-16 bold">Ship</div>
+              </div>
+              <div>
+                <%= image_tag 'review_black.svg', alt: 'check-image' , class: "icon" %>
+                <div class="poppins-text-16 bold">Review</div>
+              </div>
+            </div>
+
+            <div class="grey-line"></div>
+
+            <div class="lexend-h4 faq-heading text-left mb-2">
+              Shipped Orders
+            </div>
+
+            <div class="poppins-text-16 success-message">
+              First, you'll get an order confirmation email that summarizes what you just bought. Then we'll package and ship your order! If your order is too large to be shipped in a box, or through traditional shipping services then we'll contact you to schedule an LTL shipment wherever
+              you need it.
+
+              From there, we'll send you another email when your order ships that includes your tracking number, then you get your products! We read all of our product reviews, and they influence the products we carry and how our service works—we'd appreciate your feedback once you get the chance to use what you bought!
+            </div>
+
+            <div class="lexend-h4 faq-heading text-left mb-2">
+              Pick-Up Orders
+            </div>
+
+            <div class="poppins-text-16 success-message">
+              If your order was placed to be picked up on-site at the National Championship Chuckwagon Races, you will receive an order confirmation email only. If you have any questions regarding your pick-up order, please <%= link_to "contact us", spree::faqs_page_path, class: 'clear-link faq-link' %>-we’d be happy to help
+            </div>
+
+            <p class="m-0 text-right d-lg-block d-none"><%= link_to 'Return Home', spree::root_url, class: 'poppins-text-16 bold home-btn clear-link' %></p>
+          </div>
+        </div>
+
+        <div class="faq-section">
+          <div class="lexend-h4 faq-heading">Is Anything Wrong?</div>
+          <div class="poppins-text-16 faq-content">If you have any questions don't hesitate to reach out, or head over to our FAQs page to see if your question has already been answered.</div>
+          <div class="btns-group">
+            <p class="mb-0"><%= link_to 'View Orders', '', class: 'poppins-text-16 order-btn clear-link' %></p>
+            <p class="mb-0"><%= link_to 'Contact Us', '/contacts/new', class: 'poppins-text-16 contact-btn clear-link' %></p>
+            <p class="mb-0"><%= link_to 'FAQs', '/faqs', class: 'poppins-text-16 faq-btn clear-link' %></p>
+          </div>
+        </div>
+      </div>
+      <%= render 'success_summary', order: @order %>
+      <p class="order-3 w-100 d-lg-none d-block mb-5"><%= link_to 'Return Home', spree::root_url, class: 'poppins-text-16 bold home-btn home-mob clear-link m-5' %></p>
+    </div>
+  </div>
+</div>
+
+
+<% coupon_codes = []%>
+<% @order.all_adjustments.eligible.promotion.each do |promo| %>
+  <% coupon_codes << promo&.promotion_code&.value %>
+<% end %>
+
+<div class="order_info d-none" data-id="<%= @order.number%>" data-value="<%= @order.display_total.to_s.sub("$", "") %>" data-currency="<%= @order.currency %>" data-coupon="<%= coupon_codes.uniq.join(",") %>" data-shipping="<%= @order.shipments.last.cost.to_s %>" data-count="<%= @order.line_items.count %>"></div>
+  <% cutom_hose_price = 0 %>
+  <% index = 0 %>
+  <% @order.line_items.each do|line_item| %>
+    <% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+      <% cutom_hose_price =  cutom_hose_price + (line_item.price.to_f * line_item.quantity ) %>
+      <div class="order_item d-none" data-id="<%= line_item.id %>"data-price="<%= cutom_hose_price %>" data-quantity="<%= line_item.quantity %>" data-currency="<%= line_item.currency %>" data-listname="Not Listed" data-listid="0" ></div>
+    <% else %>
+      <div class="order_item_<%= index%> d-none" data-id="<%= line_item.id %>" data-name="<%= line_item.variant.name %>" data-price="<%= line_item.price.to_s %>" data-quantity="<%= line_item.quantity %>" data-currency="<%= line_item.currency %>" data-listname="<%= line_item.product.taxons.any? ? line_item.product.taxons.first.name : "Not Listed" %>" data-listid="<%= line_item.product.taxons.any? ? line_item.product.taxons.first.id : 0 %>" ></div>
+        <% index = index +1 %>
+    <% end %>
+  <% end %>
+
+# touched on 2025-05-22T19:07:41.092454Z
+# touched on 2025-05-22T19:10:20.399057Z
