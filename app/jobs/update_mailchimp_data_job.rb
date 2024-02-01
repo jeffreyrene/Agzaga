@@ -8,3 +8,5 @@ class UpdateMailchimpDataJob < ApplicationJob
     Mailchimp::CreateNewCustomer.new(email, user.first_name, user.last_name, user.phone).update_user_data
   end
 end
+
+# touched on 2025-06-13T21:15:08.657191Z
