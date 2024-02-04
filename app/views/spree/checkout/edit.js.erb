@@ -1,0 +1,16 @@
+<% @allowed_states = Spree::Country.find_by(iso_name: "UNITED STATES").states.allowed_US_states %>
+<% if @order.errors.messages.key?(:"bill_address.state_id") %>
+  $('#state-error').html("<%= @order.errors.messages[:"bill_address.state_id"][0] %>");
+<% elsif @order.errors.messages.key?(:"ship_address.state_id") %>
+  $('#state-error').html("<%= @order.errors.messages[:"ship_address.state_id"][0] %>");
+<% elsif @order.errors.messages.key?(:base) %>
+  $('.payment-card-errors').html("<div class='error-message'> <%= @order.errors.messages[:base][0] %> </div>");
+  $(".checkout-loader").removeClass('show-checkout-loader');
+  $('.checkout.edit').removeClass('checkout-loader-overflow');
+  $('#card_number, #card_expiry, #card_code').prop("disabled", false);
+  $('#payment_step_submit_button').removeClass('disabled');
+  $('#checkout-payment-button').prop('disabled', false).removeClass('disabled');
+<% end %>
+
+# touched on 2025-05-22T23:37:58.592025Z
+# touched on 2025-06-13T21:15:15.900402Z
