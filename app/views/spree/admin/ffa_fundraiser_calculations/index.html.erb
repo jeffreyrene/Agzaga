@@ -1,0 +1,124 @@
+<% admin_breadcrumb("FFA Fundraiser") %>
+
+<% admin_layout "full-width" %>
+
+<% content_for :page_actions do %>
+  <li>
+    <%= link_to 'Manage FFA Event', admin_ffa_fundraiser_events_path, class: "btn btn-primary" %>
+  </li>
+
+  <li>
+    <%= link_to 'Download CSV', main_app.export_ffa_fundraiser_path, class: 'btn btn-primary' %>
+  </li>
+<% end %>
+
+<% content_for :table_filter_title do %>
+  <%= t('spree.filter') %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_email_logs_index_search">
+    <%= search_form_for @search, url: admin_ffa_fundraiser_calculations_path do |f| %>
+      <div class="row">
+        <div class="col-6">
+          <div class="date-range-filter field">
+            <%= label_tag :q_created_at_gt, t('spree.date_range') %>
+            <div class="date-range-fields input-group">
+              <%= f.text_field :created_at_gt, class: 'datepicker form-control datepicker-from', placeholder: t('spree.start'), autocomplete: 'off' %>
+
+              <div class="input-group-prepend input-group-append">
+                <span class="input-group-text range-divider">
+                  <i class="fa fa-arrow-right"></i>
+                </span>
+              </div>
+
+              <%= f.text_field :created_at_lt, class: 'datepicker form-control datepicker-to', placeholder: t('spree.stop'), autocomplete: 'off' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" data-hook="admin_ffa_chapter_index_search" >
+        <div class="col-6">
+          <div class="field">
+            <%= f.label "Chapter Name" %>
+            <%= f.text_field :name_start %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="field">
+            <%= f.label "School Name" %>
+            <%= f.text_field :school_name_start %>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions filter-actions" data-hook="admin_email_logs_index_search_buttons">
+        <%= button_tag t('spree.search'), class: 'btn btn-primary mb-5' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<h4 class="text-center mb-3">FFA Fundraiser</h4>
+
+<table class="index" width="100%" id="listing_orders" data-hook>
+  <thead>
+    <tr>
+      <th>ID</th>
+
+      <th class="is-sortable">
+        <%= sort_link @search, :name, default_order: :desc, default_arrow: true do %>
+          Chapter Name <%= image_tag "up-down-arrows.svg", class: 'default-sort-icon' %>
+        <% end %>
+      </th>
+
+      <th class="is-sortable">
+        <%= sort_link @search, :school_name, default_order: :desc, default_arrow: true do %>
+          School Name <%= image_tag "up-down-arrows.svg", class: 'default-sort-icon' %>
+        <% end %>
+      </th>
+
+      <th class="is-sortable">
+        <%= sort_link @search, :sub_total, default_order: :desc, default_arrow: true do %>
+          5% of orders <%= image_tag "up-down-arrows.svg", class: 'default-sort-icon' %>
+        <% end %>
+      </th>
+
+      <th class="is-sortable">
+        <%= sort_link @search, :orders_count, default_order: :desc, default_arrow: true do %>
+          Count of orders <%= image_tag "up-down-arrows.svg", class: 'default-sort-icon' %>
+        <% end %>
+      </th>
+
+      <th>Orders Detail</th>
+
+      <th>Created at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @selected_chapter.each do |selected_chapter| %>
+      <tr>
+        <td><%= selected_chapter.id %></td>
+        <td><%= selected_chapter.name %></td>
+        <td><%= selected_chapter.school_name %></td>
+        <td><%= selected_chapter.sub_total.round(2) %></td>
+        <td><%= selected_chapter.orders_count %></td>
+        <td><%= link_to 'Detail', admin_ffa_fundraiser_calculation_path({id: selected_chapter.id}) %></td>
+        <td><%= selected_chapter.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @selected_chapter, theme: "solidus_admin" %>
+
+# touched on 2025-05-22T19:22:15.144911Z
+# touched on 2025-05-22T21:19:08.156127Z
+# touched on 2025-05-22T22:32:10.064401Z
+# touched on 2025-05-22T22:44:18.364592Z
+# touched on 2025-05-22T22:55:46.259993Z
+# touched on 2025-05-22T23:05:14.238771Z
+# touched on 2025-05-22T23:30:48.140193Z
