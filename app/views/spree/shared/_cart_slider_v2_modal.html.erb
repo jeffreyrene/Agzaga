@@ -1,0 +1,21 @@
+<% @order = current_order(create_order_if_necessary: false, build_order_if_necessary: true) %>
+
+<div class="cart-slider">
+  <div class="modal right fade" id="cartSlider" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="line-items" id="slider-adc-form">
+            <%= render partial: 'spree/shared/slider_v2' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:24:28.532206Z
+# touched on 2025-05-22T20:31:42.866317Z
+# touched on 2025-05-22T21:21:23.087499Z
+# touched on 2025-05-22T23:29:20.357358Z
+# touched on 2025-05-22T23:38:24.041471Z
