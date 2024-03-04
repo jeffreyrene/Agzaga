@@ -1,0 +1,59 @@
+<% param_prefix = "payment_source[#{payment_method.id}]" %>
+<div class="payment-method">
+  <div class="d-flex flex-wrap justify-content-between">
+
+    <div class="shipping-address-field top-round-border poppins-text-16 custom-field card_number field-required name-field mr-0  ag-input-neutral" data-hook="card_number" id="pcnumber">
+      <div class="ag-input-group-box new-card-payment">
+        <%= text_field_tag "#{param_prefix}[number]", '', {id: 'card_number', class: 'form-control custom-field-input cardNumber', size: 19, maxlength: 19, autocomplete: "cc-number", type: "tel", placeholder: 'Card number'} %>
+
+        <div class="ag-input-icon-append">
+          <%= image_tag 'invalid-field.png' %>
+        </div>
+      </div>
+    </div>
+
+    <span id="card_type" style="display:none;">
+      ( <span id="looks_like" ><%= t('spree.card_type_is') %> <span id="type"></span></span>
+        <span id="unrecognized"><%= t('spree.unrecognized_card_type') %></span>
+      )
+    </span>
+
+    <div class="shipping-address-field bottom-round-border poppins-text-16 custom-field field-required card_code name-field ag-input-neutral">
+      <div class="ag-input-group-box border-left-radius top-border-none border-right-none"  data-hook="card_expiration" id="pexpiry">
+        <%= text_field_tag "#{param_prefix}[expiry]", '', id: 'card_expiry', class: "form-control custom-field-input cardExpiry", type: "tel", placeholder: 'MM / YY' %>
+
+        <div class="ag-input-icon-append">
+          <%= image_tag 'invalid-field.png' %>
+        </div>
+      </div>
+
+      <div class="ag-input-group-box border-right-radius top-border-none" data-hook="card_code" id="pccv">
+        <%= text_field_tag "#{param_prefix}[verification_value]", '', {id: 'card_code', class: 'form-control custom-field-input cardCode', size: 5, type: "tel", autocomplete: "off", placeholder: 'CVC'} %>
+
+        <div class="ag-input-icon-append">
+          <%= image_tag 'invalid-field.png' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-section mt-3" data-hook="buttons">
+    <%= submit_tag 'Save Card', id: "payment_step_submit_btn", class: "save-btn clear-link d-none" %>
+    <script>Spree.disableSaveOnClick();</script>
+  </div>
+  <% if @order.bill_address %>
+    <%= fields_for "#{param_prefix}[address_attributes]", @order.bill_address do |f| %>
+      <%= render partial: 'spree/address/form_hidden', locals: { form: f } %>
+    <% end %>
+  <% end %>
+
+  <%= hidden_field_tag "#{param_prefix}[cc_type]", '', id: "cc_type", class: 'ccType' %>
+</div>
+
+<div class="payment-card-errors"></div>
+
+# touched on 2025-05-22T19:24:26.613080Z
+# touched on 2025-05-22T20:34:25.204278Z
+# touched on 2025-05-22T22:38:51.647010Z
+# touched on 2025-05-22T23:36:47.272192Z
+# touched on 2025-06-13T21:15:53.603349Z
