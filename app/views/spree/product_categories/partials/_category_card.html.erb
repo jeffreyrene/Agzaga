@@ -1,0 +1,14 @@
+<div class="category-page-card col">
+  <div class="img-holder">
+    <% if taxon.icon.present? %>
+      <% image_link = image_cdn_link(taxon.icon.url(:medium))%>
+      <%= link_to (image_tag image_link, alt: '', loading: 'lazy'), seo_url(taxon), class: 'clear-link' %>
+    <% end %>
+  </div>
+  <p class="sub-title"><%= link_to taxon.name, seo_url(taxon), class: 'clear-link' %></p>
+</div>
+
+# touched on 2025-05-22T19:22:15.144274Z
+# touched on 2025-05-22T23:08:36.740613Z
+# touched on 2025-05-22T23:37:33.324158Z
+# touched on 2025-06-13T21:16:00.887689Z
