@@ -1,0 +1,73 @@
+<div class="order-summary-section d-lg-block <%# 'd-none' unless order.state == 'confirm' || order.state == 'payment' %>">
+  <div class="summary-header d-flex">
+    <div class="lexend-h4 summary-heading" data-toggle="collapse" data-target="#order-summary-div">
+      In Your Cart
+    </div>
+
+    <div class="edit-button d-lg-block d-none">
+      <%= link_to 'Edit', spree::cart_path, class: 'poppins-text-16 clear-link'  %>
+      <script>Spree.disableSaveOnClick();</script>
+    </div>
+
+    <div class="edit-button d-lg-none d-block">
+      <%= link_to (image_tag 'edit-icon-mob.svg'), spree::cart_path, class: 'poppins-text-16 clear-link'  %>
+      <script>Spree.disableSaveOnClick();</script>
+    </div>
+  </div>
+
+  <div class="summary text-left" id="order-summary-div">
+
+    <% if @order.ffa_chapter.present? %>
+      <div class="summary-row d-flex checkout-step-group mb-0">
+        <p class="poppins-text-16 name-line">FFA Chapter</p>
+        <div class="poppins-text-16">
+          <%= @order&.ffa_chapter&.name %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="summary-row d-flex checkout-step-group mb-0">
+      <p class="poppins-text-16 name-line">Promo Code</p>
+      <div class="promo-area">
+        <%= render partial: 'spree/checkout/partials/checkout_promo_code_fields', locals: {order: @order} %>
+      </div>
+    </div>
+
+    <div id="checkout_summary_detail_div">
+      <%= render 'spree/checkout/checkout_summary_detail', order: @order%>
+    </div>
+
+    <div class="line under-items"></div>
+
+    <div  class='d-lg-block d-none'>
+      <%= render 'spree/checkout/partials/order_line_items', order: @order%>
+    </div>
+
+    <div id="accordion" class="d-lg-none d-block">
+      <div id="expandCart" class="text-center">
+        <button class="expand-btn clear-link btn btn-link" data-toggle="collapse" data-target="#cartLineItems" aria-expanded="true" aria-controls="cartLineItems">
+          EXPAND CART
+          <div><%= image_tag 'expand-arrow.svg' %></div>
+        </button>
+
+        <button class="view-less-btn clear-link btn btn-link" data-toggle="collapse" data-target="#cartLineItems" aria-expanded="true" aria-controls="cartLineItems">
+          VIEW LESS
+          <div><%= image_tag 'viewless-cart.svg' %></div>
+        </button>
+      </div>
+
+      <div id="cartLineItems" class="collapse" aria-labelledby="expandCart" data-parent="#accordion">
+        <div class="card-body p-0">
+          <%= render 'spree/checkout/partials/order_line_items', order: @order%>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+# touched on 2025-05-22T19:07:30.974638Z
+# touched on 2025-05-22T19:24:13.018361Z
+# touched on 2025-05-22T20:38:24.234803Z
+# touched on 2025-05-22T23:07:20.827992Z
+# touched on 2025-06-13T21:16:13.476031Z
