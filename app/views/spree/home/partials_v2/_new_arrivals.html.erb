@@ -1,0 +1,13 @@
+<% new_arrivals_product_cards = load_product_cards(@new_arrivals) %>
+
+<div class="new-arrivals-content">
+  <% new_arrivals_product_cards.each do |product| %>
+    <%= render partial: 'spree/home/partials_v2/product_card_sm', locals: { product: product } %>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T20:33:10.000081Z
+# touched on 2025-05-22T23:02:56.665727Z
+# touched on 2025-05-22T23:24:15.602337Z
+# touched on 2025-05-22T23:47:23.545898Z
+# touched on 2025-06-13T21:16:35.016814Z
