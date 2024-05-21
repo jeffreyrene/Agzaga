@@ -1,0 +1,60 @@
+<% variants_stock ||= false %>
+
+<% if out_of_stock(product, variants_stock) %>
+  <%= hidden_field_tag 'disable-quick-view-select2', true %>
+<% end %>
+
+<div id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <% if product.variants_and_option_values_for(current_pricing_options).any? %>
+    <div id="product-<%= product.id %>-variants">
+      <ul class="d-none">
+        <% product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index| %>
+          <li>
+            <%= radio_button_tag "variant_id", variant.id, nil, 'data-price' => variant.price_for(current_pricing_options)  , class: "quick-view-variantid"%>
+
+            <%= label_tag "variant_id_#{ variant.id }" do %>
+              <span class="variant-description">
+                <%= variant_options variant %>
+              </span>
+
+              <% if variant_price variant %>
+                <span class="price diff"><%= variant_price variant %></span>
+              <% end %>
+
+              <% unless variant.can_supply? %>
+                <span class="out-of-stock"><%= t('spree.out_of_stock') %></span>
+              <% end %>
+
+              <span class="stock-count"><%= variant.total_on_hand %></span>
+              <span class="variant-backorderable"><%= variant.is_backorderable? %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+
+      <% product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index| %>
+        <div class="d-none variants-data-for-<%= product.id %>" data-id="<%= variant.id %>" data-text="<%= variant.options_text %>" ></div>
+      <% end %>
+
+      <% options = product.variant_option_values_by_option_type %>
+
+      <% options.each do |option| %>
+        <div class="poppins-text-16 option-label"> <%= option[0].presentation %> </div>
+
+        <%= f.select 'variants', options_for_select( option[1].map { |value| [ value.name, value.presentation ]}),
+              { include_blank: "Choose a #{ option[0].presentation }" },
+              data: { option: option[0].presentation },
+              id: "#{ product.id }-options-for-#{ option[0].presentation.gsub(/[^\w]/, '_')}",
+              class: "options-select #{'quick-view-options' if out_of_stock(product, variants_stock)}", required: true %>
+      <% end %>
+    </div>
+
+  <% else %>
+    <%= hidden_field_tag 'variant_id', product.master.id, id: "variant_id_#{product.master.id}" %>
+  <% end %>
+</div>
+
+
+# touched on 2025-05-22T22:32:30.481155Z
+# touched on 2025-05-22T23:27:14.156086Z
+# touched on 2025-06-13T21:17:03.086051Z
