@@ -1,0 +1,307 @@
+$palettes: (
+  neutral: (
+    50:  #FAFAFA,
+    100: #F4F4F5,
+    200: #E4E4E7,
+    300: #D4D4D8,
+    400: #A1A1AA,
+    500: #71717A,
+    600: #52525B,
+    700: #3F3F46,
+    800: #27272A,
+    900: #18181B,
+  ),
+
+  primary: (
+    50:  #FFF8E8,
+    100: #FFEDC7,
+    200: #FFD882,
+    300: #FFC954,
+    400: #FFBE30,
+    500: #FFB514,
+    600: #D69300,
+    700: #9E6900,
+    800: #7A4100,
+    900: #4A2B07,
+  ),
+
+  success: (
+    50:  #F0FDF4,
+    100: #DCFCE7,
+    200: #BBF7D0,
+    300: #86EFAC,
+    400: #4ADE80,
+    500: #22C55E,
+    600: #16A34A,
+    700: #15803D,
+    800: #166534,
+    900: #14532D,
+  ),
+
+  warning: (
+    50:  #FFF7ED,
+    100: #FFEDD5,
+    200: #FED7AA,
+    300: #FDBA74,
+    400: #FB923C,
+    500: #F97316,
+    600: #EA580C,
+    700: #C2410C,
+    800: #9A3412,
+    900: #7C2D12,
+  ),
+
+  destructive: (
+    50:  #FEF2F2,
+    100: #FEE2E2,
+    200: #FECACA,
+    300: #FCA5A5,
+    400: #F87171,
+    500: #EF4444,
+    600: #DC2626,
+    700: #B91C1C,
+    800: #991B1B,
+    900: #7F1D1D,
+  ),
+
+  shades: (
+    0: #FFFFFF,
+    100: #000000,
+  ),
+);
+
+:root {
+  @each $colorname, $palette in $palettes {
+    @each $key, $value in $palette {
+        $keyname: "--palette-" + $colorname + "-" + $key;
+        #{$keyname}: #{$value};
+    }
+  }
+}
+
+
+$font-family-poppins:         Poppins !default;
+$font-family-lexend:          lexend !default;
+$font-style:                  normal !default;
+
+$font-weight-normal:          500 !default;
+$font-weight-semi-bold:       600 !default;
+$font-weight-bold:            bold !default;
+$font-weight-extra-bold:      800 !default;
+
+$d-lg-font-size:              52px !default;
+$d-sm-font-size:              48px !default;
+$h1-font-size:                40px !default;
+$h2-font-size:                36px !default;
+$h3-font-size:                32px !default;
+$h4-font-size:                28px !default;
+$h5-font-size:                24px !default;
+$h6-font-size:                20px !default;
+$p-lg-font-size:              18px !default;
+$p-md-font-size:              16px !default;
+$p-sm-font-size:              14px !default;
+$p-xsm-font-size:             12px !default;
+
+$line-height-h1:              48px !default;
+$line-height-h2:              44px !default;
+$line-height-h3:              40px !default;
+$line-height-h4:              36px !default;
+$line-height-h5:              32px !default;
+$line-height-h6:              28px !default;
+$line-height-d-lg:            56px !default;
+$line-height-pg-lg:           $line-height-h6;
+$line-height-pg-md:           24px !default;
+$line-height-pg-sm:           20px !default;
+$line-height-pg-xsm:          $line-height-pg-sm;
+
+$breadcrumb-padding-y:        0 !default;
+$breadcrumb-padding-x:        0 !default;
+$breadcrumb-margin-bottom:    1rem !default;
+$breadcrumb-border-radius:    null !default;
+$breadcrumb-divider:          quote("/") !default;
+$breadcrumb-item-padding-x:   10px !default;
+$breadcrumb-font-size:        14px !default;
+
+$neutral-input-shadow:        var(--palette-primary-100);
+$destructive-input-shadow:    var(--palette-destructive-100);
+$input-group-border-radius:   6px;
+$input-group-background:      #FFFFFF;
+$input-font-size:             14px;
+$input-field-height:          40px;
+
+$zindex-modal:                1055 !default;
+$modal-dialog-margin:         0 auto !default;
+$modal-content-bg:            #FFFFFF;
+$modal-content-border-color:  6px;
+$modal-inner-padding:         1rem !default;
+$modal-header-padding-y:      $modal-inner-padding !default;
+$modal-header-padding-x:      $modal-inner-padding !default;
+$modal-header-padding:        $modal-header-padding-y $modal-header-padding-x !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 575px,
+  md: 767px,
+  lg: 991px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (max-width: $min) {
+      @content;
+    }
+  }
+}
+
+$ag-display: (
+  "lg": (
+    font_size: $d-lg-font-size,
+    line_height: $line-height-d-lg
+  ),
+  "sm": (
+    font_size: $d-sm-font-size,
+    line_height: $line-height-h1
+  )
+) !default;
+
+$ag-headings: (
+  "h1": (
+    font_size: $h1-font-size,
+    line_height: $line-height-h1
+  ),
+
+  "h2": (
+    font_size: $h2-font-size,
+    line_height: $line-height-h2
+  ),
+
+  "h3": (
+    font_size: $h3-font-size,
+    line_height: $line-height-h3
+  ),
+
+  "h4": (
+    font_size: $h4-font-size,
+    line_height: $line-height-h4
+  ),
+
+  "h5": (
+    font_size: $h5-font-size,
+    line_height: $line-height-h5
+  ),
+
+  "h6": (
+    font_size: $h6-font-size,
+    line_height: $line-height-h6
+  )
+) !default;
+
+$ag-paragraphs: (
+  "p-lg": (
+    font_size: $p-lg-font-size,
+    line_height: $line-height-pg-lg
+  ),
+  "p-md": (
+    font_size: $p-md-font-size,
+    line_height: $line-height-pg-md
+  ),
+  "p-sm": (
+    font_size: $p-sm-font-size,
+    line_height: $line-height-pg-sm
+  ),
+  "p-xsm": (
+    font_size: $p-xsm-font-size,
+    line_height: $line-height-pg-xsm
+  )
+) !default;
+
+%ag-font-normal {
+  font-weight: $font-weight-normal;
+}
+
+%ag-font-sbold {
+  font-weight: $font-weight-semi-bold;
+}
+
+%ag-font-bold {
+  font-weight: $font-weight-bold;
+}
+
+%ag-font-xbold {
+  font-weight: $font-weight-extra-bold;
+}
+
+$textDecoration: ("none", "underline", "line-through");
+
+$fontStyle: ("normal", "italic");
+
+// spacing variables
+$spacings: (
+  "small": (
+    "xx-sm": 4px,
+    "x-sm": 8px,
+    "sm": 12px,
+    "md": 16px
+  ),
+
+  "big": (
+    "big": 20px,
+    "x-big": 24px,
+    "xx-big": 28px,
+    "xxx-big": 32px
+  ),
+
+  "large": (
+    "lg": 40px,
+    "x-lg": 48px,
+    "xx-lg": 64px,
+    "xxx-lg": 80px
+  ),
+
+  "huge": (
+    "huge": 96px,
+    "x-huge": 128px,
+    "xx-huge": 160px,
+    "xxx-huge": 192px
+  )
+) !default;
+
+$inputs: (
+  "neutral": (
+    "hover_border": var(--palette-primary-300),
+    "helper_txt_color": var(--palette-neutral-500),
+    "input_border_value": 6px,
+  ),
+
+  "destructive": (
+    "hover_border": var(--palette-destructive-200),
+    "helper_txt_color": var(--palette-destructive-500),
+    "input_border_value": 6px,
+  ),
+
+  "line-neutral": (
+    "border_color": var(--palette-primary-200),
+    "hover_border": var(--palette-primary-200),
+    "helper_txt_color": var(--palette-neutral-500),
+    "input_border_value": 0,
+  ),
+
+  "line-destructive": (
+    "hover_border": var(--palette-destructive-200),
+    "helper_txt_color": var(--palette-destructive-500),
+    "input_border_value": 0,
+  )
+) !default;
+
+# touched on 2025-05-22T19:19:57.495230Z
+# touched on 2025-05-22T20:36:30.597463Z
+# touched on 2025-05-22T23:47:34.660043Z
+# touched on 2025-06-13T21:17:09.676883Z
