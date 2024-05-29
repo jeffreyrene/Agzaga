@@ -1,0 +1,64 @@
+<ul class="nav justify-content-center mill-top-nav">
+  <li class="nav-item">
+    <a class="nav-link clear-link poppins-text-16" href="#">
+      <%= image_tag 'mill_fan_white.svg', class: 'mill-fan', alt: 'Mill fan' %>
+      Mill Certified
+    </a>
+  </li>
+
+  <% mill_page_categories.each do |category| %>
+    <li class="nav-item d-none d-lg-block">
+      <a class="nav-link clear-link poppins-text-16" href="<%= category[1] %>"><%= category[0] %></a>
+    </li>
+  <% end %>
+
+  <li class="nav-item d-block d-lg-none">
+    <a class="nav-link clear-link poppins-text-16" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Categories <%= image_tag 'arrow_down_white.svg', class: 'pl-2', alt: '' %>
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <% mill_page_categories.each do |category| %>
+        <a class="dropdown-item clear-link poppins-text-16" href="<%= category[1]%>"><%= category[0] %></a>
+      <% end %>
+    </div>
+  </li>
+</ul>
+
+<div class="container">
+  <div class="row">
+    <%= image_tag 'mill_logo.svg', class: "mill-logo", alt: 'Mil Logo' %>
+
+    <%= form_with url: "/",  id: "mill-search-form", class: "mill-search-form", method: :get do |form| %>
+      <%= image_tag "search_icon_warm.svg", class: 'search-icon', alt: 'Search' %>
+      <input type="text" class="mill-search-input poppins-text-16" placeholder="Search for an category, tag, or product">
+    <% end %>
+  </div>
+</div>
+
+<%= render partial: 'pages/partials/mill_latest_posts' %>
+
+<%= render partial: 'pages/partials/mill_certified_products' %>
+
+<div class="mill-by-category-section data-container">
+  <h1 class="draught-textured-h1 section-top-h1">
+    Browse by Category
+  </h1>
+
+  <%= render partial: 'pages/partials/mill_by_category' %>
+</div>
+
+<div class="text-center data-container">
+  <h2 class="draught-h2 sign-up-heading mb-4">
+    Get informed when we write a new article
+  </h2>
+
+  <form class="inline-sign-up-form">
+    <%= email_field_tag 'email', '', placeholder: 'Enter your email address', class: 'email-input-field poppins-text-14' %>
+    <%= submit_tag 'Sign Up', class: 'btn-gradient-orange poppins-text-16'%>
+  </form>
+</div>
+
+# touched on 2025-05-22T21:51:14.258044Z
+# touched on 2025-05-22T23:10:02.477508Z
+# touched on 2025-06-13T21:17:26.876717Z
