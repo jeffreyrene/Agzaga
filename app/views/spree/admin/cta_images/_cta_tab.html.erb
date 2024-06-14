@@ -1,0 +1,42 @@
+
+<% if cta_images.length > 0 %>
+  <table class="index sortable inline-editable-table" id="listing_products" data-hook="featured_products_table"
+  data-sortable-link="<%= update_positions_admin_cta_images_url(@cta_image) %>">
+    <thead>
+      <tr>
+        <th></th>
+        <th><%= Spree::CtaImage.human_attribute_name(:desktop_link) %></th>
+        <th> Image </th>
+        <th><%= Spree::CtaImage.human_attribute_name(:start_at) %></th>
+        <th><%= Spree::CtaImage.human_attribute_name(:end_at) %></th>
+
+        <th> Ad Space </th>
+        <th colspan="3"></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cta_images.each do |cta_image| %>
+        <tr id="<%= spree_dom_id cta_image %>">
+          <td><span class="handle"> </span></td>
+          <td><%= cta_image.desktop_link %></td>
+          <td class="width-5"><%= image_tag cta_image.mobile_link, class: 'w-50' %></td>
+
+          <td><%= (cta_image.start_at).in_time_zone("Central Time (US & Canada)").strftime('%d-%m-%Y %H:%M:%S %Z') %></td>
+          <td><%= (cta_image.end_at).in_time_zone("Central Time (US & Canada)").strftime('%d-%m-%Y %H:%M:%S %Z') %></td>
+          <td><%= cta_image.add_space %></td>
+          <td><%= link_to 'Edit', edit_admin_cta_image_path(cta_image) %></td>
+          <td><%= link_to 'Delete', admin_cta_image_path(cta_image), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= render 'spree/admin/shared/no_objects_found',
+                 resource: Spree::CtaImage %>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T23:29:51.084667Z
+# touched on 2025-06-13T21:17:37.857013Z
