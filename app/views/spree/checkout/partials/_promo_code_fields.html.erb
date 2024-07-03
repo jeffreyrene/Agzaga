@@ -1,0 +1,23 @@
+<% error =  params["error"] ||= false %>
+<% applied =  params["applied"] ||= false %>
+<div class="discount">
+  <div class="d-flex justify-content-between">
+    <div class="m-0 pl-0 pr-3 input-group">
+      <%= text_field_tag :coupon_code, nil, placeholder: "#{t( "spree.coupon_code" )}" , size: 10, class: "form-control m-0 input-coupon-code" %>
+    </div>
+
+    <p class="p-0 mb-0 coupon-submit" >
+      <%= image_tag "arrow-right-circle-fill.svg", id: "submit-coupon_code", alt: ''%>
+    </p>
+  </div>
+
+  <% if error.present?  %>
+    <div class="coupon_message <%= applied=='true' ? 'success': 'error' if error.present? %> "> <%= error if error.present? %> </div>
+  <% elsif (order.all_adjustments.nonzero.promotion.present? || order.shipment_adjustments.promotion.present? ) && applied == 'true' %>
+    <div class="coupon_message success">
+      Promotion applied.
+    </div>
+  <% end %>
+</div>
+
+# touched on 2025-06-13T21:17:46.987188Z
