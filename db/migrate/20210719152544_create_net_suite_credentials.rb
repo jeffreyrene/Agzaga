@@ -11,3 +11,5 @@ class CreateNetSuiteCredentials < ActiveRecord::Migration[6.1]
 end
 
 # touched on 2025-05-22T19:21:54.949851Z
+
+# touched on 2025-06-13T21:18:26.327927Z
