@@ -1,0 +1,39 @@
+<% order.line_items.each do |item| %>
+  <div class="products-list-item">
+    <div class="list-block">
+      <div class="product-image">
+        <%= link_to image_tag("remove-icon-red.png"), spree::cart_destroy_line_item_path(id: item.id, recalculate_shipping: true ), class: 'clear-link remove-icon', method: :delete %>
+
+        <%= render( 'spree/shared/image', image: item.variant.gallery.images.first || item.variant.product.gallery.images.first, size: :small ) %>
+      </div>
+      <div class="detail-section">
+        <div class="title"><%= item.variant.name %></div>
+        <div class="qty checkout-qty-modal-btn">
+          <span class="ag-p-sm qty-heading">Qty</span>
+          <%= link_to populate_qty_modal_path(id: item.id), method: :get, remote: true do %>
+            <span class="item-qty ag-p-xsm ag-font-normal"><%= item.quantity %></span>
+            <%= image_tag "qty-dropdown-icon.svg" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-block">
+      <div class="price">
+        <%= Spree::Money.new( item.quantity * item.price ).to_html%>
+      </div>
+      <% if item.quantity > 1 %>
+        <div class="each-price"><%= Spree::Money.new(item.price ).to_html %> each</div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="quantity-modal-drop-down"></div>
+<div class="line-item-qty-modal-container"></div>
+
+# touched on 2025-05-22T20:40:49.278650Z
+# touched on 2025-05-22T23:01:55.567329Z
+# touched on 2025-05-22T23:05:52.239067Z
+# touched on 2025-05-22T23:27:30.489711Z
+# touched on 2025-06-13T21:19:21.996422Z
