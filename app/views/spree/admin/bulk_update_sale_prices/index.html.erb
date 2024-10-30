@@ -1,0 +1,58 @@
+<div data-hook="admin_product_form_fields">
+  <div class="row">
+    <div class="left col-9" data-hook="admin_product_form_left">
+      <%= form_for [:admin, @product], :url => {:controller => "bulk_update_sale_prices"} do |f| %>
+        <div data-hook="admin_product_form_taxons">
+          <%= f.field_container :taxons do %>
+            <%= f.label :taxon_ids, plural_resource_name(Spree::Taxon) %><br />
+            <%= f.hidden_field :taxon_ids, value: @product.taxon_ids.join(',') %>
+          <% end %>
+        </div>
+
+        <div data-hook="admin_product_sale_price">
+          <%= f.field_container :sale_percentage do %>
+            <%= f.label :percentage, 'Discount Percentage' %><br />
+            <%= number_field_tag :percentage, nil, in: 1...101, step: :any, autocomplete: 'off', required: true, placeholder: 'Add discount percentage' %>
+          <% end %>
+        </div>
+
+        <div data-hook="admin_product_price_start_at">
+          <%= f.field_container :start_at do %>
+            <%= f.label :start_at, "Start Date" %><br />
+
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <%= solidus_icon('fa fa-calendar') %>
+                </span>
+              </div>
+              <%= text_field_tag :start_at, {}, class: 'datetimepicker', autocomplete: 'off' %>
+            </div>
+          <% end %>
+        </div>
+
+        <div data-hook="admin_product_price_ends_at">
+          <%= f.field_container :end_at do %>
+            <%= f.label :end_at, "End Date" %><br />
+
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <%= solidus_icon('fa fa-calendar') %>
+                </span>
+              </div>
+              <%= text_field_tag :end_at, {}, class: 'datetimepicker', autocomplete: 'off' %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= f.submit "Add", disable_with: 'Adding...' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:07:28.960322Z
+# touched on 2025-05-22T20:43:49.050447Z
+# touched on 2025-05-22T23:06:57.434511Z
+# touched on 2025-06-13T21:19:25.993335Z
