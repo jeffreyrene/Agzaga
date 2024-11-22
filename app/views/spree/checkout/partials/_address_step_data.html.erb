@@ -1,0 +1,74 @@
+<div class="checkout-step-group">
+  <div class="step-header">
+    <span class="details-heading">Address Information</span>
+    <span class="d-md-block d-none poppins-text-16 clear-link edit-personal-info">
+      <a class="clear-link" href="<%= checkout_state_path(:address) %>" data-turbolinks="false">Edit</a>
+    </span>
+
+    <span class="edit-button d-md-none d-block poppins-text-16 clear-link edit-personal-info">
+      <a class="clear-link" href="<%= checkout_state_path(:address) %>" data-turbolinks="false"><%= image_tag 'edit-white-icon.svg', class: 'edit-icon'%></a>
+    </span>
+  </div>
+
+  <div class="step-content">
+    <div id="shipping" class="mb-4" data-hook>
+      <div class="poppins-text-14 details-text">
+        <%= @order.email %>
+      </div>
+    </div>
+
+    <div class="mb-4 address-information">
+      <div class="poppins-body-16 bold details-heading">
+        <%= @order.pick_up_order? ? 'Pick Up Person' : 'Shipping Details' %>
+      </div>
+
+      <% shipping_address = @order.ship_address %>
+      <div class="text-left user-info">
+        <% if @order.pick_up_order? %>
+          <div class="poppins-text-14 details-text confirmed-pickup"><%= "#{@order.pick_up_person.firstname}  #{@order.pick_up_person.lastname}" %></div>
+          <div class="poppins-text-14 details-text"><%= @order.pick_up_person.email %></div>
+        <% else %>
+          <div class="poppins-text-14 details-text"><%= shipping_address.name %></div>
+          <div class="poppins-text-14 details-text"><%= shipping_address.businessname %></div>
+          <div class="poppins-text-14 details-text"><%= shipping_address.address1 %></div>
+          <div class="poppins-text-14 details-text"><%= shipping_address.address2 %></div>
+          <div class="poppins-text-14 details-text"><%= "#{shipping_address.city}, #{shipping_address.state.abbr} #{shipping_address.zipcode}" %></div>
+          <div class="poppins-text-14 details-text">
+            <span class="flag-icon">
+              <%= image_tag "flag-united-states.png" %>
+            </span>
+
+            <%= shipping_address.phone %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @order.bill_address_id.present? %>
+      <div class="address-information">
+        <div class="poppins-body-16 bold details-heading">
+          Billing Details
+        </div>
+
+        <% billing_address = @order.bill_address %>
+
+        <div class="text-left user-info">
+          <div class="poppins-text-14 details-text"><%= billing_address.name %></div>
+          <div class="poppins-text-14 details-text"><%= billing_address.businessname %></div>
+          <div class="poppins-text-14 details-text"><%= billing_address.address1 %></div>
+          <div class="poppins-text-14 details-text"><%= billing_address.address2 %></div>
+          <div class="poppins-text-14 details-text"><%= "#{billing_address.city}, #{billing_address.state.abbr} #{billing_address.zipcode}" %></div>
+          <div class="poppins-text-14 details-text">
+            <span class="flag-icon">
+              <%= image_tag "flag-united-states.png" %>
+            </span>
+
+            <%= billing_address.phone %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-06-13T21:19:44.317636Z
