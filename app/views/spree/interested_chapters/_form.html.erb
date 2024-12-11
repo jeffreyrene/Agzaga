@@ -1,0 +1,111 @@
+<div class="modal-content" id="modal-content">
+  <div class="header">
+    <div class="modal-title">
+      <div class="main-heading">Sign-Up Form</div>
+      <div class="sub-heading">FFA Week Fundraiser</div>
+    </div>
+    <div class="poppins-bold-text-12 d-md-block close-modal review_modal_close" data-dismiss="modal" id="close-icon"></div>
+  </div>
+  <div class="modal-body">
+    <%= form_for @interested_chapter, url: interested_chapters_path, method: :post, remote: true do |f| %>
+      <div class="step-col-90">
+        <div class="field-height">
+          <div class="material-textfield">
+            <%= f.text_field :name, placeholder: ' ' %>
+            <label>Chapter Name</label>
+            <% if @interested_chapter.errors.messages.key?(:name) %>
+              <span class= "ffa-error-message"><%= @interested_chapter.errors[:name][0]%></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-col-90 is-flex justify-space-between">
+        <div class="step-col-48">
+          <div class="field-height">
+            <div class="material-textfield">
+              <%= f.text_field :first_name, placeholder: ' ' %>
+              <label>First Name</label>
+              <% if @interested_chapter.errors.messages.key?(:first_name) %>
+                <span class= "ffa-error-message"><%= @interested_chapter.errors[:first_name][0]%></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-col-48">
+          <div class="field-height">
+            <div class="material-textfield">
+              <%= f.text_field :last_name, placeholder: ' ' %>
+              <label>Last Name</label>
+              <% if @interested_chapter.errors.messages.key?(:last_name) %>
+                <span class= "ffa-error-message"><%= @interested_chapter.errors[:last_name][0]%></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-col-90">
+        <div class="field-height">
+          <div class="material-textfield">
+            <%= f.text_field :email, placeholder: ' ' %>
+            <label>Email Address</label>
+            <% if @interested_chapter.errors.messages.key?(:email) %>
+                <span class= "ffa-error-message"><%= @interested_chapter.errors[:email][0]%></span>
+              <% end %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="step-col-90 is-flex justify-space-between">
+        <div class="step-col-39">
+          <div class="field-height">
+            <div class="material-textfield">
+              <%= f.text_field :phone_number, placeholder: ' ' %>
+              <label>Phone</label>
+              <% if @interested_chapter.errors.messages.key?(:phone_number) %>
+                <span class= "ffa-error-message"><%= @interested_chapter.errors[:phone_number][0]%></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-col-18">
+          <div class="field-height">
+            <div class="material-textfield">
+              <%= f.collection_select :state, @allowed_states, :abbr, :abbr, {include_blank: false} , {class: 'ffa-approved-states'} %>
+              <label>State</label>
+              <% if @interested_chapter.errors.messages.key?(:state) %>
+                <span class= "ffa-error-message"><%= @interested_chapter.errors[:state][0]%></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-col-33">
+          <div class="field-height">
+            <div class="material-textfield">
+              <%= f.text_field :postal_code, placeholder: ' ' %>
+              <label>Postal Code</label>
+              <% if @interested_chapter.errors.messages.key?(:postal_code) %>
+                <span class= "ffa-error-message"><%= @interested_chapter.errors[:postal_code][0]%></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="ffa-sign-up-btn" type="submit">
+        Sign Up
+      </button>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-05-22T21:27:43.466636Z
+# touched on 2025-05-22T22:30:33.728656Z
+# touched on 2025-05-22T23:26:22.766721Z
+# touched on 2025-05-22T23:29:13.048799Z
+# touched on 2025-06-13T21:20:16.206339Z
