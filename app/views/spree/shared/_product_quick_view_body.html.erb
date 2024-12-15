@@ -1,0 +1,224 @@
+<% image ||= '' %>
+<% product ||= [] %>
+<% if product.present? %>
+  <div class="quick_view d-none" data-id="<%= product.id %>" data-price="<%= product.price %>" data-name="<%= product.name%>" data-currency="<%= product.prices.last.currency %>"></div>
+  <% variants_stock = product_out_of_stock(product) %>
+  <div class="modal-dialog modal-dialog-centered product-view-modal-dialog" role="document">
+    <div class="modal-content product-view-modal-content">
+      <div class="modal-body">
+        <div>
+
+          <div class="images-slider-group">
+            <div class="d-none">
+              <% product.gallery.images.each do |image| %>
+                <div class="data-for-quick-view-slider" data-image="<%= image.url(:small) %>" data-id="product-image-for-<%= image.viewable_id %>"></div>
+              <% end %>
+            </div>
+
+            <ul class="product-image-slider cS-hidden">
+              <% product.gallery.images.each do |image| %>
+                <% sub_domain_image_url = image_cdn_link(image.url(:small)) %>
+                <li data-responsive="<%= sub_domain_image_url %>" data-src="<%= sub_domain_image_url %>" data-thumb="<%= sub_domain_image_url %>" class="quick-view-product-images product-image-for-<%= image.viewable_id %>">
+                  <img src="<%= sub_domain_image_url  %>" loading="lazy"/>
+                </li>
+              <% end %>
+            </ul>
+
+            <div class="slider-nav-group quick-view-slider-nav-group" style="display: none;">
+              <div class="slider-nav-btn nav-prev quick-view-slider-nav" data-target="prev"></div>
+              <div class="slider-nav-btn nav-next quick-view-slider-nav" data-target="next"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="product-big-desc">
+          <div>
+            <h2 class="poppins-h4 prod-headinng"><%= product.name %></h2>
+            <div class="close-btn quick_view_close" data-dismiss="modal" aria-label="Close"></div>
+          </div>
+          <div class="line"></div>
+
+          <div class="price">
+            <span class="poppins-h3 current-price on-sale"><%= display_price(product) %></span>
+            <% if product.on_sale? %>
+              <span class="poppins-text-18 orignal-price"><%= Spree::Money.new(product.original_price).to_html %></span>
+              <span class="poppins-text-16 discount-percentage"><%= number_to_percentage(product.discount_percent.round, precision: 0) %> OFF</span>
+            <% end %>
+          </div>
+
+          <%= form_for :order, html: { method: :post, remote: true}, url: populate_orders_path do |f| %>
+
+            <% if !product.variants.empty? %>
+              <div class="option-tabs">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a href="#options-<%= product.id %>" data-toggle="tab" class="poppins-text-13 nav-link active">OPTIONS</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="#product-detail-<%= product.id %>" data-toggle="tab" class="poppins-text-13 nav-link detail-tab">PRODUCT DETAILS</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content">
+                  <div class="poppins-text-11 tab-pane product-detail-tab-content" id="product-detail-<%= product.id %>">
+
+                    <p class="poppins-text-8 m-0 p-0">
+                      <%= product_description(product) rescue t('spree.product_has_no_description') %>
+                    </p>
+
+                    <br>
+
+                    <span class="list"> Key Details</span>
+                    <ul class="properties">
+                      <% product.product_properties.each do |product_property| %>
+                        <li class="poppins-text-10">
+                          <span class="poppins-text-10 bold"><%= product_property.property.presentation %>:</span>
+                          <%= product_property.value %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+
+                  <div class="col-12 tab-pane active options-tab-content" id="options-<%= product.id %>">
+
+                    <%if try_spree_current_user %>
+                      <div class="favorites d-flex justify-content-end" itemprop='favorite' data-hook='favorite'>
+                        <% if has_favorite?(product) %>
+                          <%= link_to '',
+                                      favorite_path(get_favorite(product),
+                                      favorable_id: product.id,
+                                      favorable_type: 'Spree::Product'),
+                                      method: :delete,
+                                      remote: true,
+                                      id: "favorable_product_#{product.id}",
+                                      class: 'favorites-control' %>
+                        <% else %>
+                          <%= link_to '',
+                                      favorites_path(favorable_id: product.id,
+                                      favorable_type: 'Spree::Product'),
+                                      method: :post,
+                                      remote: true,
+                                      id: "favorable_product_#{product.id}",
+                                      class: 'favorites-control' %>
+                        <% end %>
+                      </div>
+                    <% end %>
+
+                    <%= render partial: 'spree/shared/product_quick_view_cart_form', locals: {product: product, f: f, variants_stock: variants_stock } %>
+                  </div>
+                </div>
+              </div>
+
+            <% else %>
+              <div class="option-tabs">
+                <ul class="nav nav-tabs">
+
+                  <li class="nav-item">
+                    <a href="#product-detail-<%= product.id %>" data-toggle="tab" class="poppins-text-13 nav-link detail-tab active">PRODUCT DETAILS</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content">
+                  <div class="poppins-text-11 tab-pane product-detail-tab-content active" id="product-detail-<%= product.id %>">
+
+                    <p class="poppins-text-8 m-0 p-0">
+                      <%= product_description(product) rescue t('spree.product_has_no_description') %>
+                    </p>
+                    <br>
+                    <span class="list"> Key Details</span>
+                    <ul class="properties">
+                      <% product.product_properties.each do |product_property| %>
+                        <li class="poppins-text-10">
+                          <span class="poppins-text-10 bold"><%= product_property.property.presentation %>:</span>
+                          <%= product_property.value %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+
+                  <div class="col-12 tab-pane active options-tab-content" id="options-<%= product.id %>">
+
+                    <%if try_spree_current_user %>
+                      <div class="favorites d-flex justify-content-end" itemprop='favorite' data-hook='favorite'>
+                        <% if has_favorite?(product) %>
+                          <%= link_to '',
+                                      favorite_path(get_favorite(product),
+                                      favorable_id: product.id,
+                                      favorable_type: 'Spree::Product'),
+                                      method: :delete,
+                                      remote: true,
+                                      id: "favorable_product_#{product.id}",
+                                      class: 'favorites-control' %>
+                        <% else %>
+                          <%= link_to '',
+                                      favorites_path(favorable_id: product.id,
+                                      favorable_type: 'Spree::Product'),
+                                      method: :post,
+                                      remote: true,
+                                      id: "favorable_product_#{product.id}",
+                                      class: 'favorites-control' %>
+                        <% end %>
+                      </div>
+                    <% end %>
+
+                    <%= render partial: 'spree/shared/product_quick_view_cart_form', locals: {product: product, f: f, variants_stock: variants_stock } %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
+            <% if product.price_for(current_pricing_options) and !product.price.nil? %>
+              <div class="quantity-cart-btn-group">
+                <div class="quantity-btn-group <%= 'disable-quantity-btn-group' if out_of_stock(product, variants_stock) || !product.variants.empty? %>">
+                  <div>
+                    <%= button_tag "", class: "button disable_btn sub-btn", type: 'button', disabled: true %>
+                    <% if product.master.is_backorderable? && product.master.total_on_hand <= 0 %>
+
+                      <% if product.master.get_max_stock > 0 %>
+                        <%= number_field_tag :quantity, 1, id: "quantity-for-#{product.id}", class: 'quantity text-center', min: 1, max: product.master.get_max_stock %>
+                      <% else %>
+                        <%= number_field_tag :quantity, 1, id: "quantity-for-#{product.id}", class: 'quantity text-center', min: 1 %>
+                      <% end %>
+
+                    <% else %>
+                      <%= number_field_tag :quantity, 1, id: "quantity-for-#{product.id}", class: 'quantity text-center', min: 1, max: product.master.total_on_hand %>
+                    <% end%>
+
+
+                    <%= button_tag "", class: "button add-btn", type: 'button' %>
+                  </div>
+                  <div class="poppins-text-10 stock-error-message"></div>
+                </div>
+
+                <% if out_of_stock(product, variants_stock) %>
+                  <%= button_tag class: 'poppins-bold-text-16 mt-0 out-of-stock-btn add-to-cart', id: 'add-to-cart-button', :disabled => true, type: :submit do %>
+                    <%= t('spree.add_to_cart') %>
+                  <% end %>
+
+                <% else %>
+                  <%= button_tag class: 'poppins-bold-text-16 mt-0 btn-gradient-orange add-to-cart', id: 'add-to-cart-button', type: :submit do %>
+                    <%= t('spree.add_to_cart') %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <div class="quick-view-buttons">
+            <div class="d-block w-100 text-center">
+              <a class="poppins-bold-text-16 more-info" href="<%= product_path(product) %>" data-turbolinks="false"> View More Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T21:30:53.685914Z
+# touched on 2025-05-22T21:58:06.035785Z
+# touched on 2025-05-22T22:38:54.970926Z
+# touched on 2025-05-22T23:26:28.864286Z
+# touched on 2025-06-13T21:20:18.980766Z
