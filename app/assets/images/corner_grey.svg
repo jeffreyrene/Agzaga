@@ -1,0 +1,31 @@
+<svg width="346" height="234" viewBox="0 0 346 234" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_ddd)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-31.2545 -509.902C41.7352 -513.243 85.1453 -430.692 144.163 -387.616C202.999 -344.672 287.158 -326.099 313.572 -258.215C340.254 -189.642 319.405 -106.185 277.093 -45.9861C239.118 8.04321 155.641 -1.17871 103.988 39.9703C48.0614 84.5231 38.2679 182.942 -31.2545 199.655C-100.622 216.331 -177.909 173.434 -223.738 118.757C-266.353 67.9139 -250.158 -6.41266 -259.075 -72.1511C-266.059 -123.641 -280.997 -172.985 -270.203 -223.813C-258.414 -279.321 -231.755 -328.52 -195.379 -372.072C-148.434 -428.279 -104.411 -506.553 -31.2545 -509.902Z" fill="white"/>
+</g>
+<defs>
+<filter id="filter0_ddd" x="-294" y="-520" width="639.461" height="753.3" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="0.5"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="3"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+<feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dy="10"/>
+<feGaussianBlur stdDeviation="10"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+<feBlend mode="normal" in2="effect2_dropShadow" result="effect3_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect3_dropShadow" result="shape"/>
+</filter>
+</defs>
+</svg>
+
+# touched on 2025-05-22T20:43:31.132333Z
+# touched on 2025-05-22T23:01:55.566027Z
+# touched on 2025-05-22T23:47:13.017054Z
+# touched on 2025-06-13T21:20:23.412680Z

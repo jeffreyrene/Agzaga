@@ -1,0 +1,35 @@
+<div
+  class="modal checkout-registration-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="main-heading">Signup</div>
+        </div>
+
+        <div class="poppins-bold-text-12 close-modal upsell_modal_close upsell_modal_close-desktop" data-dismiss="modal"></div>
+      </div>
+      <div class="modal-body">
+        <div id="new-customer">
+          <div data-hook="signup" class="signup_form">
+            <%= render 'spree/shared/signup_form', for_checkout_login: true %>
+
+            <div class="login-option">
+              <%= t('spree.or') %>
+
+              <div class="green-link" id="continue-to-login" data-toggle="modal" data-target=".checkout-login-modal">Login to your account</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T23:47:18.371853Z
+# touched on 2025-06-13T21:20:23.415077Z
