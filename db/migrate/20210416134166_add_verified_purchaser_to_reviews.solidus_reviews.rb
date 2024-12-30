@@ -8,3 +8,5 @@ class AddVerifiedPurchaserToReviews < SolidusSupport::Migration[4.2]
 end
 
 # touched on 2025-05-22T23:36:47.270891Z
+
+# touched on 2025-06-13T21:20:36.900499Z
