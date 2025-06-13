@@ -1,0 +1,16 @@
+<% admin_breadcrumb('CTA Images') %>
+<h1>Edit CTA Image</h1>
+
+<%= form_for [@admin, @cta_image], url: admin_cta_image_path do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+
+  <div class="form-buttons filter-actions actions" data-hook="buttons">
+    <%= f.submit t('spree.actions.update'), class: 'btn btn-primary' %>
+    <%= link_to 'Back', admin_cta_images_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+
+# touched on 2025-05-22T20:36:33.256251Z
+# touched on 2025-05-22T23:01:12.666100Z
+# touched on 2025-05-22T23:30:42.771100Z

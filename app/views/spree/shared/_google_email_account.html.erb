@@ -1,0 +1,51 @@
+<% email_account ||= false %>
+<div class="google-account-email">
+  <div class="modal-header">
+    <div class="modal-title">Whoops!</div>
+
+    <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <%= image_tag("modal-close.svg") %>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <div class="description"><%= content %></div>
+
+    <% unless email_account.present? %>
+      <%= link_to spree_user_google_oauth2_omniauth_authorize_path, method: :post, data: {turbolinks: false}, class: 'google-login-section' do %>
+        <div class="google-login">
+          <div class="content">
+            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_227_1063)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5354 5.45654C13.5029 4.47179 12.125 3.93532 10.6993 3.95736C8.09049 3.95736 5.8748 5.71741 5.08479 8.08741V8.08746C4.6659 9.32942 4.6659 10.6743 5.08479 11.9162H5.08845C5.88213 14.2826 8.09415 16.0426 10.703 16.0426C12.0497 16.0426 13.2058 15.6982 14.1019 15.0898V15.0873C15.1565 14.3891 15.8766 13.2905 16.1008 12.0485H10.6993V8.19771H20.1317C20.2492 8.86646 20.3044 9.5499 20.3044 10.2297C20.3044 13.2712 19.2174 15.8427 17.3261 17.5844L17.328 17.5859C15.6709 19.1145 13.3964 20 10.6993 20C6.91833 20 3.46068 17.8688 1.76308 14.492V14.492C0.344757 11.6664 0.34476 8.33732 1.76309 5.51168H1.76311L1.76308 5.51165C3.46068 2.13116 6.91833 -1.27572e-05 10.6993 -1.27572e-05C13.1833 -0.0294083 15.5827 0.903901 17.3905 2.60149L14.5354 5.45654Z" fill="white"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_227_1063">
+              <rect width="20" height="20" fill="white" transform="translate(0.5)"/>
+              </clipPath>
+              </defs>
+            </svg>
+
+            <div class="text">Login with Google</div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div type="button" class="back-to-login google-login-section" data-toggle= "modal" data-target=".checkout-login-modal" data-dismiss="modal">
+        <div class="google-login">
+          <div class="content">
+            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.37839 5.81924L10.4999 9.88002L18.6216 5.81918C18.5603 4.75242 17.6759 3.90625 16.5938 3.90625H4.40625C3.32412 3.90625 2.43963 4.75245 2.37839 5.81924Z" fill="white"/>
+             <path d="M18.625 8.0885L10.4999 12.151L2.375 8.08855V14.0625C2.375 15.1843 3.28442 16.0938 4.40625 16.0938H16.5938C17.7156 16.0938 18.625 15.1843 18.625 14.0625V8.0885Z" fill="white"/>
+            </svg>
+
+            <div class="text">Login with Email</div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:40:34.400503Z
+# touched on 2025-05-22T23:37:30.949297Z

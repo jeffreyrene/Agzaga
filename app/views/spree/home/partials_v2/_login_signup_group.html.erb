@@ -1,0 +1,29 @@
+<div class="ag-card-bg-sunset-wheat login-group">
+  <div class="ag-card-header">
+    <div class="lexend-heading-32 d-flex align-items-center">
+      <%= image_tag 'gridicons_customize.svg', size: '24x24', class: 'heading-logo', alt: 'logo' if signed_in? %>
+      <%= signed_in? ? 'Custom Products' : 'Login or Signup' %>
+    </div>
+  </div>
+
+  <% if signed_in? %>
+    <%= link_to 'Custom Length Garden Hose', spree::custom_hose_generator_index_path, class: 'poppins-body-12 bold clear-link ag-btn-white btn-link-custom-hose' %>
+
+    <div class="coming-soon-group">
+      <div class="poppins-small-text pre-title-text">Coming Soon!</div>
+      <div class="poppins-body-12 bold mb-1">Custom Operator Invoicing</div>
+      <div class="poppins-body-12 bold">Custom Air Hose</div>
+    </div>
+
+  <% else %>
+    <div class="login-btn-group">
+      <%= link_to 'Login', spree::login_path, class: 'poppins-body-16 bold-600 clear-link ag-btn-white btn-link-login' %>
+
+      <%= link_to 'Sign up', spree::signup_path, class: 'poppins-body-16 bold-600 clear-link ag-btn-white btn-link-sign-up' %>
+    </div>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T20:44:38.682138Z
+# touched on 2025-05-22T23:45:55.235845Z
+# touched on 2025-05-22T23:47:02.120657Z

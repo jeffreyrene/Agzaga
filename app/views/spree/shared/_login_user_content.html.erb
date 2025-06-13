@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <div class="modal-title">Welcome Back <%= user&.bill_address&.firstname%>.</div>
+
+  <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <%= image_tag("modal-close.svg") %>
+  </div>
+</div>
+
+<div class="modal-body logged-in-user-section">
+  <div class="body-header">
+    <div class="body-header-title">Enter Your Password to Sign In</div>
+  </div>
+
+  <%= form_for Spree.user_class.new, as: :spree_user, url: spree.create_new_session_path, method: :post, remote: :true do |f| %>
+    <div id="nav-login-form">
+      <div class="form-group">
+        <%= hidden_field_tag "spree_user[email]", user.email %>
+        <div class="ag-input-neutral shipping-email">
+          <div class="ag-input-group-box email-validation">
+            <%= f.password_field :password, required: true, minlength: 6, class: "ag-input-field form-control",  placeholder: "Password", id: "nav_login_password"%>
+
+            <div class="ag-input-icon-append">
+              <div data-field='nav_login_password' id="login_password_icon" class="secure-password"></div>
+            </div>
+          </div>
+
+          <span class="error-message" id="nav_login_pass_message"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="remember-me-group">
+      <div class="remember-me">
+        <%= f.check_box :remember_me, tabindex: 3, class: 'check-box' %>
+        <span class="checkmark"></span>
+        <%= f.label :remember_me, 'Remember Me' %>
+      </div>
+
+      <%= link_to t('spree.forgot_password'), forget_password_path, method: :post, remote: :true, class: 'grey-link d-block poppins-bold-text-10 forgot-pass' %>
+    </div>
+
+    <div>
+      <%= f.button id: 'nav-login-btn', class: 'ag-btn ag-btn-md ag-btn-primary nav-login-btn', type: 'submit', tabindex: 4, autofocus: true do %>
+        Sign In
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T19:10:54.416431Z
+# touched on 2025-05-22T19:19:59.855776Z
+# touched on 2025-05-22T23:05:52.231045Z
+# touched on 2025-05-22T23:48:25.727110Z

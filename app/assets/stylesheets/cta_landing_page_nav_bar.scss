@@ -1,0 +1,290 @@
+.landing-page-nav-bar {
+  max-width: 1760px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 24px 32px;
+
+  header {
+    padding: 0;
+
+    .mobile-nav {
+      display: none;
+
+      .small-nav-v2 {
+        height: 0;
+        box-shadow: none;
+
+        .small-search-bar-v2 .search-form_v2 {
+          border: none;
+        }
+      }
+    }
+
+    .mobile-sidebar {
+      display: none;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 56px;
+
+      .logo-nav-items {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 760px;
+        width: 100%;
+
+        .head-logo {
+          max-width: 132px;
+          width: 100%;
+
+          img {
+            max-width: 132px;
+            width: 100%;
+          }
+        }
+      }
+
+      .navbar_v2 {
+        display: none;
+      }
+
+      .nav-icons {
+        display: flex;
+        align-items: center;
+        max-width: 906px;
+        width: 100%;
+        justify-content: flex-end;
+        column-gap: 8px;
+        position: relative;
+
+        .login-icon, .cart-btn, .search-icon {
+          cursor: pointer;
+        }
+
+        .navbar_v2 {
+          min-width: calc(min(47.28vw, 802px));
+          width: 100%;
+          border: none;
+        }
+
+        .countdown-notifier {
+          right: 7px;
+          top: 9px;
+          left: auto;
+          z-index: 11;
+          display: none;
+        }
+
+        .display-animation {
+          display: block !important;
+        }
+
+        .hide-animation {
+          display: none !important;
+        }
+      }
+
+      .nav-box {
+        max-width: 472px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 16px;
+
+        a, div {
+          font-family: 'Poppins';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: #1E1E1E;
+          text-decoration: none;
+          cursor: pointer;
+
+          &:hover {
+            color: #FFB514;
+            font-family: 'Poppins-semi-bold';
+          }
+        }
+      }
+
+      .navbar_v2 {
+        color: #ffffff;
+        box-shadow: rgba(0, 0, 0, 0.04);
+        min-height: 0;
+        min-width: 515px;
+        max-width: 750px;
+        width: 100%;
+        background: none;
+
+        .nav-search-box-v2 .search-form_v2 {
+          .search-bar-icon {
+            display: none;
+          }
+
+          .search-list-box {
+            .search-list-block{
+              width: 100%;
+            }
+
+            .search-feature-block {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .search-bar-box {
+        max-width: 750px;
+        width: 100%;
+        height: 50px;
+        background: #FFFFFF;
+        /* Primary/300 */
+        border: 2px solid #FFC954;
+        border-radius: 100px;
+        padding: 4px;
+        box-sizing: border-box;
+        display: flex;
+
+        .search-bar {
+          border: none;
+          flex: 1;
+          margin: 4px;
+        }
+
+        .btn-search {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 15px;
+          text-align: center;
+          color: #FFFFFF;
+          padding: 7px 24px;
+          background-color: #FFB514;
+          border-radius: 100px;
+          cursor: pointer;
+          border: none;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    header .desktop-nav .navbar_v2 {
+      min-width: 465px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    padding: 10px 16px;
+
+    header {
+      .desktop-nav {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: flex;
+        justify-content: space-between;
+
+        .toggle-logo {
+          display: flex;
+          align-items: center;
+        }
+
+        .mobile-icons {
+          display: flex;
+          align-items: center;
+          position: relative;
+
+          .countdown-notifier {
+            right: 9px;
+            top: 10px;
+            left: auto;
+            z-index: 11;
+            display: none;
+          }
+
+          .display-animation {
+            display: block !important;
+          }
+
+          .hide-animation {
+            display: none !important;
+          }
+        }
+
+        align-items: center;
+        .toggle-btn {
+          padding: 0;
+
+          img {
+            width: 44px;
+            height: 44px;
+          }
+        }
+
+        .mobile-nav-logo {
+          width: 134px;
+        }
+
+        .mobile-search-icon {
+          padding: 0;
+        }
+      }
+
+      .overlay {
+        height: calc(100% - 56px);
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0, 0.9);
+        overflow-x: hidden;
+        transition: 0.5s;
+        display: none;
+
+        .overlay-left {
+          background: var(--palette-neutral-100);
+          width: 73%;
+          height: 100%;
+          padding: 32px;
+          display: flex;
+          flex-direction: column;
+
+          a, div {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 28px;
+            color: #000000;
+            margin: 0;
+            padding-left: 0;
+            margin-bottom: 10px;
+
+            &:hover {
+              cursor: pointer;
+              color: grey;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+# touched on 2025-05-22T19:21:45.890235Z
+# touched on 2025-05-22T20:39:06.156721Z
+# touched on 2025-05-22T20:39:53.024637Z
+# touched on 2025-05-22T23:07:12.573978Z
+# touched on 2025-05-22T23:28:04.334293Z
+# touched on 2025-05-22T23:41:33.624950Z

@@ -1,0 +1,73 @@
+@import "spree/agzaga_ds/agzaga_variables";
+
+@each $key, $value in $ag-headings {
+  %#{$key} {
+    font-family: $font-family-poppins;
+    font-style: $font-style;
+    font-size: map-get($value, font_size);
+    line-height: map-get($value, line_height);
+  }
+
+  .ag-#{$key} {
+    @extend %#{$key};
+  }
+
+  @include media-breakpoint-up(lg) {
+    .ag-#{$key} {
+      font-size: map-get($value, font_size) - 4px;
+      line-height: map-get($value, line_height) - 4px;
+    }
+  }
+}
+
+@each $key, $value in $ag-display {
+  .ag-display-#{$key} {
+    font-family: $font-family-poppins;
+    font-style: $font-style;
+    font-size: map-get($value, font_size);
+    line-height: map-get($value, line_height);
+  }
+}
+
+@each $key, $value in $ag-paragraphs {
+  .ag-#{$key} {
+    font-family: $font-family-poppins;
+    font-size: map-get($value, font_size);
+    line-height: map-get($value, line_height);
+  }
+}
+
+@each $textDecorate in $textDecoration {
+  .ag-text-decoration-#{$textDecorate} {
+    text-decoration: #{$textDecorate};
+  }
+}
+
+@each $fst in $fontStyle {
+  .ag-fst-#{$fst} {
+    font-style: #{$fst};
+  }
+}
+
+.ag-font-normal {
+  @extend %ag-font-normal;
+}
+
+.ag-font-sbold {
+  @extend %ag-font-sbold;
+}
+
+.ag-font-bold {
+  @extend %ag-font-bold;
+}
+
+.ag-font-xbold {
+  @extend %ag-font-xbold;
+}
+
+
+# touched on 2025-05-22T19:16:11.208240Z
+# touched on 2025-05-22T20:41:42.989605Z
+# touched on 2025-05-22T20:44:25.688691Z
+# touched on 2025-05-22T23:07:43.212935Z
+# touched on 2025-05-22T23:24:23.522927Z

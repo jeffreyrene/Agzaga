@@ -1,0 +1,26 @@
+<% placeholder_text ||= nil %>
+<% mobile_nav ||= nil %>
+<% search_from_results ||= nil %>
+
+<%= form_tag spree.products_path, class:'navbar_search', method: :get do %>
+  <div class="search-form_v2" id="outer-search-box">
+    <div class="search-bar-icon">
+      <div class= "search-field-icon d-glass"></div>
+      <div class= "m-search-field-icon m-default-icon"></div>
+    </div>
+    <%= search_field_tag :keywords, params[:keywords], placeholder: placeholder_text || t('spree.search'), autocomplete: "off", class: 'search-input', id: nil, data: { mobile_view: mobile_nav.present?}  %>
+    <%= hidden_field_tag 'category', {}, class: 'search-items-category' %>
+
+    <input type="submit" class="search-btn-v2" value="Search" />
+
+    <div class="m-close-icon">
+
+    </div>
+
+    <%= render 'spree/shared/partials/mobile_nav_bar_search_modal', search_from_results: search_from_results %>
+  </div>
+<% end %>
+
+<div class="algolia-keys" data-algolia_id="<%= ENV['ALGOLIA_ID'] %>"  data-algolia_search_key="<%= ENV['ALGOLIA_SEARCH_KEY'] %>" data-algolia_index="<%= ENV['ALGOLIA_INDEX'] %>"></div>
+
+# touched on 2025-05-22T20:31:59.602280Z

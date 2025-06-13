@@ -1,0 +1,22 @@
+<div data-hook="admin_filter_type_form_fields" class="align-center row">
+  <div class="col-6">
+    <%= f.field_container :name do %>
+      <%= f.label :name, class: 'required' %><br />
+      <%= f.text_field :name, class: "fullwidth" %>
+      <%= f.error_message_on :name %>
+    <% end %>
+  </div>
+
+  <div class="col-6">
+    <%= f.field_container :presentation do %>
+      <%= f.label :presentation, class: 'required' %><br />
+      <%= f.text_field :presentation, class: "fullwidth" %>
+      <%= f.error_message_on :presentation %>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:15:40.555954Z
+# touched on 2025-05-22T19:16:13.069167Z
+# touched on 2025-05-22T23:27:35.506431Z
+# touched on 2025-05-22T23:42:51.382419Z

@@ -1,0 +1,103 @@
+<%promotion_exists = (@order&.line_item_adjustments&.nonzero&.exists? && @order&.line_item_adjustments&.nonzero&.promotion&.present?) || (@order&.adjustments&.nonzero&.eligible&.exists?) || (@order&.shipment_adjustments&.nonzero&.exists?)%>
+
+<div class="cart-bottom-summary">
+		<div class="cart-bottom-summary-total">
+			<div class="sub-total">Subtotal</div>
+			<div class="sub-total-price"><%= @order.display_item_total %></div>
+		</div>
+		<% @order.all_adjustments.tax.eligible.group_by( &:label ).each do |label, adjustments| %>
+		 	<div class="cart-bottom-summary-total">
+				<div class="sub-total"><%= t('spree.tax') %>: <%= label %></div>
+				<div class="sub-total-price"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></div>
+			</div>
+		<% end %>
+
+		<div class="cart-bottom-summary-total ship-clr-red">
+			<div class="sub-total">Est. Shipping</div>
+			<div class="sub-total-price"><%= @order.shipments.any? ? Spree::Money.new(@order.shipments.sum(&:cost), currency: @order.currency).to_html : '$0.00' %></div>
+		</div>
+
+		<div class="cart-bottom-summary-seperator">
+		</div>
+
+		<% unless @order.line_items.empty? %>
+			<%= form_tag order_coupon_codes_url(@order, from_cart_slider: true), id: "couponcode",  method: :post, remote: :true do %>
+				<div class="cart-bottom-summary-promo">
+						<%= text_field_tag 'coupon_code','', class:"cart-bottom-promo-text promo-input-field", placeholder:"Promo Code" %>
+						<%= submit_tag 'Apply',class:"promo-apply" %>
+				</div>
+			<%end%>
+		<% end %>
+
+		<div class="clr-red cart-summary-promo-helper d-none">helper text</div>
+
+		<% if promotion_exists%>
+			<div class="promo-badge-container">
+				<%= render partial: 'spree/checkout/checkout_promotion_badges', locals: { order: @order } %>
+			</div>
+		<%end%>
+
+		<div class="cart-bottom-summary-seperator">
+		</div>
+		<div class="cart-bottom-summary-total">
+			<div class="sub-total">Total Due</div>
+			<div class="total-due-price"><%= @order.display_total %></div>
+		</div>
+	</div>
+
+	<div class="cart-mobile-total">
+		<div class="total-shipping-container">
+			<div class="total-container">
+				<div class="total-text">Subtotal: </div>
+				<div class="total-value"><%= @order.display_item_total %></div>
+			</div>
+
+			<div class="guaranteed-secure-section">
+				<span class="secure">
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M4.875 7.375V6.125C4.875 4.39911 6.27411 3 8 3C9.72589 3 11.125 4.39911 11.125 6.125V7.375C11.8154 7.375 12.375 7.93464 12.375 8.625V11.75C12.375 12.4404 11.8154 13 11.125 13H4.875C4.18464 13 3.625 12.4404 3.625 11.75V8.625C3.625 7.93464 4.18464 7.375 4.875 7.375ZM9.875 6.125V7.375H6.125V6.125C6.125 5.08947 6.96447 4.25 8 4.25C9.03553 4.25 9.875 5.08947 9.875 6.125Z" fill="#22C55E"/>
+					</svg>
+
+					Guaranteed Secure
+				</span>
+
+				<a href="<%= faqs_page_path%>#help-center-faq-section" class="learn-more">
+					<span class="d-none d-md-inline-block link"> Learn More </span>
+
+					<span class="d-inline-block d-md-none">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M8.23962 8.60005C8.49588 8.05629 9.18732 7.66672 10.0001 7.66672C11.031 7.66672 11.8667 8.29352 11.8667 9.06672C11.8667 9.71979 11.2705 10.2684 10.464 10.4231C10.2109 10.4717 10.0001 10.6756 10.0001 10.9334M10 12.3334H10.0047M14.2 10C14.2 12.3196 12.3196 14.2 10 14.2C7.68045 14.2 5.80005 12.3196 5.80005 10C5.80005 7.68045 7.68045 5.80005 10 5.80005C12.3196 5.80005 14.2 7.68045 14.2 10Z" stroke="#A1A1AA" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</span>
+				</a>
+
+			</div>
+		</div>
+		<%= form_for @order, url: update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+			<%= button_tag class: 'ag-btn ag-btn-primary checkout-button', id: 'checkout-link', name: 'checkout' do %>
+				Check Out
+			<% end %>
+		<%end%>
+	</div>
+
+<% coupon_codes = []%>
+<% @order.all_adjustments.eligible.promotion.each do |promo| %>
+  <% coupon_codes << promo&.promotion_code&.value %>
+<% end %>
+
+<div class="order_info d-none" data-id="<%= @order.number%>" data-value="<%= @order.display_total.to_s.sub("$", "") %>" data-currency="<%= @order.currency %>" data-coupon="<%= coupon_codes.uniq.join(",") %>" data-shipping="<%= @order.shipments.last&.cost.to_s %>" data-count="<%= @order.line_items.count %>"></div>
+<% cutom_hose_price = 0 %>
+<% index = 0 %>
+<% @order.line_items.each do|line_item| %>
+  <% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+    <% cutom_hose_price =  cutom_hose_price + (line_item.price.to_f * line_item.quantity ) %>
+    <div class="order_item d-none" data-id="<%= line_item.id %>"data-price="<%= cutom_hose_price %>" data-quantity="<%= line_item.quantity %>" data-currency="<%= line_item.currency %>" data-listname="Not Listed" data-listid="0" ></div>
+  <% else %>
+    <div class="order_item_<%= index%> d-none" data-id="<%= line_item.id %>" data-name="<%= line_item.variant.name %>" data-price="<%= line_item.price.to_s %>" data-quantity="<%= line_item.quantity %>" data-currency="<%= line_item.currency %>" data-listname="<%= line_item.product.taxons.any? ? line_item.product.taxons.first.name : "Not Listed" %>" data-listid="<%= line_item.product.taxons.any? ? line_item.product.taxons.first.id : 0 %>" ></div>
+      <% index = index +1 %>
+  <% end %>
+<% end %>
+
+# touched on 2025-05-22T19:24:47.936105Z
+# touched on 2025-05-22T20:40:22.752033Z
+# touched on 2025-05-22T23:18:38.804170Z

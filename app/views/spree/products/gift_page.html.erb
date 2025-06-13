@@ -1,0 +1,72 @@
+<% content_for :title, 'Agzaga - Great Gift Ideas!' %>
+
+<% @body_id = 'gift-page' %>
+
+<div class="gift-page">
+  <div id="hero-div">
+    <picture>
+      <source media="(max-width:414px)" srcset="https://assets.agzaga.com/CTA/gift_bundle_mobile_cta.webp" type="image/webp">
+      <source media="(max-width:414px)" srcset="https://assets.agzaga.com/CTA/gift_bundle_mobile_cta.jpg" type="image/jpeg" >
+
+      <source media="(max-width:767px)" srcset="https://assets.agzaga.com/CTA/gift_bundle_tab_cta.webp" type="image/webp">
+      <source media="(max-width:767px)" srcset="https://assets.agzaga.com/CTA/gift_bundle_tab_cta.jpg" type="image/jpeg" >
+
+      <source srcset="https://assets.agzaga.com/CTA/gift_bundle_cta_desktop.webp" type="image/webp" >
+      <img data-src="https://assets.agzaga.com/CTA/gift_bundle_cta_desktop.jpg" alt="Gift Bundle" class="d-block w-100 outerdiv-img" >
+    </picture>
+  </div>
+
+  <div class="gift-page-content-section">
+    <div class="breadcrumb-group">
+      <div class="back-btn">
+        <%= link_to request.referer do%>
+          <span class="back-arrow">
+            <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.66667 9L1.5 5M1.5 5L5.66667 1M1.5 5L11.5 5" stroke="#52525B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+
+          <span class="back-lbl back-lbl-mbl-desktop">Back</span>
+          <%= link_to 'Deals', spree::deals_products_url, class: 'deals-mobile-link' %>
+        <% end %>
+      </div>
+
+      <% separator = '<span class="separator">/<span>'.html_safe %>
+
+      <div class="gift-breadcrumb-desktop">
+        <li class='breadcrumb-option'>
+          <%= link_to 'Home', spree::root_url, class: 'option-link' %>
+          <span class="separator">/<span>
+        </li>
+
+        <li class='breadcrumb-option'>
+          <%= link_to 'Deals', spree::deals_products_url, class: 'option-link' %>
+          <span class="separator">/<span>
+        </li>
+
+        <li class='breadcrumb-option'>
+          <span class='option-link gift-breadcrumb-option'>Gift Bundles</span>
+        </li>
+      </div>
+    </div>
+
+    <div class="gift-products-section">
+      <% @group_products.each_with_index do |product, index| %>
+        <% if index == 7 %>
+          <div class="gift-bundle-ad">
+            <div class="gift-ad-image">
+              <%= link_to spree::deals_products_url do %>
+                <%= image_tag 'gift_bundle_ad.jpg', alt: 'gift bundle ad', class: 'image' %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <%= render 'spree/products/partials/gift_product_cards', product: product %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T23:02:56.664305Z
+# touched on 2025-05-22T23:26:22.765711Z

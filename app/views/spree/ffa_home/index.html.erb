@@ -1,0 +1,309 @@
+<div class="ffa-home-container">
+  <div class="ffa-cta">
+    <div class="support-section">
+
+      <div class="support-section-text">
+        <div class="ffa-logo">
+          <%= image_tag 'Frame.png', class: 'frame-image' %>
+        </div>
+
+        <div class="heading">
+          <div class="sub-heading-1">
+            WE SUPPORT
+          </div>
+
+          <div class="sub-heading-2">
+            the Future of Ag
+          </div>
+        </div>
+
+        <div class="ffa-cta-image-mobile">
+          <img src='https://assets.agzaga.com/public/bale-tuff-mobile.webp' alt='bale tuff mobile' class='w-100'>
+        </div>
+
+        <div class="text">
+          We “believe in the future of agriculture, with a faith born not of words but of deeds.
+          ” This is why we're dedicated to supporting and empowering the new generation of farmers,
+           many of whom participate in FFA. As today’s youth learn, earn, and serve through the
+           organization's mission, we’re finding creative ways to give back and elevate their opportunities.
+        </div>
+
+          <%= link_to "#back-to-future-container", class: "support-section-button" do %>
+            Watch How
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.1666 10.8333L9.99992 15M9.99992 15L5.83325 10.8333M9.99992 15L9.99992 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          <% end %>
+      </div>
+
+      <div class="support-section-img">
+        <img src='https://assets.agzaga.com/public/bale-tuff-desktop.webp' alt='bale tuff desktop' class='w-100'>
+      </div>
+    </div>
+
+    <%= link_to "#back-to-future-container", class: "icon" do %>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 17L12 21M12 21L8 17M12 21L12 3" stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    <% end %>
+  </div>
+
+  <div id="back-to-future-container">
+    <div class="back-to-future-section">
+      <div class="future-description">
+        <div class="heading">GIVING BACK TO THE FUTURE</div>
+
+        <div class="video-block-mobile">
+          <iframe src="https://www.youtube.com/embed/Mr5gcfUCeUk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+
+        <div class="text"><span class="top">As a sign of our support, we want to give farmers the opportunity to show their own. Partnering with the National FFA Organization, we created a custom patterned net wrap which boasts the strong & recognizable colors of FFA. Support for this organization runs deep in our community, and now farmers all over the country can display their support by joining the Blue & Gold movement.</span>
+
+        2023 marks the second year of our Blue & Gold initiative, and thanks to the support of our customers, we have been able to commit <span class="ffa-count">over $100,000</span> to National FFA.</div>
+
+        <% if @product.present? %>
+          <div class="blue-gold-wrap">
+            <div class="heading">Shop Blue & Gold Wrap</div>
+            <div class="shop-net-wrap-container">
+              <a href="<%= product_path(@product.slug) %>" class="product-link" data-turbolinks="false">
+                <div class="net-wrap-block">
+                  <div class="image-block">
+                    <%= image_tag @product&.gallery&.images.present? ?  @product.gallery.images.where(alt: "mobile-image")&.first&.url(:sm_285) || @product.gallery.images&.first&.url(:sm_285) : 'noimage_sq.png', loading: 'lazy', alt: @product.name, class: 'image' %>
+                  </div>
+
+                  <div class="detail">
+                    <div class="title">
+                      <% if @product.on_sale? %>
+                        <div class="product-on-sale">
+                          <div class="sale-discount-section">
+                            <span class="current-price on-sale before-sale-price"><%= "$#{'%.2f' % @product.price}" %></span>
+                            <span class="discount-percentage"> <%= @product.discount_percent.round %>% OFF </span>
+                          </div>
+
+                          <div class="orignal-price">List Price: <span class="original-price-value"><%= Spree::Money.new(@product.original_price).to_html %></span></div>
+                        </div>
+
+                      <% else %>
+                        <span class="current-price"><%= "$#{'%.2f' % @product.price}" %></span>
+                      <% end %>
+                    </div>
+
+                    <div class="desc">
+                      <%= @product.name %>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <%= link_to  "#{spree.root_url}products?keywords=bale tuff blue and gold'", class: "shop-all-btn" do %>
+                <span>Shop All Sizes</span>
+
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.8889 6.88892L17 10M17 10L13.8889 13.1111M17 10L3 10" stroke="#18181B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="video-block">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Mr5gcfUCeUk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="sign-of-support">
+      <div class="text">
+        <%= image_tag 'sign-of-support.png' %>
+        <span> As a sign of our support, we want to give farmers the opportunity to show their own.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap-section">
+    <div class="wrap-heading">A WRAP THAT GIVES BACK</div>
+    <div class="wrap-text">The funds raised through FFA Net Wrap sales have allowed us to do a whole lot of good. Here are some of our favorite projects:</div>
+    <div class="card-section">
+      <div class="card">
+        <div class="logo"><%= image_tag 'donated-img-1.png' %></div>
+
+        <div class="text-section">
+          <div class="logo-text">Donated</div>
+
+          <div class="card-heading">$10,000</div>
+
+          <div class="card-text">Locally to help fund a new Health & Sciences Lab in Nevada, MO</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="logo"><%= image_tag 'award-img.png' %></div>
+
+        <div class="text-section">
+          <div class="logo-text">Sponsored Forage Proficiency </div>
+
+          <div class="card-heading">AWARDS</div>
+
+          <div class="card-text">At National FFA, and on the State Level across the country.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="logo"><%= image_tag 'awareness-img.png' %></div>
+
+        <div class="text-section">
+          <div class="logo-text">Spread Massive</div>
+
+          <div class="card-heading">AWARENESS</div>
+
+          <div class="card-text">Through our Blue & Gold Initiative in hayfields across the Midwest.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="logo"><%= image_tag 'donated-img-2.png' %></div>
+
+        <div class="text-section">
+          <div class="logo-text">Donated</div>
+
+          <div class="card-heading">$18,000</div>
+
+          <div class="card-text">Towards 2022 SAE projects. 18 projects at $1,000 each.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="convention-section">
+    <div class="flex upper">
+      <div class="upper-section">
+        <div class="first-img">
+          <img src='https://assets.agzaga.com/public/ffa-convention-img1.webp' alt='ffa convention img1'>
+        </div>
+
+        <div class="second-img">
+          <img src='https://assets.agzaga.com/public/ffa-convention-img2.webp' alt='ffa convention img2'>
+        </div>
+
+        <div class="third-img">
+          <img src='https://assets.agzaga.com/public/ffa-convention-img3.webp' alt='ffa convention img3'>
+        </div>
+      </div>
+
+      <div class="text-section">
+        <div class="heading">NATIONAL FFA CONVENTION</div>
+
+        <div class="text">
+          <div class="lines">In 2022, we went to the National FFA Convention in Indianapolis and met some great future farmers, gave away some awesome merch, and connected with a host of amazing people who are <span class="orange">passionate about the future</span> just like we are.</div>
+
+          <div class="lines">We hosted a TikTok competition and crowned Silo, Oklahoma as “Agzaga’s Intern” on TikTok for the next 12 months, while we took sponsorship applications for FFA members to attend the Washington Leadership Conference in 2023.</div>
+
+          <div class="lines">The past two years have served as an amazing opportunity to meet with youth in agriculture, and keep a pulse on where their passions and interests lie.</div>
+        </div>
+
+        <%= render partial: 'spree/ffa_home/partials/socials' %>
+      </div>
+    </div>
+
+    <div class="flex lower">
+      <div class="first-img lower-section">
+        <img src='https://assets.agzaga.com/public/ffa-convention-img3.webp' alt='ffa convention img3'>
+      </div>
+
+      <div class="last-img">
+        <img src='https://assets.agzaga.com/public/ffa-convention-img4.webp' alt='ffa convention img4'>
+      </div>
+    </div>
+  </div>
+
+  <div class="convention-section mobile">
+    <div class="text-section">
+      <div class="heading">NATIONAL FFA CONVENTION</div>
+
+      <div class="text">
+        <div class="lines">In 2022, we went to the National FFA Convention in Indianapolis and met some great future farmers, gave away some awesome merch, and connected with a host of amazing people who are <span class="orange">passionate about the future</span> just like we are.</div>
+
+        <div class="lines">We hosted a TikTok competition and crowned Silo, Oklahoma as “Agzaga’s Intern” on TikTok for the next 12 months, while we took sponsorship applications for FFA members to attend the Washington Leadership Conference in 2023.</div>
+
+        <div class="lines">The past two years have served as an amazing opportunity to meet with youth in agriculture, and keep a pulse on where their passions and interests lie.</div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <%= render partial: 'spree/ffa_home/partials/slider' %>
+      <div class="overlay"></div>
+    </div>
+
+    <%= render partial: 'spree/ffa_home/partials/socials' %>
+  </div>
+
+  <div class="horizontal-line"></div>
+
+  <div class="more-products-section">
+    <div class="heading-section">
+      <div class="heading"> MORE PRODUCTS THAT SUPPORT </div>
+    </div>
+
+    <div class="card-pages-group" data-tab-size=4>
+      <div class="nav-section left">
+        <div class="load-btn nav-back disabled" data-current-section="ffa_products">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="cards" id="ffa_products" data-total-cards="<%= @ffa_products_count %>">
+        <% cache @ffa_products.map(&:id), expires_in: 30.minutes do %>
+          <% featured_product_cards = load_product_cards(@ffa_products) %>
+          <% featured_product_cards.each do |product| %>
+            <div class="slider-card visible" data-tab="" data-loaded="true">
+              <%= render partial: 'spree/shared/standard_product_card', locals: { product: product } %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="nav-section">
+        <div class="load-btn nav-forward <%= "disabled" if @ffa_products_count <= 4 %>" data-current-section="ffa_products">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-more-mbl">
+      <%= link_to spree.products_url(ffa_products: true), class: 'ag-btn ag-btn-neutral ag-btn-lg view-more-link' do %>
+        View More
+
+        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.3333 5.83325L15.5 9.99992M15.5 9.99992L11.3333 14.1666M15.5 9.99992L5.5 9.99992" stroke="#71717A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="keep-uptodate-section">
+    <div class="keep-uptodate">
+
+      <div class="keep-uptodate-img">
+        <picture>
+          <source media="(max-width:991px)" srcset="https://assets.agzaga.com/public/mailing-subscription-mobile-img.webp" type="image/webp">
+
+          <source srcset="https://assets.agzaga.com/public/mailing-subscription-desktop-img.webp" type="image/webp" >
+          <img data-src="https://assets.agzaga.com/public/mailing-subscription-desktop-img.webp" alt="Mailing Subscription" class="d-block w-100 outerdiv-img" >
+        </picture>
+      </div>
+
+      <div class="keep-uptodate-form" id="mailing-subscription-section">
+        <%= render partial: 'spree/ffa_home/partials/mailing_subscription_by_ffa' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:34:30.300626Z
+# touched on 2025-05-22T22:30:40.170307Z
+# touched on 2025-05-22T23:01:19.883609Z
+# touched on 2025-05-22T23:30:00.849005Z

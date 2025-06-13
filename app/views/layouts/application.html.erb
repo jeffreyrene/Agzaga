@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : 'Agzaga' %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= favicon_link_tag 'agazon_logo_mark_warm.svg' %>
+    <%= render partial: 'layouts/partials/no_index' %>
+    <%= render partial: 'layouts/partials/google_tag_head' %>
+
+    <% if content_for?(:meta_description) %>
+      <meta name="description" content="<%= yield :meta_description %>">
+    <% end %>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render partial: 'layouts/partials/facebook_meta_tag' %>
+    <%= render partial: 'layouts/partials/hotjar' %>
+    <%= render partial: 'layouts/partials/google_ads' %>
+    <%= render partial: 'layouts/partials/pinterest' %>
+    <%= render partial: 'layouts/partials/microsoft_ads' %>
+  </head>
+
+  <body class="<%= "#{controller_name} #{action_name}" %>">
+    <%= render partial: 'layouts/partials/google_tag_body' %>
+    <%= render partial: 'spree/shared/header' unless ['not_found', 'internal_server'].include?(action_name) %>
+    <%= yield %>
+    <%= render partial: 'spree/shared/footer_v2' unless ['not_found', 'internal_server'].include?(action_name)%>
+    <%= render partial: 'spree/shared/mobile_footer' unless ['not_found', 'internal_server'].include?(action_name)%>
+    <%= render partial: 'layouts/partials/help_scout' %>
+  </body>
+</html>
+
+# touched on 2025-05-22T19:06:59.095971Z
+# touched on 2025-05-22T20:45:04.829989Z
+# touched on 2025-05-22T23:38:54.481582Z
+# touched on 2025-05-22T23:43:48.647040Z
+# touched on 2025-05-22T23:48:15.376543Z

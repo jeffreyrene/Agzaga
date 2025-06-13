@@ -1,0 +1,13 @@
+<div class="your-cart-head cart-body-saved-items">
+  <div class="your-cart-heading">Saved Items</div>
+  <span id='save-item-count'class="ag-badge ag-badge-sm cart-items-badge"><%= render 'spree/shared/cart_count', saved_item:true %></span>
+</div>
+<%= render partial: 'spree/orders/cart_v2_product', collection: @saveditems, :as => :line_item, locals: { saveditems: true, quantity_change: true }  %>
+
+# touched on 2025-05-22T20:38:16.647973Z
+# touched on 2025-05-22T20:42:29.343301Z
+# touched on 2025-05-22T23:01:28.467202Z
+# touched on 2025-05-22T23:19:40.854443Z
+# touched on 2025-05-22T23:29:51.086812Z
+# touched on 2025-05-22T23:30:08.739090Z
+# touched on 2025-05-22T23:30:52.214582Z

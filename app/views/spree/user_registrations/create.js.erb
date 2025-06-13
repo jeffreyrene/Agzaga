@@ -1,0 +1,23 @@
+<% if resource.errors.any? %>
+  window.$("#email-modal-message").addClass('error-data').html("<%= j resource.errors.full_messages.join('; ') %>")
+  if (($('.show-subscriber').length) || ($('.early-bird-show-subscriber').length)) {
+    $("#subscriber-email-message").addClass('error-data').html("<%= j resource.errors.full_messages.join('; ') %>").show()
+    $('#signup-email').parent().addClass('error-field');
+  }
+<% else %>
+
+  if (window.$('.show-subscriber').length) {
+    <% cookies[:visited] = nil %>
+    $('.subscriber-modal-dialog').addClass('success-bg')
+    $('.header-text').html("<%= j render 'spree/shared/subscriber_success_text' %>")
+  }
+  else if (window.$('.early-bird-show-subscriber').length) {
+    <% cookies[:early_bird_visited] = nil %>
+    $('.early-bird-modal-dialog').addClass('early-success-bg')
+    $('.header-text').html("<%= j render 'spree/shared/early_bird_success_text' %>")
+  }
+  else {
+    window.$("#checkout-registration-modal .close").click()
+    location.reload();
+  }
+<% end %>

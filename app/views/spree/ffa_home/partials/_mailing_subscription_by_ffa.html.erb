@@ -1,0 +1,49 @@
+<div class="heading">
+  KEEP UP-TO-DATE ON AGZAGA
+</div>
+
+<div class="keep-uptodate-sub-form">
+  <%= form_tag(main_app.news_letter_path(ffa_susbscription: true), remote: true, class: 'news-letter-form') do %>
+    <div class="ag-input-neutral">
+      <div class="ag-input-label">First Name</div>
+      <div class="ag-input-group-box">
+        <%= text_field_tag 'first_name', '', placeholder: 'First Name', required: true, class: 'ag-input-field input-field first-name-input-ffa' %><br/><br/>
+      </div>
+      <div class="ag-input-helper-text">Helper Text</div>
+    </div>
+
+    <div class="ag-input-neutral">
+      <div class="ag-input-label">Last Name</div>
+      <div class="ag-input-group-box">
+        <%= text_field_tag 'last_name', '', placeholder: 'Last Name', required: true, class: 'ag-input-field input-field first-name-input-ffa' %><br/><br/>
+      </div>
+      <div class="ag-input-helper-text">Helper Text</div>
+    </div>
+
+    <div class="ag-input-neutral email-section">
+      <div class="ag-input-label">Email</div>
+      <div class="ag-input-group-box">
+        <%= email_field_tag 'email', '', placeholder: 'Email Address', required: true, class: 'ag-input-field input-field first-name-input-ffa' %><br/><br/>
+      </div>
+      <div class="ag-input-helper-text">Helper Text</div>
+    </div>
+
+    <div class="agree-policy-error"></div>
+
+    <div class="agree-policy-section">
+      <button type="submit" class="submit-btn submit-btn-news-letter submit-btn-ffa" aria-label="email">Sign Up
+      </button>
+
+      <%= label_tag do %>
+        <%= check_box_tag "agree_policy", 1, true %>
+        I agree to receive exclusive discounts and other updates via Email
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="footer">
+  By clicking "Sign Up", you agree to create a free agzaga.com account, and you agree to Agzaga's Privacy Policy.
+</div>
+
+# touched on 2025-05-22T20:31:59.604930Z

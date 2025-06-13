@@ -1,0 +1,317 @@
+<div style="  width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #FFF;
+              margin-bottom: 8px;">
+  <a href="https://agzaga.com/"
+     style="text-decoration: none;
+            display: block;
+            margin: auto;">
+    <img src="https://agazon-storage.nyc3.cdn.digitaloceanspaces.com/public_images/agzaga_logo.png" alt="Agzaga" style="width: 104px; display: block; margin: auto; ">
+  </a>
+</div>
+
+<div
+  style=" text-align: center;
+          font-family: Poppins, sans-serif;
+          margin-bottom: 16px;">
+
+    <a href="<%= spree::account_url %>"
+       style="font-size: 10px;
+              line-height: 16px;
+              letter-spacing: 0.04em;
+              color: #171717;
+              text-decoration: none;
+              display: inline-block;
+              cursor: pointer;
+              margin: 0 16px;">
+      Account Info
+    </a>
+
+    <a href="<%= spree::product_categories_url %>"
+       style="font-size: 10px;
+              letter-spacing: 0.04em;
+              color: #171717;
+              text-decoration: none;
+              display: inline-block;
+              cursor: pointer;
+              margin: 0 16px;">
+      View All Products
+    </a>
+  </div>
+
+
+
+
+<% if @order.ffa_chapter.present? %>
+  <div class="thank-you-heading" style="text-align: center; width: 600px; margin: 0 auto;">
+    <img src="https://agazon-storage.nyc3.cdn.digitaloceanspaces.com/public_images/thank-you_header.png" style="width: 100%"></img>
+  </div>
+
+  <div
+  style="
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 0 auto;
+  max-height: 2px;
+  background: #004C97;
+  max-width: 600px;
+  margin-top: 30px;
+  margin-bottom: 20px;">
+
+  <span style=" font-family: Poppins-bold,  sans-serif;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 24px;
+                align-items: center;
+                letter-spacing: 0.03em;
+                color: #000000;
+                background-color: #fff;
+                padding: 0 8px 0 46px;
+                margin: 10px auto 20px">
+    Your Contributed
+  </span>
+
+  <span style=" padding: 0 46px 0 0;
+                background-color: #fff;
+                color: #FFB514;
+                align-items: center;
+                letter-spacing: 0.03em;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: bold;
+                font-family: Poppins-bold, sans-serif;">
+    $<%= @order.five_percent_of_items_total %>
+  </span>
+</div>
+
+<div style="  width: 100%;
+              margin: 0 auto;
+              text-align: center;
+              font-family: Poppins, sans-serif;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 17px;
+              text-align: center;
+              letter-spacing: 0.03em;
+              color: #000000;">
+  to <span style="text-transform: uppercase;"><%= "#{@order.ffa_chapter.name}" %></span>
+</div>
+
+<div style="border:2px dashed #DADADA; width: 600px; margin: 20px auto; text-align: center;"></div>
+
+<% else %>
+  <div class="thank-you-heading" style="font-family: Draught, sans-serif;font-style: normal;font-weight: normal;font-size: 45px;line-height: 46px; align-items: center; text-align: center; letter-spacing: 0.03em; color: #000000; margin-bottom: 16px; cursor: default;padding: 0 45px;">
+    Thank you for your order!
+  </div>
+<% end %>
+
+<p class="sub-head-text" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;align-items: center;text-align: center;letter-spacing: 0.03em;color: #000000;max-width: 384px;margin: 0 auto 24px;padding: 0 34px;cursor: default;">
+  Take a look at these details, and keep them for your records. We’ll send you another email when we ship your order.
+</p>
+
+<div class="order-group"
+      style="max-width: 536px;
+              background: #FAFAFA;
+              box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+              border-radius: 16px;
+              margin: 0 auto 16px;
+              padding: 30px 0 30px 0;">
+
+  <div class="summary-heading-group" style="display: flex;align-items: center;margin-bottom: 16px;">
+
+    <div class="gold-box" style="width: 16px;height: 16px;background: #F1B71C;margin-right: 16px;"></div>
+
+    <p class="heading poppins-bold-text-18" style="font-family: Poppins-bold, sans-serif;font-style: normal;font-weight: bold;font-size: 18px;line-height: 23px;cursor: default;color: #171717;letter-spacing: 0.02em;margin: 0;">Order Summary</p>
+  </div>
+
+  <% @order.line_items.each do |item| %>
+    <table style="margin: 0 12px 16px 12px; width: 96%">
+      <tr style="margin-bottom: 3px;">
+        <td style="font-family: Poppins, sans-serif;font-style: normal;font-weight: bold;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default;max-width: 360px;">
+          <%= item.variant.product.name %>
+        </td>
+
+        <td style="font-family: Poppins, sans-serif;font-style: normal;font-weight: bold;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default; text-align: right;">
+          <%= item.display_amount %>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 10px;line-height: 14px;letter-spacing: 0.03em;color: #000000;cursor: default;">
+          <%= item.variant.options_text %>
+        </td>
+
+        <td style="text-align: right;">
+          <p style="font-family: sans-serif;font-weight: normal;font-size: 8px;line-height: 11px;text-align: right;letter-spacing: 0.03em;color: #000000;cursor: default;font-style: italic; margin: 0;">
+            SKU: <span><%= item.variant.sku %></span>
+          </p>
+
+          <div style="font-family: sans-serif;font-weight: normal;font-size: 8px;line-height: 11px;text-align: right;letter-spacing: 0.03em;color: #000000;cursor: default;font-style: italic; margin: 0;">
+            Qty: <span><%= item.quantity %></span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+
+  <div class="gray-line-2x" style="border-bottom: 2px solid #EDEDED;margin-bottom: 16px;"></div>
+
+  <table class="order-price-group" style="width: 96%; margin: 0 12px 16px 12px;">
+    <tr style="margin: 0 12px 4px 12px;">
+      <td class="subtotal-label poppins-text-12" style="font-family: Poppins, sans-serif; font-style: normal; font-weight: normal;font-size: 12px; line-height: 17px; letter-spacing: 0.03em; color: #000000; cursor: default;">
+        <%= t('.subtotal') %>
+      </td>
+
+      <td class="sub-price poppins-text-12" style=" font-family: Poppins, sans-serif; font-style: normal; font-weight: normal;font-size: 12px; line-height: 17px; letter-spacing: 0.03em; color: #000000; cursor: default; text-align: right;">
+        <%= @order.display_item_total %>
+      </td>
+    </tr>
+
+    <% if @order.line_item_adjustments.exists? %>
+      <% if @order.all_adjustments.promotion.eligible.exists? %>
+        <% @order.all_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
+          <tr class="subtotal-group" style="margin: 0 12px 4px 12px;">
+            <td class="subtotal-label poppins-text-12" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default;">
+              <%= label %>:
+            </td>
+
+            <td class="sub-price poppins-text-12" style="font-family: Poppins, sans-serif; font-style: normal; font-weight: normal;font-size: 12px; line-height: 17px; letter-spacing: 0.03em; color: #000000; cursor: default; text-align: right;">
+              <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| %>
+      <tr class="subtotal-group" style="margin: 0 12px 4px 12px;">
+        <td class="subtotal-label poppins-text-12" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default;">
+          <%= name %>:
+        </td>
+
+        <td class="sub-price poppins-text-12" style="font-family: Poppins, sans-serif; font-style: normal; font-weight: normal; font-size: 12px; line-height: 17px; letter-spacing: 0.03em; color: #000000; cursor: default; text-align: right;">
+          <%= Spree::Money.new(shipments.sum(&:total_before_tax), currency: @order.currency) %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% if @order.all_adjustments.eligible.tax.exists? %>
+      <% @order.all_adjustments.eligible.tax.group_by(&:label).each do |label, adjustments| %>
+        <tr class="subtotal-group" style="margin: 0 12px 4px 12px;">
+          <td class="subtotal-label poppins-text-12" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default;">
+            <%= label %>:
+          </td>
+
+          <td class="sub-price poppins-text-12" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default; text-align: right;">
+            <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+
+    <% @order.adjustments.eligible.each do |adjustment| %>
+      <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+
+      <tr class="subtotal-group" style="display: flex;margin: 0 12px 4px 12px;">
+        <td class="subtotal-label poppins-text-12" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default;">
+          <%= adjustment.label %>:
+        </td>
+
+        <td class="sub-price poppins-text-12" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default; text-align: right;">
+          <%= adjustment.display_amount %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @order.total_applicable_store_credit > 0 %>
+      <tr class="subtotal-group" style="margin: 0 12px 4px 12px;">
+        <td class="subtotal-label poppins-text-12" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default;">
+            <%= t('spree.store_credit.store_credit') %>:
+        </td>
+
+        <td class="sub-price poppins-text-12" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: normal;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default; text-align: right;">
+          <%= @order.display_total_applicable_store_credit.to_html %>
+        </td>
+      </tr>
+    <% end %>
+
+    <tr class="subtotal-group" style="margin: 0 12px 4px 12px;">
+      <td class="subtotal-label poppins-text-12 bold" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: 700;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default;">
+        <%= t('.total') %>
+      </td>
+
+      <td class="sub-price poppins-text-12 bold" style="font-family: Poppins, sans-serif;font-style: normal;font-weight: 700;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default; text-align: right;">
+        <%= @order.display_total %>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="for-desktop order-status-btn" style="text-align: center; margin: 23px;">
+  <a href="<%= spree::account_url + '#my-orders' %>"
+      style=" padding: 11px;
+              margin: 0 0 15px 0;
+              font-size: 12px;
+              line-height: 18px;
+              font-weight: 600;
+              background: linear-gradient(145.87deg, #F1B71C -11.86%, #EB6E19 95.89%);
+              box-shadow: 0px 2px 6px rgb(240 170 28 / 45%);
+              border-radius: 100px;
+              color: #FFFFFF;
+              border: none;
+              outline: none;
+              cursor: pointer;
+              text-decoration: none;
+              font-family: Draught, sans-serif;">
+    Login to check your order status
+  </a>
+</div>
+
+<table class="any-question-group" style="width:100%; max-width: 536px; height: 85px; background: #FAFAFA; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04); border-radius: 16px; margin: 0 auto 24px auto;">
+  <tr>
+    <td>
+      <img src="https://agazon-storage.nyc3.digitaloceanspaces.com/public_images/email_icon.png" style="width: 40px; height: 32px; margin: auto 16px auto 12px;">
+    </td>
+
+    <td>
+      <div class="poppins-bold-text-12" style="font-family: Poppins, sans-serif; font-style: normal; font-weight: bold; font-size: 12px;line-height: 17px; letter-spacing: 0.03em; color: #000000; cursor: default;">Any Questions?</div>
+      <div class="poppins-text-10" style="font-family: Poppins, sans-serif; font-style: normal; font-weight: normal; font-size: 10px;line-height: 14px; letter-spacing: 0.03em; color: #000000; cursor: default; margin-right: 8px;">
+        If you need any help whatsoever, email us anytime at
+        <a href="mailto:support@agzaga.com" target="_blank" style=" color: #7b8c48; text-decoration:underline;">support@agzaga.com</a>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<div style="max-width: 536px; height: 85px; background: #FAFAFA; border-radius: 16px; margin-bottom: 37px; margin: 0 auto 30px auto; display: block; text-align: center;">
+  <div class="poppins-bold-text-12" style="font-family: sans-serif;font-style: normal;font-weight: bold;font-size: 12px;line-height: 17px;letter-spacing: 0.03em;color: #000000;cursor: default; padding: 10px 0 13px 0;">
+    Following Us?
+  </div>
+
+  <div>
+    <a target="_blank" href="https://www.facebook.com/agzagasocial" style="text-decoration: none; display: inline-block; width: 32px; height: 32px; margin-right: 12px;">
+      <img src="https://agazon-storage.nyc3.digitaloceanspaces.com/public_images/facebook.png" style="width: 32px">
+    </a>
+
+    <a target="_blank" href="https://www.instagram.com/agzagasocial" style="text-decoration: none; display: inline-block; width: 32px; height: 32px; margin-right: 12px;">
+      <img src="https://agazon-storage.nyc3.digitaloceanspaces.com/public_images/instagram.png" style="width: 32px">
+    </a>
+
+    <a target="_blank" href="https://www.twitter.com/agzagasocial" style="text-decoration: none; display: inline-block; width: 32px; height: 32px; margin-right: 12px;">
+      <img src="https://agazon-storage.nyc3.digitaloceanspaces.com/public_images/Twitter.png" style="width: 32px">
+    </a>
+    <a target="_blank" href="https://www.youtube.com/channel/UCbakHBOpI1LJAMsqTvmE13w" style="text-decoration: none; display: inline-block; width: 32px; height: 32px;">
+      <img src="https://agazon-storage.nyc3.digitaloceanspaces.com/public_images/youtube.png" style="width: 32px">
+    </a>
+  </div>
+</div>
+
+<div class="dark-footer" style="width: 100%; height: 40px; background: #171717; display: flex;align-items: center; justify-content: center; color: #FFF;">
+  <img src="https://agazon-storage.nyc3.digitaloceanspaces.com/public_images/AGZ_logo_mark.png" alt="AGzaga" class="logo" style="width: 15px; height: 22px; margin: auto; display: block;">
+</div>
+
+# touched on 2025-05-22T19:16:20.284934Z
+# touched on 2025-05-22T19:22:50.187700Z

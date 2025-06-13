@@ -1,0 +1,134 @@
+<% for_pick_up ||= false %>
+<% for_upsell ||= false %>
+<% added_products = current_order.line_items.map {|line_item| line_item.product} if current_order.present? %>
+<% from_chukwagon ||= false%>
+
+<% add_to_cart_url = for_pick_up ? populate_orders_path( params: {pick_up: true} ) : for_upsell ? populate_orders_path( params: {upsell: true} ) : populate_orders_path %>
+<% button_text ||= t('spree.add_to_cart') %>
+<% variant_id_prefix ||= false%>
+<div class="pick-up-product-footer d-block">
+  <% variants_stock = product_out_of_stock(product) %>
+  <%= form_for :order, html: { method: :post, remote: true}, url: add_to_cart_url  do |f| %>
+
+    <% if true %>
+      <% if product.variants_and_option_values_for(current_pricing_options).any? %>
+        <div id="product-<%= product.id %>-variants" class="product-variants" data-product="<%= product.id %>">
+          <ul class="d-none">
+            <% product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index| %>
+              <li>
+                <div id = "pallet_element_<%=variant.id%>">
+                  <% variant.volume_prices.each do |v|%>
+                    <% price_per_unit = v.discount_type == 'price' ? v.amount : (v.discount_type == 'percent' ? (product.price - (product.price * v.amount)) : product.price - v.amount) %>
+
+                    <%= content_tag :div, '', data: { volume_price_name: v.name, volume_prices_quantity: v.range.split(/[. +]/).first, volume_unit_price: ('%.2f' % price_per_unit) } %>
+                  <% end %>
+                </div>
+
+                <%= radio_button_tag 'variant_id', variant.id, nil, data: {price: "#{variant.price_for(current_pricing_options)}", target_pallet: "pallet_element_#{variant.id}", product_id: "#{product.id}", product_section: "#{variant_id_prefix}"}, class: 'variantid', checked: index == 0 ? true : false %>
+
+                <%= label_tag "variant_id_#{ variant.id }" do %>
+                  <span class="variant-description">
+                    <%= variant_options variant %>
+                  </span>
+
+                  <% unless variant.can_supply? %>
+                    <span class="out-of-stock"><%= t('spree.out_of_stock') %></span>
+                  <% end %>
+
+                  <span class="stock-count"><%= variant.total_on_hand %></span>
+                  <span class="variant-backorderable"><%= variant.is_backorderable? %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+
+          <% product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index| %>
+            <div class="d-none variants-data-for-<%= product.id %>" data-id="<%= variant.id %>" data-text="<%= variant.options_text %>" ></div>
+          <% end %>
+
+          <% options = product.variant_option_values_by_option_type %>
+
+          <% options.each do |option| %>
+            <%= f.select 'variants', options_for_select(option[1].map { |value| [value.name, value.presentation] }),
+                  { include_blank: false },
+                  data: { option: option[0].presentation },
+                  id: "#{ product.id }-#{variant_id_prefix ? variant_id_prefix : ''}-options-for-#{ option[0].presentation.gsub(/[^\w]/, '_')}",
+                  class: "options-select #{'product-options-select' if out_of_stock(product, variants_stock) }"%>
+          <% end %>
+        </div>
+
+      <% else %>
+        <%= hidden_field_tag 'variant_id', product.master.id %>
+
+        <div class="for-mobile-space">
+
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if product.price_for(current_pricing_options) and !product.price.nil? %>
+      <% if !for_upsell || !added_products&.include?(product) %>
+        <div class="pick-up-product-footer">
+          <div class="quantity-btn-group <%= 'disable-quantity-btn-group' if out_of_stock(product, variants_stock) || (!product.variants.empty? && !for_upsell) %>">
+            <div class="qty-btn-container">
+              <%= button_tag '', class: 'button disable_btn sub-btn', type: 'button' %>
+              <% if product.master.is_backorderable? %>
+
+                <% if product.master.get_max_stock > 0 %>
+                  <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1, max: product.master.get_max_stock  %>
+                <% else %>
+                  <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1, max: 500 %>
+                <% end %>
+
+              <% else %>
+                <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1, max: product.master.total_on_hand %>
+              <% end%>
+              <%= button_tag '', class: 'button add-btn', type: 'button' %>
+            </div>
+
+            <div class="poppins-text-10 stock-error-message"></div>
+          </div>
+
+          <% if out_of_stock(product, variants_stock) %>
+            <%= button_tag class: 'poppins-bold-text-16 mt-0 out-of-stock-btn', id: 'add-to-cart-button', disabled: true, type: :submit do %>
+              <%= button_text %>
+            <% end %>
+
+          <% else %>
+            <%= button_tag class: 'poppins-bold-text-16 mt-0 btn-gradient-orange', id: 'add-to-cart-button', type: :submit do %>
+                <%= button_text %>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="upsell-btn-section">
+          <% if product.variants.present? %>
+            <% line_item_id = current_order.line_items.map {|line_item| product.variants.select {|v| v if v.id == line_item.variant_id}}.select{|item| item if !item.empty?} %>
+            <% line_item_id = line_item_id.first[0]&.id if line_item_id.present? %>
+          <% else %>
+            <% line_item_id = product.master.id %>
+          <% end %>
+
+          <% line_item_id = product.variants.present? ? current_order.line_items.map {|line_item| product.variants.select {|v| v if v.id == line_item.variant_id}}.select{|item| item if !item.empty?}.first[0]&.id : product.master.id %>
+
+          <% line_item_id = current_order.line_items.find_by(variant_id: line_item_id) %>
+          <%= link_to spree::cart_destroy_line_item_path(id: line_item_id, upsell: true), class: 'clear-link remove-upsell-product-mbl d-lg-none d-block', method: :delete, remote: true do %>
+            <%= image_tag "remove-from-cart.png" %>
+          <% end %>
+
+          <div class="added-upsell-product for-mobile">
+            Added to Cart
+          </div>
+
+          <%= link_to spree::cart_destroy_line_item_path(id: line_item_id, upsell: true), class: 'clear-link remove-upsell-product', method: :delete, remote: true do %>
+              <div class="added-upsell-product remove-upsell-product-text">Added to Cart</div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T20:40:49.281404Z
+# touched on 2025-05-22T22:55:24.157932Z
+# touched on 2025-05-22T23:07:18.532841Z

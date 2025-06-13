@@ -1,0 +1,21 @@
+var product_cards = []
+<% @product_cards.each do |product| %>
+  product_cards.push({
+    card: "<%= j render 'spree/shared/standard_product_card', product: product %>",
+    form: "<%= j render 'spree/pages/partials/cart_flag_form', product: product %>"
+  });
+<% end %>
+
+var sliderCards = $('#accessories_flag_products').find($('.slider-card[data-tab="<%= params[:tab] %>"]'));
+
+sliderCards.each(function(index){
+  var productCard = product_cards[index];
+  $(this).html(productCard.card + productCard.form).data('loaded', true);
+});
+
+
+# touched on 2025-05-22T19:07:21.228487Z
+# touched on 2025-05-22T20:31:57.338664Z
+# touched on 2025-05-22T20:38:16.649599Z
+# touched on 2025-05-22T20:41:13.053552Z
+# touched on 2025-05-22T23:07:35.791810Z

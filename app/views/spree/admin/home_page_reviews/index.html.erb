@@ -1,0 +1,93 @@
+<div class="align-right">
+  <% if can?(:create, Spree::HomePageReview) %>
+    <%= link_to 'New Review', spree.new_admin_home_page_review_path, class: 'mb-5 btn btn-primary' %>
+  <% end %>
+
+  <% content_for :page_title do %>
+    Customers Reviews for Home Page
+  <% end %>
+
+  <% if @home_page_reviews.any? %>
+    <table class="index align-left sortable inline-editable-table" data-sortable-link="<%= update_positions_admin_home_page_reviews_path %>">
+      <colgroup>
+        <col style="width: 5%;">
+        <col style="width: 10%;">
+        <col style="width: 12%;">
+        <col style="width: 17%;">
+        <col style="width: 20%;">
+        <col style="width: 7%;">
+        <col style="width: 10%;">
+        <col style="width: 10%;">
+        <col style="width: 10%;">
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th></th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Comment</th>
+          <th>Visibility</th>
+          <th>Rating</th>
+          <th>Date</th>
+          <th class="actions"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%- @home_page_reviews.each do |home_page_data| -%>
+          <tr id="<%= spree_dom_id home_page_data %>">
+            <td>
+              <span class="handle"></span>
+            </td>
+
+            <td class="align-center">
+              <%= image_tag(home_page_data&.image&.url(:product))%>
+            </td>
+
+            <td>
+              <%= home_page_data.name %>
+            </td>
+
+            <td>
+              <%= home_page_data.title %>
+            </td>
+
+            <td>
+              <%= home_page_data.comment %>
+            </td>
+
+            <td>
+              <%= check_box("visibility", home_page_data.visibility , {checked: home_page_data.visibility,  :disabled => "disabled"}) %>
+            </td>
+
+            <td >
+              <%= txt_stars(home_page_data.rating) %><br />
+            </td>
+
+            <td class="align-center">
+              <%= home_page_data.review_date.strftime('%d-%m-%Y') %>
+            </td>
+
+            <td class="actions">
+              <% if can? :manage, Spree::HomePageReview %>
+                <%= link_to_edit home_page_data, no_text: true, class: 'edit' %>
+                <%= link_to_delete home_page_data, no_text: true %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+
+    <div class="no-objects-found">
+      <%= I18n.t("spree.no_results") %>
+    </div>
+  <% end %>
+</div>
+
+
+# touched on 2025-05-22T21:33:54.884815Z
+# touched on 2025-05-22T22:59:47.939789Z

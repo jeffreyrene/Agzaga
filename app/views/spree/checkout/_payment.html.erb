@@ -1,0 +1,177 @@
+<div class="pay-detail-body">
+  <%= render 'spree/checkout/partials/address_step_data' %>
+
+  <% if @order.pick_up_order? %>
+    <div class="pick-up-container">
+      <%= render 'spree/checkout/partials/pickup' %>
+    </div>
+  <% else %>
+    <div class="shipping-rate-container" id="shipping-rate-section">
+        <%= render 'delivery_form', form: form %>
+    </div>
+  <% end %>
+
+  <div class="category-title">
+    Payment Details
+  </div>
+
+  <%= render partial: 'solidus_affirm_v2/affirm_js' %>
+  <%= javascript_include_tag "spree/frontend/affirm_v2_checkout" %>
+  <%= render 'affirm_button', button_text: t('spree.pay_with_affirm') %>
+
+  <div class="paypal-divider">
+    <div class="divider">
+      <hr>
+      <p class="divider-text ag-p-sm">Or pay with PayPal</p>
+    </div>
+  </div>
+
+  <div id="paypal-button-container"></div>
+
+  <div class="card_options d-none">
+    <%= radio_button_tag 'use_existing_card', 'yes', true %>
+    <%= radio_button_tag 'use_existing_card', 'no' %>
+  </div>
+
+  <div class="shipping-address-block">
+    <div class="payment-group" id="payment">
+      <div class="promo-store-credit <%= 'd-none' unless (spree_current_user &&spree_current_user&.total_available_store_credit > 0.0) %>">
+
+        <div class="black-input-group d-flex align-items-center">
+          <label class="black-input-label poppins-text-16 m-0">Credit or Debit Card</label>
+        </div>
+
+        <% if @order&.user.present? %>
+          <%= render 'spree/checkout/partials/store_credit_input' %>
+        <% end %>
+      </div>
+      <%= render 'existing_payment_sources', form: form%>
+
+      <div id="payment-method-fields" data-hook>
+        <%= hidden_field_tag "order[payments_attributes][][payment_method_id]", @order.available_payment_methods.first.id %>
+        <%= hidden_field_tag "delete_card", "no"%>
+      </div>
+
+      <ul id="payment-methods" data-hook class="mb-0 <%= @wallet_payment_sources.present? ? 'd-none' : 'd-block'%>">
+        <div class="payment-header-section">
+          <div class="category-sub-title">
+            Card Information
+          </div>
+
+          <% if try_spree_current_user &&  @wallet_payment_sources.present? %>
+            <div class="ag-btn ag-btn-sm ag-btn-primary existing-card-option">Use Existing Card</div>
+          <% end %>
+        </div>
+
+        <div id="payment-method-paypal" data-paypal-id=<%= @order.available_payment_methods.find_by(name: 'PayPal').id %>></div>
+        <div id="payment-method-stripe" data-stripe-id=<%= @order.available_payment_methods.find_by(name: 'Stripe').id %>></div>
+
+        <% @order.available_payment_methods.each do |method| %>
+          <li id="payment_method_<%= method.id %>" class="<%= 'last' if method == @order.available_payment_methods.last %>" data-hook>
+            <%= render partial: "spree/checkout/payment/#{method.partial_name}", locals: { payment_method: method } %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ag-form-control save-my-card <%= @wallet_payment_sources.present? ? 'hide-save-my-card' : 'show-save-my-card' %>">
+    <% if try_spree_current_user %>
+      <div class="ag-check form-control-content">
+        <label class="ag-checkbox form-control-sub-title">Save my card for next time
+          <%= check_box_tag 'save_card', '1', class: 'black-checkbox' %>
+          <span class="checkmark"></span>
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="return-and-exchange">
+    <a class="clear-link return-policy-link" href="<%= spree::faqs_page_path %>" data-turbolinks="false">
+      <span class="link-icon"><%= image_tag "link-icon.png", alt: '' %></span>
+      Return and Exchange Information
+    </a>
+  </div>
+
+  <%= render 'submit_button', button_text: t('spree.pay_now') %>
+
+  <div class="guaranteed-secure-section">
+    <span class="secure">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.875 7.375V6.125C4.875 4.39911 6.27411 3 8 3C9.72589 3 11.125 4.39911 11.125 6.125V7.375C11.8154 7.375 12.375 7.93464 12.375 8.625V11.75C12.375 12.4404 11.8154 13 11.125 13H4.875C4.18464 13 3.625 12.4404 3.625 11.75V8.625C3.625 7.93464 4.18464 7.375 4.875 7.375ZM9.875 6.125V7.375H6.125V6.125C6.125 5.08947 6.96447 4.25 8 4.25C9.03553 4.25 9.875 5.08947 9.875 6.125Z" fill="#22C55E"/>
+      </svg>
+
+      Guaranteed Secure
+    </span>
+
+    <a href="<%= faqs_page_path%>#help-center-faq-section" class="learn-more">
+      <span class="d-none d-md-inline-block link"> Learn More </span>
+
+      <span class="d-inline-block d-md-none">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8.23962 8.60005C8.49588 8.05629 9.18732 7.66672 10.0001 7.66672C11.031 7.66672 11.8667 8.29352 11.8667 9.06672C11.8667 9.71979 11.2705 10.2684 10.464 10.4231C10.2109 10.4717 10.0001 10.6756 10.0001 10.9334M10 12.3334H10.0047M14.2 10C14.2 12.3196 12.3196 14.2 10 14.2C7.68045 14.2 5.80005 12.3196 5.80005 10C5.80005 7.68045 7.68045 5.80005 10 5.80005C12.3196 5.80005 14.2 7.68045 14.2 10Z" stroke="#A1A1AA" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </a>
+  </div>
+
+  <div class="family-owned-section mobile-only">
+    <div class="image-container">
+      <%= image_tag 'about-us-mobile.png', class: 'image' %>
+    </div>
+    <div class="info-section">
+      <div class="heading">Family-Owned & Operated</div>
+      <div class="info">We’re a family-owned business, proudly located in Southwest Missouri.</div>
+      <a href="<%= about_us_path %>" class="learn-more">
+        More About Us
+        <span class="ml-1">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.75 4.25H4.25C3.55964 4.25 3 4.80964 3 5.5V11.75C3 12.4404 3.55964 13 4.25 13H10.5C11.1904 13 11.75 12.4404 11.75 11.75V9.25M9.25 3H13M13 3V6.75M13 3L6.75 9.25" stroke="#52525B" stroke-width="1.13" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="checkout-footer">
+    <div class="footer-logo">
+      <%=image_tag "chkout-v3-footer-logo.png" %>
+    </div>
+    <div class="footer-links">
+      <%= link_to 'Return, Privacy & Contact', faqs_page_path, class: 'footer-link' %>
+    </div>
+  </div>
+</div>
+
+<% if @order.state == 'payment' %>
+  <input name="order_state" type="hidden" value=<%= @order.state%> >
+  <input name="order_free_shipping" type="hidden" value="<%= @order.free_shipping if @order&.shipments&.last&.shipping_method&.name == "Standard Shipping" %>">
+  <input name="order_free_shipping_applied" type="hidden" value="">
+<% end %>
+
+<% if SolidusAffirmV2::PaymentMethod.first.present? %>
+  <% content_for :head do %>
+    <%= affirm_js_setup(SolidusAffirmV2::PaymentMethod.first.preferred_public_api_key, SolidusAffirmV2::PaymentMethod.first.preferred_javascript_url) %>
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+  Checkout_Payment();
+  if ($('#payment-methods').hasClass('d-none')) {
+   $("#use_existing_card_yes").click();
+  }
+  else {
+    $('#use_existing_card_no').click();
+  }
+
+  Spree.onPayment();
+
+  $(document).on('click','.delete-icon ', {} ,function() {
+    $('#delete_card').val('yes');
+    $(this).parent().parent().children()[0].children[0].checked = true;
+  });
+</script>
+
+# touched on 2025-05-22T19:24:34.223671Z
+# touched on 2025-05-22T23:27:38.024517Z

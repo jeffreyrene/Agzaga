@@ -1,0 +1,41 @@
+<% if @review.errors.present? %>
+  <% @review.errors.full_messages.each do |msg| %>
+    <% if msg == 'Images is invalid' %>
+      $('.image-upload-error').css('display', 'contents');
+      $('.image-selected').css('display', 'none');
+      $('.image-tag-content').html('Something’s Wrong');
+      $('.image-upload').removeClass('default-upload active-upload').addClass('failed-upload');
+    <% end %>
+  <% end %>
+  $('.body').addClass('validation-error');
+  $('.review-submit-btn').addClass('disable_btn').removeClass('btn-gradient-orange');
+  $('.review-submit-btn').prop("disabled", true);
+<% else %>
+  $(".body").html("<%= j render partial: 'spree/products/partials/thanks_for_review', locals: { product: @product } %>");
+  $('.review-added-content').css('display', 'block');
+  $("#new_review").removeClass('was-validated');
+  $('.review-submit-btn').removeClass('disable_btn').addClass('btn-gradient-orange');
+
+  setTimeout(function() {
+    $('#review_name').val("");
+    $('#review_title').val("");
+    $('#review_review').val("");
+    $('#review_email').val("");
+    $('.review_modal_close').click();
+    $('.image-tag-content').html('Upload Images');
+    $('.image-upload-error').css('display', 'none');
+    $('.image-selected').css('display', 'none');
+    $('.image-upload').removeClass('failed-upload active-upload').addClass('default-upload');
+    $('.rating-required-error').css('display', 'none');
+    $('.review-added-content').css('display', 'none');
+    for (i = 1 ; i <= 5; i++) {
+      $('#'+i+'star').removeAttr('checked');
+      $('#'+i+'star').next().removeClass('selected-label_star').addClass('label_star');
+    }
+  }, 3000);
+
+<% end %>
+
+# touched on 2025-05-22T21:34:02.988862Z
+# touched on 2025-05-22T22:32:12.726327Z
+# touched on 2025-05-22T22:36:03.290554Z

@@ -1,0 +1,17 @@
+<div data-hook="admin_inside_taxonomy_form" class="field align-center">
+  <%= f.field_container :name do %>
+    <%= f.label :name, class: 'required' %><br />
+    <%= error_message_on :taxonomy, :name, class: 'fullwidth title' %>
+    <%= text_field :taxonomy, :name %>
+  <% end %>
+
+  <%= f.field_container :visibility do %>
+    <%= f.label :visibility, class: 'required' %>&nbsp;
+    <%= f.check_box :visibility %>
+  <% end %>
+</div>
+
+
+# touched on 2025-05-22T19:10:54.415608Z
+# touched on 2025-05-22T23:05:47.649861Z
+# touched on 2025-05-22T23:48:05.441742Z
