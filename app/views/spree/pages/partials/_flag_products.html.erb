@@ -1,0 +1,55 @@
+<div class="flag-products-row">
+  <div class="carousel-title d-lg-none d-block <%= "flag-title" if (t flag_translation + '.title').include?('USA Flags American Made')%>">
+    <%= t flag_translation + '.title' %>
+  </div>
+
+  <div class="logo freedom_wrap-large-logo d-lg-none d-block">
+    <% assets[0].each do |img| %>
+      <div class="<%= img.include?(assets[1]) ? assets[1] : '' %>">
+        <img src="<%= img %>">
+      </div>
+    <% end %>
+  </div>
+
+  <div class="flag-text freedom_wrap-heading d-lg-none d-block">
+   <%= t flag_translation + '.text' %>
+  </div>
+  <div class="flag-products-carousel-portion">
+    <div class="flag-products-carousel">
+      <% cache flag_products&.map(&:id), expires_in: 30.minutes do %>
+        <%= render 'spree/pages/partials/flag_products_carousel', flag_products: flag_products, flag_products_count:  flag_products_count %>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="flag-products-description-portion">
+    <div class="net_wrap-data">
+    <div class="carousel-title d-lg-block d-none <%= "flag-title" if (t flag_translation + '.title').include?('USA Flags American Made')%>">
+      <%= t flag_translation + '.title' %>
+    </div>
+      <div class="logo freedom_wrap-large-logo d-lg-block d-none">
+        <% assets[0].each do |img| %>
+          <div class="<%= img.include?(assets[1]) ? assets[1] : '' %>">
+            <img src="<%= img %>">
+          </div>
+        <% end %>
+      </div>
+
+      <div class="flag-text freedom_wrap-heading d-lg-block d-none">
+        <%= t flag_translation + '.text' %>
+      </div>
+
+      <% if assets.count >= 3 %>
+        <a class="shop-all-btn" href="<%= spree::nested_taxons_url(assets[3]) %>">
+          Shop All <%= assets[2] %>
+          <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.6667 6.66669L18 10M18 10L14.6667 13.3334M18 10L3 10" stroke="#71717A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:16:52.377324Z
+# touched on 2025-05-22T21:30:42.195833Z

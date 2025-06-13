@@ -1,0 +1,104 @@
+<% product_card = product.product_card %>
+
+<div class="gift-product-content">
+  <div class="product-detail">
+    <div class="image-container">
+      <a href="<%= product_path(product.slug) %>" data-turbolinks="false">
+        <%= image_tag product_card.image_url.present? ? image_cdn_link(product_card.image_url.gsub('/sm_285/', '/small/')) : 'noimage_sq.png', loading: 'lazy', alt: product_card.name, class: 'image' %>
+
+        <%= product_label(product_card.label_text, product_card.label_color, product_card.label_display_text_color) %>
+      </a>
+    </div>
+
+    <div class="detail-section">
+      <div class="title"><%= product_card.name %></div>
+
+      <div class="price">
+        <% if product_card.on_sale %>
+          <div class="product-on-sale">
+            <div class="sale-discount-section">
+              <span class="current-price on-sale before-sale-price"><%= "$#{'%.2f' % product_card.price}" %></span>
+              <span class="discount-percentage"> <%= product_card.discount_percentage.round %>% OFF </span>
+            </div>
+
+            <div class="orignal-price">List Price: <span class="original-price-value"><%= Spree::Money.new(product_card.original_price).to_html %></span></div>
+          </div>
+        <% else %>
+          <span class="current-price"><%= "$#{'%.2f' % product_card.price}" %></span>
+        <% end %>
+      </div>
+
+      <%= form_for :order, html: { method: :post, remote: true},  url: populate_orders_path do |f| %>
+        <%= hidden_field_tag 'variant_id', product.master.id %>
+        <div class="btns-group">
+          <div class="quantity-btn-group <%= 'disable-quantity-btn-group' unless product_card.in_stock %>">
+            <%= button_tag '', class: 'button disable_btn sub-btn', type: 'button' %>
+            <% if product.master.is_backorderable? %>
+
+              <% if product.master.get_max_stock > 0 %>
+                <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1, max: product.master.get_max_stock  %>
+              <% else %>
+                <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1 %>
+              <% end %>
+
+            <% else %>
+              <%= number_field_tag :quantity, 1, class: 'quantity text-center', min: 1, max: product.master.total_on_hand %>
+            <% end%>
+            <%= button_tag '', class: 'button add-btn', type: 'button' %>
+          </div>
+
+          <div class="poppins-text-10 stock-error-message"></div>
+          <% state = product_card.in_stock ? false : true %>
+          <%= button_tag class: 'ag-btn ag-btn-lg ag-btn-primary add-to-cart', id: "add-to-cart-button", type: :submit, disabled: state do %>
+            <%= t('spree.add_to_cart') %>
+          <% end %>
+        </div>
+
+        <% unless product_card.on_sale %>
+          <div class="for-mobile-space"></div>
+        <% end %>
+      <% end %>
+
+      <div class="horizontal-line more-content"></div>
+
+      <div class="product-description-section more-content">
+        <div class="heading">Description</div>
+
+        <div class="description">
+          <%= raw(product.description) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% products = product&.products if product&.products.present? %>
+  <% if products.present? %>
+    <div class="included-products-heading more-content">What’s Included?</div>
+
+    <div class="included-products-group more-content">
+      <% products.each do |product| %>
+        <% product = product.product_card %>
+        <a href="<%= product_path(product.product_id) %>" class="clear-link">
+          <div class="product-detail-section">
+            <div class="included-products">
+              <div class="image-section">
+                <%= image_tag product.image_url.present? ? image_cdn_link(product.image_url) : 'noimage_sq.png', loading: 'lazy', alt: product.name, class: 'image' %>
+              </div>
+
+              <div class="name">
+                <%= product.name %>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  <% end %>
+
+  <span class="show-more-content show-more">More info</span>
+</div>
+
+# touched on 2025-05-22T19:16:52.376444Z
+# touched on 2025-05-22T20:44:32.256232Z
+# touched on 2025-05-22T23:25:23.363918Z
+# touched on 2025-05-22T23:48:05.438813Z

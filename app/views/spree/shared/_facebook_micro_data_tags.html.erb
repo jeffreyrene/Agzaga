@@ -1,0 +1,44 @@
+<% if Rails.env.production? && ENV['APPLICATION_ENV'] == 'production' %>
+  <% content_for :facebook_micro_data do %>
+
+    <% sku_data = @product.sku.present? ? @product.sku : @product.slug %>
+    <meta property="og:id" content="<%= sku_data %>">
+
+    <meta property="og:title" content="<%= @product.name %>">
+
+    <% product_description = @product.description %>
+
+    <% if product_description.present? %>
+      <% description_data = Nokogiri::HTML(product_description).text %>
+    <% elsif @product_properties.present? %>
+      <% description_data = @product_properties&.where(visibility: true)&.map{|product_property| "#{product_property&.property&.presentation}: #{product_property&.value}"}&.join(', ') %>
+    <% end %>
+
+    <meta property="og:description" content="<%= description_data %>">
+    <meta property="og:url" content="<%= request.url %>">
+    <meta property="product:category" content="<%= google_product_categories[@product.google_product_category] if @product.google_product_category.present? %>">
+    <meta property="product:availability" content="<%= product_in_stock?(@product) ? 'in stock' : 'out of stock' %>">
+    <meta property="product:brand" content="<%= @product.property(:Brand) %>">
+    <meta property="product:condition" content="new">
+
+
+    <% @product&.gallery&.images&.each do |image| %>
+      <meta property="og:image" content="<%= image.url(:product) %>">
+    <% end %>
+
+    <% if @product.on_sale? %>
+      <meta property="product:price:amount" content="<%= @product.original_price.to_f %>">
+      <meta property="product:price:currency" content="USD">
+      <meta property="product:sale_price:amount" content="<%= @product.price.to_f %>">
+      <meta property="product:sale_price:currency" content="USD">
+    <% else %>
+      <meta property="product:price:amount" content="<%= @product.price.to_f %>">
+      <meta property="product:price:currency" content="USD">
+    <% end %>
+
+    <meta property="product:retailer_item_id" content="<%= sku_data %>">
+  <% end %>
+<% end %>
+
+# touched on 2025-05-22T22:42:43.734193Z
+# touched on 2025-05-22T23:38:56.662566Z

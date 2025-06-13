@@ -1,0 +1,128 @@
+<div class="pay-detail-body">
+
+<% if !@order.pick_up_order? %>
+  <div class="category-title">
+    Shipping Information
+  </div>
+
+  <div class="ag-input-neutral shipping-email">
+    <div>
+      <label class="ag-input-label" for="firstname">Email</label>
+    </div>
+
+    <div class="ag-input-group-box email-validation">
+      <%= form.text_field :email, required: true, class: "ag-input-field custom-field-input form-control checkout-email-field",  placeholder: "Email Address", id: "email"%>
+    </div>
+
+    <div class="email-error-message error-messages-section"></div>
+  </div>
+
+  <div id="check-user-status">
+    <%= render partial: 'check_user_status' %>
+  </div>
+
+  <div class="category-sub-title">
+    Shipping Address
+  </div>
+
+  <div class="shipping-address-block">
+    <%= form.fields_for :ship_address do |ship_form| %>
+      <%= render partial: 'spree/address/shipping_address', locals: { form: ship_form, address_type: 'shipping', address: @order.ship_address } %>
+    <% end %>
+  </div>
+<% else %>
+  <%= render partial: 'spree/address/default_shipping' %>
+  <% if @order.pick_up_person&.firstname.blank? || params[:edit_address] == "true" %>
+    <div data-hook="pickup_person_fieldset_wrapper">
+      <div id="pickup" class="poppins-body-16 bold group-heading" data-hook>
+        <%= form.fields_for :pick_up_person do |pick_up_person_form| %>
+          <div class="category-title">
+            Pick Up Person Information
+          </div>
+
+          <div class="category-sub-title">
+            Pick Up person Address
+          </div>
+          <div class="shipping-address-block">
+            <%= render partial: 'spree/pick_up_person/form', locals: { form: pick_up_person_form } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="ag-form-control exclusive-offer">
+  <div class="ag-check form-control-content">
+    <% if try_spree_current_user %>
+      <label class="poppins-text-16 save-address-label mb-0 ml-1 mt-1 ag-checkbox form-control-sub-title">
+        Save this information for next time
+        <%= check_box_tag 'save_user_address', '1', try_spree_current_user.respond_to?(:persist_order_address), class: "mt-1 black-checkbox save-address-checkbox checkbox" %>
+        <span data-hook="save_user_address" class="checkmark"></span>
+      </label>
+    <% end %>
+  </div>
+</div>
+
+<% unless @order.pick_up_order? %>
+  <div class="ag-form-control same-billing-address">
+    <div class="ag-check form-control-content">
+      <label class="ag-checkbox form-control-sub-title" id="order_use_shipping">Billing address is the same as shipping
+        <%= check_box_tag 'order[use_shipping]', '1', @order.billing_eq_shipping_address?, class: 'black-checkbox use-billing-checkbox' %>
+        <span class="checkmark"></span>
+      </label>
+    </div>
+  </div>
+<% end %>
+
+<% billing_address_fields = @order.pick_up_order? ? 'show-billing-address-fields' : ''%>
+<div  id="billing-address-fields" class="<%= billing_address_fields %>">
+  <div class="category-title">
+    Billing Information
+  </div>
+
+  <div class="category-sub-title">
+    Billing Address
+  </div>
+
+  <div class="shipping-address-block">
+    <%= form.fields_for :bill_address do |bill_form| %>
+      <%= render partial: 'spree/address/shipping_address', locals: { form: bill_form, address_type: 'billing', address: @order.bill_address } %>
+   <% end %>
+  </div>
+</div>
+
+  <%= hidden_field_tag "edit_address_flag", '' %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <%= render 'submit_button', button_text: t('spree.continue_to_payment_option') %>
+
+  <div class="family-owned-section mobile-only">
+    <div class="image-container">
+      <%= image_tag 'about-us-mobile.png', class: 'image' %>
+    </div>
+    <div class="info-section">
+      <div class="heading">Family-Owned & Operated</div>
+      <div class="info">We’re a family-owned business, proudly located in Southwest Missouri.</div>
+      <a href="<%= about_us_path %>" class="learn-more">
+        More About Us
+        <span class="ml-1">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.75 4.25H4.25C3.55964 4.25 3 4.80964 3 5.5V11.75C3 12.4404 3.55964 13 4.25 13H10.5C11.1904 13 11.75 12.4404 11.75 11.75V9.25M9.25 3H13M13 3V6.75M13 3L6.75 9.25" stroke="#52525B" stroke-width="1.13" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="checkout-footer">
+    <div class="footer-logo">
+      <%=image_tag "chkout-v3-footer-logo.png" %>
+    </div>
+    <div class="footer-links">
+      <%= link_to 'Return, Privacy & Contact', faqs_page_path, class: 'footer-link', rel: "nofollow" %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T23:06:35.597170Z

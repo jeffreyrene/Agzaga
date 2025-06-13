@@ -1,0 +1,27 @@
+<div class="product-page-container">
+  <div class="success-icon">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M16 29C23.1797 29 29 23.1797 29 16C29 8.8203 23.1797 3 16 3C8.8203 3 3 8.8203 3 16C3 23.1797 8.8203 29 16 29ZM22.024 13.899C22.6587 13.2644 22.6587 12.2356 22.024 11.601C21.3894 10.9663 20.3606 10.9663 19.726 11.601L14.375 16.9519L12.274 14.851C11.6394 14.2163 10.6106 14.2163 9.97595 14.851C9.34135 15.4856 9.34135 16.5144 9.97595 17.149L13.226 20.399C13.8606 21.0337 14.8894 21.0337 15.524 20.399L22.024 13.899Z" fill="#22C55E"/>
+    </svg>
+  </div>
+
+  <div class="heading">Thanks For the Review!</div>
+
+  <div class="product-image-container">
+    <div class="product-image-section">
+      <%= image_tag  @product.gallery.images[0].url(:original), class: 'image', alt: ''%>
+    </div>
+
+    <div class="image-text"><%= @product.name%></div>
+  </div>
+
+  <div class="text-section">Once your review is validated, it will be shared on Agzaga.com to help other customers find the best possible products!</div>
+
+  <div class="ag-btn ag-btn-md ag-btn-primary keep-shoping-btn">
+     <%= link_to "Keep Shoping", spree::root_url %>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:31:57.337699Z
+# touched on 2025-05-22T21:33:54.879799Z
+# touched on 2025-05-22T23:25:44.206226Z

@@ -1,0 +1,55 @@
+<% admin_layout "full-width" %>
+
+<% admin_breadcrumb(plural_resource_name(Spree::NetSuiteLog)) %>
+
+<table class="index" width="100%" id="listing_orders" data-hook>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Record</th>
+      <th>Field</th>
+      <th>Old Value</th>
+      <th>New Value</th>
+      <th>Date Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @change_logs.each do |log| %>
+      <tr>
+        <td><%= log.id %></td>
+
+        <td>
+          <% if log.loggable_type == "Spree::StockItem"  %>
+            <% variant = log.loggable.variant %>
+
+            <%= link_to admin_product_stock_path(variant.product_id) do %>
+              SKU: <%= variant.sku %>
+              <br/>
+              <%= variant.descriptive_name %>
+            <% end %>
+          <% end %>
+          <% if log.loggable_type == "Spree::Variant"  %>
+            <% variant = log.loggable %>
+
+            <%= link_to admin_product_stock_path(variant.product_id) do %>
+              SKU: <%= variant.sku %>
+              <br/>
+              <%= variant.descriptive_name %>
+            <% end %>
+          <% end %>
+        </td>
+
+        <td><%= log.field_name %></td>
+        <td><%= log.old_value %></td>
+        <td><%= log.new_value %></td>
+        <td><%= log.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%m-%d-%Y %H:%M:%S %Z") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @change_logs, theme: "solidus_admin" %>
+
+# touched on 2025-05-22T19:23:46.660151Z
+# touched on 2025-05-22T23:21:10.849325Z

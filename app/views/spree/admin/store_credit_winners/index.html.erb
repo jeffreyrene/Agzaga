@@ -1,0 +1,39 @@
+<% admin_breadcrumb("Chuckwagon Contest") %>
+<% admin_layout "full-width" %>
+
+<h4 class="text-center mb-3">Chuckwagon Contest</h4>
+<div style="width: 100%; overflow-x: scroll;">
+  <table class="index" width="100%" id="listing_orders" data-hook>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Enrolled AT</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @store_credit_winners.each do |winner| %>
+        <tr>
+          <td><%= winner.id %></td>
+          <td><%= winner.name %></td>
+          <td><%= winner.email %></td>
+          <td><%= winner.phone_number %></td>
+          <td><%= winner.created_at %></td>
+          <td><%= link_to '', edit_admin_store_credit_winner_path(winner.id), class: 'edit fa fa-edit icon_link with-tip no-text' %></td>
+          <td><%= link_to '', admin_store_credit_winner_path(winner.id), method: :delete, data: {confirm:"Are you sure?"}, class: 'fa fa-trash icon_link' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= paginate @store_credit_winners, theme: "solidus_admin" %>
+
+# touched on 2025-05-22T20:35:04.889997Z
+# touched on 2025-05-22T20:37:39.234712Z
+# touched on 2025-05-22T23:20:01.221082Z
+# touched on 2025-05-22T23:47:28.297299Z

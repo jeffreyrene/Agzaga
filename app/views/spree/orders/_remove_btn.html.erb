@@ -1,0 +1,12 @@
+<% line_item ||= " " %>
+<% from_cart_v2 ||= false%>
+<%if from_cart_v2%>
+  <a href="#" class="delete remove-items-btn" id= "delete_#{dom_id(line_item)}">
+    <span class="title">Remove</span>
+    <span class="remove-icon"> <%= image_tag 'trash_red_icon.svg'%> </span>
+  </a>
+<%else%>
+  <%= link_to image_tag("times_circle_red.svg"), '#', class: 'delete', id: "delete_#{dom_id(line_item)}" %>
+<%end%>
+
+# touched on 2025-05-22T23:24:23.521427Z

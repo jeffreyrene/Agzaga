@@ -1,0 +1,127 @@
+.products.show,
+.taxons.show,
+.orders.edit,
+.products.deals,
+.products.index,
+.favorites.index,
+.product_categories.index,
+.pages.chuckwagon_dvd {
+  .box {
+    width: 40%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    padding: 35px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+  }
+
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 11111;
+  }
+
+  .popup-overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #FAFAFA;
+    border-radius: 16px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    transition: all 5s ease-in-out;
+
+    h2 {
+      margin-top: 0;
+      color: #333;
+      font-family: 'Poppins';
+      text-align: center;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid lightgray;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      transition: all 200ms;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .content {
+      max-height: 30%;
+      overflow: auto;
+      font-size: 16px;
+      line-height: 24px;
+      margin-bottom: 24px;
+    }
+
+    .buttons_section {
+      display: flex;
+      justify-content: center;
+
+      .cart_btn {
+        border-radius: 8px;
+        font-family: 'Poppins-bold';
+        padding: 11px 40px;
+        margin: 0px;
+        background: linear-gradient(96.99deg, #F1B71C 10.28%, #EC721A 82.19%);
+        box-shadow: none;
+        letter-spacing: 0.07em;
+        color: #FFFFFF;
+      }
+
+      .separater {
+        align-self: center;
+        margin: 0px 16px;
+        font-size: 10px;
+        line-height: 16px;
+      }
+
+      .empty-pick-up-order {
+        border: 1px solid #5A5A5A;
+        border-radius: 8px;
+        font-family: 'Poppins-bold';
+        letter-spacing: 0.07em;
+        padding: 11px 23px;
+        color: #353535;
+      }
+    }
+  }
+
+  .show-popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  @media  (max-width: 767px) {
+    .popup .buttons_section {
+      justify-content: space-around;
+    }
+  }
+}
+
+# touched on 2025-05-22T20:32:55.138991Z

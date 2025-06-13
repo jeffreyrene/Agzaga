@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+  <%= "New Deal" %>
+<% end %>
+
+<%= form_for @deals_page, url: admin_deals_page_index_path do |f| %>
+  <div class="mt-5 justify-content-center">
+    <div class="mb-3 col-6">
+      <%= f.label :title, class: "required poppins-text-10" %>
+      <%= f.text_field :title, required: true, class: "form-control input-field" %>
+    </div>
+
+    <div class="mb-3 col-6">
+      <%= f.label :description, "Description", class: "required poppins-text-10" %>
+      <%= f.text_area :description, required: true, wrap: "virtual", rows: 8, class: "required form-control input-field" %>
+    </div>
+
+    <div class="mb-3 col-6">
+      <%= f.label :tag_deprecated, class: "poppins-text-10" %>
+      <%= f.text_field :tag, disabled: true, class: "form-control input-field" %>
+    </div>
+
+    <div class="mb-3 col-6">
+      <%= f.label :visibility, "visibility", class: "poppins-text-10" %><br/>
+      <%= f.check_box :visibility %>
+    </div>
+
+
+    <div class="mb-3 col-6">
+      <%= f.file_field :images, :accept => "image/jpeg, image/png", multiple: true, class: "required" %>
+    </div>
+
+    <div class="mb-3 col-6">
+      <%= f.submit "Submit", data: { disable_with: "Submitting...."}, class: "poppins-text-10 btn-gradient-orange customer-submit-btn" %>
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T23:42:13.353920Z

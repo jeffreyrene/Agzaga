@@ -1,0 +1,46 @@
+.admin {
+  .is-sortable .sort_link {
+    .default-sort-icon {
+      height: 15px;
+    }
+
+     &.asc, &.desc {
+      .default-sort-icon {
+        display: none;
+      }
+    }
+  }
+
+  .ffa-checkbox {
+
+    input,label {
+      cursor: pointer;
+    }
+  }
+
+  .volume-price-ranges {
+    font-size: 14px;
+  }
+
+  .tracking_url_dropdown {
+    display: none;
+    position: relative;
+    bottom: 23px;
+  }
+
+  #tracking_lookup {
+    display: block;
+    left: auto;
+    height: 145px;
+    overflow-y: scroll;
+    width: 100%;
+    position: unset;
+  }
+
+  .tracking-lookup-option {
+    cursor: pointer;
+  }
+}
+
+# touched on 2025-05-22T23:22:33.778317Z
+# touched on 2025-05-22T23:48:08.315930Z
