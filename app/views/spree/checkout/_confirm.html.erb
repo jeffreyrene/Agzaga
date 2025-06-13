@@ -1,0 +1,72 @@
+<%= render 'spree/checkout/partials/address_step_data' %>
+<% if @order.pick_up_order? %>
+  <%= render 'spree/checkout/partials/pickup' %>
+<% else %>
+  <%= render 'spree/checkout/partials/delivery_step_data' %>
+<% end %>
+
+<%= render 'spree/checkout/partials/payment_step_data' %>
+
+<div class="checkout-step-group">
+
+  <div class="mb-0 checkout-step-group">
+    <div class="step-header">
+      <span class="step-number lexend-h4">4.</span>
+      <span class="step-name lexend-h4">Order Review</span>
+    </div>
+  </div>
+
+  <div class="step-content">
+    <div class="order-confirmation-group">
+      <% coupon_codes = []%>
+      <% @order.all_adjustments.eligible.promotion.each do |promo| %>
+        <% coupon_codes << promo&.promotion_code&.value %>
+      <% end %>
+
+      <div class="order_info d-none" data-id="<%= @order.number%>" data-value="<%= @order.display_total.to_s.sub("$", "") %>" data-currency="<%= @order.currency %>" data-coupon="<%= coupon_codes.uniq.join(",") %>" data-shipping="<%= @order.shipments.last.cost.to_s %>" data-count="<%= @order.line_items.count %>"></div>
+        <% cutom_hose_price = 0 %>
+        <% index = 0 %>
+        <% @order.line_items.each do|line_item| %>
+          <% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+            <% cutom_hose_price =  cutom_hose_price + (line_item.price.to_f * line_item.quantity ) %>
+            <div class="order_item d-none" data-id="<%= line_item.id %>"data-price="<%= cutom_hose_price %>" data-quantity="<%= line_item.quantity %>" data-currency="<%= line_item.currency %>" data-listname="Not Listed" data-listid="0" ></div>
+          <% else %>
+            <div class="order_item_<%= index%> d-none" data-id="<%= line_item.id %>" data-name="<%= line_item.variant.name %>" data-price="<%= line_item.price.to_s %>" data-quantity="<%= line_item.quantity %>" data-currency="<%= line_item.currency %>" data-listname="<%= line_item.product.taxons.any? ? line_item.product.taxons.first.name : "Not Listed" %>" data-listid="<%= line_item.product.taxons.any? ? line_item.product.taxons.first.id : 0 %>" ></div>
+              <% index = index +1 %>
+          <% end %>
+        <% end %>
+
+      <div class="form-buttons" data-hook="buttons">
+        <% Spree::Frontend::Config[:require_terms_and_conditions_acceptance].tap do |requires_acceptance| %>
+          <% if requires_acceptance %>
+            <div class="terms_and_conditions" data-hook="terms_and_conditions">
+
+              <div class="policy"><%= render partial: "spree/checkout/terms_and_conditions" %></div>
+
+              <%= check_box_tag :accept_terms_and_conditions, 'accepted', false %>
+
+              <%= label_tag :accept_terms_and_conditions, t('spree.agree_to_terms_of_service') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="text-left">
+      <div class="poppins-text-16 details-text order-details-info">
+        By clicking the “Place Order” button, you confirm that you have read, understand, and accept our
+        <a class="clear-link shipping-link" href="/privacy_policy">Privacy Policy</a> and
+        <a class="clear-link shipping-link" href="/shipping_policy">Return Policy</a>.
+      </div>
+    </div>
+
+    <div class="mt-3 btn-section sbmt-btn">
+      <%= submit_tag 'Place Order', class: "place-order-btn clear-link", id:'confirm-order-btn'%>
+      <script>Spree.disableSaveOnClick();</script>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:31:44.893706Z
+# touched on 2025-05-22T23:01:09.772429Z
+# touched on 2025-06-13T21:14:21.871820Z

@@ -1,0 +1,29 @@
+<div class="d-none <%= spree_user_signed_in? || cookies[:early_bird_visited] ? 'hide-subscriber' : 'early-bird-show-subscriber' %>" aria-expanded="false" data-toggle="modal" data-target="#early-bird-registration-modal"></div>
+<% cookies[:early_bird_visited] = { value: 'true' } %>
+<div
+  class="modal early-bird-login-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+  id="early-bird-registration-modal"
+>
+    <div class="modal-dialog early-bird-modal-dialog" role="document">
+      <div class="modal-content" id="early-bird-registration-content">
+        <div type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+          <%= image_tag("modal-close.svg") %>
+        </div>
+
+        <div class="modal-body">
+          <div class="header-text">
+            <%= render 'spree/shared/early_bird_modal_text' %>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+# touched on 2025-05-22T19:08:17.260716Z
+# touched on 2025-05-22T20:35:29.989938Z
+# touched on 2025-05-22T23:23:59.911143Z
+# touched on 2025-06-13T21:20:32.384101Z

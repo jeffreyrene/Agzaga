@@ -1,0 +1,10 @@
+<div id="google-ad-gclid" class="d-none"><%= session[:google_ad_gclid] %></div>
+<div class="checkout-navbar">
+  <%= link_to spree::root_url do %>
+    <%= image_tag 'agzaga_black_logo.svg', alt: 'Agzaga', class: "agzaga-logo" %>
+  <% end %>
+
+  <%= link_to spree::cart_path do %>
+    <%= image_tag 'cart_black_sm.svg', alt: 'cart', class: "cart-btn" %>
+  <% end %>
+</div>

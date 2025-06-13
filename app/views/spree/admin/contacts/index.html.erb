@@ -1,0 +1,65 @@
+<% admin_layout "full-width" %>
+
+<% admin_breadcrumb("Contacts") %>
+
+<%= form_with controller: 'contacts', action: 'index', method: :get do |f| %>
+  <%= f.label :time_zone, "Select timezone: " %>
+  <%= f.select :time_zone, options_for_select(['CST', 'UTC'], selected: params['time_zone'] || nil), {}, class: 'custom-select w-25' %>
+  <%= f.submit "Apply", class: 'btn btn-primary' %>
+<% end %>
+
+<% if @contacts.any? %>
+  <table class="index mt-5 mb-5" id="listing_products">
+    <colgroup>
+       <col style="width: 15%;">
+       <col style="width: 15%;">
+       <col style="width: 15%;">
+       <col style="width: 30%;">
+       <col style="width: 20%;">
+    </colgroup>
+
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Date</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @contacts.each do |contact_data| %>
+        <tr>
+          <td><%= contact_data.firstname %> <%= contact_data.lastname %></td>
+          <td><%= contact_data.phone %></td>
+          <td><%= contact_data.email %></td>
+          <td>
+            <% if contact_data.messsage.length > 30 %>
+              <%= contact_data.messsage.first(30) + "..." %>
+            <% else %>
+              <%= contact_data.messsage %>
+            <% end %>
+          </td>
+          <% if params['time_zone'] == 'CST' %>
+            <td><%= contact_data.created_at.in_time_zone("Central Time (US & Canada)").strftime("%Y-%m-%d %H:%M:%S %Z") %></td>
+          <% else %>
+            <td><%= contact_data.created_at %></td>
+          <% end %>
+          <td>
+            <%= link_to 'show', admin_contact_path( contact_data.id) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @contacts, theme: "solidus_admin" %>
+<% else %>
+  <h6 class="m-6 text-center">No message found</h6>
+<% end %>
+
+
+# touched on 2025-05-22T23:27:38.032368Z
+# touched on 2025-05-22T23:39:51.520600Z

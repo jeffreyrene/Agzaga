@@ -1,0 +1,50 @@
+<% heading_text ||= 'You Might Also Like' %>
+
+<div id="top-rated-this-season" class="data-container featured-carousel d-lg-none d-block">
+  <h2 class="section-heading"><%= heading_text %></h2>
+  <div class="container-fluid p-0">
+    <div id="addition-carousel" class="owl-carousel owl-theme home-page-slider">
+      <% @product_cards.each do |product| %>
+        <% next if product.product_id == @product.id %>
+        <div class="item">
+          <a href="<%= product_path(product.slug) %>" class="clear-link" data-turbolinks="false">
+            <%= render partial: 'spree/shared/standard_product_card', locals: { product: product } %>
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="top-rated-this-season" class="data-container featured-carousel d-lg-block d-none">
+  <h2 class="section-heading"><%= heading_text %></h2>
+  <div class="card-pages-group">
+    <div class="nav-section left">
+      <div class="load-btn nav-back disabled" data-current-section="related_products">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="cards" id="related_products" data-total-cards="<%= @product_cards_count %>">
+      <% @product_cards.each do |product| %>
+        <div class="slider-card visible" data-tab="" data-loaded="true">
+          <a href="<%= product_path(product.slug) %>" class="clear-link" data-turbolinks="false">
+            <%= render partial: 'spree/shared/standard_product_card', locals: { product: product } %>
+          </a>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="nav-section">
+      <div class="load-btn nav-forward <%= "disabled" if @product_cards_count <= 4 %>" data-current-section="related_products"  data-params-id="<%= params[:id] %>" >
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-06-13T21:18:04.244476Z

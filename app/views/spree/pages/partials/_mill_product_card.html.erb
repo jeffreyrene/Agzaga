@@ -1,0 +1,47 @@
+<% image ||= '' %>
+<% title ||= '' %>
+<% category ||= 'Crop Packaging' %>
+<% published ||= 0 %>
+<% certified ||= false %>
+
+<div class="card mill-product-card text-left">
+  <%= image_tag image, class: 'product-image card-img-top', alt: '' %>
+  <div class="content">
+    <div class="d-flex justify-content-between">
+      <p class="category poppins-text-11 bold">
+        <%= category %>
+      </p>
+
+      <% unless certified %>
+        <p class="published poppins-text-11">
+          <%= "#{published} days ago" %>
+        </p>
+      <% end %>
+    </div>
+
+    <% if certified %>
+      <%= image_tag 'mill_fan_slim_fill.svg', class: 'mill-icon' %>
+    <% end %>
+
+    <h4 class="poppins-bold-text-20 product-title">
+      <%= title %>
+    </h4>
+
+    <p class="poppins-text-13 detail">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis.
+    </p>
+
+    <div class="d-flex align-items-center justify-content-between product-footer">
+      <div class="d-flex align-items-center">
+        <%= image_tag 'agazon_logo_mark_warm.svg', class: 'logo-mark' %>
+        <span class="published-by poppins-text-11">Agzaga Staff</span>
+      </div>
+
+      <a class="poppins-text-11 read-more clear-link d-flex align-items-center">
+        Read more <i class="bi bi-arrow-right d-flex"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-06-13T21:16:20.976935Z

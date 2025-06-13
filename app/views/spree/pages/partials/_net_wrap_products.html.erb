@@ -1,0 +1,137 @@
+<% industry_products ||= false %>
+<% net_wrap_product = net_wrap_product_order == 1 ? 'blue_gold' : net_wrap_product_order == 2 ? 'bridon-usa' : 'freedom_wrap' %>
+<% product_image_url = mobile_image?(product.product) ? image_cdn_link(product.product.gallery&.images&.where(alt: "mobile-image").first&.url(:sm_200)) : image_cdn_link(product.product.gallery&.images&.first&.url(:product))   %>
+
+<div class="net_wrap_loading_page">
+  <% unless industry_products %>
+    <div class="logo <%= net_wrap_product %>-large-logo d-lg-none d-block">
+      <img src="https://assets.agzaga.com/public%2F<%= net_wrap_product %>.webp"></img>
+    </div>
+
+    <div class="sub-heading <%= net_wrap_product %>-heading d-lg-none d-block">
+      <%= net_wrap_product == 'blue_gold' ? 'The Strength of Bale Tuff, Supporting FFA.' : (net_wrap_product == 'freedom_wrap' ? 'Quality Netwrap, the Color of Freedom' : 'Take your baling to the MAX with Bridon Max net wrap') %>
+    </div>
+  <% end %>
+
+  <div class="net_wrap-img <%= net_wrap_product %>">
+    <div class="image-containter">
+      <a href="<%= product_path(product.slug) %>" class="clear-link" data-turbolinks="false">
+        <%= image_tag product_image_url.present? ? product_image_url : 'noimage_sq.png' , loading: 'lazy', alt: product.name, class: 'product-image-sm' %>
+      </a>
+
+      <div class="company-logo <%= net_wrap_product %>-logo">
+        <div class="logo logo1">
+          <% net_wrap_logo = net_wrap_product == 'freedom_wrap' ? 'https://assets.agzaga.com/net_wraps%2Fsustainable-icon.png' : 'https://assets.agzaga.com/net_wraps%2Fsuperior-uv-icon.png'%>
+
+          <img src="<%= net_wrap_logo %>"></img>
+
+          <div class="text">
+          <% net_wrap_logo_text = net_wrap_product == 'freedom_wrap' ? 'Biodegradable & sustainable' : 'SUPERIOR UV Resistance'%>
+
+            <%= net_wrap_logo_text %>
+          </div>
+        </div>
+
+        <div class="logo logo2">
+          <% net_wrap_logo = net_wrap_product == 'freedom_wrap' ? 'https://assets.agzaga.com/net_wraps%2Fsupport-ffa-icon.png' : 'https://assets.agzaga.com/net_wraps%2Fflag-icon.png'%>
+          <img src="<%= net_wrap_logo %>"></img>
+
+          <div class="text">
+            <% net_wrap_logo_text = net_wrap_product == 'blue_gold' ? 'ALL PURCHASES SUPPORT FFA' : 'MADE FOR USA CONDITIONS'%>
+
+            <%= net_wrap_logo_text %>
+          </div>
+        </div>
+
+        <div class="logo logo3">
+          <% net_wrap_logo = net_wrap_product == 'blue_gold' ? 'https://assets.agzaga.com/net_wraps%2Fdurability-icon.png' : 'https://assets.agzaga.com/net_wraps%2Fcover-edge-icon.png'%>
+          <img src="<%= net_wrap_logo %>"></img>
+
+          <div class="text">
+            <% net_wrap_logo_text = net_wrap_product == 'blue_gold' ? 'DURABLE HAY Protection' : 'UNMATCHED COVER EDGE'%>
+
+            <%= net_wrap_logo_text %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="net_wrap-data">
+    <% unless industry_products %>
+      <div class="logo <%= net_wrap_product %>-large-logo d-lg-block d-none">
+        <img src="https://assets.agzaga.com/public%2F<%= net_wrap_product %>.webp"></img>
+      </div>
+
+      <div class="sub-heading <%= net_wrap_product %>-heading d-lg-block d-none">
+        <%= net_wrap_product == 'blue_gold' ? 'The Strength of Bale Tuff, Supporting FFA.' : (net_wrap_product == 'freedom_wrap' ? 'Quality Netwrap, the Color of Freedom' : 'Take your baling to the MAX with Bridon Max net wrap') %>
+      </div>
+    <% end %>
+
+    <div class="box">
+      <div class="sale-box">
+        <div class="sale-text">
+          <%= "#{product.discount_percentage.round}% OFF" if product.on_sale? %>
+        </div>
+      </div>
+
+      <div class="product-heading">
+        <a href="<%= product_path(product.slug) %>" class="clear-link" data-turbolinks="false">
+          <%= product.name %>
+        </a>
+      </div>
+
+      <div class="product-description">
+        <%= raw(product.product.description) %>
+      </div>
+
+      <div class="price-section">
+        <div class="product-price">
+          <% if product.on_sale? %>
+            <span class="sale-price">
+              <%= "$#{'%.2f' % product.price}" %>
+            </span>
+
+            <span class="original-price">
+              <%= Spree::Money.new(product.original_price).to_html %>
+            </span>
+          <% else %>
+            <span class="actual-price" id="update-price-<%=product.product.id%>" >
+              <%= "$#{'%.2f' % product.price}" %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="buy-in-bulk-<%= product.product.id %> buy-in-bulk">
+      <% if !product.product.variants.present? && product.product.master.volume_prices.present? %>
+        <div class="bulk-pricing">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 13.5C11.2614 13.5 13.5 11.2614 13.5 8.5C13.5 5.73858 11.2614 3.5 8.5 3.5C5.73858 3.5 3.5 5.73858 3.5 8.5C3.5 11.2614 5.73858 13.5 8.5 13.5ZM10.8169 7.69194C11.061 7.44786 11.061 7.05214 10.8169 6.80806C10.5729 6.56398 10.1771 6.56398 9.93306 6.80806L7.875 8.86612L7.06694 8.05806C6.82286 7.81398 6.42714 7.81398 6.18306 8.05806C5.93898 8.30214 5.93898 8.69786 6.18306 8.94194L7.43306 10.1919C7.67714 10.436 8.07286 10.436 8.31694 10.1919L10.8169 7.69194Z" fill="#52525B"/>
+          </svg>
+          Bulk Pricing
+        </div>
+
+        <div class="pallet-section">
+          <% product.product.master.volume_prices.each do |v|%>
+            <% price_per_unit = v.discount_type == 'price' ? v.amount : (v.discount_type == 'percent' ? (product.product.price - (product.product.price * v.amount)) : product.product.price - v.amount) %>
+            <div class="pallets">
+              <div class="add-pallet-to-cart-button" data-pallet-quantity="<%= v.range.split(/[. +]/).first %>" data-quantity-field="product-quantity-field-<%=product.product.id%>">
+                <%= v.name %>
+              </div>
+
+              <div class="price-per-unit">
+                $<%= '%.2f' % price_per_unit %> Each
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="add-to-cart-section" id="cart-form" data-hook="cart_form">
+      <%= render 'spree/pages/partials/cart_form', product: product, net_wrap_product_order: net_wrap_product_order, industry_products: industry_products %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<% admin_layout "full-width" %>
+
+<% admin_breadcrumb(plural_resource_name(Spree::NetSuiteLog)) %>
+
+<table class="index" width="100%" id="listing_orders" data-hook>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Request Payload</th>
+      <th>Date Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @responses.each do |response| %>
+      <tr>
+        <td><%= response.id %></td>
+        <td><%= response.response %></td>
+        <td><%= response.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%m-%d-%Y %H:%M:%S %Z") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @responses, theme: "solidus_admin" %>
+
+# touched on 2025-05-22T22:30:28.149687Z
+# touched on 2025-06-13T21:18:29.361236Z

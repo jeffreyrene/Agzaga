@@ -1,0 +1,43 @@
+<div id="carouselExampleIndicators" class="slider carousel lazy-load slide w-100" data-ride="carousel">
+  <div class="carousel-inner" role="listbox" aria-label="cta carousel">
+
+    <% @home_page_cta&.top&.each_with_index do |cta, index| %>
+      <div class="carousel-item <%= "active" if index == 0 %>" role="option">
+        <div class="outerdiv" style="position: relative;">
+          <a href="<%= spree::root_url + cta.redirect_to %>" class= "clear-link">
+            <picture>
+              <source media="(max-width:414px)" srcset="<%= cta.mobile_link %>" type="image/webp">
+
+              <source media="(max-width:767px)" srcset="<%= cta.tab_link %>" type="image/webp">
+
+              <source srcset="<%= cta.desktop_link %>" type="image/webp" >
+              <img data-src="https://assets.agzaga.com/CTA/deals_home_page_cta.jpg" alt="Deals" class="d-block w-100 outerdiv-img" >
+            </picture>
+          </a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="carousel-indicators-section">
+    <a class="carousel-control-prev left-arrow" href="#carouselExampleIndicators" rel="nofollow" data-slide="prev" aria-label="carousel-left-icon">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+
+    <ol class="carousel-indicators">
+      <% @home_page_cta&.top&.each_with_index do |cta, index| %>
+        <span class="indicator <%= "active" if index == 0 %>"><li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>"></li></span>
+      <% end %>
+    </ol>
+
+    <a class="carousel-control-next right-arrow" href="#carouselExampleIndicators" rel="nofollow" data-slide="next" aria-label="carousel-right-icon">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:23:23.762432Z
+# touched on 2025-05-22T22:33:06.701871Z
+# touched on 2025-05-22T22:34:24.878411Z
+# touched on 2025-05-22T23:03:47.089404Z
+# touched on 2025-05-22T23:45:21.088864Z

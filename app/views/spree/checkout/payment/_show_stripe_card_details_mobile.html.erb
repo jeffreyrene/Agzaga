@@ -1,0 +1,27 @@
+<% store_credit = @order.payments.where(source_type: "Spree::StoreCredit")&.last&.source %>
+<% card = @order.payments.where(source_type: "Spree::CreditCard")&.last&.source %>
+
+<% if card.present? && card.is_a?(Spree::CreditCard) %>
+  <p class="poppins-bold-text-16 card-text">
+    <%= card.name %>
+  </p>
+
+  <div class="d-flex justify-content-start">
+    <p class="poppins-text-16 card-text card-number"><span class="card-last-digits">......</span>
+      <%= card.last_digits%>
+    </p>
+
+    <p class="poppins-text-16 card-text">
+      <%= "#{card.month} / #{card.year}" %>
+    </p>
+  </div>
+<% end %>
+
+<% if store_credit.present? && store_credit.is_a?(Spree::StoreCredit) %>
+  <div class="poppins-text-18 group-heading-content user_name">Store Credit Applied: <%= Spree::Money.new( @order.total_applicable_store_credit, currency: @order.currency ).to_html %></div>
+<% end %>
+
+# touched on 2025-05-22T19:21:52.872555Z
+# touched on 2025-05-22T23:05:52.236740Z
+# touched on 2025-05-22T23:09:59.868751Z
+# touched on 2025-06-13T21:16:48.423273Z

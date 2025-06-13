@@ -24,3 +24,5 @@ class Spree::CtaImage < ApplicationRecord
     end
   end
 end
+
+# touched on 2025-06-13T21:21:00.010559Z

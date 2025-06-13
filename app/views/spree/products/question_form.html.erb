@@ -1,0 +1,60 @@
+<div class="body">
+  <%= link_to request.referer, class: 'back-link' do %>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.16667 14L5 10M5 10L9.16667 6M5 10L15 10" stroke="#52525B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <span class="back">Back</span>
+  <% end %>
+
+  <div class="modal-title">
+    <div class="txt-heading">What’s Your Question?</div>
+  </div>
+
+  <div class="product-image-container">
+    <div class="product-image-section">
+      <%= image_tag @product.gallery.images[0].url(:original), class: 'image', alt: ''%>
+    </div>
+    <div class="image-text"><%= @product.name%></div>
+  </div>
+
+  <div class="review-form">
+    <%= form_for @question, url: product_product_questions_path(@product), html: {method: :post, remote: true, multipart: true} do |f| %>
+      <div class="review_title_field">
+        <div class="form-text">Ask Your Question</div>
+        <%= f.text_area :question, class: "product-review-content question-field form-control input-field placeholder-text", placeholder: "Question" %>
+        <div class="poppins-text-10   review-title-error" >*Question can't be blank</div>
+      </div>
+
+      <div class="review_title_field">
+        <div class="email-text">Nickname</div>
+        <div class="example-text">Example: Joke 96 Don't use your full name or email address </div>
+        <%= f.text_field :name, class: "form-control question-field input-field placeholder-text", placeholder: "Nickname" %>
+        <div class="poppins-text-10 questioner-name-error product-question-content" >*Question can't be blank</div>
+      </div>
+
+      <div class="review_title_field">
+        <div class="email-text">Email*</div>
+        <div class="example-text">This is for confirmation only - we won't send your any promotional emails from this review </div>
+        <%= f.text_field :email, class: "form-control question-field input-field placeholder-text", placeholder: "Email Address" %>
+        <div class="poppins-text-10 review-email-error" >*Email can't be blank</div>
+      </div>
+
+      <%= button_tag class: "review-submit-btn question-submit-btn" do %>
+        <span class="btn-text">Submit Question<span>
+        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.6667 6.66669L18 10M18 10L14.6667 13.3334M18 10L3 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      <% end %>
+
+      <div class="privacy-text">By submitting a question, you agree to our</div>
+      <div class="privacy-policy">
+        <a class="clear-link" href="<%= spree::privacy_policy_path %>">Terms & Condition</a>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+# touched on 2025-05-22T22:47:35.588392Z
+# touched on 2025-05-22T23:27:14.155590Z
+# touched on 2025-05-22T23:43:57.445704Z

@@ -1,0 +1,20 @@
+<% if @favorite.persisted? %>
+  if ( $('.orders.edit').length == 0 ) {
+    var $el = $(".favorable_<%= @favorite.favorable_type.demodulize.underscore %>_<%= @favorite.favorable_id %>");
+
+    $el.each(function( index, element ) {
+      element.href = '<%= favorite_path(@favorite, favorable_id: @favorite.favorable_id, favorable_type: @favorite.favorable_type) %>';
+      element.dataset.method = 'delete';
+    });
+
+  } else {
+    location.reload();
+  }
+
+  window.$('#slider-adc-form').html("<%= j render 'spree/shared/slider_v2' %>");
+<% end %>
+
+# touched on 2025-05-22T21:57:24.039226Z
+# touched on 2025-05-22T22:52:34.820714Z
+# touched on 2025-05-22T22:52:38.470861Z
+# touched on 2025-06-13T21:16:07.724517Z

@@ -1,0 +1,193 @@
+.home.index_v2 {
+  $wheat: #ffb514;
+  $white: #f9f9f9;
+  $coal: #353535;
+  $grey: #D5D5D5;
+
+  .customer-review-section {
+    background-color: $wheat;
+    padding: 24px 0px 32px 0px;
+    max-width: 2880px;
+    margin: 20px auto 32px auto;
+
+    .customer-heading {
+      padding-bottom: 24px;
+      text-align: center;
+      font-size: 41.89px;
+      line-height: 52px;
+    }
+
+    #home_page_review {
+      .owl-nav, .owl-dots {
+        display: none;
+      }
+
+      .owl-stage {
+        margin: 0px 32px 0px 20px;
+      }
+    }
+
+    .customer-card {
+      border-radius: 16px;
+      background-color: $white;
+      width: 578.09px;
+      height: 288px;
+      display: flex;
+      margin: 0px 12px;
+
+      .customer-image {
+        -webkit-clip-path: polygon(0 0, 0 100px, 100% 100%, 100% 45%);
+        clip-path: polygon(0 0, 0 100%, 59% 100%, 139% 0);
+        height: 100%;
+        flex: 0 0 42%;
+        max-width: 42%;
+
+        img {
+          max-width: 344px;
+          max-height: 288px;
+          border-top-left-radius: 16px;
+          border-bottom-left-radius: 16px;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          inline-size: auto;
+        }
+      }
+
+      .customer-detail {
+        flex: 0 0 58%;
+        max-width: 58%;
+        text-align: right;
+        padding: 24px 32px 24px 1px;
+        .review-date {
+          line-height: 15px;
+          color: $coal;
+          text-align: right;
+          letter-spacing: 0.01em;
+        }
+
+        .review-name {
+          color: $coal;
+          margin-bottom: 8px;
+        }
+
+        .review-title {
+          margin-bottom: 8px;
+        }
+
+        .line {
+          border: 1px solid $grey;
+          margin-bottom: 35px;
+          max-width: 219px;
+          margin-right: 0px;
+          width: 100%;
+          margin-left: 82px;
+        }
+
+        .customer-comment {
+          font-style: italic;
+          color: $coal;
+          max-height: 111px;
+          overflow-y: auto;
+        }
+
+        .rating {
+          margin-bottom: 8px;
+          justify-content: flex-end;
+          display: flex;
+          align-items: center;
+
+          .rating-wheat {
+            margin-right: 12px;
+
+            &:before {
+              content: image-url('agazon_logo_mark_gray_mob.svg');
+              display: block;
+              width: 9.49px;
+              height: 15.8px;
+              margin: 0;
+
+              &.filled {
+                content: image-url('agazon_logo_mark_warm_mob.svg');
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .search-tag {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .customer-review-section {
+      padding: 22px 0px 40px 0px;
+      .customer-heading {
+        font-size: 25.89px;
+        line-height: 32px;
+        padding: 0px 19px 19px 19px;
+      }
+
+      #home_page_review {
+        .owl-stage {
+          margin: 0px 0px 0px 0px;
+        }
+      }
+
+      .customer-card {
+        display: block;
+        height: 568px;
+        width: 100%;
+        max-width: 350px;
+        margin: 0px 8px;
+
+        .customer-image {
+          clip-path: none;
+          flex: none;
+          max-width: 350px;
+          width: 100%;
+          height: 274px;
+
+          img {
+            max-width: 350px;
+            width: -webkit-fill-available;
+            height: 274px;
+            border-radius: 16px 16px 0px 0px;
+          }
+        }
+
+        .customer-detail {
+          padding: 19px 32px 40px 32px;
+          flex: none;
+          max-width: 100%;
+          text-align: left;
+          .line {
+            max-width: 286px;
+            margin-bottom: 24px;
+            margin-left: 0;
+          }
+
+          .review-date {
+            text-align: left;
+          }
+
+          .review-name {
+            margin-bottom: 16px;
+          }
+
+          .rating {
+            margin-bottom: -8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+# touched on 2025-05-22T19:16:11.207732Z
+# touched on 2025-05-22T20:40:38.183480Z
+# touched on 2025-05-22T22:43:15.132999Z
+# touched on 2025-05-22T23:21:41.918931Z
+# touched on 2025-06-13T21:20:18.983202Z

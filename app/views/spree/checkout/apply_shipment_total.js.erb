@@ -1,0 +1,9 @@
+$('.checkout-summary-group').html("<%=j render partial: 'spree/checkout/checkout_v3_summary_detail' %>");
+<% affirm_payment = Spree::PaymentMethod.find_by(type: "SolidusAffirmV2::PaymentMethod")%>
+<% if affirm_payment && @order.shipping_address.present? %>
+    $('#payment_method_<%= affirm_payment.id %>').html('<%= j render 'spree/checkout/payment/affirm_v2', payment_method: affirm_payment%>');
+<% end %>
+
+# touched on 2025-05-22T19:18:57.075090Z
+# touched on 2025-05-22T20:40:32.113719Z
+# touched on 2025-06-13T21:19:59.349515Z

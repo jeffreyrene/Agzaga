@@ -1,0 +1,31 @@
+<% have_user_with_email = @order.email.present? && @order.user.blank? %>
+<% if have_user_with_email && @ag_member.present? %>
+  <div class="ag-member-section">
+    <div class="ag-member">
+      <div class="ag-member-text">
+        It looks like you already have an account.
+      </div>
+      <div class="poppins-text-16">
+        <div class="ag-btn ag-btn-lg sign-in-btn" data-toggle= "modal", data-target= ".checkout-login-modal">Sign in</div>
+      </div>
+    </div>
+  </div>
+<% elsif have_user_with_email %>
+  <div class="guest-member-section">
+    <div class="guest-member">
+      <div class="guest-member-text">
+        We can’t find you in our system!
+      </div>
+
+      <div class="guest-login-section">
+        <div class="ag-btn ag-btn-lg sign-in-btn" data-toggle= "modal", data-target= ".checkout-login-modal">Sign in</div>
+        <div class="ag-btn ag-btn-lg ag-btn-primary sign-up-btn" data-toggle= "modal", data-target= ".checkout-login-modal">Create Free Account</div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T19:10:22.702197Z
+# touched on 2025-05-22T22:47:14.288053Z
+# touched on 2025-05-22T23:21:34.006321Z
+# touched on 2025-06-13T21:20:57.079133Z

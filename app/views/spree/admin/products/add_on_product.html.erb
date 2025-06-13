@@ -1,0 +1,64 @@
+<%= render 'spree/admin/shared/product_tabs', current: 'Add On' %>
+
+<%= form_for [:admin, @product], method: :post, url: admin_add_add_on_products_path, html: { multipart: true } do |f| %>
+  <fieldset data-hook="add_product">
+    <legend align="center">Add Adds On Product</legend>
+
+    <div data-hook="admin_product_form_labels">
+      <%= f.field_container :products do %>
+        <%= f.label :product_ids, plural_resource_name(Spree::Product) %><br />
+        <%= f.select(:product_ids, Spree::Product.all.collect {|p| [p.name, p.id] }.compact, { include_blank: true, include_hidden: true }, class: "form-control products_dropdown", style: "border:none; padding:0", :multiple => true) %>
+      <% end %>
+    </div>
+
+    <%= render partial: 'spree/admin/shared/group_links' %>
+  </fieldset>
+<% end %>
+
+<% if @add_products.any? %>
+  <table class="index" id="listing_products">
+    <colgroup>
+       <col style="width: 15%;">
+       <col style="width: 5%;">
+       <col style="width: 45%;">
+       <col style="width: 15%;">
+       <col style="width: 20%;">
+    </colgroup>
+    <thead>
+      <tr data-hook="admin_products_index_headers">
+        <th><%= Spree::Variant.human_attribute_name(:sku) %></th>
+        <th></th>
+        <th><%= Spree::Product.human_attribute_name(:name) %></th>
+        <th class="align-right"><%=  Spree::Product.human_attribute_name(:price) %></th>
+        <th data-hook="admin_products_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @add_products.each do |product| %>
+          <tr <%== "style='color: red;'" if product.deleted? %> id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows">
+            <td><%= product.sku %></td>
+            <td class="align-center">
+              <%= render 'spree/admin/shared/image', image: product.gallery.images.first, size: :mini %>
+            </td>
+            <td><%= link_to product.try(:name), edit_admin_product_path(product) %></td>
+            <td class="align-right"><%= product.display_price.to_html %></td>
+            <td class="actions" data-hook="admin_products_index_row_actions">
+              <%= link_to "", admin_remove_add_on_product_path(id: @product, product_id: product.id ), method: :delete, data: {confirm:"Are you sure?"}, class: "fa fa-trash" %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <p>This is an individual product add product to make this product as a group product</p>
+  </div>
+<% end %>
+<%= paginate @add_products, theme: "solidus_admin" %>
+
+<script>
+  $('.products_dropdown').select2();
+</script>
+# touched on 2025-05-22T20:37:36.125107Z
+# touched on 2025-05-22T23:30:14.451827Z
+# touched on 2025-06-13T21:17:29.970081Z

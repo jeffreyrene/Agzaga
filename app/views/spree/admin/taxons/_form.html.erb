@@ -1,0 +1,191 @@
+<div data-hook="admin_inside_taxon_form" class="row">
+  <div class="col-5">
+    <%= f.field_container :name do %>
+      <%= f.label :name, class: 'required' %><br />
+      <%= text_field :taxon, :name, class: 'fullwidth' %>
+      <%= error_message_on :taxon, :name, class: 'fullwidth title' %><br><br>
+    <% end %>
+
+    <%= f.field_container :visibility do %>
+      <%= f.label :visibility, class: 'required' %>&nbsp;
+      <%= f.check_box :visibility %>
+    <% end %>
+
+    <%= f.field_container :permalink_part do %>
+      <%= label_tag :permalink_part, Spree::Taxon.human_attribute_name(:permalink), class: 'required' %><br />
+      <div class="input-group">
+        <% if @taxon.parent %>
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <%= @taxon.permalink.split('/')[0...-1].join('/') + '/' %>
+            </span>
+          </div>
+        <% end %>
+        <%= text_field_tag :permalink_part, @permalink_part, class: 'fullwidth form-control' %><br />
+      </div>
+    <% end %>
+
+    <%= f.field_container :icon do %>
+      <%= f.label :icon %><br>
+      <%= f.file_field :icon %>
+      <% if f.object.icon_present? %>
+        <%= image_tag f.object.icon(:mini) %>
+        <%= link_to t('spree.actions.remove'),
+                    admin_taxonomy_taxon_attachment_path(@taxonomy,
+                                                          @taxon.id,
+                                                          attachment_definition: :icon,
+                                                          authenticity_token: form_authenticity_token),
+                    method: :delete,
+                    class: 'btn btn-sm btn-danger' %>
+      <% end %>
+    <% end %>
+
+    <%= f.field_container :small_ads do %>
+      <%= f.label :small_ads, 'Small ad' %><br>
+      <%= f.file_field :small_ads %>
+      <% if f.object.small_ads_present? %>
+        <%= image_tag f.object.small_ads(:mini) %>
+        <%= link_to t('spree.actions.remove'),
+                    admin_taxonomy_taxon_attachment_path(@taxonomy,
+                                                          @taxon.id,
+                                                          attachment_definition: :small_ads,
+                                                          authenticity_token: form_authenticity_token),
+                    method: :delete,
+                    class: 'btn btn-sm btn-danger' %>
+      <% end %>
+    <% end %>
+
+    <%= f.field_container :small_ad_for_mobile do %>
+      <%= f.label :small_ad_for_mobile, 'Small ad for mobile' %><br>
+      <%= f.file_field :small_ad_for_mobile %>
+      <% if f.object.small_ad_for_mobile_present? %>
+        <%= image_tag f.object.small_ad_for_mobile(:mini) %>
+        <%= link_to t('spree.actions.remove'),
+                    admin_taxonomy_taxon_attachment_path(@taxonomy,
+                                                          @taxon.id,
+                                                          attachment_definition: :small_ad_for_mobile,
+                                                          authenticity_token: form_authenticity_token),
+                    method: :delete,
+                    class: 'btn btn-sm btn-danger' %>
+      <% end %>
+    <% end %>
+
+    <%= f.field_container :small_ad_link do %>
+      <%= f.label :small_ad_link %><br />
+      <%= f.text_field :small_ad_link, class: 'fullwidth' %>
+    <% end %>
+
+    <div>
+      <%= f.field_container :video_link do %>
+        <%= f.label :video_link, "Video Link" %><br />
+        <%= f.text_field :video_link, class: 'fullwidth' %>
+      <% end %>
+    </div>
+
+    <div data-hook="admin_inside_faq_form">
+      <div class="row">
+        <div class="col-12" data-hook="admin_label_form_left">
+          <div id="editor" data-hook="admin_product_form_features">
+            <%= f.field_container :annotation do %>
+              <%= f.label :annotation, 'Video Annotation' %>
+              <%= f.text_area :annotation, {rows: "5", class: 'fullwidth', required: true} %>
+              <%= f.error_message_on :annotation %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <%= f.field_container :small_ads_end_at do %>
+      <%= f.label :small_ads_end_at, 'Small ad end date' %><br />
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <%= solidus_icon('fa fa-calendar') %>
+          </span>
+        </div>
+        <%= f.text_field :small_ads_end_at, class: "datetimepicker",
+                                  value: f.object.small_ads_end_at.present? ? l(f.object.small_ads_end_at.in_time_zone("Central Time (US & Canada)"), format: :datetimepicker) : "" %>
+      </div>
+    <% end %>
+
+    <%= f.field_container :large_ads do %>
+      <%= f.label :large_ads, 'Large ad' %><br>
+      <%= f.file_field :large_ads %>
+      <% if f.object.large_ads_present? %>
+        <%= image_tag f.object.large_ads(:mini) %>
+        <%= link_to t('spree.actions.remove'),
+                    admin_taxonomy_taxon_attachment_path(@taxonomy,
+                                                          @taxon.id,
+                                                          attachment_definition: :large_ads,
+                                                          authenticity_token: form_authenticity_token),
+                    method: :delete,
+                    class: 'btn btn-sm btn-danger' %>
+      <% end %>
+    <% end %>
+
+    <%= f.field_container :large_ad_for_mobile do %>
+      <%= f.label :large_ad_for_mobile, 'Large ad for mobile' %><br>
+      <%= f.file_field :large_ad_for_mobile %>
+      <% if f.object.large_ad_for_mobile_present? %>
+        <%= image_tag f.object.large_ad_for_mobile(:mini) %>
+        <%= link_to t('spree.actions.remove'),
+                    admin_taxonomy_taxon_attachment_path(@taxonomy,
+                                                          @taxon.id,
+                                                          attachment_definition: :large_ad_for_mobile,
+                                                          authenticity_token: form_authenticity_token),
+                    method: :delete,
+                    class: 'btn btn-sm btn-danger' %>
+      <% end %>
+    <% end %>
+
+
+    <%= f.field_container :large_ad_link do %>
+      <%= f.label :large_ad_link %><br />
+      <%= f.text_field :large_ad_link, class: 'fullwidth' %>
+    <% end %>
+
+    <%= f.field_container :large_ads_end_at do %>
+      <%= f.label :large_ads_end_at, 'Large ad end date' %><br />
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <%= solidus_icon('fa fa-calendar') %>
+          </span>
+        </div>
+        <%= f.text_field :large_ads_end_at, class: "datetimepicker",
+                                  value: f.object.large_ads_end_at.present? ? l(f.object.large_ads_end_at.in_time_zone("Central Time (US & Canada)"), format: :datetimepicker) : "" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-5">
+    <%= f.field_container :description do %>
+      <%= f.label :description %><br />
+      <%= f.text_area :description, class: 'fullwidth', rows: 12 %>
+    <% end %>
+  </div>
+
+  <div class="col-10">
+    <%= f.field_container :meta_title do %>
+      <%= f.label :meta_title %><br />
+      <%= f.text_field :meta_title, class: 'fullwidth' %>
+    <% end %>
+
+    <%= f.field_container :meta_description do %>
+      <%= f.label :meta_description %><br />
+      <%= f.text_field :meta_description, class: 'fullwidth' %>
+    <% end %>
+
+    <%= f.field_container :meta_keywords do %>
+      <%= f.label :meta_keywords %><br />
+      <%= f.text_field :meta_keywords, class: 'fullwidth' %>
+    <% end %>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:43:49.051306Z
+# touched on 2025-06-13T21:22:17.675148Z

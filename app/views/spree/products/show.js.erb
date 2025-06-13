@@ -1,0 +1,12 @@
+$('.customer-review-stars').html("<%=j render partial: 'spree/products/partials/customer_reviews_stars', locals: { reviews: @product_reviews } %>");
+<% pagination_theme = params[:for_desktop] ? 'ag_pagination' : 'review_pagination' %>
+$('.reviews-pagination').html("<%= j (paginate(@product_reviews, theme: "#{pagination_theme}", remote: true, params: {count: @product_reviews.count})) %>")
+
+if($('#sort-reviews').attr('aria-expanded') == 'true') {
+  $('#sort-reviews').click();
+}
+
+# touched on 2025-05-22T19:15:49.735444Z
+# touched on 2025-05-22T23:39:20.933875Z
+
+# touched on 2025-06-13T21:16:00.886450Z
