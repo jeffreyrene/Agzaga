@@ -1,0 +1,17 @@
+<% heading_text ||= 'get policy updates, sale information, and more' %>
+
+<div class="tt text-center">
+  <h2 class="draught-h2"><%= heading_text %></h2>
+
+  <%= form_tag(main_app.news_letter_path, remote: true, class: 'inline-sign-up-form') do %>
+    <div class="email-group">
+      <%= email_field_tag 'email', '', placeholder: 'Enter your email address', required: true, class: 'email-input-field poppins-text-14' %>
+      <div class="error-message" id="news_letter_error">This is an invalid email address</div>
+    </div>
+
+    <%= submit_tag 'Sign Up', class: 'btn-gradient-orange poppins-text-16 news_letter_submit' %>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T19:09:15.623342Z
+# touched on 2025-05-22T23:03:41.171076Z

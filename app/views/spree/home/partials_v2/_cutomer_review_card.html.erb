@@ -1,0 +1,21 @@
+<div class="customer-card">
+  <div class="customer-image">
+    <%= image_tag(review.image&.url(:product))%>
+  </div>
+
+  <div class="customer-detail">
+    <div class="d-block d-md-none">
+      <%= render partial: 'spree/home/partials/rating', locals: { fill: review.rating, hide_rating_number: true} %>
+    </div>
+    <div class="poppins-text-10 review-date"><%= review.review_date.strftime('%d-%m-%Y') %></div>
+    <div class="lexend-h4 review-name"><%= review.name %></div>
+    <div class="line"></div>
+    <div class="d-md-block d-none">
+      <%= render partial: 'spree/home/partials/rating', locals: { fill: review.rating, hide_rating_number: true} %>
+    </div>
+    <div class="poppins-text-16 bold review-title"><%= review.title %></div>
+    <div class="poppins-text-12 customer-comment"><%= review.comment %></div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:22:37.497317Z

@@ -1,0 +1,81 @@
+<div class="modal chapter_selection_modal" id = "cart_chapter_selection_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-bottom animate-bottom" role="document" id="sign-up-form-wrapper">
+    <div class="modal-content" id="modal-content">
+      <div class="main-heading">Select a Chapter</div>
+      <div class="poppins-bold-text-12 d-md-block close-modal review_modal_close" data-dismiss="modal" id="close-icon"></div>
+
+      <div class="modal-body">
+        <div class="chapters-search-group">
+          <%= image_tag "search_icon_black_24.svg", class: 'search-icon', alt: 'Search', size: '24x24' %>
+          <input type="text" class="search-input" id="ffa-chapter-search-input" placeholder="Search by State or School">
+        </div>
+        <%= form_tag update_chapter_path, remote: true, method: :patch do %>
+          <div class="chapter-list-table-wrapper">
+            <table id="chapter-list-table">
+              <thead>
+                <tr>
+                  <th class="chapter-name-head">
+                    Chapter Name
+                    <a id="sort-chapter" data-order="desc"><%= image_tag '', class:"icon-desc" %></a>
+                  </th>
+
+                  <th class="chapter-state-head">
+                    City, State
+                    <a id="sort-state" data-order="asc"><%= image_tag '', class: "float-right icon-asc" %></a>
+                  </th>
+
+                  <th class="chapter-select-head" id="for-selection">Set my chapter</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @ffa_chapters&.each do |chapter| %>
+                  <tr class="chapter-row <%= active_row = chapter&.id == @order&.ffa_chapter&.id ?  'active-selected-row' : '' %>" data-chapter=<%= chapter.name %> data-state=<%= chapter.state_full_name %>>
+                    <td>
+                      <div class="flex-block">
+                        <div class="chapter-icon"><%= chapter.name&.first %></div>
+                        <div class="school-info">
+                          <div class="main-title"><%= chapter.name %></div>
+                          <div class="sub-title school-name"><%= chapter.school_name %></div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="main-title"><%= chapter.city %></div>
+                      <div class="sub-title state-name"><%= chapter.state_full_name %></div>
+                    </td>
+
+                    <td class="button-section">
+                      <% @active_state = chapter&.id == @order&.ffa_chapter&.id ?  'chapter-selected-btn' : 'chapter-select-btn' %>
+                      <% @active_chapter = chapter&.id == @order&.ffa_chapter&.id ? 'active-chapter' : '' %>
+
+                      <input type="radio" id="ffa_chapter_<%= chapter.id%>" name="order[ffa_chapter_id]" value=<%= chapter.id %>  <%= 'checked' if chapter&.id == @order&.ffa_chapter&.id %>>
+
+                      <label class=" selected-chapter-btn <%= @active_state %> <%= @active_chapter %>" for="ffa_chapter_<%= chapter.id%>">
+                        <%= image_tag 'chapter-selected.svg', size: '13x13', class: 'chapter-selected-icon' %>
+                        <%= image_tag 'white-check.svg', size: '13x13', class: 'm-chapter-selected-icon' %>
+                        <span>Select Chapter</span>
+                      </label>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="chapter-list-modal-footer">
+            <div class="cancel-btn" data-dismiss="modal" id="close-icon">Cancel</div>
+            <button class="done-btn chapter-apply-btn">Done</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:44:25.690608Z
+# touched on 2025-05-22T21:19:10.142651Z
+# touched on 2025-05-22T22:46:56.396110Z
+# touched on 2025-05-22T23:28:09.705991Z
+# touched on 2025-05-22T23:48:35.275247Z

@@ -1,0 +1,39 @@
+<div class="card-pages-group" data-tab-size=3>
+  <div class="nav-section left">
+    <div class="load-btn nav-back disabled" data-current-section="<%= flag_products.first.tag.split(' ').join('_').downcase %>">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="cards" id="<%= flag_products.first.tag.split(' ').join('_').downcase %>" data-total-cards="<%= flag_products_count %>">
+    <% flag_product_cards = load_product_cards(flag_products) %>
+    <% flag_product_cards.each do |product| %>
+      <div class="slider-card visible" data-tab="" data-loaded="true">
+        <%= render partial: 'spree/shared/standard_product_card', locals: { product: product } %>
+
+        <%= render 'spree/pages/partials/cart_flag_form', product: product %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="nav-section nav-next-button d-flex d-md-none">
+    <div class="load-btn nav-forward <%= "d-none" if flag_products_count <= 3 %>" data-current-section="<%= flag_products.first.tag.split(' ').join('_').downcase %>">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-section d-none d-md-flex">
+    <div class="load-btn nav-forward <%= "disabled" if flag_products_count <= 3 %>" data-current-section="<%= flag_products.first.tag.split(' ').join('_').downcase %>">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.5 3L22.5 16L9.5 29" stroke="#18181B" stroke-width="2.67" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T22:31:23.187627Z
+# touched on 2025-05-22T23:26:36.501717Z

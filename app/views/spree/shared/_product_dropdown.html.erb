@@ -1,0 +1,10 @@
+<% taxonomy ||= nil %>
+
+<div class="col-sm-12 col-md-6 col-lg-6 product-menu-outer">
+  <div class="product-menu-inner boder-left-yellow">
+    <h6 class="poppins-bold-text-16 drop-down-bold-heading"><%= taxonomy.name %></h6>
+    <% taxonomy.root.children.where(visibility: true).each do |staxon| %>
+      <div><a class="poppins-text-16 product-dropdown-submenu" href="<%= spree::nested_taxons_path(staxon) %>"><%= staxon.name %></a></div>
+    <% end %>
+  </div>
+</div>

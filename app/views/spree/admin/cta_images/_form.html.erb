@@ -1,0 +1,46 @@
+<div id="start_at_field" class="field">
+  <%= f.label :start_at %>
+  <%= f.text_field :start_at, value: datepicker_field_value(@cta_image.start_at&.in_time_zone("Central Time (US & Canada)"), with_time: true), placeholder: "Start at", class: 'datepicker datepicker-from fullwidth', data: { :'enable-time' => true, :'default-hour' => 0 }, required: :true %>
+</div>
+
+<div id="expires_at_field" class="field">
+  <%= f.label :end_at %>
+  <%= f.text_field :end_at, value: datepicker_field_value(@cta_image.end_at&.in_time_zone("Central Time (US & Canada)"), with_time: true), placeholder: "End date", class: 'datepicker datepicker-to fullwidth', data: { :'enable-time' => true, :'default-hour' => 0 }, required: :true %>
+</div>
+
+<div class="row justify-content-between m-0">
+  <div id="link_at_field" class="field col-5">
+    <%= f.label :desktop_link %>
+    <%= f.text_field :desktop_link, class: 'fullwidth' %>
+  </div>
+
+  <div id="link_at_field" class="field col-5">
+    <%= f.label :tab_link %>
+    <%= f.text_field :tab_link, class: 'fullwidth' %>
+  </div>
+</div>
+
+<div class="row justify-content-between m-0">
+  <div id="link_at_field" class="field col-5">
+    <%= f.label :mobile_link %>
+    <%= f.text_field :mobile_link, class: 'fullwidth' %>
+  </div>
+
+  <div id="link_at_field" class="field col-5">
+    <%= f.label :redirect_to %>
+    <%= f.text_field :redirect_to, class: 'fullwidth' %>
+  </div>
+</div>
+
+<div data-hook="admin_product_form_promotionable">
+  <%= f.field_container :add_space do %>
+    <label>
+      Ad Space:
+    </label>
+
+    <%= f.select :add_space, Spree::CtaImage.add_spaces.keys.map {|key| [key.humanize, key]}, {include_blank: false}, class: "custom-select" %>
+  <% end %>
+</div>
+
+
+# touched on 2025-05-22T19:22:05.372294Z

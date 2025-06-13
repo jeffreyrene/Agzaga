@@ -1,0 +1,69 @@
+<div class="modal fade quantity-changer-modal" id="checkout-quantity-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered checkout-quantity-changer-modal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="line-item-image">
+          <%= render( 'spree/shared/image', image: item.variant.gallery.images.first || item.variant.product.gallery.images.first, size: :small ) %>
+        </div>
+        <div class="line-item-details">
+          <div class="update-quantity ag-p-sm">Update Quantity</div>
+          <div class="line-item-name ag-p-sm"><%= item.name %></div>
+        </div>
+        <button type="button" class="close close-checkout-qty-modal" data-dismiss="modal" aria-label="Close">
+          <%= image_tag "qty-modal-close.svg" %>
+        </button>
+      </div>
+
+      <% variants_stock = product_out_of_stock(item.product) %>
+      <% product = item.product %>
+
+      <%= form_for current_order, html: { method: :get }, url: cart_update_line_item_quantity_path do |order_form| %>
+        <div class="modal-body">
+          <%= order_form.fields_for :line_items, item do |item_form| %>
+
+            <%= hidden_field_tag 'id', @order.find_line_item_by_variant(item.variant).id %>
+
+            <div class="quantity-btn-group <%= 'disable-quantity-btn-group' if out_of_stock(product, variants_stock) || !product.variants.empty? %>">
+              <div class="qty-btn-container">
+                <%= button_tag '', class: 'button sub-btn', type: 'button' %>
+
+                <% if item.variant.is_backorderable? %>
+                  <% if item.variant.get_max_stock > 0 %>
+                    <%= item_form.number_field :quantity, class: "quantity modal-quantity-field text-center", min: 1, max: item.variant.get_max_stock+1, data: {quantity: item.quantity} %>
+                  <% else %>
+                    <%= item_form.number_field :quantity, class: "quantity modal-quantity-field text-center", min: 1, max: 501, data: {quantity: item.quantity} %>
+                  <% end %>
+
+                <% else %>
+                    <%= item_form.number_field :quantity, class: "quantity modal-quantity-field text-center", min: 1, max: item.variant.total_on_hand+1, data: {quantity: item.quantity} %>
+                <% end%>
+
+                <%= button_tag '', class: 'button add-btn', type: 'button' %>
+              </div>
+              <div class="poppins-text-10 stock-error-message"></div>
+              <input name="recalculate_shipping" type="hidden" value="true" />
+            </div>
+
+            <div class="update-btn-container">
+              <% if out_of_stock(product, variants_stock) %>
+                <%= button_tag class: 'ag-btn-lg', id: 'add-to-cart-button ag-btn-destructive', disabled: true, type: :submit do %>
+                  <%= t('spree.add_to_cart') %>
+                <% end %>
+
+              <% else %>
+                <%= button_tag class: 'ag-btn-lg ag-btn-primary checkout-add-to-cart-button', id: 'add-to-cart-button', type: :submit do %>
+                  Update
+                <% end %>
+
+                <%= link_to 'Remove', spree::cart_destroy_line_item_path(id: item.id, recalculate_shipping: true ), class: 'ag-btn-lg ag-btn-destructive checkout-remove-from-cart-button w-100 clear-link', method: :delete %>
+              <% end %>
+            </div>
+
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:32:57.250940Z

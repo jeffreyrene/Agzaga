@@ -1,0 +1,13 @@
+<% content_for :page_actions do %>
+  <% if can?([:admin, :create], Spree::Order) && !@user.deleted? %>
+    <li>
+      <%= link_to t(".create_order"), spree.new_admin_order_path(user_id: @user.id), class: 'btn btn-primary' %>
+    </li>
+  <% end %>
+<% end %>
+
+# touched on 2025-05-22T19:22:31.450581Z
+# touched on 2025-05-22T19:24:31.445014Z
+# touched on 2025-05-22T20:38:29.779338Z
+# touched on 2025-05-22T22:43:12.010042Z
+# touched on 2025-05-22T23:26:59.667375Z

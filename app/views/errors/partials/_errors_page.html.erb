@@ -1,0 +1,48 @@
+<div class="container">
+  <%= image_tag "corner_grey.svg" , class: "corner-image d-md-block d-none", alt: '' %>
+  <%= image_tag "error_page_bg.svg", class: "error_page_bg", alt: '' %>
+
+  <div class="data-container">
+    <div class="text-center">
+      <%= image_tag "agzaga_logo_black.svg" , class: "agzaga_logo", alt: 'Agzaga Logo'%>
+    </div>
+
+    <div class="row">
+
+      <div class="page-content content-left text-center col-xl-6 col-12">
+        <div class="poppins-text-32 bold error_page-heading">Whoops,</div>
+        <%= image_tag "error_404.svg", class: "error_404_img", alt: 'Error 404' %>
+        <div class="error_page-heading pg-not-found">Page Not Found</div>
+        <div class="poppins-text-24 error_page-description">
+          The page you’re looking for might have been removed, had its name changed, or is temporarily unavailable.
+        </div>
+
+        <div class="error_page-btn text-center">
+          <a href="<%= spree::root_url %>" class="poppins-text-12 clear-link home-btn">Go Home</a>
+        </div>
+
+        <div class="desktop-icons">
+          <%= render partial: 'spree/shared/social_icons'%>
+        </div>
+      </div>
+
+      <div class="page-content content-right col-xl-6 col-12">
+        <div class="search-products">
+          <div class="poppins-text-24 search-heading">Search Our Products</div>
+          <div class="nav-search-box">
+            <%= render partial: 'spree/shared/search' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-icons">
+      <%= render partial: 'spree/shared/social_icons'%>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:22:15.143601Z
+# touched on 2025-05-22T20:38:11.670570Z
+# touched on 2025-05-22T22:44:41.097759Z
+# touched on 2025-05-22T23:42:49.050349Z

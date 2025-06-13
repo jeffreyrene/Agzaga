@@ -1,0 +1,187 @@
+<% content_for :title, 'Custom Length Flexzilla Garden Hose' %>
+<% content_for :meta_description, 'Get your custom Flexzilla garden hose cut to length with aluminum or brass fittings!' %>
+<% content_for :meta_keywords, 'custom garden hose, flexzilla, non kink, lead in hose, custom length, cut to length, brass fittings, short garden hose, best garden hose' %>
+
+<div class="data-container">
+  <%= form_for :order,html: { method: :post, remote: true}, url: populate_orders_path do |f| %>
+  <div class="data-wrapper d-flex flex-md-wrap">
+
+    <div class="custom-made-group">
+      <div class="logo-header-group">
+        <%= image_tag 'custom_hose/flexzilla_logo_4C_black.svg', class: 'flex-logo' %>
+
+        <div class="poppins-bold-text-24 heading-text">
+          Custom Made 5/8” Hose
+        </div>
+        <%= render partial: 'spree/custom_hose_generator/partials/help_section'%>
+      </div>
+
+      <div class="hose-image-container zillagreen">
+        <%= image_tag 'custom_hose/custom-hose_aluminum_full_zilla-green.jpg', id: "hose_bg_img", class: "Aluminum hose_image green_header" %>
+        <%= image_tag 'custom_hose/custom-hose_brass_full_brown-mulch.jpg', id: "hose_bg_img", class: "Aluminum hose_image brown_header" %>
+
+      </div>
+
+        <%= render partial: 'spree/custom_hose_generator/partials/product_options', locals: {f: f} %>
+
+    </div>
+
+    <%= image_tag 'help-icon-active.svg', class: 'd-none help_active_img' %>
+    <%= image_tag 'question_icon_circle_black.svg', class: 'd-none help_black_img' %>
+    <%= image_tag 'custom_hose/custom-hose_brass_full_zilla-green.jpg', class: 'd-none bg_green_brass_img' %>
+    <%= image_tag 'custom_hose/custom-hose_aluminum_full_zilla-green.jpg', class: 'd-none bg_green_al_img' %>
+    <%= image_tag 'custom_hose/custom-hose_brass_full_brown-mulch.jpg', class: 'd-none bg_brown_brass_img' %>
+    <%= image_tag 'custom_hose/custom-hose_aluminum_full_brown-mulch.jpg', class: 'd-none bg_brown_al_img' %>
+
+    <div class="price-group">
+      <div class="poppins-bold-text-20 group-heading">
+        Total Price
+      </div>
+      <div class="heading-line"></div>
+      <div>
+        <div class="price-group-detail">
+          <div class="item">
+            <div class="poppins-text-16 item-name">Hose Length:</div>
+            <div class="poppins-text-16 bold item-price" id="hose_price">$0</div>
+          </div>
+          <div class="item">
+            <div class="poppins-text-16 item-name">Fitting 1:</div>
+            <div class="poppins-text-16 bold item-price" id="fitting_1_price">$0</div>
+          </div>
+          <div class="item">
+            <div class="poppins-text-16 item-name">Fitting 2:</div>
+            <div class="poppins-text-16 bold item-price" id="fitting_2_price">$0</div>
+          </div>
+          <div class="item last-child">
+            <div class="poppins-text-16 item-name">Assembly Fee:</div>
+            <div class="poppins-text-16 bold item-price" id="assembly_fee">$<%= @hose_assembly_fee ? @hose_assembly_fee.price : "0" %></div>
+          </div>
+          <div class="price-subtotal">
+            <div class="poppins-text-16 subtotal-name">Subtotal:</div>
+            <div class="poppins-text-16 bold subtotal-price" id="subtotal-price">$0.00</div>
+          </div>
+
+            <input id="fitting_1_variant" name="fitting_1_variant_id"  type="hidden" value="">
+            <input id="fitting_2_variant" name="fitting_2_variant_id"  type="hidden" value="">
+            <input name="hose_assembly_fee"  type="hidden" value="<%= @hose_assembly_fee ? @hose_assembly_fee.master.id : '' %>">
+            <%= button_tag class: 'add-to-cart', id: 'add_custom', type: :submit, data: { disable_with: 'Adding to Cart ...' } do %>
+              <%= t('spree.add_to_cart') %>
+            <% end %>
+          <div class="cart-error-message">*Missing Selections</div>
+        </div>
+        <div class="poppins-text-8 note text-center">
+          <div class="p-0"> *See
+          <a class="clear-link" href="/shipping_policy/#custom-product-returns">Shipping & Returns</a> for custom product policy. </div>
+          <div class="p-0"> Field repair supplies not available through agzaga.com.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-hose-configurations poppins-text-14" id='custom-hose-configurations-table'>
+      <%= render 'spree/custom_hose_generator/partials/product_data_table'%>
+    </div>
+
+    <div class="hose-features-group">
+      <div class="poppins-bold-text-20 group-heading">
+        Hose Features
+      </div>
+
+      <div class="heading-line"></div>
+      <div class="features-group row ml-0 mr-0">
+        <div class="feature padding-left col-md-6">
+          <div class="icon">
+            <%= image_tag 'custom_hose/fluent_weather_drizzle_filled.svg' %>
+          </div>
+
+          <div class="poppins-text-10">
+            Extreme all-weather cabalitles
+          </div>
+        </div>
+
+        <div class="feature padding-right col-md-6">
+          <div class="icon">
+            <%= image_tag 'custom_hose/jam_feather-f.svg' %>
+          </div>
+
+          <div class="poppins-text-10">
+            Lightweight and easy to handle
+          </div>
+        </div>
+
+        <div class="feature padding-left col-md-6">
+          <div class="icon">
+            <%= image_tag 'custom_hose/icon_park_node-round.svg' %>
+          </div>
+
+          <div class="poppins-text-10">
+            Won’t kink under pressure
+          </div>
+        </div>
+
+        <div class="feature padding-right col-md-6">
+          <div class="icon">
+            <%= image_tag 'custom_hose/mdi_wall_sconce_flat_variant.svg' %>
+          </div>
+
+          <div class="poppins-text-10">
+            Lays flat— no memory
+          </div>
+        </div>
+
+        <div class="feature padding-left col-md-6">
+          <div class="icon">
+            <%= image_tag 'custom_hose/ic_round-center-focus-strong.svg' %>
+          </div>
+
+          <div class="poppins-text-10">
+            Durable and abrasion- resistant outer cover
+          </div>
+        </div>
+
+        <div class="feature padding-right col-md-6">
+          <div class="icon">
+            <%= image_tag 'custom_hose/gg_arrow_long_right_l.svg' %>
+          </div>
+
+          <div class="poppins-text-10">
+            Available in lengths up to 249 feet
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-repair-ready-group">
+      <a class="clear-link" href="<%= spree.products_path(request.query_parameters.merge( keywords: 'flexzilla pro reusable'))%>">
+        <div class="ready-group">
+          <div class="poppins-bold-text-20 filter_section_heading">
+            Field Repair Ready
+          </div>
+          <div class="poppins-text-10 fitting-image">
+            Whether you’re in the field or in the shop, Annodized Aluminum Fittings are repairable with Flexzilla’s Pro Reusable Fittings; just trim, attach and tighten to keep your hose like new!
+          </div>
+          <div>
+            <%= image_tag 'custom_hose/field_repair.jpg'%>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+  <% end %>
+</div>
+
+
+<script type="text/javascript">
+   var images = {
+      "green_female_brass_img":  "<%= image_path('custom_hose/custom-hose_brass_female_zilla-green.jpg') %>",
+      "green_female_al_img":  "<%= image_path('custom_hose/custom-hose_aluminum_female_zilla-green.jpg') %>",
+      "green_male_brass_img":  "<%= image_path('custom_hose/custom-hose_brass_male_zilla-green.jpg') %>",
+      "green_male_al_img":  "<%= image_path('custom_hose/custom-hose_aluminum_male_zilla-green.jpg') %>",
+      "brown_female_brass_img":  "<%= image_path('custom_hose/custom-hose_brass_female_brown-mulch.png') %>",
+      "brown_female_al_img":  "<%= image_path('custom_hose/custom-hose_aluminum_female_brown-mulch.png') %>",
+      "brown_male_brass_img":  "<%= image_path('custom_hose/custom-hose_brass_male_brown-mulch.png') %>",
+      "brown_male_al_img":  "<%= image_path('custom_hose/custom-hose_aluminum_male_brown-mulch.png') %>"
+    }
+</script>
+
+# touched on 2025-05-22T22:32:17.827938Z

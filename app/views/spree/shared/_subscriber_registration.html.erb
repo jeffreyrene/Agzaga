@@ -1,0 +1,63 @@
+<% for_checkout_login ||= false %>
+<% request_type = for_checkout_login ? true : false %>
+<% resource = Spree::User.new %>
+
+<%= form_for resource, as: :spree_user, remote: true, url: spree.registration_path(resource), :html => {:class => 'subscriber-registration-form'} do |f| %>
+  <div data-hook="signup_inside_form" class="checkout-login-form">
+    <div class="form-group">
+      <div class="ag-input-neutral">
+        <div class="ag-input-group-box email-validation">
+          <%= f.text_field :email, required: true, class: "ag-input-field form-control",  placeholder: "Email Address", id: "signup-email"%>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="ag-input-neutral">
+        <div class="ag-input-group-box">
+          <%= f.password_field :password, required: true, class: "ag-input-field form-control",  placeholder: "Password", id: "subs-password"%>
+
+          <div class="ag-input-icon-append">
+            <div data-field='subs-password' id="password-icon" class="secure-password"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="ag-input-neutral confirm-pass-input">
+        <div class="ag-input-group-box">
+          <%= f.password_field :password_confirmation, required: true, class: "ag-input-field form-control",  placeholder: "Re-Enter Password", id: "subs-confirm-password"%>
+
+          <div class="ag-input-icon-append">
+            <div data-field='subs-confirm-password' id="confirm-password-icon" class="secure-password"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-hook="signup_below_password_fields"></div>
+
+    <div class="mailchimp-subscription privacy-policy">
+      <%= label_tag do %>
+        <%= check_box_tag "agree_to_policy", 1, true %>
+        <span> I've read and agree to the<%= link_to 'Privacy Policy', spree::privacy_policy_path, class: 'link' %></span>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <div class="ag-input-neutral confirm-pass-input">
+        <span id='subscriber-email-message' class="error-message"></span>
+        <span id='subscriber-password-message' class="error-message"></span>
+        <span id='subscriber-policy-message' class="error-message"></span>
+      </div>
+    </div>
+
+    <div class="p-0 sigup-btn">
+      <%= f.submit name, id: 'subscribe', class: 'ag-btn ag-btn-md ag-btn-primary create-account-btn' %>
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T19:07:24.106260Z
+# touched on 2025-05-22T22:29:07.620165Z

@@ -1,0 +1,106 @@
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Product), spree.admin_products_path) %>
+
+<% content_for :page_title do %>
+  <%= "Product Questions" %>
+<% end %>
+
+<% content_for :table_filter_title do %>
+  <% if can? :display, Spree::ProductQuestion %>
+    <%= I18n.t("spree.search") %>
+  <% end %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_reviews_index_search">
+    <%= search_form_for [:admin, @search] do |f| %>
+      <div class="col">
+        <div class="field">
+          <%= f.label :name_cont, I18n.t("spree.user") %><br />
+          <%= f.text_field :name_cont, class: 'fullwidth' %>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="field">
+          <%= f.label :product_name, "Product" %><br />
+          <%= f.text_field :product_name, class: 'fullwidth' %>
+        </div>
+      </div>
+
+      <div class="clear"></div>
+
+      <div class="form-buttons actions filter-actions" data-hook="admin_product_questions_index_search_buttons">
+        <%= button_tag I18n.t("spree.search") %>
+      </div>
+    <%- end -%>
+  </div>
+<%- end -%>
+
+<%= paginate @product_questions, theme: "solidus_admin" %>
+
+<% if @product_questions.any? %>
+  <table class="index">
+    <colgroup>
+      <col style="width: 20%;">
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+      <col style="width: 15%;">
+      <col style="width: 20%;">
+      <col style="width: 15%;">
+    </colgroup>
+    <thead>
+      <tr>
+        <th><%= I18n.t("spree.product") %></th>
+        <th><%= Spree::ProductQuestion.human_attribute_name(:created_at) %></th>
+        <th><%= Spree::ProductQuestion.human_attribute_name(:name) %></th>
+        <th><%= Spree::ProductQuestion.human_attribute_name(:question) %></th>
+        <th><%= Spree::ProductQuestion.human_attribute_name(:answer) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @product_questions.each do |product_question| -%>
+        <tr id="<%= dom_id product_question %>">
+          <td>
+            <% if product_question.product %>
+              <%= link_to product_question.product.name, product_path(product_question.product) %>
+            <% end %>
+          </td>
+
+          <td class="align">
+            <%= l product_question.created_at, format: :short %>
+          </td>
+
+          <td class="align">
+            <p><%= product_question.name %></p>
+          </td>
+
+          <td class="align">
+            <%= product_question.question %>
+          </td>
+
+          <td class="align">
+            <%= product_question.answer  %>
+          </td>
+          <td class="actions">
+            <% if can? :manage, Spree::ProductQuestion %>
+              <%= link_to_with_icon 'ok', t('spree.approve'), publish_admin_product_question_path(product_question), no_text: true, class: 'approve'  unless product_question.visibility %>
+              <%= link_to_with_icon 'edit', t('spree.actions.edit'), edit_admin_product_question_path(product_question), no_text: true, data: {action: 'edit'} %>
+              <%= link_to_delete product_question, no_text: true %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= I18n.t("spree.no_results") %>
+  </div>
+<% end %>
+
+<%= paginate @product_questions, theme: "solidus_admin" -%>
+
+# touched on 2025-05-22T22:34:24.878924Z
+# touched on 2025-05-22T23:02:01.585185Z
+# touched on 2025-05-22T23:30:19.624046Z

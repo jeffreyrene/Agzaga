@@ -1,0 +1,161 @@
+<% product_on_sale = @product&.on_sale? ? true : false %>
+<% product_reviews_count = @product&.reviews_count %>
+<% product_questions_count = @product_questions&.total_count %>
+<% product_pre_order_second_bottom ||= false %>
+<% from_chukwagon ||= false%>
+<% variant_id_prefix ||= false%>
+
+<% if @product.present? %>
+  <div class="pre-order-section" id="<%= product_pre_order_second_bottom ? 'pre-order-section-bottom' : '' %>" >
+    <div class="product-details-group">
+      <div class="product-details pre-order-inner-section">
+        <div class="product-slider">
+
+          <%= render partial: 'spree/shared/product_images_slider' %>
+
+          <p class="product-sku poppins-text-10 d-lg-block d-none cS-hidden">
+            SKU: <span class="poppins-bold-text-10"><%= @product.sku %></span>
+          </p>
+        </div>
+
+        <div class="product-details-section">
+          <div class="brand-group d-inline-block w-100">
+            <div class="brand-share-icons">
+              <div class="product-brand d-inline-block poppins-bold-text-12">
+                <%= @product.property(:Brand) %>
+              </div>
+            </div>
+
+            <div class="sale-tag-bulk-available d-inline-block float-right">
+              <% if (@product.master.volume_prices.present? && !@product.variants.present?) || @product.variants.any?{|v| v.volume_prices.present?} %>
+                <div class="bulk-avialable-tag">
+                  Bulk Pricing Available
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="product-name poppins-bold-text-24">
+            <%= @product.name %>
+          </div>
+
+          <div class="product-info">
+            <div id="product-rating" class="product-rating-group">
+            </div>
+
+            <div class="share-icon-favorite-section">
+              <div class="product-icons-container">
+                <div class="icon-list-container">
+                  <div class="share-icons-popup hide-popup">
+                    <a class="mail-btn" id="mail-btn" target="_blank"></a>
+                    <a class="clipboard-button" id="clipboard-btn"></a>
+                    <a class="twitter-btn" id="twitter-btn" target="_blank"></a>
+                    <a class="facebook-btn" id="facebook-btn" target="_blank"></a>
+                  </div>
+                </div>
+              </div>
+
+              <%if try_spree_current_user %>
+                <div class="favorites media-icons-mbl" itemprop='favorite' data-hook='favorite'>
+                  <% if has_favorite?(@product) %>
+                    <%= link_to '',
+                                favorite_path(get_favorite(@product),
+                                favorable_id: @product.id,
+                                favorable_type: 'Spree::Product'),
+                                method: :delete,
+                                remote: true,
+                                id: "favorable_product_#{@product.id}",
+                                class: "favorites-control favorable_product_#{@product.id}" %>
+                  <% else %>
+                    <%= link_to '',
+                                favorites_path(favorable_id: @product.id,
+                                favorable_type: 'Spree::Product'),
+                                method: :post,
+                                remote: true,
+                                id: "favorable_product_#{@product.id}",
+                                class: "favorites-control favorable_product_#{@product.id}" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="price-container">
+            <div id="product-price" class="product-price-group">
+              <div>
+                <span class="price selling selling-price poppins-bold-text-32" itemprop="price" content="<%= @product.price_for(current_pricing_options).to_d %>">
+                  <%= display_price(@product) %>
+                </span>
+
+                <% if product_on_sale %>
+                  <span class="original-price poppins-text-16">
+                    <%= Spree::Money.new(@product.original_price).to_html %>
+                  </span>
+                <% end %>
+
+                <span itemprop="priceCurrency" content="<%= current_pricing_options.currency %>"></span>
+              </div>
+            </div>
+
+            <div class="sale-tag-bulk-available d-inline-block float-right">
+              <div class="sale-tag d-flex align-items-center">
+                <% if product_on_sale %>
+                  <div class="percent poppins-text-12 bold">
+                    <%= number_to_percentage(@product.discount_percent.round, precision: 0) %> OFF
+                  </div>
+                <% end %>
+                <% if product_on_sale || @product.deal_product? %>
+                  <div class="tag poppins-text-12 bold">DEAL</div>
+                <% end %>
+              </div>
+
+              <% if (@product.master.volume_prices.present? && !@product.variants.present?) || @product.variants.any?{|v| v.volume_prices.present?} %>
+                <div class="bulk-avialable-tag">
+                  Bulk Pricing Available
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="d-none d-lg-block">
+            <div class="chuckwagon-product-block">
+              <%= render partial: 'spree/pages/partials/pick_up_product_form', locals: { product: @product, button_text: 'Pre-Order Now', from_chukwagon: true, variant_id_prefix: variant_id_prefix } %>
+            </div>
+
+            <div class="description-group">
+              <div class="group-heading">
+                Description
+              </div>
+
+              <div class="description poppins-text-16">
+                <%= raw(@product.description) rescue t('spree.product_has_no_description') %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-lg-none d-block order-3 description-section-mobile">
+          <div class="chuckwagon-product-block">
+            <%= render partial: 'spree/pages/partials/pick_up_product_form', locals: { product: @product, from_chukwagon: true, variant_id_prefix: variant_id_prefix ? variant_id_prefix + '2' : variant_id_prefix } %>
+          </div>
+
+          <div class="product-description-group">
+            <div class="description-group">
+              <div class="group-heading">
+                Description
+              </div>
+
+              <div class="description poppins-text-16">
+                <%= raw(@product.description) rescue t('spree.product_has_no_description') %>
+              </div>
+            </div>
+          </div>
+
+          <div class="show-more-content show-more">Show More</div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T22:47:02.038788Z

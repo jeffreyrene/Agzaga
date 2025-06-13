@@ -1,0 +1,27 @@
+<% content_for :page_title do %>
+  <%= "Edit Question" %>
+<% end %>
+
+<% render 'spree/admin/shared/product_sub_menu' %>
+
+<%= form_for([:admin, @product_question]) do |f| %>
+  <div class="col-8">
+    <% unless @product_question.question.blank? %>
+      <h2><%= @product_question.question %></h2>
+    <% end %>
+  </div>
+
+  <div class="col-8">
+    <%= render 'form', f: f %>
+  </div>
+
+  <div class="clear"></div>
+
+  <fieldset class="no-border-top">
+    <% if can? :manage, Spree::ProductQuestion %>
+      <%= render 'spree/admin/shared/edit_resource_links' %>
+    <% end %>
+  </fieldset>
+<% end %>
+
+# touched on 2025-05-22T23:29:53.822696Z

@@ -1,0 +1,45 @@
+<% added_products = current_order.line_items.map {|line_item| line_item.product} if current_order.present? %>
+
+<div
+  class="modal products-upsell-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <div class="main-heading">Wait! Before You Go...</div>
+        </div>
+
+        <a href="<%= spree::cart_path %>" class="ag-btn ag-btn-lg ag-btn-outlined upsell_modal_close upsell_modal_close-desktop">Skip & Go to Cart</a>
+      </div>
+      <div class="modal-body">
+        <div class="upsell-text">
+          Check out our new treats and all-natural fly sprays!
+        </div>
+
+        <div class="upsell-products-section" id="update-upsell-products">
+          <% if @upsell_products.present? %>
+            <%= render partial: 'spree/pages/partials/chuckwagon_upsell_product', collection: @upsell_products, as: :product, locals:{ variant_id_prefix: 'upsell' } %>
+          <% end %>
+        </div>
+
+        <a class="clear-link go-to-cart-btn" href="<%= spree::cart_path %>" data-turbolinks="false">
+          <div class="go-to-cart">
+            Continue to Cart
+          </div>
+        </a>
+
+        <a href="<%= spree::cart_path %>" class="ag-btn ag-btn-lg upsell_modal_close upsell_modal_close-mobile">Skip & Go to Cart</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:39:00.223771Z
+# touched on 2025-05-22T20:44:23.611170Z
+# touched on 2025-05-22T22:38:54.968177Z
+# touched on 2025-05-22T23:29:02.523592Z

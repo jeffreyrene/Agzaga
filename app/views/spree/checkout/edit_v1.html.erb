@@ -1,0 +1,62 @@
+<div class="data-container">
+  <div id="checkout" data-hook>
+    <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+
+    <div class="row" data-hook="checkout_header">
+      <div class="col-12">
+        <h1 class="lexend-h3 mb-sm-5"> Checkout </h1>
+      </div>
+    </div>
+
+    <%= form_for @order, url: update_checkout_path(@order.state), remote: true, html: { id: "checkout_form_#{@order.state}" } do |form| %>
+      <div class="d-flex justify-content-around" data-hook="checkout_content">
+        <% design_change_on_mobile = @order.state == 'confirm' || @order.state == 'payment' %>
+
+        <% if @order.state == 'payment' && @order&.user&.store_credits.present? %>
+
+          <div class="checkout-section d-flex order-md-1 <%= 'order-2' if design_change_on_mobile %>" data-hook="checkout_form_wrapper">
+            <div class="payment-with-store-credit-group">
+              <div class="store-credit-input-group">
+                <%= render 'spree/checkout/partials/store_credit_input', form: form %>
+              </div>
+              <%= render @order.state, form: form %>
+            </div>
+          </div>
+
+        <% else %>
+          <div class="checkout-section d-flex order-md-1 <%= 'order-2' if design_change_on_mobile %>" data-hook="checkout_form_wrapper">
+            <%= render partial: @order.state, locals: { order: @order, form: form }%>
+          </div>
+        <% end %>
+
+        <div class="d-flex order-md-2 <%= 'order-1' if design_change_on_mobile %>"  data-hook="checkout_summary_box">
+          <div class="sticky-content">
+            <%= render partial: 'summary', locals: { order: @order } %>
+
+            <div class="d-md-block <%= 'd-none' if design_change_on_mobile %>">
+            </div>
+          </div>
+        </div>
+
+        <% if design_change_on_mobile %>
+          <div class="col-12 order-3 d-md-none d-block">
+            <%= render partial: 'submit_button', locals: { order: @order } %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_tag order_coupon_codes_path(@order), id: "couponcode",  method: :post do %>
+    <input name="coupon_code" type="hidden" value="">
+  <% end %>
+
+  <script>
+    Spree.current_order_id = "<%= @order.number %>"
+    Spree.current_order_token = "<%= @order.guest_token %>"
+  </script>
+</div>
+
+# touched on 2025-05-22T19:22:05.370958Z
+# touched on 2025-05-22T23:19:29.796279Z
+# touched on 2025-05-22T23:39:03.396077Z

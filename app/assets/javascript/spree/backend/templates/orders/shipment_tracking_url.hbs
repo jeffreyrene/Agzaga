@@ -1,0 +1,28 @@
+<th>
+  Tracking URL
+</th>
+<td colspan="4">
+  {{#if editing}}
+    <form>
+      <input type="text" name="tracking_lookup" class="fullwidth" id="tracking_lookup_field" value="{{tracking_lookup}}">
+    </form>
+  {{else}}
+    {{#if tracking_lookup}}
+      {{ tracking_lookup }}
+    {{else}}
+      No Tracking URL Provided
+    {{/if}}
+  {{/if}}
+</td>
+<td class="actions">
+  {{#if editing}}
+    <button class="js-save fa fa-check no-text with-tip edit-tracking-lookup" data-action="save" title="{{ t "actions.save" }}"></button>
+    <button class="js-cancel fa fa-cancel no-text with-tip edit-tracking-lookup" data-action="cancel" title="{{ t "actions.cancel" }}"></button>
+  {{else}}
+    <button class="js-edit fa fa-edit no-text with-tip" data-action="edit" title=""{{ t "actions.edit" }}"></button>
+  {{/if}}
+</td>
+
+# touched on 2025-05-22T19:18:57.080382Z
+# touched on 2025-05-22T21:51:09.265056Z
+# touched on 2025-05-22T22:32:48.586380Z

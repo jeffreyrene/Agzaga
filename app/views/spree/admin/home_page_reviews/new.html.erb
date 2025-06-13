@@ -1,0 +1,59 @@
+<% content_for :page_title do %>
+  <%= "New Review" %>
+<% end %>
+
+<%= form_for @home_page_review, url: admin_home_page_reviews_path do |f| %>
+  <div class="mt-5">
+    <div class="mb-3">
+      <%= f.label :name, class: "required poppins-text-10" %>
+      <%= f.text_field :name, required: true, class: "form-control input-field" %>
+    </div>
+
+    <div class="mb-3 row">
+       <div class="col-6">
+        <%= f.label :title, class: "required poppins-text-10" %>
+        <%= f.text_field :title, required: true, class: "form-control input-field" %>
+      </div>
+
+      <div class="col-6 align-center">
+        <%= f.label :rating, "Rating", class: "required poppins-text-10" %><br/>
+        <% for i in 1..5 %>
+
+          <input name="home_page_review[rating]"
+                 type="radio" class="rating_star"
+                 id="<%= i %>star"
+                 value="<%= pluralize(i, 'stars') %>"
+                 <%= "checked" if i == @home_page_review.rating %> />
+          <label class="label_star <%= 'filled' if i <= @home_page_review.rating.to_i %>" for="<%= i %>star"></label>
+        <% end %>
+      </div>
+
+    </div>
+
+    <div class="mb-3 row">
+      <div class="col-6">
+        <%= f.label :review_date, "Review Date", class: "required poppins-text-10" %>
+        <%= render "spree/admin/shared/datepicker", f: f, date_attr: :review_date %>
+      </div>
+
+      <div class="col-6 align-center">
+        <%= f.label :visibility, "visibility", class: "poppins-text-10" %><br/>
+        <%= f.check_box :visibility %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :comment, "Comment", class: "required poppins-text-10" %>
+      <%= f.text_area :comment, required: true, wrap: "virtual", rows: 8, class: "required form-control input-field" %>
+    </div>
+
+
+    <div class="row m-0 pt-4">
+      <%= f.file_field :images, :accept => "image/jpeg, image/png", multiple: true, class: "required" %>
+
+      <%= f.submit "Submit", data: { disable_with: "Submitting...."}, class: "poppins-text-10 btn-gradient-orange customer-submit-btn" %>
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T23:41:33.626209Z

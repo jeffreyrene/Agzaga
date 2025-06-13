@@ -1,0 +1,38 @@
+<tr class="volume_price fields">
+  <td></td>
+  <td>
+    <%= error_message_on(f.object, :name) %>
+    <%= f.text_field :name, size: 10, class: 'form-control' %>
+  </td>
+  <td>
+    <%= error_message_on(f.object, :discount_type) %>
+    <%= f.select :discount_type, [
+        [t('spree.total_price'), 'price'],
+        [t('spree.percent_discount'), 'percent'],
+        [t('spree.price_discount'), 'dollar']
+      ], { include_blank: true }, class: 'custom-select' %>
+  </td>
+  <td>
+    <%= error_message_on(f.object, :range) %>
+    <%= f.text_field :range, size: 10, class: 'form-control' %>
+  </td>
+  <td>
+    <%= error_message_on(f.object, :amount) %>
+    <%= f.text_field :amount, size: 10, class: 'form-control' %>
+  </td>
+  <td>
+    <%= error_message_on(f.object, :position) %>
+    <%= f.text_field :position, size: 3, class: 'form-control' %>
+  </td>
+  <td>
+    <%= error_message_on(f.object, :role_id) %>
+    <%= f.collection_select(:role_id, Spree::Role.all, :id, :name, { include_blank: t('spree.match_choices.none') }, { class: 'custom-select' }) %>
+  </td>
+  <% if f.object.persisted? %>
+    <td class="actions">
+      <%= link_to_delete f.object, url: admin_volume_price_url(f.object.id), no_text: true %>
+    </td>
+  <% end %>
+</tr>
+
+# touched on 2025-05-22T23:19:06.358123Z

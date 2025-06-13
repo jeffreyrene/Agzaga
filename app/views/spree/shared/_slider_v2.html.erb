@@ -1,0 +1,109 @@
+<%	if spree_user_signed_in? && !@saveditems.present?
+        @saveditems = try_spree_current_user.save_items
+    end
+%>
+
+<% on_cart_page ||= false%>
+
+<%promotion_exists = (@order&.line_item_adjustments&.nonzero&.exists? && @order&.line_item_adjustments&.nonzero&.promotion&.present?) || (@order&.adjustments&.nonzero&.eligible&.exists?) || (@order&.shipment_adjustments&.nonzero&.exists?)%>
+
+<% back_button_link = (request&.referer unless request&.referer&.include?('/cart')) || spree::root_path %>
+
+<div class="cart">
+  <% if on_cart_page %>
+    <div class="ticker <%= flash[:error] ? 'ticker-danger' : (flash[:success] ? 'ticker-success' : '' ) %>">
+      <%if flash[:error]%>
+        <span><%= image_tag 'trash_white.svg'%></span>
+        <span><%= flash[:error]%></span>
+
+      <%elsif flash[:success]%>
+        <span><%= image_tag 'tick_white.svg'%></span>
+        <span><%= flash[:success]%></span>
+      <%end%>
+    </div>
+  <%end%>
+
+  <div class="cart-header">
+    <% if on_cart_page %>
+      <%= link_to back_button_link, class: 'cart-back', data: {turbolinks: false} do %>
+          <%= image_tag 'back_arrow.svg' %>
+        <%end%>
+    <%end%>
+
+    <%= image_tag 'close-cart-slider.svg', class: 'close-btn close-cart-slider cart-slider-close-btn', id: 'slider-close-btn' %>
+
+    <div class="cart-heading">Cart
+      <% unless spree_current_user&.login %>
+        <div id='upper-cart' class="ag-badge ag-badge-sm ag-badge-primary cart-body-tabs-count"> <%= render 'spree/shared/cart_count', order:true %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="cart-body-tabs">
+    <%if spree_current_user&.login%>
+      <button class="cart-body-tabs-content cart-body-tab-selected yourcart">Your Cart
+        <div id= 'count-mob-cart' class="ag-badge ag-badge-sm ag-badge-primary cart-body-tabs-count"><%= render 'spree/shared/cart_count', order:true %></div>
+      </button>
+
+      <button id='saved-items-product' class="cart-body-tabs-content saveditems">Saved Items
+        <div id='count-mob-saved'class="ag-badge ag-badge-sm ag-badge-primary cart-body-tabs-count"><%= render 'spree/shared/cart_count', saved_item:true %></div>
+      </button>
+    <%end%>
+  </div>
+
+  <% render 'spree/shared/empty_save_items.html.erb', on_cart_page: on_cart_page, back_button_link: back_button_link %>
+
+  <% unless @order&.line_items&.present? %>
+    <div class="empty-cart-body empty-cart-body-cart" >
+      <div class="empty-cart" >
+        <div class="empty-cart-icon"><%= image_tag 'empty_cart.svg'%></div>
+        <div class="empty-cart-text"><%= 'Oh No, ' if on_cart_page %>Looks Like Your Cart is Empty!</div>
+
+        <% if on_cart_page %>
+          <%= link_to t('spree.continue_shopping'), back_button_link, class: 'empty-cart-button ag-btn-lg ag-btn-primary' %>
+        <% else %>
+          <div class="empty-cart-button ag-btn-lg ag-btn-primary close-cart-slider">
+            <%= t('spree.continue_shopping') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="cart-body">
+    <div class="cart-body-content-left">
+      <div class="cart-body-left-max-freight">
+        <div  class="freight-icon-container"><%= image_tag 'freight-icon-cart-v2.svg', class: 'freight-icon'%></div>
+        <div>$99 Max Freight On All Orders</div>
+      </div>
+
+      <div class="cart-body-cart-section">
+        <div class="your-cart-head">
+          <div class="your-cart-heading">Your Cart</div>
+          <span id="order-count" class="ag-badge ag-badge-sm cart-items-badge"><%= render 'spree/shared/cart_count', order: true %></span>
+        </div>
+
+        <%= render 'spree/shared/cart_products' if @order.present? %>
+      </div>
+
+      <%if spree_user_signed_in? %>
+        <div id='saved-products-section' class="cart-body-saved-items-section cart-body-section-visible">
+          <%= render partial: 'spree/shared/partials/saved_section' %>
+        </div>
+      <%end%>
+    </div>
+
+    <div class="cart-body-summary" id="cart-body-summary">
+      <%= render partial: '/spree/shared/cart_summary' if @order.present? %>
+    </div>
+  </div>
+
+  <div id="slider-summary">
+    <%= render partial: 'spree/shared/cart_mobile_total' if @order.present? %>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:15:40.554457Z
+# touched on 2025-05-22T23:03:56.101869Z
+# touched on 2025-05-22T23:30:36.975393Z
+# touched on 2025-05-22T23:39:42.704663Z

@@ -1,0 +1,98 @@
+<div class="data-container">
+  <% if (@taxon&.large_ads&.present? || @taxon&.large_ad_for_mobile&.present?) && @taxon&.large_ads_end_at&.future? %>
+    <div class="large-ads-section">
+      <a href="<%= @taxon.large_ad_link %>">
+        <%= image_tag( @taxon.large_ads.url(:large), class: 'large-ads d-md-block d-none w-100') %>
+        <%= image_tag( @taxon.large_ad_for_mobile.url(:medium), class: 'large-ads d-md-none d-block w-100') %>
+      </a>
+    </div>
+  <% end %>
+
+  <div class="breadcrumb-group">
+    <div class="back-btn">
+      <%= link_to request.referer do%>
+        <span class="back-arrow">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.66667 9L1.5 5M1.5 5L5.66667 1M1.5 5L11.5 5" stroke="#52525B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+
+        <span class="back-lbl back-lbl-mbl"><%= @taxon.name %></span>
+        <span class="back-lbl back-lbl-mbl-desktop">Back</span>
+      <% end %>
+    </div>
+
+    <% separator = '<span class="separator">/<span>'.html_safe %>
+
+    <div class="taxon-breadcrumb-desktop">
+      <%= taxon_breadcrumbs(@taxon, separator, '') %>
+    </div>
+
+    <div class="products-sort products-sort-mobile">
+      <div class="dropdown">
+        <div class="poppins-text-16 sort_by-btn <%= 'sorted' if h(params.dig(:order_by)).present? %>"  data-display="static" aria-haspopup="true" aria-expanded="true" data-toggle="modal" data-target="#sortingModal">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.11111 13.1112V3.77783M6.11111 3.77783L3 6.88894M6.11111 3.77783L9.22222 6.88894M13.8889 6.88894V16.2223M13.8889 16.2223L17 13.1112M13.8889 16.2223L10.7778 13.1112" stroke="#52525B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <%= h(params.dig(:order_by)).present? ? h(params.dig(:order_by)) : 'Sort By' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="taxon-name">
+    <%= @taxon.name %>
+    <span class="category-count">(<%= @products&.total_count.to_i %>)</span>
+  </div>
+
+  <% sub_taxons = @taxon&.children&.where(visibility: true) %>
+  <% sub_taxons = @taxon&.parent&.children&.where(visibility: true) if sub_taxons.blank? %>
+
+  <div class="sub-taxons-and-sort-group">
+    <div class="sub-taxons">
+      <% if sub_taxons.present? %>
+        <%= link_to "All #{@taxon.root.name}", spree.nested_taxons_path(@taxon.root), class: "link #{@taxon.root.id == @taxon.id && 'active'}" %>
+
+        <% sub_taxons.each do |child| %>
+          <%= link_to child.name, spree.nested_taxons_path(child), class: "link #{child.id == @taxon.id && 'active'}" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="products-sort">
+      <div class="dropdown">
+        <div class="poppins-text-16 sort_by-btn <%= 'sorted' if h(params.dig(:order_by)).present? %>"  data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.11111 13.1112V3.77783M6.11111 3.77783L3 6.88894M6.11111 3.77783L9.22222 6.88894M13.8889 6.88894V16.2223M13.8889 16.2223L17 13.1112M13.8889 16.2223L10.7778 13.1112" stroke="#52525B" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <%= h(params.dig(:order_by)).present? ? h(params.dig(:order_by)) : 'Sort By' %>
+        </div>
+
+        <div class="dropdown-menu sort_by-options">
+          <%= link_to "Sale", nested_taxons_url(taxon: @taxon, order_by: 'Sale'), class: "p-0 poppins-text-16 dropdown-item", rel: 'nofollow' %>
+          <%= link_to "Staff Pick", nested_taxons_url(taxon: @taxon, order_by_staff_pick: 'Staff Pick'), class: "p-0 poppins-text-16 dropdown-item", rel: 'nofollow' %>
+          <%= link_to "Best Sellers", nested_taxons_url(taxon: @taxon, order_by: 'Best Sellers'), class: "p-0 poppins-text-16 dropdown-item", rel: 'nofollow' %>
+          <%= link_to "Price: Low-High", nested_taxons_url(taxon: @taxon, order_by: 'Price: Low to High'), class: "p-0 poppins-text-16 dropdown-item", rel: 'nofollow' %>
+          <%= link_to "Price: High-Low", nested_taxons_url(taxon: @taxon, order_by: 'Price: High to Low'), class: "p-0 poppins-text-16 dropdown-item", rel: 'nofollow' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="navigation-border-bottom">
+
+    </div>
+  </div>
+
+  <div data-hook="taxon_products" id="taxon-show-all">
+    <%= render 'spree/shared/individual_category' %>
+  </div>
+</div>
+
+<%= render partial: 'spree/shared/pick_up_popup' %>
+
+<%= render partial: 'spree/shared/sorting_modal' %>
+
+# touched on 2025-05-22T20:39:55.066436Z
+# touched on 2025-05-22T23:28:52.523783Z

@@ -1,0 +1,66 @@
+<% if taxon.children.any? %>
+  <% taxon.children.where(visibility: true).each do |sub_taxon| %>
+    <div class="item">
+      <div class="img-holder">
+        <% if sub_taxon.icon.present? %>
+          <% image_link = image_cdn_link(sub_taxon.icon.url(:medium))%>
+
+          <% if taxon.name == sub_taxon.name %>
+            <a href="<%= seo_url(sub_taxon) %>" class="clear-link active-border">
+              <%= image_tag image_link, class: "active-hover", alt: sub_taxon.name, loading: "lazy" %>
+            </a>
+          <% else %>
+            <%= link_to (image_tag image_link, alt: sub_taxon.name, loading: 'lazy'), seo_url(sub_taxon), class: 'clear-link' %>
+          <% end %>
+        <% else %>
+          <% if taxon.name == sub_taxon.name %>
+            <a href="<%= seo_url(sub_taxon) %>" class="clear-link active-border">
+              <%= image_tag "noimage.png", class: "active-hover", alt: ''%>
+            </a>
+          <% else %>
+            <a href="<%= seo_url(sub_taxon) %>" class="clear-link">
+              <%= image_tag "noimage.png", alt: ''%>
+            </a>
+          <% end %>
+        <% end %>
+      </div>
+      <p><%= link_to (sub_taxon.name), seo_url(sub_taxon), class: 'clear-link' %></p>
+    </div>
+  <% end %>
+
+<% elsif taxon.parent.present? %>
+  <% taxon.parent.children.where(visibility: true).each do |sub_taxon| %>
+    <div class="item">
+      <div class="img-holder">
+      <% if sub_taxon.icon.present? %>
+        <% image_link = image_cdn_link(sub_taxon.icon.url(:medium))%>
+          <% if taxon.name == sub_taxon.name %>
+            <a href="<%= seo_url(sub_taxon) %>" class="clear-link active-border">
+              <%= image_tag image_link, class: "active-hover", alt: sub_taxon.name, loading: "lazy" %>
+            </a>
+          <% else %>
+            <%= link_to (image_tag image_link, alt: sub_taxon.name, loading: "lazy"), seo_url(sub_taxon), class: 'clear-link' %>
+          <% end %>
+
+      <% else %>
+        <% if taxon.name == sub_taxon.name %>
+          <a href="<%= seo_url(sub_taxon) %>" class="clear-link active-border">
+            <%= image_tag "noimage.png", class: "active-hover", alt: '' %>
+          </a>
+        <% else %>
+          <a href="<%= seo_url(sub_taxon) %>" class="clear-link">
+            <%= image_tag "noimage.png", alt: '' %>
+          </a>
+        <% end %>
+      <% end %>
+      </div>
+      <p><%= link_to (sub_taxon.name), seo_url(sub_taxon), class: 'clear-link' %></p>
+    </div>
+  <% end %>
+<% end %>
+
+# touched on 2025-05-22T19:17:34.170568Z
+# touched on 2025-05-22T22:51:17.667354Z
+# touched on 2025-05-22T23:08:27.760193Z
+# touched on 2025-05-22T23:26:41.300668Z
+# touched on 2025-05-22T23:27:22.546109Z

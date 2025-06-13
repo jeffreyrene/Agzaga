@@ -1,0 +1,65 @@
+<div class="data-container">
+  <div class="row">
+    <div class="side-contents d-none d-md-block d-lg-block col-3 poppins-text-16">
+      <p class="on-sale-text"><%= link_to 'ALL DEALS', spree.products_url(deals: true), class: 'clear-link'%></p>
+      <div class="sm-line"></div>
+
+      <div class="category-contents d-flex flex-column">
+        <% @taxonomies.each do |taxonomy|%>
+          <div class="heading">
+            <%= link_to (taxonomy.name), spree::nested_taxons_url(id: taxonomy.root.permalink), class: 'clear-link' %>
+          </div>
+
+          <div class="category-dropdown">
+            <% taxonomy.root.children.where(visibility: true).each do |staxon| %>
+
+              <% if staxon.children.any? %>
+                <div class="accordion-content">
+                  <div class="sub-head">
+                    <div class="pb-2 product-links question" href="#taxon<%= staxon.id %>" data-toggle="collapse" aria-expanded="false">
+                      <%= link_to staxon.name, seo_url(staxon), class: 'clear-link' %>
+                    </div>
+                  </div>
+
+                  <div id="taxon<%= staxon.id %>" class="collapse poppins-text-16 answer collapse">
+                    <% staxon.children.where(visibility: true).each do |taxon| %>
+                    <div class="sub-head">
+                      <div class="pb-2 product-links"><%= link_to taxon.name, seo_url(taxon), class: 'clear-link' %></div>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
+
+              <% else %>
+                <div class="sub-head">
+                  <div class="pb-2 product-links ">
+                    <%= link_to staxon.name, seo_url(staxon), class: 'clear-link' %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+
+            <% if @taxonomies.last != taxonomy %>
+              <div class="sm-line mt-3"></div>
+            <% end %>
+
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-9 col-sm-12">
+      <% @taxonomies.each do |taxonomy|%>
+        <h3 class="category-heading">
+          <%= link_to (taxonomy.name), spree::nested_taxons_url(id: taxonomy.root.permalink), class: 'clear-link' %>
+        </h3>
+        <%= render partial: 'spree/product_categories/partials/category_section', locals: { taxonomy: taxonomy }%>
+        <% if @taxonomies.last != taxonomy %>
+          <div class="line"></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:22:42.384021Z

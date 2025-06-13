@@ -1,0 +1,279 @@
+.errors.not_found,
+.errors.internal_server {
+  .container {
+    max-width: 1440px;
+  }
+
+  .error_page_bg {
+    position: absolute;
+    z-index: -1;
+    right: 0px;
+    top: 0px;
+  }
+
+  .corner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .data-container {
+    position: relative;
+    text-align:left;
+    .agzaga_logo {
+      margin: 48px auto 90px;
+      width: 226.56px;
+      height: 48px;
+      text-align: center;
+    }
+
+    .mobile-icons {
+      display: none;
+    }
+
+    .page-content {
+      position: relative;
+      padding-left: 78px;
+      margin-bottom: 150px;
+      .error_page-heading {
+        font-size: 43px;
+        line-height: 56px;
+        margin-bottom: 21px;
+        text-align: center;
+        letter-spacing: 0.02em;
+        font-family: 'Poppins-bold';
+      }
+
+      .error_404_img {
+        margin-bottom: 20px;
+      }
+
+      .pg-not-found {
+        margin-bottom: 40px;
+      }
+
+      .error_page-description {
+        line-height: 28px;
+        text-align: center;
+        color: #353535;
+        width: 473px;
+        margin: 0px auto 48px;
+      }
+
+      .error_page-btn {
+        margin-bottom: 24px;
+        .home-btn {
+          border: 2px solid #353535;
+          border-radius: 16px;
+          padding: 11px 44px 11px 47px;
+          font-family: 'Poppins-bold';
+          letter-spacing: 0.07em;
+          margin-bottom: 24px;
+          &:before {
+            content: image-url("arrow_left_long_black.svg");
+            padding-right: 8px;
+            vertical-align: middle;
+          }
+        }
+      }
+
+      .social-icons {
+        .nav-link {
+          padding: 0px 6px;
+          color: black;
+          font-size: 20px;
+          &:hover {
+            color: #F1B71C;
+          }
+        }
+      }
+
+      .search-products {
+        position: absolute;
+        bottom: 42px;
+        padding-left: 22px;
+        margin-bottom: 20px;
+
+        .search-heading {
+          line-height: 31px;
+          letter-spacing: 0.02em;
+          color: #171717;
+          margin-bottom: 16px;
+          font-family: 'Poppins-bold';
+        }
+
+        .nav-search-box {
+          .search-form {
+            background: #EDEDED;
+            .search-input {
+              background: #EDEDED;
+            }
+
+            [type="search"]::-webkit-search-cancel-button,
+            [type="search"]::-webkit-search-decoration {
+              -webkit-appearance: none;
+              appearance: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media(max-width: 1200px) {
+    .data-container .page-content {
+      position: relative;
+      padding: 0px 38px;
+      margin-bottom: 100px;
+      .search-products {
+        text-align: center;
+        position: relative;
+        bottom: 0px;
+      }
+    }
+  }
+
+  @media(max-width: 800px) {
+    .agzaga_logo {
+      margin: 40px auto 100px;
+      width: 167.44px;
+      height: 35.47px;
+    }
+
+    .error_page_bg {
+      content: image_url("error_page_bg_mob.svg");
+      margin-left: auto;
+      margin-right: auto;
+      top: 21px;
+      left: 0px;
+      right: 0px;
+    }
+
+    .data-container {
+      .corner-image {
+        display: none;
+      }
+
+      .mobile-icons {
+        display: block;
+        margin-bottom: 34px;
+        margin-top: -37px;
+      }
+
+      .social-icons {
+        position: relative;
+        background: transparent;
+        padding: inherit;
+        box-shadow: none;
+        border-radius: 0px;
+        .nav-link {
+          padding: 0px 6px;
+          color: black;
+          font-size: 20px;
+          &:hover {
+            color: #F1B71C;
+          }
+        }
+      }
+
+      .page-content {
+        margin-bottom: 107px;
+        .error_page-heading {
+          font-size: 28px;
+          line-height: 38px;
+        }
+        .pg-not-found {
+          margin-bottom: 16px;
+        }
+
+        .error_page-description {
+          font-size: 16px;
+          line-height: 23px;
+          letter-spacing: 0.03em;
+          width: 333px;
+          margin-bottom: 32px;
+        }
+
+        .error_404_img {
+          content: image_url("error_404_small.svg");
+        }
+
+        .desktop-icons {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media(max-width: 474px) {
+
+    .corner-image {
+      max-width: 346px;
+      width: 100%;
+    }
+
+    .error_page_bg {
+      max-width: 414px;
+      width: 100%;
+    }
+
+    .page-content {
+      .search-products {
+        .nav-search-box {
+          .search-form {
+            max-width: 360px;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .data-container .page-content {
+      margin-bottom: 85px;
+      .search-products {
+        padding-left: 0;
+      }
+    }
+    .data-container .page-content {
+      .error_page-description {
+        max-width: 333px;
+        width: 100%;
+      }
+    }
+  }
+
+  @media(max-width: 375px) {
+    .error_page_bg {
+      margin-top: 34px;
+    }
+
+    .data-container .page-content {
+      .error_404_img {
+        max-width: 338px;
+        width: 100%;
+      }
+
+      .error_page-description {
+        font-size: 12px;
+      }
+    }
+  }
+
+  @media(max-width: 320px) {
+    .data-container .page-content {
+      .error_404_img {
+        width: 200px;
+      }
+
+      .error_page-heading {
+        font-size: 22px;
+        line-height: 12px;
+      }
+    }
+  }
+
+}
+
+# touched on 2025-05-22T20:43:31.137113Z
+# touched on 2025-05-22T23:27:49.295497Z
+# touched on 2025-05-22T23:29:53.826368Z

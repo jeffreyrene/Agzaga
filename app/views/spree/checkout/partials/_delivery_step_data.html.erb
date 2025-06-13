@@ -1,0 +1,33 @@
+<div class="checkout-step-group">
+  <div class="step-header">
+    <span class="step-number lexend-h4"><%= image_tag 'green_check_mark.svg'%></span>
+    <span class="step-name lexend-h4">Delivery Options</span>
+    <span class="d-lg-block d-none poppins-text-16 clear-link edit-personal-info">
+      <a class="clear-link" href="<%= checkout_state_path(:delivery) %>" data-remote="true">Edit</a>
+    </span>
+
+    <span class="edit-button d-lg-none d-block poppins-text-16 clear-link edit-personal-info">
+      <a class="clear-link" href="<%= checkout_state_path(:delivery) %>" data-remote="true"><%= image_tag 'edit-white-icon.svg'%></a>
+    </span>
+  </div>
+
+  <div class="step-content">
+    <div class="poppins-body-16 bold details-heading">
+      Shipping Speed
+    </div>
+
+    <div class="text-left">
+      <% ship = @order.shipments.first.shipping_method %>
+      <div class="poppins-text-16 details-text"><%= ship.name %></div>
+      <div class="poppins-text-16 details-text">
+        Arrives in <%= ship.name == 'Standard Shipping'? '5-7' : 'max 3' %> Business Days
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T20:44:19.118347Z
+# touched on 2025-05-22T23:19:38.510582Z
+# touched on 2025-05-22T23:21:31.231478Z
+# touched on 2025-05-22T23:29:15.505632Z
+# touched on 2025-05-22T23:37:39.691477Z

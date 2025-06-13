@@ -1,0 +1,73 @@
+<% image_first ||= false %>
+<% for_pick_up ||= false %>
+<% from ||= false%>
+<% from_chukwagon ||= false %>
+<% product_image_url = wide_image?(product) ? image_cdn_link(product.gallery&.images&.where(alt: "wide-image").first&.url(:product)) : image_cdn_link(product.gallery&.images&.first&.url(:product))%>
+
+<section class="burch-barrel-grill pickup-product-lg <%= "image-first" if image_first %>">
+  <div class="content">
+    <a href="<%= spree::product_url(product) %>"  data-turbolinks="false" class="clear-link <%= "link-product-page" if !from_chukwagon %>">
+      <% if product.on_sale? %>
+        <div class="badge">$<%= product.total_discount %> OFF</div>
+      <% end %>
+
+
+      <div class="head"><%= product.name %></div>
+
+      <div class="detail">
+        <%= raw(product.description) %>
+      </div>
+
+      <% featured_heading = product.features.present? ? 'Features:' : '' %>
+      <label class="tooltip-content" data-toggle = "ag-tooltip"
+        data-content = "<%= raw(product.description) + featured_heading + raw(product.features) %>"
+        data-placement = "bottom"
+        data-target = "<%= product.id %>-tooltip"
+        data-header = "Description:"
+        >
+        <span class="show-more-content">show more</span>
+      </label>
+
+      <div class="price-section">
+        <span class="selling-price" itemprop="price" content="<%= product.price_for(current_pricing_options).to_d %>">
+          <%= display_price(product) %>
+        </span>
+
+        <% if product.on_sale? %>
+          <span class="original-price">
+            <%= Spree::Money.new(product.original_price).to_html %>
+          </span>
+        <% end %>
+
+        <span itemprop="priceCurrency" content="<%= current_pricing_options.currency %>"></span>
+      </div>
+    </a>
+
+    <%= render partial: 'spree/pages/partials/pick_up_product_form', locals: { product: product, for_pick_up: for_pick_up, from_chukwagon: from_chukwagon, from: from } %>
+  </div>
+
+  <% if product.name.include?("Burch Barrel Grill") %>
+    <div class="burch-barrel-images">
+      <%= image_tag "burch-barrel-static.svg", class: 'burch-barrel-static' %>
+      <%= image_tag product&.gallery&.images&.first&.url(:small), alt: 'product image', class: 'product-img' %>
+    </div>
+
+  <% else %>
+    <div class="american-flag-img">
+      <% if from_chukwagon%>
+        <a href="<%= spree::product_url(product) %>"  data-turbolinks="false" class="clear-link">
+          <picture>
+            <%= image_tag product_image_url.present? ? product_image_url : 'noimage_sq.png', alt: 'wide-image', class:'product-image'%>
+          </picture>
+        </a>
+      <% else %>
+        <picture>
+          <%= image_tag product&.gallery&.images&.first&.url(:small).to_s, alt: 'product image', class:'product-image'%>
+        </picture>
+      <% end %>
+    </div>
+  <% end %>
+</section>
+
+
+# touched on 2025-05-22T22:30:48.563046Z

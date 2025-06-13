@@ -1,0 +1,118 @@
+<% content_for :title, "Agzaga FAQs - Frequently Asked Questions" %>
+<% content_for :meta_description, "Need answers? We've got 'em! How can I return all or part of my order? How can I check my order status? Do you offer different shipping options?" %>
+<div class="bg-gradient-warm"></div>
+
+<div class="container">
+  <div class="text-center">
+    <h1 class="draught-textured-h1 main-heading">
+      FREQUENTLY ASKED QUESTIONS
+    </h1>
+
+    <h3 class="poppins-h3 sub-heading">
+      Need answers? We’ve got ‘em.
+    </h3>
+
+    <div class="faq-search-group">
+      <%= image_tag "search_icon_warm.svg", class: 'search-icon', alt: 'Search' %>
+      <input type="text" class="faq-search-input poppins-text-16" id="faq-search-input" placeholder="Search for a question" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+  </div>
+
+  <div id="faq-collapse-group" class="row">
+    <div class="col-12 search-control-div">
+      <div class="card active">
+        <div class="question search-text" id="question-1" data-toggle="collapse" data-target="#answer-1" aria-expanded="true" aria-controls="answer-1">
+          I have a problem with my order. How can I resolve my issue?
+        </div>
+
+        <div id="answer-1" class="collapse show" aria-labelledby="question-1" data-parent="#faq-collapse-group">
+          <div class="answer poppins-text-16 search-text">
+            Please send us an email, describing your issue and include a photo if product is damaged.<br>
+            <%= mail_to 'customerservice@agzaga.com', nil, { class: 'clear-link faq-email-link' } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 search-control-div">
+      <div class="card">
+        <div class="question search-text" id="question-2" data-toggle="collapse" data-target="#answer-2" aria-expanded="false" aria-controls="answer-2">
+          Where is my order?
+        </div>
+
+        <div id="answer-2" class="collapse" aria-labelledby="question-2" data-parent="#faq-collapse-group">
+          <div class="answer poppins-text-16 search-text">
+            If you have an account, please sign in and look under “My orders”. Here you’ll find your order status and tracking information.
+            <br>
+            If you do not have an account, please refer to the order confirmation email you received with your tracking information.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 search-control-div">
+      <div class="card">
+        <div class="question search-text" id="question-3" data-toggle="collapse" data-target="#answer-3" aria-expanded="false" aria-controls="answer-3">
+          Why should I set up an Agzaga account?
+        </div>
+
+        <div id="answer-3" class="collapse" aria-labelledby="question-3" data-parent="#faq-collapse-group">
+          <div class="answer poppins-text-16 search-text">
+            Having an Agzaga account allows you to keep track of your favorite products, view order history, and securely save your checkout preferences. You can also subscribe to our exclusive monthly newsletter.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 search-control-div">
+      <div class="card">
+        <div class="question search-text" id="question-4" data-toggle="collapse" data-target="#answer-4" aria-expanded="false" aria-controls="answer-4">
+          What are Agzaga’s shipping options?
+        </div>
+
+        <div id="answer-4" class="collapse" aria-labelledby="question-4" data-parent="#faq-collapse-group">
+          <div class="answer poppins-text-16 search-text">
+            All Agzaga orders are fulfilled by UPS. The three shipping options are:
+            <ol>
+              <li>UPS ground 3 day select</li>
+              <li>UPS second day air</li>
+              <li>UPS ground</li>
+            </ol>
+            *Items in excessive size will be shipped with a common carrier freight trailer truck (LTL).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 search-control-div">
+      <div class="card">
+        <div class="question search-text" id="question-5" data-toggle="collapse" data-target="#answer-5" aria-expanded="false" aria-controls="answer-5">
+          I received my order and it’s damaged, what do I do?
+        </div>
+
+        <div id="answer-5" class="collapse" aria-labelledby="question-5" data-parent="#faq-collapse-group">
+          <div class="answer poppins-text-16 search-text">
+            We apologize for any inconvenience this may have caused you. Please notify the delivery handler within 72 hours of delivery and save all packing material for inspection.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 search-control-div">
+      <div class="card">
+        <div class="question search-text" id="question-6" data-toggle="collapse" data-target="#answer-6" aria-expanded="false" aria-controls="answer-6">
+          FFA Fundraiser - Approved States
+        </div>
+
+        <div id="answer-6" class="collapse" aria-labelledby="question-6" data-parent="#faq-collapse-group">
+          <div class="answer poppins-text-16 search-text">
+            Our state selection process is predicated by two things—number of chapters interested in the state, and state requirements for non-profit fundraising (Commercial Co-Ventures - CCVs). Some states are very simple and require very little or no additional information from participants and Agzaga. Other states have very stringent CCV requirements, which make it difficult or impossible for us to include them in our fundraising initiative this year. If you did not see your state in the approved list this year, there's a very good chance you'll see it next year once we can validate information with your state government. We apologize for any inconvenience!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'spree/pages/partials/contact_methods' %>
+</div>
+
+# touched on 2025-05-22T23:30:34.153853Z

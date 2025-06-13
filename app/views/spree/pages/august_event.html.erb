@@ -1,0 +1,123 @@
+<% pick_up = true %>
+<div class="main-cta fix-container">
+  <picture>
+    <source media="(max-width:414px)" srcset="https://assets.agzaga.com/CTA/chuckwagon-header-mob-webp.webp" type="image/webp">
+    <source media="(max-width:414px)" srcset="https://assets.agzaga.com/CTA/chuckwagon-header-mob.png" type="image/png" >
+
+    <source media="(max-width:991px)" srcset="https://assets.agzaga.com/CTA/chuckwagon-header-mobile.webp" type="image/webp">
+    <source media="(max-width:991px)" srcset="https://assets.agzaga.com/CTA/chuckwagon-header-mobile.jpg" type="image/jpg" >
+
+    <source srcset="https://assets.agzaga.com/CTA/chuckwagon-header-desktop.webp" type="image/webp" >
+
+    <img src="https://assets.agzaga.com/CTA/chuckwagon-header-desktop.jpg" alt="About us" class="america-day-desktop-cta" loading= "lazy" >
+  </picture>
+</div>
+
+<section class="trusted-brand">
+  <div class="trusted-brand-body">
+    <div class="title">
+      Find us at Chuckwagon — let's have some fun.
+    </div>
+  </div>
+</section>
+
+<% @pick_up_products.each_with_index do |product, index| %>
+  <%= render partial: 'spree/pages/partials/pick_up_product_content', locals: { product: product, image_first: index.even?, for_pick_up: pick_up } %>
+<% end %>
+
+<section class="more-products">
+  <div class="title-block">
+    <div class="title">
+      Something for Everyone
+    </div>
+
+    <div class="detail">
+      Our Rodeo and Ranch toy bundles are a great way for the kids to experience agriculture!
+    </div>
+  </div>
+
+  <div class="product-block">
+    <% @pick_up_group_products.each do |toy_bundle| %>
+      <div class="chuckwagon-product-block">
+        <div class="chuckwagon-product-card">
+          <%= image_tag toy_bundle.gallery.images.first.url(:small), alt: '' %>
+        </div>
+
+        <div class="chuckwagon-product-title">
+          <div class="title"><%= toy_bundle.name %></div>
+
+          <div class="price">
+            <%= display_price(toy_bundle) %>
+          </div>
+        </div>
+
+        <div class="product-category">
+          Toys Included
+        </div>
+
+        <div class="product-detail">
+          <%= toy_bundle&.products&.pluck(:name)&.join(", ") %>
+        </div>
+
+        <%= render partial: 'spree/pages/partials/pick_up_product_form', locals: { product: toy_bundle, for_pick_up: pick_up } %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+
+<section class="video">
+  <div class="video-title">
+    NCCR DVD — Available for Pre-Order
+  </div>
+
+  <div class="video-title-desc">
+    We’ll be there, filming the action and popped up on Vendor Row! Come check out our tent, and be sure to pre-order the 2022 NCCR DVD; we’ll ship it to you when it’s ready!
+  </div>
+
+  <a href="<%= spree::product_url('2022-national-championship-chuckwagon-races-dvd') %>" class="ag-btn-lg btn-pre-order">Pre-Order Now</a>
+
+  <div class="video-block">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/OllxSt1gALA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-us-cta">
+    <picture>
+      <source media="(max-width:991px)" srcset="https://assets.agzaga.com/about_us/about_us_cta_mob.webp" type="image/webp">
+      <source media="(max-width:991px)" srcset="https://assets.agzaga.com/about_us/about_us_cta_mob.png" type="image/png" >
+      <source srcset="https://assets.agzaga.com/about_us/about-us-desktop.webp" type="image/webp" >
+
+      <img src="https://assets.agzaga.com/about_us/about-us-desktop.jpg" alt="About us" class="d-block w-100 outerdiv-img video_loader" loading= "lazy" >
+    </picture>
+  </div>
+
+  <div class="our-story-section">
+
+    <div class="our-story ag-p-sm">Our Story</div>
+
+    <div class="story-section-content">
+      <div class="story-section-left">
+        <div class="story-heading">Four generations of agricultural business experience.</div>
+        <%= link_to "Read More", "#{root_url}about_us#our-story", class: 'ag-btn-lg mobile-hide' %>
+      </div>
+      <div class="story-section-right">
+        <p>Agzaga brings four generations of agricultural business experience to the table, with the goal of ushering the Ag industry into the next generation by giving Ag people a time and money saving way to quickly and easily get everything they need—all in one place online.</p>
+      </div>
+      <%= link_to "Read More", "#{root_url}about_us#our-story", class: 'ag-btn-lg mobile-show' %>
+    </div>
+  </div>
+</section>
+
+<div class="seperator"></div>
+
+<div class="footer-section">
+  <div class="footer-section-text">
+    Need Your Products Soon?
+  </div>
+
+  <%= link_to "Shop Now", root_url, class: 'ag-btn-primary ag-btn-lg' %>
+</div>
+
+# touched on 2025-05-22T23:41:42.171086Z

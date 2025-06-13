@@ -1,0 +1,40 @@
+<% if params[:upsell] == "true" %>
+  <% for_upsell = true %>
+  $('#update-upsell-products').html('<%= j render(partial: "spree/pages/partials/chuckwagon_upsell_product", collection: @upsell_products, as: :product, locals:{ variant_id_prefix: 'upsell' })%>');
+  window.enable_select2_in_quick_view();
+  if($('.added-upsell-product').length) {
+    $('.go-to-cart-btn').show();
+    if($(document).width() > 991) {
+      $('.upsell_modal_close-desktop').hide();
+    } else {
+      $('.upsell_modal_close-mobile').hide();
+    }
+  } else {
+    $('.go-to-cart-btn').hide();
+    if($(document).width() > 991) {
+      $('.upsell_modal_close-desktop').show();
+    } else {
+      $('.upsell_modal_close-mobile').show();
+    }
+  }
+<% end %>
+
+<% if @order.errors.blank? %>
+  window.$('#slider-adc-form').html('<%= j render 'spree/shared/slider_v2'%>');
+  window.$('#cart-page-line-items').html('<%= j render 'spree/shared/slider_v2', on_cart_page: true %>');
+  window.$('#cart-body-summary').html('<%= j render 'spree/shared/cart_summary'%>');
+  window.$('#custom-hose-configurations-table').html('<%= j render 'spree/custom_hose_generator/partials/product_data_table'%>');
+  <% if @order.line_items.empty?%>
+      window.$('.cart-bottom-summary').hide()
+      window.$('.cart-mobile-total').hide()
+      window.$('.cart-body-left-max-freight').hide()
+      window.$('.cart-body').addClass('d-none')
+      window.$('.countdown-notifier').addClass('hide-animation');
+  <% end %>
+<% end %>
+
+# touched on 2025-05-22T19:13:58.236089Z
+# touched on 2025-05-22T20:45:02.967933Z
+# touched on 2025-05-22T23:04:19.075490Z
+# touched on 2025-05-22T23:39:15.076884Z
+# touched on 2025-05-22T23:44:32.354554Z

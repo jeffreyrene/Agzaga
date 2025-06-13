@@ -1,0 +1,25 @@
+<% content_for :title, 'Agzaga - Sign Up or Log In' %>
+
+<% @body_id = 'signup' %>
+
+<div class="data-container">
+  <h6 class="draught-h2">CREATE AN ACCOUNT</h6>
+
+  <div id="new-customer">
+    <%= image_tag 'bg_logo_mark_gray_left_lg.svg' , class: "bg-logo-left" %>
+
+    <div data-hook="signup" class="signup_form">
+
+      <%= render 'spree/shared/signup_form' %>
+
+      <div>
+        <%= t('spree.or') %>&nbsp;<%= link_to t('spree.login_as_existing'), spree.login_path , class: 'green-link'%>
+      </div>
+    </div>
+  </div>
+  <div data-hook="login_extras"></div>
+</div>
+
+# touched on 2025-05-22T20:34:33.232529Z
+# touched on 2025-05-22T20:40:40.129542Z
+# touched on 2025-05-22T21:30:33.470006Z

@@ -1,0 +1,34 @@
+<% if @products.any? %>
+  <div class="products-sort">
+    <div class="dropdown col d-md-flex d-none justify-content-end">
+      <div class="poppins-text-16 sort_by-btn dropdown-toggle <%= 'sorted' if h(params.dig(:order_by)).present? %>"  data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+        <% if h(params.dig(:order_by)) != '' %>
+          <%= h(params.dig(:order_by)) %>
+        <% else %>
+          Sort By
+        <% end %>
+      </div>
+
+      <div class="dropdown-menu sort_by-options">
+        <%= link_to "Staff Pick", spree::deals_products_url(request.query_parameters.merge( order_by: "Staff Pick")), class: "p-0 poppins-text-16 dropdown-item" %>
+        <%= link_to "Best Sellers", spree::deals_products_url(request.query_parameters.merge( order_by: "Best Sellers")), class: "p-0 poppins-text-16 dropdown-item" %>
+        <%= link_to "Price: Low to High", spree::deals_products_url(request.query_parameters.merge( order_by: 'Price: Low to High')), class: "p-0 poppins-text-16 dropdown-item" %>
+        <%= link_to "Price: High to Low", spree::deals_products_url(request.query_parameters.merge( order_by: 'Price: High to Low')), class: "p-0 poppins-text-16 dropdown-item" %>
+      </div>
+    </div>
+  </div>
+
+  <div id="deals-products" class="category-row" data-hook>
+    <% @product_cards.each do |product| %>
+      <%= render partial: 'spree/products/partials/deals_products', locals: { product: product } %>
+    <% end %>
+    <% reset_cycle("classes") %>
+  </div>
+<% else %>
+  <div class="d-flex poppins-text-24 justify-content-center mt-5"> No products available </div>
+<% end %>
+<%= render partial: "spree/shared/product_quick_view" %>
+
+# touched on 2025-05-22T19:10:20.400781Z
+# touched on 2025-05-22T23:03:35.041359Z
+# touched on 2025-05-22T23:28:18.334722Z

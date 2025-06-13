@@ -1,0 +1,59 @@
+$bg-gold: #F1B71C;
+
+.gold-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  .page a, .current, .gap {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #1A202C;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .current {
+    background: $bg-gold;
+    border-radius: 100px;
+  }
+
+  .next, .prev {
+    a {
+      color: transparent;
+      font-size: 0px;
+      width: 0;
+      width: 44px;
+      height: 44px;
+      background: #BBBBBB;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+
+  .next a:after {
+    content: image-url('right_arrow_bold_white.svg');
+    height: 11px;
+  }
+
+  .prev a:after {
+    content: image-url('left_arrow_bold_white.svg');
+    height: 11px;
+  }
+}
+
+# touched on 2025-05-22T21:34:20.232331Z

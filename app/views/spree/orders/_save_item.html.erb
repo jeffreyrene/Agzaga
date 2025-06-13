@@ -1,0 +1,29 @@
+<% saveditems ||= false %>
+<% is_save_item ||= false %>
+<% if @saveditems.present? && !saveditems && is_save_item %>
+    <% variant = @variant%>
+    <div class="saved-items-section" id="saved-item-block">
+
+      <div class="saved-item-preview">
+        <%= link_to( render( 'spree/shared/image', image: variant.gallery.images.first || variant.product.gallery.images.first, size: :sm_200 ), variant.product, class: "productlist-image", data: { turbolinks: false } ) %>
+      </div>
+      <div class="product-details-block">
+        <div class="product-title">
+          <%= variant.product.name %>
+        </div>
+
+        <div class="actions-block">
+          <%= link_to 'Undo',
+                          populate_orders_path(variant_id: variant.id, quantity: @quantity, from_undo: true),
+                          method: :post,
+                          remote: true,
+                          class: "undo-action" %>
+          <div class="saved-later">Saved for Later</div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-product-seperator saved-items-section-seperator"></div>
+<% end %>
+
+# touched on 2025-05-22T19:09:23.016103Z
+# touched on 2025-05-22T23:37:39.695122Z

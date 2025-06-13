@@ -1,0 +1,27 @@
+<div data-hook="admin_inside_label_form" class="field align-center">
+  <%= f.field_container :tag do %>
+    <%= f.label :Name, class: 'required' %><br />
+    <%= error_message_on :label, :tag, class: 'fullwidth title' %>
+    <%= text_field :label, :tag %>
+  <% end %>
+
+  <%= f.field_container :display_text do %>
+    <%= f.label :display_text, 'Display Text' %><br />
+    <%= error_message_on :label, :display_text, class: 'fullwidth title' %>
+    <%= text_field :label, :display_text %>
+  <% end %>
+
+  <%= f.field_container :color do %>
+    <%= f.label :color, 'Color code' %><br />
+    <%= error_message_on :label, :color, class: 'fullwidth title' %>
+    <%= text_field :label, :color %>
+  <% end %>
+
+  <%= f.field_container :display_text_color do %>
+    <%= f.label :display_text_color, 'Display text color code' %><br />
+    <%= error_message_on :label, :display_text_color, class: 'fullwidth title' %>
+    <%= text_field :label, :display_text_color %>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T23:02:08.317916Z

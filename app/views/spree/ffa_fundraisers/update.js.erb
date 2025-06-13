@@ -1,0 +1,15 @@
+document.getElementById("enrollment-form-wrapper").innerHTML = " ";
+<% if @ffa_chapter.errors.any? %>
+  document.getElementById("enrollment-form-wrapper").innerHTML = "<%= escape_javascript render(partial: @step.to_s) %>";
+<% elsif params[:edit_request].present? %>
+  document.getElementById("enrollment-form-wrapper").innerHTML = "<%= escape_javascript render(partial: 'signature') %>";
+  history.pushState({}, null, "<%= wizard_path(:signature) %>");
+<% else %>
+  document.getElementById("enrollment-form-wrapper").innerHTML = "<%= escape_javascript render(partial: @next_step.to_s) %>";
+  history.pushState({}, null, "<%= next_wizard_path %>");
+<% end %>
+
+window.ffa_chapter_js();
+
+# touched on 2025-05-22T19:23:29.867546Z
+# touched on 2025-05-22T22:47:02.034309Z

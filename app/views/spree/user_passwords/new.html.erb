@@ -1,0 +1,23 @@
+<div class="data-container p-0">
+  <h6 class="draught-h2">FORGET SOMETHING?</h6>
+
+  <div class="poppins-text-24 bold sub-heading">That’s okay, let’s find it. What’s your email address?</div>
+
+  <div id="forgot-password">
+    <%= image_tag 'bg_logo_mark_gray_left_lg.svg' , class: "bg-logo-left" %>
+    <div class="forget-password-form">
+      <%= form_for Spree::User.new, as: :spree_user, url: spree.reset_password_path do |f| %>
+        <div>
+          <%= f.label :email, 'Email Address', class: 'poppins-text-16 d-block'%>
+          <%= f.email_field :email, required: true, class: 'input-field poppins-text-16' %>
+        </div>
+        <div class="p-0">
+          <%= f.submit 'Submit', class: 'btn-submit btn-gradient-orange poppins-text-16' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:11:57.977176Z
+# touched on 2025-05-22T23:47:13.016025Z

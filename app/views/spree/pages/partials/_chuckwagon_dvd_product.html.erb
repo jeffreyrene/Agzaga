@@ -1,0 +1,42 @@
+<% variant_id_prefix ||= false %>
+<div class="chuckwagon-dvd-product">
+  <div class="<%=variant_id_prefix%>-product-images-<%=product.id%> d-none">
+    <% product.gallery.images.each do |image| %>
+      <span data-src="<%= image_cdn_link(image.url(:sm_285))%>" class="pro-img img-<%= image.viewable_id %>"></span>
+    <% end %>
+  </div>
+
+  <a href="<%= spree::product_url(product) %>"  data-turbolinks="false" class="clear-link chuckwagon-dvd-product-image">
+      <%= image_tag image_cdn_link(product&.gallery&.images&.first&.url(:sm_285)), id: "#{variant_id_prefix}-product-image-#{product.id}" %>
+
+      <% if product.on_sale? %>
+        <div class="badge">$<%= product.total_discount %> OFF</div>
+      <% end %>
+  </a>
+
+  <div class="content">
+    <a href="<%= spree::product_url(product) %>"  data-turbolinks="false" class="clear-link chuckwagon-product-link">
+
+      <div class="head"><%= product.name %></div>
+
+      <div class="price-section">
+        <span class="selling-price" itemprop="price" content="<%= product.price_for(current_pricing_options).to_d %>">
+          <%= display_price(product) %>
+        </span>
+
+        <% if product.on_sale? %>
+          <span class="original-price">
+            <%= Spree::Money.new(product.original_price).to_html %>
+          </span>
+        <% end %>
+
+        <span itemprop="priceCurrency" content="<%= current_pricing_options.currency %>"></span>
+      </div>
+    </a>
+
+    <%= render partial: 'spree/pages/partials/pick_up_product_form', locals: { product: product, from_chukwagon: true, variant_id_prefix: variant_id_prefix} %>
+  </div>
+</div>
+
+# touched on 2025-05-22T23:07:12.576266Z
+# touched on 2025-05-22T23:18:41.212542Z

@@ -1,0 +1,1670 @@
+.pages.chuckwagon_dvd {
+  cursor: default;
+
+  .container-fluid {
+    padding: 0;
+  }
+
+  .out-of-stock-btn:after {
+    border-radius: 6px !important;
+    padding: 12px 8px !important;
+    height: fit-content;
+  }
+
+  .lSSlideWrapper {
+    box-shadow: none !important;
+  }
+
+  .chuckwagon-landing-page {
+    .select2-selection__clear{
+      display: none;
+    }
+
+    .pre-order-section {
+      max-width: 1408px;
+      width: calc(100% - 16px);
+      padding: 80px 16px;
+      background-color: var(--palette-neutral-100);
+      border-radius: 48px;
+      margin: -12% auto 64px auto;
+      position: relative;
+
+      .product-details-group {
+        padding: 0;
+        margin: 0 auto 0 auto;
+        max-width: 1224px;
+
+        .pre-order-inner-section {
+          display: flex;
+          justify-content: space-between;
+
+          .product-slider {
+            max-width: 544px;
+            width: 100%;
+          }
+
+          .product-details-section {
+            max-width: 608px;
+            width: 100%;
+            display: block;
+
+            .product-info {
+              display: flex;
+              justify-content: space-between;
+              padding-bottom: 35px;
+              border-bottom: 1px solid var(--palette-neutral-200);
+              margin-bottom: 26px;
+
+              .share-icon-favorite-section {
+                  display: flex;
+              }
+            }
+
+            .price-container {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 58px;
+
+              .product-price-group {
+                .selling-price {
+                  font-family: 'Lexend';
+                  font-style: normal;
+                  font-weight: 700;
+                  font-size: 36px;
+                  line-height: 44px;
+                  letter-spacing: -0.02em;
+                  color: var(--palette-neutral-900);
+                }
+
+                .original-price {
+                  text-decoration: line-through;
+                  margin-left: 8px;
+                  font-family: 'Poppins';
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 18px;
+                  line-height: 28px;
+                  color: var(--palette-neutral-700);
+                }
+              }
+
+              .sale-tag {
+                .tag {
+                  margin-left: 8px;
+                  text-transform: uppercase;
+                  color: #FFFFFF;
+                  padding: 4px 19px;
+                  background: var(--palette-destructive-500);
+                  border-radius: 24px;
+                }
+
+                .percent {
+                  font-family: 'Poppins-medium';
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 20px;
+                  color: var(--palette-destructive-600);
+                }
+              }
+            }
+
+            .brand-group {
+              margin-bottom: 16px;
+
+              .product-brand {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 28px;
+                text-decoration-line: underline;
+                color: var(--palette-primary-600);
+              }
+
+              .sale-tag-bulk-available {
+                display: none;
+              }
+            }
+
+            .product-name {
+              font-family: 'Lexend';
+              font-style: normal;
+              font-weight: 600;
+              font-size: 32px;
+              line-height: 40px;
+              letter-spacing: -0.02em;
+              color: var(--palette-neutral-900);
+              margin-bottom: 20px;
+            }
+
+            .product-info {
+              padding-top: 0;
+              line-height: 32px;
+              align-items: center;
+
+              .product-rating-group {
+                .rating {
+                  .rating-wheat {
+                    &:before {
+                      content: image-url('star-rating.png');
+                      filter: grayscale(1);
+
+                      &.filled {
+                        content: image-url('star-rating.png');
+                        filter: brightness(1);
+                      }
+                    }
+                  }
+
+                  .number, .rating-text {
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 20px;
+                    letter-spacing: 0.04em;
+                    color: var(--palette-shades-100);
+                    margin: 0 4px 0 8px;
+                  }
+                }
+              }
+            }
+
+            .chuckwagon-product-block {
+              margin-bottom: 40px;
+
+              .pick-up-product-footer {
+                .pick-up-product-footer {
+                  .quantity-btn-group {
+                    margin-bottom: 0;
+                  }
+
+                  #add-to-cart-button {
+                    max-width: 454px;
+                    width: 100%;
+                  }
+                }
+              }
+            }
+
+            .description-group {
+              .group-heading {
+                font-family: 'Poppins-semi-bold';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+                color: var(--palette-neutral-900);
+                margin-bottom: 16px;
+              }
+
+              .description {
+                p {
+                  margin: 0 0 32px 0;
+                  padding: 0;
+                }
+              }
+            }
+
+            .properties-group {
+              .group-heading {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+                color: var(--palette-neutral-900);
+                margin-bottom: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    #pre-order-section-bottom{
+      margin-top: 0px;
+      margin-bottom: 155px;
+    }
+
+    .heading {
+      max-width: 1408px;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      margin-bottom: 32px;
+      font-family: 'Lexend';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 44px;
+      letter-spacing: -0.02em;
+      color: var(--palette-neutral-900);
+      padding: 0 24px;
+
+      .heading-color {
+        color: var(--palette-primary-500);
+      }
+    }
+
+    .chuckwagon-dvd-product-block {
+      max-width: 1408px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      padding: 0 24px;
+
+      .chuckwagon-dvd-product {
+        margin: 0;
+        padding: 0;
+        flex-direction: column;
+        max-width: 328px;
+        width: 100%;
+        justify-content: flex-start;
+
+        .chuckwagon-dvd-product-image {
+          max-width: 328px;
+          max-height: 328px;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1);
+          border-radius: 24px;
+          margin-bottom: 24px;
+          cursor: pointer;
+          position: relative;
+
+          .badge {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 0 8px 8px 0;
+          }
+
+          img {
+            width: 100%;
+            border-radius: 24px;
+          }
+        }
+
+        .content {
+          max-width: 313px;
+          width: 100%;
+
+          .link-product-page {
+            pointer-events: none;
+          }
+
+          .chuckwagon-product-link {
+            cursor: pointer;
+
+            .head {
+              font-weight: 700;
+              font-size: 24px;
+              line-height: 32px;
+              letter-spacing: -0.02em;
+              margin-bottom: 16px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              min-height: 64px;
+            }
+
+            .price-section {
+              margin-bottom: 24px;
+            }
+          }
+        }
+      }
+
+      &.first {
+        margin-bottom: 128px;
+      }
+
+      &.second {
+        margin-bottom: 56px;
+      }
+
+      &.third {
+        margin-bottom: 100px;
+      }
+    }
+
+    .enter-win-section {
+      padding: 56px 0 92px 0;
+      background-color: #181818;
+      color: var(--palette-neutral-50);
+      margin-bottom: 96px;
+      position: relative;
+
+      .win-heading {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 74px;
+        line-height: 115px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: var(--palette-neutral-50);
+        margin-bottom: 48px;
+
+        .win-heading-tag{
+          width: fit-content;
+          margin: 0 auto;
+          position: relative;
+          z-index: 3;
+          background: #181818;
+        }
+
+        .win-divider{
+          position: absolute;
+          border: 0px;
+          border-bottom: 1px solid;
+          border-bottom-color: var(--palette-neutral-700);
+          width: 100%;
+          top: 21%;
+          z-index: 1;
+        }
+      }
+
+      .giving-away-block {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1232px;
+        width: 100%;
+        margin: 0 auto;
+
+        .giving-away-detail {
+          max-width: 456px;
+          width: 100%;
+
+          .giving-heading {
+            font-family: 'Lexend';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 44px;
+            letter-spacing: -0.02em;
+            color: #FFFFFF;
+            margin-bottom: 24px;
+          }
+
+          .giving-sub-heading {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            color: var(--palette-neutral-300);
+            margin-bottom: 64px;
+
+            .highlighter {
+              color: var(--palette-primary-500);
+            }
+          }
+
+          .terms {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: 0.04em;
+            color: var(--palette-neutral-500);
+          }
+        }
+
+        .form-block {
+          max-width: 611px;
+          width: 100%;
+          background: #FFFFFF;
+          box-shadow: 0px 20px 25px -5px rgba(16, 24, 40, 0.1), 0px 8px 10px -6px rgba(16, 24, 40, 0.1);
+          border-radius: 24px;
+          padding: 32px 50px;
+          color: var(--palette-neutral-900);
+
+          .submit-success{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 11px 18px 30px 18px;
+
+            .success-icon{
+              margin-bottom: 23px;
+              width: 62px;
+            }
+
+            .success-container{
+              font-size: 24px;
+              line-height: 32px;
+              margin-bottom: 16px;
+            }
+
+            .success-description{
+              font-size: 18px;
+              line-height: 28px;
+              max-width: 475px;
+              text-align: center;
+            }
+          }
+
+          .form-row {
+            display: flex;
+            justify-content: space-between;
+
+            .giving-form-width {
+              max-width: 243px;
+              width: 100%;
+            }
+          }
+
+          .ag-input-neutral{
+            .validation-error{
+              color: red;
+            }
+            .chuckwagon-win-email-helper{
+              margin-bottom:8px;
+            }
+          }
+
+          .giving-form-footer {
+            display: flex;
+            justify-content: space-between;
+
+            .win-btn {
+              max-width: 216px;
+              width: 100%;
+              font-family: Poppins-medium;
+              background-color: var(--palette-primary-500);
+              color: var(--palette-shades-0);
+              border: 1px solid transparent;
+              border-radius: 6px;
+              font-family: 'Poppins';
+              font-style: normal;
+              font-weight: 500;
+              font-size: 18px;
+            }
+
+            .win-btn:disabled {
+              background-color: var(--palette-primary-200);
+            }
+
+            .wining-terms {
+              max-width: 273px;
+              width: 100%;
+              color: var(--palette-neutral-400);
+              font-size: 12px;
+              line-height: 20px;
+              letter-spacing: 0.04em;
+
+              a {
+                color: var(--palette-neutral-400);
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+        .terms-sm{
+          display: none;
+        }
+      }
+    }
+
+    .master-heading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 32px;
+
+      .master-heading {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 44px;
+        text-align: center;
+        color: var(--palette-neutral-900);
+        margin: 0 11px;
+
+        img {
+          width: 32px;
+          height: 32px;
+          padding: 8px;
+        }
+      }
+    }
+
+    hr {
+      max-width: 1408px;
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 32px;
+    }
+
+    .seperator-line {
+      border-bottom: 1px solid var(--palette-neutral-300);
+    }
+
+    .mb-100 {
+      margin-bottom: 100px;
+    }
+
+    .more-products {
+      background-color: var(--palette-neutral-100);
+      max-width: inherit;
+      margin-bottom: 90px;
+      padding: 100px 24px 100px 112px;
+
+      .more-products-container{
+        max-width: 1696px;
+        margin: 0px auto;
+        display: flex;
+        column-gap: 32px;
+
+        .title-block-container{
+          max-height:516px;
+          display:flex;
+        }
+
+        .product-block {
+          max-width: 1120px;
+          column-gap: 0px;
+          row-gap: 0;
+
+          &.first {
+            margin-bottom: 32px;
+          }
+          &.second{
+            margin-bottom: 0px;
+          }
+        }
+      }
+      .more-products-block-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .product-block {
+          .product-card-md {
+            .ag-product-image-md-group {
+              .product-image-md {
+                max-width: 200px;
+                max-height: 200px;
+              }
+            }
+
+            .ag-product-name {
+              min-height: 38px;
+            }
+          }
+        }
+      }
+    }
+
+    .page-container {
+      max-width: 1456px;
+      margin: 0 auto;
+    }
+
+    .rule {
+      border-bottom: 2px solid var(--palette-neutral-300);
+      margin-bottom: 80px;
+    }
+
+    .outdoor-fun-products-group {
+      .outdoor-products-div {
+        .outdoor-products-title {
+          font-family: 'Lexend';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 70px;
+          line-height: 85px;
+          text-align: center;
+          letter-spacing: -0.02em;
+          color: var(--palette-neutral-900);
+          margin-bottom: 51px;
+        }
+      }
+
+      .pickup-product-lg {
+        max-width: none;
+        gap: 16px;
+      }
+
+      .burch-barrel-grill {
+        .american-flag-img .product-image {
+          border-radius: 24px;
+          object-fit: contain;
+          box-shadow: 0px 4px 6px -1px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.1);
+        }
+      }
+    }
+
+    .video {
+      border-top: none;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto 120px auto;
+
+      .video-div-icon-container {
+        display:flex;
+        justify-content: center;
+
+        .video-div-icon {
+          margin-bottom: 34px;
+          width: 42px;
+          height: 55px;
+        }
+      }
+
+      .video-title {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 52px;
+        line-height: 56px;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        letter-spacing: -0.02em;
+        margin-bottom: 24px;
+      }
+
+      .video-title-desc {
+        font-size: 18px;
+        line-height: 28px;
+        margin: 0 auto 40px auto;
+      }
+    }
+
+    .about-video-seperator {
+      display: none;
+      border: 0px;
+      border-bottom: 2px solid;
+      border-bottom-color: var(--palette-neutral-300);
+      max-width: 100%;
+      margin-bottom: 32px;
+    }
+
+    .about-pre-order-seperator {
+      border: 0px;
+      border-bottom: 2px solid;
+      border-bottom-color: var(--palette-neutral-300);
+      max-width: 100%;
+      margin-bottom: 103px;
+    }
+
+    .about {
+      margin-bottom: 97px;
+
+      .our-story-section {
+        max-width: 1168px;
+
+        .story-section-content {
+          gap: 32px;
+
+          .story-section-left {
+            max-width: 544px;
+          }
+
+          .story-section-right {
+            max-width: 544px;
+
+            p {
+              padding: 0px;
+            }
+          }
+        }
+      }
+    }
+
+    .pre-order-heading{
+      font-family: 'Lexend';
+      font-style: normal;
+      font-weight: 700;
+      margin: 0px auto 40px auto;
+      font-size: 36px;
+      line-height: 44px;
+      text-align: center;
+      letter-spacing: -0.02em;
+      color: var(--palette-neutral-900);
+
+      .yellow-text{
+        color: var(--palette-primary-500);
+      }
+    }
+  }
+
+  .select2-dropdown {
+    max-width: 312px;
+    width: 100%;
+  }
+
+  .products-upsell-modal {
+    .select2-selection__clear{
+      display: none;
+    }
+
+    .select2-selection__arrow {
+      width: 44px !important;
+      height: 44px !important;
+    }
+
+    .modal-dialog {
+      max-width: 1210px;
+      width: 100%;
+      border-radius: 24px;
+      min-height: calc(100% - (1.75rem * 2));
+
+      .modal-content {
+        padding: 40px 32px 52px 32px;
+        border-radius: 24px;
+
+        .modal-header {
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          border: none;
+          font-family: 'Lexend';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 40px;
+          line-height: 48px;
+          letter-spacing: -0.02em;
+          color: var(--palette-neutral-900);
+          margin-bottom: 8px;
+
+          .upsell_modal_close {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            text-decoration-line: underline;
+            color: var(--palette-neutral-500);
+            position: absolute;
+            right: 40px;
+            cursor: pointer;
+            max-width: 200px;
+            width: 100%;
+            text-decoration: none;
+          }
+        }
+
+        .modal-body {
+          padding: 0;
+          text-align: center;
+
+          .upsell_modal_close-mobile {
+            display: none;
+          }
+
+          .upsell-text {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            color: var(--palette-neutral-900);
+            margin-bottom: 44px;
+          }
+
+          .upsell-products-section {
+            max-width: 1146px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+
+            .upsell-product {
+              max-width: 561px;
+              width: 100%;
+              margin: 0;
+              padding: 16px;
+              background: var(--palette-neutral-100);
+              border-radius: 16px;
+              gap: 16px;
+
+              .chuckwagon-dvd-product-image {
+                img {
+                  max-width: 200px;
+                  width: 100%;
+                  border-radius: 8px;
+                }
+              }
+
+              .content {
+                max-width: 312px;
+                width: 100%;
+
+                .head {
+                  font-family: 'Poppins';
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 14px;
+                  line-height: 20px;
+                  text-align: left;
+                  color: var(--palette-shades-100);
+                  margin-bottom: 8px;
+                }
+
+                .price-section {
+                  text-align: left;
+                  margin-bottom: 20px;
+
+                  .selling-price {
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 24px;
+                    line-height: 100%;
+                    color: var(--palette-destructive-600);
+                  }
+                }
+
+                .pick-up-product-footer {
+                  .product-variants {
+                    .select2-selection {
+                      height: 48px;
+                      border-radius: 0;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      border-radius: 6px;
+                    }
+                  }
+
+                  #add-to-cart-button {
+                    margin: 0 0 0 11px;
+                    padding: 8px 0;
+                  }
+
+                  .quantity-btn-group {
+                    margin-bottom: 0;
+                  }
+                }
+
+                .upsell-btn-section {
+                  display: flex;
+                  gap: 16px;
+
+                  .remove-upsell-product {
+                    width: 100%;
+                    width: -webkit-fill-available;
+                  }
+
+                  .added-upsell-product {
+                    max-width: 312px;
+                    width: 100%;
+                    background: var(--palette-success-500);
+                    border-radius: 6px;
+                    padding: 10px 0;
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 18px;
+                    line-height: 28px;
+                    color: var(--palette-shades-0);
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    &:before {
+                      content: image-url('added-to-cart.png');
+                      width: 24px;
+                      height: 24px;
+                    }
+
+                    &.remove-upsell-product-text:hover {
+                      font-size: 0;
+                      color: var(--palette-shade);
+                      background: var(--palette-destructive-500);
+
+                      &:before {
+                        content: image-url('remove-icon.png');
+                        width: 24px;
+                        height: 24px;
+                      }
+
+                      &:after {
+                        content: 'Remove from Cart';
+                        color: var(--palette-shades-0);
+                        font-size: 18px;
+                      }
+                    }
+
+                    &.for-mobile {
+                      display: none;
+                    }
+                  }
+
+                  .remove-upsell-product-mbl {
+                    background: var(--palette-destructive-500);
+                    border-radius: 6px;
+                    padding: 16px;
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+          }
+
+          .go-to-cart-btn {
+
+            .go-to-cart {
+              max-width: 250px;
+              width: 100%;
+              background: var(--palette-primary-500);
+              border-radius: 6px;
+              font-family: 'Poppins-medium';
+              font-style: normal;
+              font-weight: 500;
+              font-size: 18px;
+              line-height: 28px;
+              color: var(--palette-shades-0);
+              padding: 10px 0;
+              margin: 44px auto 0 auto;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+
+              &:after {
+                content: image-url('proceed-to-next.png');
+                width: 24px;
+                height: 24px;
+                margin-left: 8px;
+              }
+            }
+          }
+
+          .upsell_modal_close-desktop {
+            display: block;
+          }
+
+          .upsell_modal_close {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            text-decoration-line: underline;
+            color: var(--palette-neutral-500);
+            margin: 40px auto;
+            text-decoration: none;
+            max-width: 300px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    .select2-selection {
+      font-size: 12px;
+    }
+
+    .products-upsell-modal {
+      .modal-dialog {
+        border-radius: 24px 24px 0 0;
+        margin: 0;
+        position: absolute;
+        bottom: 0;
+        min-height: inherit;
+
+        .modal-content {
+          padding: 32px 16px 0 16px;
+          border-radius: 24px 24px 0 0;
+
+          .modal-header {
+            font-size: 32px;
+            line-height: 40px;
+          }
+
+          .upsell_modal_close-desktop {
+            display: none;
+          }
+
+          .modal-body {
+            height: calc(100vh - 180px);
+            overflow: auto;
+
+            .upsell-text {
+              font-size: 14px;
+              line-height: 20px;
+              margin-bottom: 32px;
+            }
+
+            .upsell_modal_close-mobile {
+              display: block;
+              margin-bottom: 40px;
+            }
+
+            .upsell-products-section {
+              flex-direction: column;
+
+              .upsell-product {
+                align-items: flex-start;
+
+                .chuckwagon-dvd-product-image {
+                  img {
+                    max-width: inherit;
+                    width: 130px;
+                    margin-bottom: 8px;
+                  }
+                }
+
+                .content {
+                  max-width: inherit;
+                  width: 100%;
+                  direction: rtl;
+
+                  .head {
+                    direction: ltr;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                  }
+
+                  .price-section {
+                    margin-bottom: 12px;
+                    direction: ltr;
+                  }
+
+                  .pick-up-product-footer {
+                    .for-mobile-space {
+                      height: 60px;
+                    }
+
+                    .upsell-btn-section {
+                      width: calc(100% + 146px);
+                      direction: ltr;
+                      margin-top: 8px;
+
+                      .added-upsell-product {
+                        max-width: initial;
+
+                        &.for-mobile {
+                          display: flex;
+                        }
+                      }
+
+                      .remove-upsell-product {
+                        display: none;
+                      }
+                    }
+
+                    .pick-up-product-footer {
+                      width: calc(100% + 146px);
+                      direction: ltr;
+                      margin-top: 8px;
+                    }
+                  }
+                }
+              }
+            }
+
+            .go-to-cart-btn {
+              .go-to-cart {
+                margin: 44px auto 40px auto;
+              }
+            }
+
+          }
+        }
+      }
+    }
+
+    .small-nav-v2 {
+      display: none !important;
+    }
+
+    .lightSlider {
+      max-height: unset !important;
+    }
+
+    .chuckwagon-landing-page {
+      .pre-order-section {
+        max-width: calc(100% - 16px);
+        width: 100%;
+        border-radius: 24px;
+        padding: 32px 24px;
+        margin: -24% auto 48px auto;
+
+        .product-details-group {
+          .pre-order-inner-section {
+            flex-direction: column;
+            max-width: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+
+            .product-slider {
+              order: 2;
+              max-width: 100%;
+            }
+
+            .product-details-section {
+              max-width: 100%;
+              order: 1;
+
+              .brand-group {
+                margin-bottom: 20px;
+
+                .brand-share-icons {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+
+                  .product-info {
+                    padding: 0;
+                    margin: 0;
+                    border: none;
+                  }
+                }
+              }
+
+              .product-name {
+                font-size: 24px;
+                line-height: 32px;
+                text-align: left;
+              }
+
+              .product-info {
+                padding-bottom: 0;
+                margin-bottom: 16px;
+
+                .share-icon-favorite-section {
+                  position: absolute;
+                  top: 24px;
+                  right: 24px;
+                }
+
+                .product-icons-container {
+                  position: relative;
+                }
+              }
+
+              .price-container {
+                margin-bottom: 32px;
+
+                .product-price-group {
+                  .selling-price {
+                    font-size: 32px;
+                    line-height: 40px;
+                  }
+                }
+              }
+            }
+
+            .chuckwagon-product-block {
+              .pick-up-product-footer {
+
+                .pick-up-product-footer {
+                  #add-to-cart-button {
+                    max-width: 188px;
+                    width: 100%;
+                    margin: 0 0 0 15px;
+                  }
+
+                  .btn-gradient-orange {
+                    padding: 4px;
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+
+            .description-section-mobile {
+              .product-description-group {
+                display: none;
+              }
+
+              .show-more-content {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 28px;
+                text-align: center;
+                color: var(--palette-neutral-600);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+              }
+
+              .show-more {
+                &:before {
+                  content: image-url('show-more-icon.png');
+                  width: 20px;
+                  height: 20px;
+                  margin-bottom: 6px;
+                }
+              }
+
+              .show-less {
+                &:before {
+                  content: image-url('show-more-icon.png');
+                  width: 20px;
+                  height: 20px;
+                  margin-bottom: 6px;
+                  transform: rotate(180deg);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      #pre-order-section-bottom{
+        margin-top: 0px;
+        margin-bottom: 72px;
+      }
+
+      .heading {
+        line-height: 40px;
+        margin-bottom: 24px;
+        font-size: 32px;
+      }
+
+      .chuckwagon-dvd-product-block {
+        margin-bottom: 16px !important;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 18px;
+        justify-items: center;
+
+        .chuckwagon-dvd-product {
+          margin-bottom: 24px !important;
+          justify-content: flex-start;
+
+          .chuckwagon-dvd-product-image {
+            position: relative;
+            margin-bottom: 10px !important;
+            height: fit-content;
+
+            img {
+              border-radius: 16px;
+            }
+          }
+
+          .content {
+            .chuckwagon-product-link {
+              .head {
+                font-size: 16px !important;
+                line-height: 24px !important;
+                margin-bottom: 10px !important;
+                font-family: 'Poppins-semi-bold';
+                font-weight: 600;
+                min-height: 48px;
+              }
+
+              .price-section {
+                margin-bottom: 10px;
+
+                .selling-price {
+                  font-size: 18px;
+                  line-height: 28px;
+                }
+              }
+            }
+
+            .pick-up-product-footer {
+              flex-direction: column;
+
+              .product-variants {
+                max-width: calc(50vw - 9px - 24px);
+              }
+
+              .quantity-btn-group {
+                margin-bottom: 10px;
+
+                .qty-btn-container {
+                  .button, .quantity {
+                    width: 100%;
+                  }
+                }
+
+                .stock-error-message {
+                  margin-bottom: 10px;
+                }
+              }
+
+              #add-to-cart-button {
+                margin: 0;
+                padding: 8px;
+              }
+            }
+          }
+        }
+      }
+
+      .enter-win-section {
+        padding: 40px 0px;
+        margin-bottom: 48px;
+
+        .win-heading {
+          font-size: 32px;
+          margin-bottom: 32px;
+          line-height: 44px;
+
+          .win-heading-tag {
+            margin-bottom: 32px;
+            font-size: 36px;
+            line-height: 44px;
+          }
+
+          .win-divider {
+            position: static;
+          }
+        }
+
+        .giving-away-block {
+          display: flex;
+          flex-direction: column;
+          padding: 0px 16px;
+
+          .giving-away-detail {
+            padding: 0px 8px;
+            max-width: 100%;
+            font-size: 27px;
+            line-height: 40px;
+
+            .giving-heading {
+              font-size: 27px;
+              line-height: 40px;
+            }
+
+            .giving-sub-heading {
+              margin-bottom: 24px;
+            }
+
+            .terms {
+              display: none;
+            }
+          }
+
+          .form-block {
+            max-width: 100%;
+            padding: 24px;
+            margin-bottom: 24px;
+
+            .submit-success{
+              padding: 51px 18px 60px 18px;
+
+              .success-description{
+                max-width: 100%;
+              }
+            }
+
+            .form-row {
+              .giving-form-width {
+                max-width: 100%;
+              }
+            }
+
+            .ag-input-neutral {
+              .validation-error{
+                margin-top: 17px;
+              }
+
+              .chuckwagon-win-email-helper {
+                margin-top: 32px;
+              }
+            }
+
+            .giving-form-footer {
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+
+              .win-btn {
+                max-width: 100%;
+              }
+
+              .wining-terms {
+                max-width: 100%;
+              }
+            }
+          }
+
+          .terms-sm {
+            display: block;
+            color: var(--palette-neutral-500);
+            max-width: 100%;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+          }
+        }
+      }
+
+      .more-products {
+        padding: 32px 22px 0 22px;
+        margin-bottom: 46px;
+
+        .more-products-container {
+          flex-direction:column;
+          max-width: 100%;
+
+          .title-block-container {
+            .title-block {
+
+              .detail {
+                font-size: 16px;
+                line-height: 24px;
+                max-width: 100%;
+                margin-bottom: 24px;
+              }
+            }
+          }
+
+          .more-products-block-container{
+            .product-block {
+              column-gap: 18px;
+              row-gap: 24px;
+
+              &.first {
+                padding: 0;
+              }
+            }
+          }
+        }
+      }
+
+      .video {
+        margin-bottom: 32px;
+
+        .video-div-icon-container {
+          margin-bottom: 22px;
+
+          .video-div-icon {
+            margin-bottom: 0px;
+          }
+        }
+
+        .video-title {
+            font-size: 32px;
+            line-height: 40px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .video-title-desc {
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+
+      .about-video-seperator {
+        display: block;
+      }
+
+      .about-pre-order-seperator{
+        margin-bottom: 56px;
+      }
+
+      .about {
+        margin-bottom: 56px;
+
+        .our-story-section {
+          .story-section-content {
+            gap: 24px;
+            .story-section-left {
+              max-width: 100%;
+
+              .story-heading {
+                margin-bottom: 0;
+              }
+            }
+
+            .story-section-right {
+              max-width: 100%;
+            }
+          }
+        }
+      }
+
+      .master-heading-container {
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--palette-neutral-100);
+        padding: 0 16px 24px 16px;
+
+        .master-heading {
+          font-size: 56px;
+          line-height: 44px;
+        }
+      }
+
+      hr {
+        margin-bottom: 24px;
+      }
+
+      .heading {
+        margin-bottom: 32px;
+      }
+
+      .outdoor-fun-products-group {
+        .outdoor-products-div {
+          padding: 16px;
+          .outdoor-products-title {
+            font-size: 40px;
+            line-height: 44px;
+          }
+        }
+      }
+
+      .seperator-line {
+        margin-bottom: 40px;
+      }
+
+      .burch-barrel-grill {
+        margin-bottom: 24px;
+
+        .pick-up-product-footer {
+          button {
+
+            margin-left: 4px;
+          }
+        }
+      }
+
+      .pre-order-heading{
+        margin-bottom: 24px;
+        font-size: 32px;
+        line-height: 40px;
+        padding: 0px 16px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .small-nav-v2 {
+      display: flex !important;
+
+      &.minified{
+        align-items: center !important;
+        height: 72px !important;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .more-products-block-container{
+      .product-block {
+        .product-card-md {
+          .ag-product-image-md-group {
+            height: calc(100vw * 0.399);
+            width: calc(100vw * 0.399);
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    .products-upsell-modal {
+      .modal-dialog {
+        .modal-content {
+          .modal-body {
+            .upsell-products-section {
+              .upsell-product {
+                gap: 6px;
+
+                .chuckwagon-dvd-product-image {
+                  img {
+                    width: 100px;
+                  }
+                }
+
+                .content {
+                  .pick-up-product-footer {
+                    .upsell-btn-section, .pick-up-product-footer {
+                      width: calc(100% + 106px);
+                    }
+
+                    .for-mobile-space {
+                      height: 38px;
+                    }
+
+                    .quantity-btn-group {
+                      .qty-btn-container {
+                        .sub-btn, .add-btn {
+                          max-width: 30px;
+                          width: 100%;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+# touched on 2025-05-22T19:09:20.639376Z
+# touched on 2025-05-22T19:24:28.535295Z
+# touched on 2025-05-22T22:45:13.086729Z

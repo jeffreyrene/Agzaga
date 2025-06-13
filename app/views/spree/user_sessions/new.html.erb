@@ -1,0 +1,44 @@
+<% checkout ||= false %>
+<% @body_id = 'login' %>
+
+<% unless checkout %>
+  <div class="data-container">
+    <h2 class="draught-h2"><%= t('spree.login_as_existing') %></h2>
+    <div class="page_content">
+<% end %>
+
+<% if checkout %>
+  <%= image_tag 'bg_logo_mark_gray_left.svg' , class: "bg-logo-left" %>
+  <% if flash[:alert] %>
+    <div class="flash errors"><%= flash[:alert] %></div>
+  <% end %>
+
+<% else %>
+  <%= image_tag 'bg_logo_mark_gray_left_lg.svg' , class: "bg-logo-left" %>
+<% end %>
+
+<div id="existing-customer">
+  <% if checkout %>
+    <h2 class="draught-h2"><%= t('spree.login_as_existing') %></h2>
+  <% end %>
+
+  <div data-hook="login" class="poppins-text-16">
+    <%= render partial: 'spree/shared/login', locals: { checkout: checkout, error: flash["error"] } %>
+
+    <%= link_to 'Forget Your Email?', spree.signup_path, class: 'green-link poppins-text-16' %>
+
+    <%= t('spree.or') %>
+
+    <%= link_to t('spree.forgot_password'), spree.recover_password_path,class: 'green-link poppins-text-16' %>
+  </div>
+</div>
+
+<div data-hook="login_extras"></div>
+
+<% unless checkout %>
+    </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T23:01:19.882897Z
+# touched on 2025-05-22T23:22:23.632353Z

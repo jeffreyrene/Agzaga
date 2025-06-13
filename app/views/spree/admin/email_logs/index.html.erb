@@ -1,0 +1,181 @@
+
+<% content_for :page_title do %>
+  Email Logs
+<% end %>
+
+<% content_for :table_filter_title do %>
+  <%= t('spree.filter') %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_email_logs_index_search">
+    <%= search_form_for [:admin, @search] do |f| %>
+      <div class="row">
+        <div class="col-6">
+          <div class="date-range-filter field">
+            <%= label_tag :q_created_at_gt, t('spree.date_range') %>
+            <div class="date-range-fields input-group">
+              <%= f.text_field :created_at_gt, class: 'datepicker form-control datepicker-from', placeholder: t('spree.start'), autocomplete: 'off' %>
+
+              <div class="input-group-prepend input-group-append">
+                <span class="input-group-text range-divider">
+                  <i class="fa fa-arrow-right"></i>
+                </span>
+              </div>
+
+              <%= f.text_field :created_at_lt, class: 'datepicker form-control datepicker-to', placeholder: t('spree.stop'), autocomplete: 'off' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" data-hook="admin_email_logs_index_search" >
+        <div class="col-6">
+          <div class="field">
+            <%= f.label "Order Number" %>
+            <%= f.text_field :order_number_start %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="field">
+            <%= f.label "Template name" %>
+            <%= f.text_field :template_name_start %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" data-hook="admin_email_logs_index_search" >
+        <div class="col-6">
+          <div class="field">
+            <%= f.label "Sent to" %>
+            <%= f.text_field :sent_to_start %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="field">
+            <%= f.label "Sent from" %>
+            <%= f.text_field :sent_from_start %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" data-hook="admin_email_logs_index_search" >
+        <div class="col-6">
+          <div class="field">
+            <%= f.label "Subject" %>
+            <%= f.text_field :subject_start %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="field">
+            <%= f.label "Status" %>
+              <%= f.select :status_start, options_for_select(['Sent', 'Rejected'], selected: params[:q][:status_start]), { include_blank: true }, class: 'custom-select' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions filter-actions" data-hook="admin_email_logs_index_search_buttons">
+        <%= button_tag t('spree.search'), class: 'btn btn-primary mb-5' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<h5 class="mb-5 align-center">Log status</h5>
+<table class="index align-left sortable inline-editable-table" data-sortable-link="<%= update_positions_admin_home_page_reviews_path %>">
+  <thead>
+    <tr>
+      <th>Template Name</th>
+      <th>Total email/s sent</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%- @template_count.keys.each do |template| -%>
+      <tr>
+        <td>
+          <%= template %>
+        </td>
+
+        <td>
+          <%= @template_count[template] %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @email_logs, theme: "solidus_admin" %>
+
+<% if @email_logs.any? %>
+  <h5 class="mt-5 align-center">Log details</h5>
+  <h6 class="align-center"><%= @email_logs.count %> record/s found</h6>
+  <table class="index align-left sortable inline-editable-table mb-5 mt-5" data-sortable-link="<%= update_positions_admin_home_page_reviews_path %>">
+    <colgroup>
+      <col style="width: 20%;">
+    </colgroup>
+
+    <thead>
+      <tr>
+        <th>Template Name</th>
+        <th>Subject</th>
+        <th>Sent from</th>
+        <th>Sent to</th>
+        <th>Order Number</th>
+        <th>Status</th>
+        <th>Reject Reason</th>
+        <th>Created at</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%- @email_logs.each do |email_log| -%>
+        <tr id="<%= spree_dom_id email_log %>">
+          <td>
+            <%= email_log.template_name %>
+          </td>
+
+          <td>
+            <%= email_log.subject %>
+          </td>
+
+          <td>
+            <%= email_log.sent_from %>
+          </td>
+
+          <td>
+            <%= email_log.sent_to %>
+          </td>
+
+          <td>
+            <%= email_log.order&.number %>
+          </td>
+
+          <td>
+            <%= email_log.status %>
+          </td>
+
+          <td>
+            <%= email_log.reject_reason %>
+          </td>
+
+          <td>
+            <%= pretty_time(email_log.created_at) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+
+  <div class="no-objects-found">
+    <%= I18n.t("spree.no_results") %>
+  </div>
+<% end %>
+
+<%= paginate @email_logs, theme: "solidus_admin" %>
+
+# touched on 2025-05-22T23:38:21.699126Z

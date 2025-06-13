@@ -1,0 +1,31 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: agazon_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: agazon_test
+
+production:
+  <<: *default
+  database: agazon_production
+  username: <%= ENV['PG_USERNAME'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
+  port: <%= ENV['PG_PORT'] %>
+
+# touched on 2025-05-22T19:24:10.789848Z
+# touched on 2025-05-22T20:44:44.576546Z
+# touched on 2025-05-22T20:45:04.833052Z
+# touched on 2025-05-22T22:38:45.494661Z
+# touched on 2025-05-22T23:04:28.935725Z
+# touched on 2025-05-22T23:30:52.207682Z
+# touched on 2025-05-22T23:38:03.511071Z
+# touched on 2025-05-22T23:39:23.554879Z

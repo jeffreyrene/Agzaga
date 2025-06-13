@@ -1,0 +1,57 @@
+<%promotion_exists = (@order&.line_item_adjustments&.nonzero&.exists? && @order&.line_item_adjustments&.nonzero&.promotion&.present?) || (@order&.adjustments&.nonzero&.eligible&.exists?) || (@order&.shipment_adjustments&.nonzero&.exists?)%>
+
+<div class="cart-body-summary-heading">Summary</div>
+
+<div class="cart-body-summary-total">
+  <div class="sub-total">Subtotal</div>
+  <div class="sub-total-price"><%= @order.display_item_total %></div>
+</div>
+
+<% @order.all_adjustments.tax.eligible.group_by( &:label ).each do |label, adjustments| %>
+  <div class="cart-body-summary-total">
+    <div class="sub-total"><%= t('spree.tax') %>: <%= label %></div>
+    <div class="sub-total-price"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></div>
+  </div>
+<% end %>
+
+<div class="cart-body-summary-total clr-red">
+  <% if @order.shipments.count != 0 %>
+    <div class="sub-total total-shipping">Est. Shipping</div>
+    <div class="sub-total-price total-shipping"><%= Spree::Money.new(@order.shipments.sum(&:amount), currency: @order.currency) %></div>
+  <% end %>
+</div>
+
+<div class="cart-body-summary-seperator"></div>
+
+<% unless @order.line_items.empty? %>
+  <%= form_tag order_coupon_codes_url(@order, from_cart_slider: true), id: "couponcode", class: 'w-100',  method: :post, remote: :true do %>
+    <div class="cart-body-summary-promo">
+      <%= text_field_tag 'coupon_code', '', class: "cart-body-promo-text promo-input-field", placeholder: "Promo Code" %>
+      <%= submit_tag 'Apply', class:"promo-apply" %>
+    </div>
+
+    <div class="clr-red cart-summary-promo-helper d-none">helper text</div>
+  <% end %>
+<% end %>
+
+<% if promotion_exists %>
+  <div class="promo-badge-container">
+    <%= render partial: 'spree/checkout/checkout_promotion_badges', locals: { order: @order } %>
+  </div>
+<%end%>
+
+<div class="cart-body-summary-seperator"></div>
+
+<div class="cart-body-summary-total">
+  <div class="sub-total">Total Due</div>
+  <div class="total-due-price"><%= @order.display_total.to_s %></div>
+</div>
+
+<%= form_for @order, url: update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+  <%= button_tag class: 'empty-cart-button ag-btn-lg ag-btn-primary cart-body-summary-checkout checkout-button', id: 'checkout-link', name: 'checkout' do %>
+    Check Out
+  <% end %>
+<%end%>
+
+# touched on 2025-05-22T22:44:00.641569Z
+# touched on 2025-05-22T23:30:00.850530Z

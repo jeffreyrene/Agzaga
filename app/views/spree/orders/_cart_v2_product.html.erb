@@ -1,0 +1,131 @@
+<% is_save_item ||= false %>
+<% saveditems ||= false %>
+<% line_item ||= nil %>
+<% saved_product_for_later = line_item %>
+<% line_item ||= @line_item %>
+<% variant ||= @variant%>
+
+<% unless is_save_item %>
+  <% variant =  line_item ? line_item.variant : @line_item.variant if line_item.present? %>
+  <% line_item = saveditems ? line_item.variant.product : line_item  if line_item.present? %>
+  <% quantity_change ||= false %>
+
+  <div class="cart-product-section cart-product-section-<%= variant.id %>" id='variant_<%= variant.id %>'>
+    <div class="product-blocks">
+      <div class="product-details-block">
+        <div class="product-image">
+          <%= link_to( render( 'spree/shared/image', image: variant.gallery.images.first || variant.product.gallery.images.first, size: :sm_200 ), variant.product, class: "productlist-image", data: { turbolinks: false } ) %>
+        </div>
+
+        <div class="product-info-container">
+          <div class="product-info">
+            <div class="cart-product-title">
+              <%= link_to line_item&.name || variant.product.name , product_path( variant.product ), data: { turbolinks: true } %>
+            </div>
+
+            <div class="product-price">
+              <%unless saveditems%>
+                <%= (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type)) ? number_to_currency(line_item.price * line_item.quantity) :  line_item.single_money.to_html%>
+              <%else%>
+                <%= variant.price_for(current_pricing_options).to_html%>
+              <%end%>
+            </div>
+          </div>
+
+          <div class="cart-product-variant">
+            <%= variant.option_values.pluck(:name).join(', ') %>
+          </div>
+
+          <% if saveditems %>
+            <div class="saved-quantity"><%= "Quantity: #{saved_product_for_later&.quantity }" %></div>
+
+            <div class="actions-block">
+              <% quantity = saved_product_for_later&.quantity %>
+              <%= link_to 'Add back to cart',
+                            populate_orders_path(variant_id: variant.id, quantity: quantity , from_undo: true, render_slider_partial: true),
+                            method: :post,
+                            remote: true,
+                            class: "undo-action" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="cart-product-footer <%= saveditems ? '' : ((['assembly_fee', 'custom_hose', 'hose_fitting'].include?(line_item.product.product_type) ) ? 'product-footer-custom-hose' : '')%>">
+      <% unless saveditems %>
+        <% if quantity_change %>
+          <%= order_form.fields_for :line_items, line_item do |item_form| %>
+            <% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+              <div class="qty-section">
+                  <%= button_tag "", class: "button sub btn-left", disabled: true, data: { disable_with: false } %>
+                  <%= item_form.number_field :quantity, min: 1, class: "product-quantity line_item_quantity custom-hose-quantity",  size: 5 %>
+                  <%= button_tag "", class: "button btn-add btn-right", disabled: true, data: { disable_with: false } %>
+              </div>
+            <% else %>
+              <div class="qty-section">
+                <%= link_to "", spree::cart_decrease_quantity_path(id: line_item.id ), class: "button btn-sub btn-left", remote: true, rel: 'nofollow' %>
+
+                <% if variant.is_backorderable? %>
+                  <% variant_max_quantity = variant.get_max_stock %>
+                  <%= item_form.number_field :quantity, data: { remote: true, method: :get, url: spree::cart_update_line_item_quantity_path(id: line_item.id )}, min: 0, class: "button product-quantity line_item_quantity",  size: 5, max: variant_max_quantity > 0 ? variant_max_quantity : 500 %>
+                <% else %>
+                  <%= item_form.number_field :quantity, data: { remote: true, method: :get, url: spree::cart_update_line_item_quantity_path(id: line_item.id )}, min: 0, class: "button product-quantity line_item_quantity",  size: 5, max: variant.total_on_hand %>
+                <% end%>
+
+                <%= link_to "", spree::cart_increase_quantity_path(id: line_item.id ), class: "button btn-add btn-right", remote: true, rel: 'nofollow' %>
+              </div>
+            <%end%>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <%end%>
+        <%end%>
+      <%end%>
+
+      <div class="product-actions <%= saveditems ? '' : ((['assembly_fee', 'custom_hose', 'hose_fitting'].include?(line_item.product.product_type) ) ? 'product-actions-custom-hose' : '')%>">
+        <% unless saveditems %>
+          <% unless (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+            <%if spree_user_signed_in? %>
+              <% unless spree_current_user.has_save_item?(line_item) %>
+                <%= link_to 'Save for later',
+                            save_items_path(variant_id: line_item.variant.id, line_item_id: line_item.id, quantity:line_item.quantity),
+                            method: :post,
+                            remote: true,
+                            id: "favorable_product_#{line_item.product.id}",
+                            class: "save-items-btn save_item_#{line_item.product.id}" %>
+
+                <span class="pipe-line">|</span>
+              <% end %>
+            <% end %>
+          <%end%>
+        <%end%>
+
+        <% if quantity_change %>
+          <%unless saveditems%>
+            <% if (["assembly_fee", "custom_hose", "hose_fitting"].include?(line_item.product.product_type) ) %>
+              <div class="cart-item-delete" data-toggle= "modal", data-target= ".custom_hose_verfication">
+                <div class="remove-items-btn">
+                  <span class="title">Remove</span>
+                  <span class="remove-icon"> <%= image_tag 'trash_red_icon.svg'%> </span>
+                </div>
+              </div>
+              <%= render partial: 'spree/orders/custom_hose_verification_modal' ,locals: { line_item: line_item}  %>
+            <% else %>
+              <div class="cart-item-delete remove-items-btn">
+                <%= link_to spree::cart_destroy_line_item_path(id: line_item.id ), class: 'clear-link', method: :delete, remote: true do %>
+                  <span class="title">Remove</span>
+                  <span class="remove-icon"> <%= image_tag 'trash_red_icon.svg'%> </span>
+                <% end %>
+              </div>
+            <% end %>
+          <%end%>
+        <% end %>
+      </div>
+    </div>
+    <div class="clr-red stock-error-message <%= "d-block" if @order.insufficient_stock_lines.any?{|l| l.variant == variant} %>"> Available Quantity: <%= variant.is_backorderable? ? '500' : variant.total_on_hand%> </div>
+  </div>
+<% end %>
+
+# touched on 2025-05-22T19:18:03.147934Z
+# touched on 2025-05-22T20:43:35.004617Z
+# touched on 2025-05-22T23:28:59.248805Z

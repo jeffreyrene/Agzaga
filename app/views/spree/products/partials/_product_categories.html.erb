@@ -1,0 +1,21 @@
+<div class="w-100 text-left taxon-info poppins-bold-text-12">
+  <% if !@product.taxons.blank? %>
+    <div class="breadcrumbs poppins-text-12">Included in Categories: </div>
+
+    <div id="breadcurmbs-mob" class="nav d-flex">
+      <% visible_taxons.each do |taxon| %>
+        <button type="button" class="breadcrumbs-btn poppins-bold-text-12 btn">
+          <%= link_to taxon.name, seo_url(taxon), class: 'clear-link' %>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+# touched on 2025-05-22T19:17:29.026630Z
+# touched on 2025-05-22T19:24:28.533410Z
+# touched on 2025-05-22T21:51:02.890802Z
+# touched on 2025-05-22T22:34:24.875560Z
+# touched on 2025-05-22T23:06:29.922064Z
+# touched on 2025-05-22T23:06:57.443999Z
+# touched on 2025-05-22T23:47:08.129877Z

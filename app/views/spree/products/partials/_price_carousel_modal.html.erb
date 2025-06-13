@@ -1,0 +1,49 @@
+<button type="button" class="sort-by carousel-btn clear-link dropdown-toggle" data-toggle="modal" data-target="#PriceModal">Price</button>
+<div class="modal" id="PriceModal" tabindex="-1" role="dialog" aria-labelledby="PriceModalTitle" aria-hidden="true">
+  <div class="back-area"></div>
+  <div class="modal-dialog modal-dialog-end animate-bottom" id="customPositionModal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title row">
+          <div class="lexend-h4 title col">Filter By Price</div>
+        </div>
+        <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <%= image_tag("close-icon.svg") %>
+        </div>
+      </div>
+      <div class="full-line"></div>
+      <div class="modal-body">
+        <div class="price-category">
+          <input type="checkbox" id="allPrice" name="filter_by_price[]" value="Any - Price" <%= 'checked' if params[:filter_by_price]&.include?("Any - Price")%>>
+          <label class="price-tag <%= 'sorted' if h(params.dig(:filter_by_price))&.include? 'Any - Price'%>" for="allPrice">All Prices</label>
+
+          <input type="checkbox" id="underPrice" name="filter_by_price[]" value="Under - $25" <%= 'checked' if params[:filter_by_price]&.include?("Under - $25")%>>
+          <label class="price-tag <%= 'sorted' if h(params.dig(:filter_by_price))&.include? 'Under - $25'%>" for="underPrice">Under 25</label>
+
+          <input type="checkbox" id="twentyFiveToFifty" name="filter_by_price[]" value="$25 - $50" <%= 'checked' if params[:filter_by_price]&.include?("$25 - $50")%>>
+          <label class="price-tag <%= 'sorted' if h(params.dig(:filter_by_price))&.include? '$25 - $50'%>" for="twentyFiveToFifty">$25 - $50</label>
+
+          <input type="checkbox" id="fiftyToHundred" name="filter_by_price[]" value="$50 - $100" <%= 'checked' if params[:filter_by_price]&.include?("$50 - $100")%>>
+          <label class="price-tag <%= 'sorted' if h(params.dig(:filter_by_price))&.include? '$50 - $100'%>" for="fiftyToHundred">$50 - $100</label>
+
+          <input type="checkbox" id="hunderedToTowHundred" name="filter_by_price[]" value="$100 - $200" <%= 'checked' if params[:filter_by_price]&.include?("$100 - $200")%>>
+          <label class="price-tag <%= 'sorted' if h(params.dig(:filter_by_price))&.include? '$100 - $200'%>" for="hunderedToTowHundred">$100 - $200</label>
+
+          <input type="checkbox" id="twoHundred" name="filter_by_price[]" value="$200+" <%= 'checked' if params[:filter_by_price]&.include?("$200+")%>>
+          <label class="price-tag <%= 'sorted' if h(params.dig(:filter_by_price))&.include? '$200+'%>" for="twoHundred">$200+</label>
+        </div>
+      </div>
+
+      <div class="modal-footer m-footer">
+        <%= link_to "Clear", spree::deals_products_url, class: 'clear-link btn modal-footer-btn' %>
+        <button class="modal-footer-apply-btn apply-button" id="apply-button">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+# touched on 2025-05-22T19:18:57.080955Z
+# touched on 2025-05-22T20:31:57.336647Z
+# touched on 2025-05-22T23:08:56.403078Z
+# touched on 2025-05-22T23:30:11.484309Z
+# touched on 2025-05-22T23:46:05.476764Z
